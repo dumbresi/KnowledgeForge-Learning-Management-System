@@ -12,4 +12,4 @@ Mit Sheth
 
 ## Following is the Domain Driven Design of the project
 
-![Alt DDD](DDD/KnowledgeForge.png)
+![Alt DDD](DDD/KnowledgeForge.jpeg)
