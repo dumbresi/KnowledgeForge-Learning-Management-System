@@ -38,26 +38,6 @@ paths:
                     description: Fundamentals of web development and design.
                     noOfModules: 12
                     creationTime: "2023-01-15T10:30:00Z"
-
-  /lms/courses:
-      responses:
-        '200':
-          description: Successful response
-          content:
-            application/json:
-              example:
-                course:
-                  id: 1
-                  title: Introduction to Programming
-                  instructor: John Doe
-                  duration: 8 weeks
-                  fees: 99.99
-                  category: Programming
-                  subCategory: Web Development
-                  thumbnail: https://example.com/thumbnail.jpg
-                  description: A comprehensive introduction to programming concepts.
-                  noOfModules: 10
-                  creationTime: "2023-01-01T12:00:00Z"
         '404':
           description: Course not found
           content:
