@@ -33,8 +33,7 @@ paths:
           description: Successful login. Returns an access token.
           content:
             application/json:
-              schema:
-                $ref: '#/components/schemas/Error_200'
+              example: Success
         '401':
           description: Unauthorized. Invalid credentials.
           content:
