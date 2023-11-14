@@ -33,8 +33,7 @@ paths:
           description: Successful login. Returns an access token.
           content:
             application/json:
-              schema:
-                $ref: '#/components/schemas/Error_200'
+              example: Success
         '401':
           description: Unauthorized. Invalid credentials.
           content:
@@ -155,6 +154,57 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error_500'
+  /user/profile:
+    get:
+      summary: Get user profile by access token
+      description: Retrieves user profile information using an access token
+      parameters:
+        - name: access_token
+          in: query
+          description: Access token for authentication
+          required: true
+          schema:
+            type: string
+        - name: user_id
+          in: query
+          description: User ID
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  user_id:
+                    type: integer
+                  contact_number:
+                    type: string
+                  profile_picture:
+                    type: string
+                    format: uri
+                  email_id:
+                    type: string
+                    format: email
+                  user_name:
+                    type: string
+                example:
+                  user_id: 123
+                  contact_number: "+1234567890"
+                  profile_picture: "https://example.com/profile.jpg"
+                  email_id: "user@example.com"
+                  user_name: "John Doe"
+        '401':
+          description: Unauthorized
+        '404':
+          description: User not found
+        '500':
+          description: Internal Server Error
+        '400' :
+          description: Invalid request
 
 components:
   schemas:
@@ -197,4 +247,3 @@ components:
           description: Error message
           examples:
             - 500 Internal Server Error
-  
