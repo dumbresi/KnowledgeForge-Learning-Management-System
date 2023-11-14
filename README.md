@@ -10,6 +10,6 @@ Vaibhav Gohil
 Mit Sheth
 
 
+## Following is the Domain Driven Design of the project
 
-
-//TODO: 2) Identify the final project topic and document it on ReadMe.md along with its description.
+![Alt DDD](DDD/KnowledgeForge.png)
