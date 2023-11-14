@@ -1,0 +1,67 @@
+openapi: 3.0.0
+info:
+  title: Learning Management System API
+  description: API documentation for managing courses in an LMS.
+  version: 1.0.0
+
+paths:
+  /courses:
+    get:
+      summary: Get All Courses
+      description: Retrieve a list of all courses available in the LMS.
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              example:
+                courses:
+                  - id: 1
+                    title: Introduction to Programming
+                    instructor: John Doe
+                    duration: 8 weeks
+                    fees: 99.99
+                    category: Programming
+                    subCategory: Web Development
+                    thumbnail: https://example.com/thumbnail.jpg
+                    description: A comprehensive introduction to programming concepts.
+                    noOfModules: 10
+                    creationTime: "2023-01-01T12:00:00Z"
+                  - id: 2
+                    title: Web Development Basics
+                    instructor: Jane Smith
+                    duration: 10 weeks
+                    fees: 129.99
+                    category: Programming
+                    subCategory: Web Development
+                    thumbnail: https://example.com/thumbnail2.jpg
+                    description: Fundamentals of web development and design.
+                    noOfModules: 12
+                    creationTime: "2023-01-15T10:30:00Z"
+
+  /lms/courses:
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              example:
+                course:
+                  id: 1
+                  title: Introduction to Programming
+                  instructor: John Doe
+                  duration: 8 weeks
+                  fees: 99.99
+                  category: Programming
+                  subCategory: Web Development
+                  thumbnail: https://example.com/thumbnail.jpg
+                  description: A comprehensive introduction to programming concepts.
+                  noOfModules: 10
+                  creationTime: "2023-01-01T12:00:00Z"
+        '404':
+          description: Course not found
+          content:
+            application/json:
+              example:
+                error: Course not found
+                message: Not Found Error
