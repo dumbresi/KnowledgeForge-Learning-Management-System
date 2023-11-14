@@ -109,55 +109,22 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error_500'
-  /courses:
-    get:
-      summary: Get All Courses
-      description: Retrieve a list of all courses available in the LMS.
-      responses:
-        '200':
-          description: Successful response
-          content:
-            application/json:
-              example:
-                courses:
-                  - id: 1
-                    title: Introduction to Programming
-                    instructor: John Doe
-                    duration: 8 weeks
-                    fees: 99.99
-                    category: Programming
-                    subCategory: Web Development
-                    thumbnail: https://example.com/thumbnail.jpg
-                    description: A comprehensive introduction to programming concepts.
-                    noOfModules: 10
-                    creationTime: "2023-01-01T12:00:00Z"
-                  - id: 2
-                    title: Web Development Basics
-                    instructor: Jane Smith
-                    duration: 10 weeks
-                    fees: 129.99
-                    category: Programming
-                    subCategory: Web Development
-                    thumbnail: https://example.com/thumbnail2.jpg
-                    description: Fundamentals of web development and design.
-                    noOfModules: 12
-                    creationTime: "2023-01-15T10:30:00Z"
-        '404':
-          description: Course not found
-          content:
-            application/json:
-              example:
-                error: Course not found
-                message: Not Found Error
-        '500':
-          description: Internal server error.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error_500'
 
 components:
   schemas:
+    Error_200:
+      type: object
+      properties:
+        access_token:
+          type: string
+          description: Successful login. Returns an access token.
+          examples:
+            - -askjdbkawbdkajwbi9102474-
+        message:
+          type: string
+          description: Successful login
+          examples:
+            - Welcome, {UserName}
     Error_401:
       type: object
       properties:
@@ -197,4 +164,3 @@ components:
           description: Error message
           examples:
             - 500 Internal Server Error
-  
