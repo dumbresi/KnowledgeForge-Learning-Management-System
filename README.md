@@ -4,12 +4,12 @@ KnowledgeForge is an innovative online platform designed to seamlessly manage an
 
 ## Team Members
 
-Gaurav Gunjal
-Siddharth Dumbre
-Vaibhav Gohil
-Mit Sheth
+Gaurav Gunjal <br>
+Siddharth Dumbre <br>
+Vaibhav Gohil <br>
+Mit Sheth <br>
 
 
 ## Following is the Domain Driven Design of the project
 
-![Alt DDD](DDD/KnowledgeForge.png)
+![Alt DDD](DDD/KnowledgeForge.jpeg)
