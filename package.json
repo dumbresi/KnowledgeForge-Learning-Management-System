@@ -1,0 +1,18 @@
+{
+  "name": "final-project-codeforge",
+  "version": "1.0.0",
+  "description": "KnowledgeForge is an innovative online platform designed to seamlessly manage and deliver a wealth of educational resources. This comprehensive hub serves as a dynamic repository for courses, learning materials, and educational content, providing users with a centralized and intuitive interface to explore and enhance their knowledge.",
+  "main": "index.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "debug": "^4.3.4",
+    "express": "^4.18.2",
+    "mongoose": "^8.0.1"
+  }
+}
