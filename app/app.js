@@ -6,7 +6,7 @@ const initialize = (app)=>{
     app.use(cors());
     app.use(express.json());
     app.use(express.urlencoded());
-    mongoose.connect('mongodb+srv://gunjalga:Gaurav123@info6150fall2023.lmskm.mongodb.net/courses?retryWrites=true&w=majority');
+    mongoose.connect('mongodb+srv://gunjalga:Gaurav123@info6150fall2023.lmskm.mongodb.net/codeForge?retryWrites=true&w=majority');
     
 
 }
