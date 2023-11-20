@@ -43,7 +43,15 @@ const courseSchema = new Schema.Schema({
     type: Date,
     default: Date.now,
   },
-});
+  avg_star_rating:{
+    type: Number,
+    required: false,
+  }
+},
+{
+  versionKey: false
+}
+);
 
 const Course = Schema.model('Course', courseSchema);
 
