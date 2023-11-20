@@ -1,8 +1,8 @@
 import mongoose from "mongoose";
 
-const Schema = mongoose.Schema;
+const schema = mongoose.Schema;
 
-const courseSchema = new Schema.Schema({
+const courseSchema = new schema({
   title: {
     type: String,
     required: true,
@@ -40,8 +40,8 @@ const courseSchema = new Schema.Schema({
     required: true,
   },
   creationTime: {
-    type: Date,
-    default: Date.now,
+    type: String,
+    required: true,
   },
   avg_star_rating:{
     type: Number,
@@ -53,6 +53,6 @@ const courseSchema = new Schema.Schema({
 }
 );
 
-const Course = Schema.model('Course', courseSchema);
+const Course = mongoose.model('courses', courseSchema);
 
-module.exports = Course;
+export default Course;

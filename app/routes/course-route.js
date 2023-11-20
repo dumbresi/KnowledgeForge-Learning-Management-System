@@ -1,13 +1,12 @@
-const express= require('express');
+import express from 'express'
+import Courses from '../models/course.js';
+import * as courseController from '../controllers/course-contoller.js';
 
-const route= express.Router();
 
-const Courses= require('../models/course.js');
+const router = express.Router();
 
-route.get('/courses', async(req,response)=>{
-    try{
-        
-    }catch{
+router.route('/')
+    .get(courseController.findCourse);
+    // .post(courseController.postCourse);
 
-    }
-})
+export default router;
