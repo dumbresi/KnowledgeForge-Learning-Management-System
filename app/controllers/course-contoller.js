@@ -10,16 +10,16 @@ export const findCourse=async (request, response) =>{
          setResponse(courses,response);
     }catch(err){
         console.log(err);
-        setErrorResponse(err,reponse);
+        setErrorResponse(err,response);
     }
 }
 
-export const postCourse=async (request, reponse)=>{
+export const postCourse=async (request, response)=>{
     try{
         const newCourse = request.body;
         const course = await CourseService.saveCourse(newCourse);
-        setResponse(course, reponse)
+        setResponse(course, response)
     }catch(err){
-        setErrorResponse(err,reponse);
+        setErrorResponse(err,response);
     }
 }

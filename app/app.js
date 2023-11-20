@@ -5,7 +5,7 @@ import registerRouter from './routes/index.js'
 import debug from 'debug';
 
 const initialize = (app)=>{
-    debug
+    //debug
     app.use(cors());
     app.use(express.json());
     app.use(express.urlencoded());
