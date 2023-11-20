@@ -2,6 +2,7 @@ import Course from '../models/course.js'
 
 export const searchCourse = async (params={}) => {
     const courses=await  Course.find(params).exec();
+    console.log(courses);
     return courses;
 }
 
