@@ -23,3 +23,24 @@ export const postInstructor=async (request, response)=>{
         setErrorResponse(err,response);
     }
 }
+
+export const putInstructor = async (request, response) => {
+    try {
+        const instructorId = request.params.id;
+        const updatedInstructor = request.body;
+        const instructor = await InstructorService.updateInstructor(updatedInstructor, instructorId);
+        setResponse(instructor, response);
+    } catch (err) {
+        setErrorResponse(err, response);
+    }
+}
+
+export const deleteInstructor = async (request, response) => {
+    try {
+        const instructorId = request.params.id;
+        const result = await InstructorService.removeInstructor(instructorId);
+        setResponse(result, response);
+    } catch (err) {
+        setErrorResponse(err, response);
+    }
+}
