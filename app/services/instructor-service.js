@@ -12,9 +12,9 @@ export const saveInstructor = async (newInstructor)=>{
 
 export const updateInstructor = async(updatedInstructor,id)=>{
     const instructor = await Instructor.findByIdAndUpdate(id,updatedInstructor).exec();
-    return course;
+    return instructor;
 }
 
 export const removeInstructor = async(id)=>{
-    return await Instructor.findByIdAndRemove(id).exec();
+    return await Instructor.findByIdAndDelete(id).exec();
 }

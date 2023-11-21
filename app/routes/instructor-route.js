@@ -9,4 +9,8 @@ router.route('/')
     .get(instructorController.findInstructor)
     .post(instructorController.postInstructor);
 
+router.route('/:id')
+    .put(instructorController.putInstructor)
+    .delete(instructorController.deleteInstructor);
+
 export default router;
