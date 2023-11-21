@@ -1,6 +1,7 @@
 import * as moduleServices from '../services/module-service.js';
 import { setResponse,setErrorResponse } from './response-handler.js';
 
+//callback function for the post route
 export const post= async(request,response)=>{
     try {
         const newModule={...request.body};
@@ -13,6 +14,7 @@ export const post= async(request,response)=>{
     }
 }
 
+//callback funtion for the delete route
 export const remove= async(request,response)=>{
     try {
         const id =request.params._id;
@@ -26,6 +28,7 @@ export const remove= async(request,response)=>{
     }
 }
 
+//callback function for the get route
 export const searchById =async(request,response)=>{
     console.log(request.params);
     try {
