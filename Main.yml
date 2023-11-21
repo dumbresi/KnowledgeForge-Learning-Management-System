@@ -75,7 +75,7 @@ paths:
                   - course_id: 456
                     title: Machine Learning
                     description: Course focuses on Machine learning algorithms and optimization
-                    creation_time: 11/14/2020
+                    creation_time: 2020-01-01T12:00:00Z
                     category: Engineering
                     sub_category: Data Science
                     thumbnail: http://google.com/thumb.jpg
@@ -84,12 +84,12 @@ paths:
                   - course_id: 784
                     title: Object Oriented Programming
                     description: Course focuses on Object Oriented Programming and Design patterns
-                    creation_time: 05/25/2020
+                    creation_time: 2020-01-01T12:00:00Z
                     category: Engineering
                     sub_category: Software Engineering
                     thumbnail: http://google.com/thumb.jpg
                     fees: $1801
-                    num_of_mods: 6
+                    num_of_mods: 4
         '401':
           description: Unauthorized. The user is not authenticated to access this resource.
           content:
@@ -108,6 +108,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error_500'
+
   /courses:
     get:
       summary: Get All Courses
@@ -154,24 +155,24 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error_500'
+
   /courseDetails:
     get:
       operationId: get-course-details
-      description: get course details
-      parameters: 
+      description: Get course details
+      parameters:
         - name: id
           in: query
           required: true
           example: 113
-          schema: 
+          schema:
             type: string
-      responses: 
-        "200":
+      responses:
+        '200':
           description: Successful search
-          content: 
-            application/json: 
-              schema: 
-                type: object
+          content:
+            application/json:
+              schema:
                 $ref: "#/components/schemas/CourseDetails"
         '404':
           description: Page not found.
@@ -185,6 +186,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error_500'
+
   /user/profile:
     get:
       summary: Get user profile by access token
@@ -230,18 +232,34 @@ paths:
                   user_name: "John Doe"
         '401':
           description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error_401'
         '404':
           description: User not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error_404'
         '500':
           description: Internal Server Error
-        '400' :
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error_500'
+        '400':
           description: Invalid request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error_400'
 
 components:
   schemas:
     CourseDetails:
       type: object
-      properties: 
+      properties:
         id:
           type: string
           examples:
@@ -284,11 +302,11 @@ components:
             - 5
         num_reviews:
           type: integer
-          examples: 
+          examples:
             - 7
         primary_category:
           type: string
-          examples: 
+          examples:
             - "Engineering"
     Error_401:
       type: object
@@ -315,7 +333,7 @@ components:
           type: string
           description: Error message
           examples:
-            - Instructor not found.
+            - Requested data not found.
     Error_500:
       type: object
       properties:
@@ -329,3 +347,16 @@ components:
           description: Error message
           examples:
             - 500 Internal Server Error
+    Error_400:
+      type: object
+      properties:
+        error:
+          type: string
+          description: Error code
+          examples:
+            - BadRequestError
+        message:
+          type: string
+          description: Error message
+          examples:
+            - Invalid request
