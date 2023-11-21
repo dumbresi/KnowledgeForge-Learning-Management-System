@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 const schema = mongoose.Schema;
-
+//schema for the modules
 const moduleSchema = new schema({
     title: {
         type: String,
