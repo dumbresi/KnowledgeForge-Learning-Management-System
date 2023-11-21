@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
-const Schema = mongoose.Schema;
+const schema = mongoose.Schema;
 
-const moduleSchema = new Schema.Schema({
+const moduleSchema = new schema({
     title: {
         type: String,
         required: true,
@@ -34,4 +34,6 @@ const moduleSchema = new Schema.Schema({
     versionKey: false,
 }
 );
-export default moduleSchema;
+
+const module = mongoose.model('modules',moduleSchema)
+export default module;
