@@ -23,3 +23,24 @@ export const postCourse=async (request, reponse)=>{
         setErrorResponse(err,reponse);
     }
 }
+
+export const updateCourse=async(request,response)=>{
+    try{
+        const updatedCourse=request.params.body;
+        const updatedCourseId=request.params._id;
+        const modifiedCourse= await CourseService.updateCourse(updatedCourse,updatedCourseId);
+        setResponse(modifiedCourse,response);
+    }catch{
+        setErrorResponse(err,response);
+    }
+}
+
+export const deleteCourse= async(request,response)=>{
+    try{
+        const courseId=request.params._id;
+        const removedCourse=await CourseService.removeCourse(courseId);
+        setResponse(removedCourse,response);
+    }catch(err){
+        setErrorResponse(err,response);
+    }
+}

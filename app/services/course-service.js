@@ -17,5 +17,5 @@ export const updateCourse = async(updatedCourse,id)=>{
 }
 
 export const removeCourse = async(id)=>{
-    return await Course.findByIdAndRemove(id).exec();
+    return await Course.findByIdAndDelete(id).exec();
 }

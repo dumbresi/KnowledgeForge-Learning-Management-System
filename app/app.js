@@ -4,7 +4,6 @@ import mongoose from 'mongoose';
 import registerRouter from './routes/index.js';
 
 const initialize = (app)=>{
-    debug
     app.use(cors());
     app.use(express.json());
     app.use(express.urlencoded());
