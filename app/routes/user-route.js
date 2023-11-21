@@ -1,6 +1,6 @@
-import express from 'express'
-import Instructor from '../models/user.js';
-import * as instructorController from '../controllers/user-controller.js';
+import express from 'express';
+import User from '../models/user.js';
+import * as userController from '../controllers/user-controller.js';
 
 
 const router = express.Router();
