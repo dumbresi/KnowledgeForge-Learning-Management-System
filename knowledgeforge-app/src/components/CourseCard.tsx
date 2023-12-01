@@ -18,7 +18,7 @@ type CourseCard ={
 const CourseCard :React.FC<CourseCard>  =({ course })=> {
 
     return(
-        <div>
+        <div className="course-card">
             <img src={`${course.thumbnail}`}></img>
             <p>{`${course.title}`}</p>
             <p>{`${course.category}`}</p>

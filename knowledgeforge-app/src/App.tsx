@@ -6,7 +6,7 @@ import AllCoursePage from './pages/AllCoursePage';
 
 function App() {
   return (
-    <div className="App">
+    <div className="coursepage">
       <AllCoursePage/>
     </div>
   );
