@@ -1,7 +1,10 @@
+// Importing mongoose for creating schemas and models
 import mongoose from "mongoose";
 
+// Creating a schema using mongoose.Schema
 const schema = mongoose.Schema;
 
+// Defining the instructor schema with specified fields and their types
 const instructorSchema = new schema({
   instructor_id: {
     type: String,
@@ -37,10 +40,12 @@ const instructorSchema = new schema({
   }
 },
 {
+  // Excluding the version key from the schema
   versionKey: false
-}
-);
+});
 
+// Creating a mongoose model named 'Instructor' based on the defined schema
 const Instructor = mongoose.model('instructor', instructorSchema);
 
+// Exporting the Instructor model for use in other files
 export default Instructor;

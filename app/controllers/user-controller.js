@@ -23,3 +23,24 @@ export const postUser = async (request, response)=>{
         setErrorResponse(err,response);
     }
 }
+
+export const putUser = async (request, response) => {
+    try {
+        const userId = request.params.id;
+        const updatedUser = request.body;
+        const user = await UserService.updateUser(updatedUser, userId);
+        setResponse(user, response);
+    } catch (err) {
+        setErrorResponse(err, response);
+    }
+}
+
+export const deleteUser = async (request, response) => {
+    try {
+        const userId = request.params.id;
+        const result = await UserService.removeUser(userId);
+        setResponse(result, response);
+    } catch (err) {
+        setErrorResponse(err, response);
+    }
+}

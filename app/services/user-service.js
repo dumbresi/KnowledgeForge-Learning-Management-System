@@ -6,15 +6,15 @@ export const searchUser = async (params={}) => {
 }
 
 export const saveUser = async (newUser)=>{
-    const user = new Instructor(newUser);
+    const user = new User(newUser);
     return await user.save();
 }
 
 export const updateUser = async(updatedUser,id)=>{
     const user = await User.findByIdAndUpdate(id,updatedUser).exec();
-    return course;
+    return user;
 }
 
 export const removeUser = async(id)=>{
-    return await User.findByIdAndRemove(id).exec();
+    return await User.findByIdAndDelete(id).exec();
 }
