@@ -46,6 +46,10 @@ const courseSchema = new schema({
   avg_star_rating:{
     type: Number,
     required: false,
+  },
+  moduleIDs:{
+    type:Array,
+    required:false
   }
 },
 {
