@@ -23,7 +23,6 @@ const AllCoursePage = ()  => {
 
     useEffect(() => {
         // Fetch course data from an API
-        // For simplicity, let's assume you have a function fetchCourses() to get the data
         const fetchData = async () => {
           try {
             const data = CourseService.getCourses();
