@@ -11,6 +11,7 @@ interface Course{
     noOfModules: number,
     creationTime: string,
     avg_star_rating: number
+    moduleIDs: Array<any>
 }
 
 export default Course
