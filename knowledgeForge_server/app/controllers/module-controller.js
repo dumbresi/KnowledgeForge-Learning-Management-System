@@ -1,5 +1,7 @@
+import { response } from 'express';
 import * as moduleServices from '../services/module-service.js';
 import { setResponse,setErrorResponse } from './response-handler.js';
+import mongoose from "mongoose";
 
 //callback function for the post route
 export const post= async(request,response)=>{
@@ -39,6 +41,18 @@ export const searchById =async(request,response)=>{
         setResponse(module,response);
     } catch (error) {
 
+        setErrorResponse(error,response);
+    }
+}
+
+export const getModules = async(request, response)=>{
+    try{
+        const courseId = request.params._courseId;
+        
+        const allModules = await moduleServices.getModules(courseId);
+        
+        setResponse(allModules,response)
+    }catch(error){
         setErrorResponse(error,response);
     }
 }

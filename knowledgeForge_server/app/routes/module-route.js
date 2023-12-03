@@ -5,6 +5,7 @@ const router= express.Router();
 
 
 router.post('/', moduleController.post);
+router.get('/course/:_courseId', moduleController.getModules);
 router.get('/:_id',moduleController.searchById);
 router.delete('/:_id',moduleController.remove);
 export default router;
