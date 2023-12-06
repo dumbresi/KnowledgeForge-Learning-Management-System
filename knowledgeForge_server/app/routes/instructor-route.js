@@ -20,5 +20,7 @@ router.route('/:id')
     .delete(instructorController.deleteInstructor); // DELETE request to remove an existing instructor
 router.route('/current')
     .get(instructorController.getOneInsrtuctor);
+router.route('/mycourses')
+    .get(instructorController.getInstructorCourses);
 // Exporting the router for use in other files
 export default router;

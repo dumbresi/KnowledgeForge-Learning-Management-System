@@ -24,6 +24,10 @@ const userSchema = new schema({
   password: {
     type: String,
     required: true,
+  },
+  registeredCourses:{
+    type: String,
+    required: false,
   }
   
 },

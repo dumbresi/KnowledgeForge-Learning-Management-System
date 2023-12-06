@@ -14,5 +14,7 @@ router.route('/:id')
     .delete(userController.deleteUser);
 router.route('/current')
     .get(userController.getOneUser);
+router.route('/registeredCourses')
+    .get(userController.getRegisteredCourses);
     
 export default router;

@@ -1,4 +1,5 @@
 // Importing the 'Instructor' model
+import Course from '../models/course.js';
 import Instructor from '../models/instructor.js';
 
 // Function to search for instructors based on specified parameters
@@ -48,5 +49,31 @@ export const getOneInsrtuctor = async(email)=>{
             },
           },
     ]);
-    return result;
+    return result[0];
+}
+export const getCourses = async(email)=>{
+
+    const result= await Instructor.aggregate([
+        {
+            $match: {
+              email: email,
+            },
+          },
+          {
+            $lookup:{
+                from: "courses",
+              localField: "myCourses",
+              foreignField: "_id",
+              as: "courses"
+            }
+          },
+          {
+            $project: {
+              courses:1,
+              _id: 0,      // Exclude the '_id' field
+
+            },
+          },
+    ]);
+    return result[0];
 }
