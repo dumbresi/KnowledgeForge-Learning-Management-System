@@ -3,30 +3,29 @@ import mongoose from "mongoose";
 const schema = mongoose.Schema;
 
 const userSchema = new schema({
-  userID: {
-    type: String,
-    required: true,
-  },
+  
   userName: {
     type: String,
     required: true,
   },
-  emailID: {
+  email: {
     type: String,
     required: true,
+    unique: true,
   },
-  profile_picture: {
-    type: String,
-    required: true,
-  },
+  // profile_picture: {
+  //   type: String,
+  //   required: true,
+  // },
   contactNumber: {
     type: String,
     required: true,
   },
-  access_token: {
+  password: {
     type: String,
     required: true,
   }
+  
 },
 {
   versionKey: false
