@@ -4,11 +4,12 @@ import logo from './logo.svg';
 import './App.css';
 import AllCoursePage from './pages/AllCoursePage';
 import RegisterUserPage from './pages/RegisterUserPage';
+import LoginPage from './pages/LoginPage';
 
 function App() {
   return (
     <div className="coursepage">
-      <RegisterUserPage/>
+      <LoginPage/>
     </div>
   );
 }
