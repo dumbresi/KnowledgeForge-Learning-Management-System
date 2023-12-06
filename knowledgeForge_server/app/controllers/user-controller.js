@@ -58,3 +58,16 @@ export const getOneUser = async (request, response) => {
         setErrorResponse(err, response);
     }
 }
+export const getRegisteredCourses = async (request, response) => {
+    const token = request.cookies.token;
+        if (!token) {
+            return response.status(401).json({ message: 'Unauthorized' });
+          }
+    try {
+        const user = jwt.verify(token, 'secret123');
+        const result = await UserService.registeredCourses(user.email);
+        setResponse(result, response);
+    } catch (err) {
+        setErrorResponse(err, response);
+    }
+}

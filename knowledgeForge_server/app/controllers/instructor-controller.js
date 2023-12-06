@@ -89,3 +89,20 @@ export const getOneInsrtuctor = async (request, response) => {
         setErrorResponse(err, response);
     }
 }
+
+export const getInstructorCourses = async (request, response) => {
+    const token = request.cookies.token;
+    
+        if (!token) {
+            return response.status(401).json({ message: 'Unauthorized' });
+          }
+    try {
+        const instructor = jwt.verify(token, 'secret123');
+        
+        const result = await InstructorService.getCourses(instructor.email);
+        setResponse(result, response);
+    } catch (err) {
+        setErrorResponse(err, response);
+    }
+}
+

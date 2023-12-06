@@ -15,7 +15,7 @@ export const registerInstructor = async (request, response) => {
         const newPassword = await bcrypt.hash(newInstructor.password, 10)
         
         newInstructor.password=newPassword;
-        console.log(newInstructor);
+        
         // Call service to save new instructor
         const instructor = await saveInstructor(newInstructor);
 

@@ -35,5 +35,30 @@ export const getOneUser = async(email)=>{
             },
           },
     ]);
-    return result;
+    return result[0];
+}
+export const registeredCourses = async(email)=>{
+    const result= await User.aggregate([
+        {
+            $match: {
+              email: email,
+            },
+          },
+          {
+            $lookup:{
+                from: "courses",
+              localField: "registeredCourses",
+              foreignField: "_id",
+              as: "myCourses"
+            }
+          },
+          {
+            $project: {
+              myCourses:1, 
+              _id: 0,      // Exclude the '_id' field
+
+            },
+          },
+    ]);
+    return result[0];
 }
