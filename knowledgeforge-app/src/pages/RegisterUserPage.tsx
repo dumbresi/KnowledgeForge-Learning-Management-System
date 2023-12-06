@@ -1,5 +1,5 @@
 import React, { ChangeEvent, FormEvent, useState } from 'react'
-import User from '../models/User'
+import User from '../models/user'
 
 type Props = {}
 

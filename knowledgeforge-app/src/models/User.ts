@@ -7,4 +7,7 @@ interface User{
     access_token: string
 }
 
+
 export default User;
+
+
