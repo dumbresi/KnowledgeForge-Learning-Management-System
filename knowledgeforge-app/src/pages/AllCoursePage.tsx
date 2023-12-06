@@ -3,19 +3,6 @@ import CourseCard from '../components/CourseCard';
 import * as CourseService from '../services/course-service';
 import Course from '../models/Course';
 
-// type Course = {
-//     title: string,
-//     instructor: string,
-//     duration: string,
-//     fees: number,
-//     category: string,
-//     subCategory: string,
-//     thumbnail: string,
-//     description: string,
-//     noOfModules: number,
-//     creationTime: string,
-//     avg_star_rating: number
-// }
 
 const AllCoursePage = ()  => {
 
@@ -23,7 +10,6 @@ const AllCoursePage = ()  => {
 
     useEffect(() => {
         // Fetch course data from an API
-        // For simplicity, let's assume you have a function fetchCourses() to get the data
         const fetchData = async () => {
           try {
             const data = CourseService.getCourses();

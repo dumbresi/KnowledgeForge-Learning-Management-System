@@ -12,7 +12,8 @@ type CourseCard ={
         description: string,
         noOfModules: number,
         creationTime: string,
-        avg_star_rating: number
+        avg_star_rating: number,
+        moduleIDs: Array<any>
     }
 }
 const CourseCard :React.FC<CourseCard>  =({ course })=> {

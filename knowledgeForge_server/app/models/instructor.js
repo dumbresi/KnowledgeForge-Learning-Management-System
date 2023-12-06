@@ -6,10 +6,6 @@ const schema = mongoose.Schema;
 
 // Defining the instructor schema with specified fields and their types
 const instructorSchema = new schema({
-  instructor_id: {
-    type: String,
-    required: true,
-  },
   name: {
     type: String,
     required: true,
@@ -17,11 +13,12 @@ const instructorSchema = new schema({
   email: {
     type: String,
     required: true,
+    unique:true,
   },
-  profile_picture: {
-    type: String,
-    required: true,
-  },
+  // profile_picture: {
+  //   type: String,
+  //   required: true,
+  // },
   contactnum: {
     type: String,
     required: true,
@@ -30,14 +27,11 @@ const instructorSchema = new schema({
     type: String,
     required: true,
   },
-  access_token: {
+  password: {
     type: String,
     required: true,
   },
-  course_id: {
-    type: String,
-    required: true,
-  }
+  
 },
 {
   // Excluding the version key from the schema
