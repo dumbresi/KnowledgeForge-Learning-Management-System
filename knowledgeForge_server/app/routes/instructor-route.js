@@ -18,6 +18,9 @@ router.route('/')
 router.route('/:id')
     .put(instructorController.putInstructor) // PUT request to update an existing instructor
     .delete(instructorController.deleteInstructor); // DELETE request to remove an existing instructor
-
+router.route('/current')
+    .get(instructorController.getOneInsrtuctor);
+router.route('/mycourses')
+    .get(instructorController.getInstructorCourses);
 // Exporting the router for use in other files
 export default router;

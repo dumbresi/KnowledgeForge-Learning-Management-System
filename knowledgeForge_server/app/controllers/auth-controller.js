@@ -13,8 +13,9 @@ export const registerInstructor = async (request, response) => {
         // Extract new instructor data from the request body
         const newInstructor = request.body;
         const newPassword = await bcrypt.hash(newInstructor.password, 10)
+        
         newInstructor.password=newPassword;
-
+        
         // Call service to save new instructor
         const instructor = await saveInstructor(newInstructor);
 

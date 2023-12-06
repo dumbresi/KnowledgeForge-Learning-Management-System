@@ -3,7 +3,7 @@ import * as CourseService from '../services/course-service.js'
 import { setResponse, setErrorResponse} from './response-handler.js'
 
 export const findCourse=async (request, response) =>{
-    console.log(request);
+    
     try{
         const searchQuery= {...request.query};
         const courses = await CourseService.searchCourse(searchQuery);

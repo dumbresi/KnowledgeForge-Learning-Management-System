@@ -2,6 +2,7 @@
 import { response } from 'express';
 import * as InstructorService from '../services/instructor-service.js';
 import { setResponse, setErrorResponse } from './response-handler.js';
+import jwt from 'jsonwebtoken';
 
 // Find instructors controller
 export const findInstructor = async (request, response) => {
@@ -72,3 +73,36 @@ export const deleteInstructor = async (request, response) => {
         setErrorResponse(err, response);
     }
 };
+
+export const getOneInsrtuctor = async (request, response) => {
+    const token = request.cookies.token;
+    
+        if (!token) {
+            return response.status(401).json({ message: 'Unauthorized' });
+          }
+    try {
+        const instructor = jwt.verify(token, 'secret123');
+        
+        const result = await InstructorService.getOneInsrtuctor(instructor.email);
+        setResponse(result, response);
+    } catch (err) {
+        setErrorResponse(err, response);
+    }
+}
+
+export const getInstructorCourses = async (request, response) => {
+    const token = request.cookies.token;
+    
+        if (!token) {
+            return response.status(401).json({ message: 'Unauthorized' });
+          }
+    try {
+        const instructor = jwt.verify(token, 'secret123');
+        
+        const result = await InstructorService.getCourses(instructor.email);
+        setResponse(result, response);
+    } catch (err) {
+        setErrorResponse(err, response);
+    }
+}
+

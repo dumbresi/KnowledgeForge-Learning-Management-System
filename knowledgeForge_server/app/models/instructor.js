@@ -31,6 +31,11 @@ const instructorSchema = new schema({
     type: String,
     required: true,
   },
+  myCourses:{
+    type: Array,
+    required: false,
+  }
+  
   
 },
 {
