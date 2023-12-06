@@ -22,7 +22,7 @@ export const findById=async(id)=>{
 }
 
 export const getModules = async(courseId)=>{
-    console.log('///');
+    
     const result = await Course.aggregate([
         {
             $match:{ _id: new mongoose.Types.ObjectId(courseId) }
@@ -46,6 +46,6 @@ export const getModules = async(courseId)=>{
     ]).catch(error=>{
         console.log(error);
     });
-    console.log(result);
+    
     return result;
 }

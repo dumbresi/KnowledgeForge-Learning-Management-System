@@ -1,6 +1,7 @@
 import { response } from 'express';
 import * as UserService from '../services/user-service.js'
 import { setResponse, setErrorResponse} from './response-handler.js'
+import  jwt  from 'jsonwebtoken';
 
 export const findUser = async (request, response) =>{
     console.log(request);
@@ -39,6 +40,19 @@ export const deleteUser = async (request, response) => {
     try {
         const userId = request.params.id;
         const result = await UserService.removeUser(userId);
+        setResponse(result, response);
+    } catch (err) {
+        setErrorResponse(err, response);
+    }
+}
+export const getOneUser = async (request, response) => {
+    const token = request.cookies.token;
+        if (!token) {
+            return response.status(401).json({ message: 'Unauthorized' });
+          }
+    try {
+        const user = jwt.verify(token, 'secret123');
+        const result = await UserService.getOneUser(user.email);
         setResponse(result, response);
     } catch (err) {
         setErrorResponse(err, response);
