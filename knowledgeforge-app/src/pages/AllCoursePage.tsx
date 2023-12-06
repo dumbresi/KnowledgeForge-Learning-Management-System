@@ -2,6 +2,7 @@ import React ,{useState, useEffect} from 'react'
 import CourseCard from '../components/CourseCard';
 import * as CourseService from '../services/course-service';
 import Course from '../models/Course';
+import { BrowserRouter, Route, Routes, Link } from 'react-router-dom'
 
 
 const AllCoursePage = ()  => {
@@ -36,6 +37,16 @@ const AllCoursePage = ()  => {
 
   return (
     <div className='all-courses-page'>
+      <nav>
+        <ul>
+          <li>
+            <Link to="/user/register">Register</Link>
+          </li>
+          <li>
+            <Link to="/user/login">Login</Link>
+          </li>
+        </ul>
+      </nav>
         <h1>All Courses</h1>
         <div className='course-list'>
             {

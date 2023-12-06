@@ -1,5 +1,6 @@
 import React, { ChangeEvent, FormEvent, useState } from 'react'
 import User from '../models/User'
+import { BrowserRouter, Route, Routes, Link,useNavigate } from 'react-router-dom'
 
 type Props = {}
 
@@ -17,6 +18,8 @@ const RegisterUserPage : React.FC= ()=>{
     const [email,setEmailID]=useState('');
     const [contactNumber,setContactNumber]=useState('');
     const [password,setPassword]=useState('');
+
+    const navigate = useNavigate();
 
     const handleNameChange=(e:ChangeEvent<HTMLInputElement>)=>{
         const {name,value}= e.target;
@@ -61,6 +64,9 @@ const RegisterUserPage : React.FC= ()=>{
             if (!response.ok) {
                 throw new Error('Network response was not ok');
               }
+            if(response.status===200){
+                navigate('../user/login');
+            }
             
         }catch(error){
             console.error('Error submitting data',error)
@@ -78,29 +84,29 @@ const RegisterUserPage : React.FC= ()=>{
         <form onSubmit={handleSubmit}>
             <label>
                 Name:
-                <input type='text' name='name' value={userName} className='block w-full rounded-md border-0 py-1.5 pl-7 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6' onChange={handleNameChange}/>
+                <input className='border-2' type='text' name='name' value={userName} onChange={handleNameChange}/>
             </label>
             <br/>
 
             <label>
                 Email:
-                <input type="email" name="email" value={email} className='block w-full rounded-md border-0 py-1.5 pl-7 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6' onChange={handleEmailChange} />
+                <input className='border-2' type="email" name="email" value={email} onChange={handleEmailChange} />
             </label>
             <br/>
 
             <label>
                 Contact number:
-                <input type="text" name="number" value={contactNumber} onChange={handleNumberChange} />
+                <input className='border-2' type="text" name="number" value={contactNumber} onChange={handleNumberChange} />
             </label>
             <br/>
 
             <label>
                 Password:
-                <input type="text" name="password" value={password} onChange={handlePasswordChange} />
+                <input className='border-2' type="text" name="password" value={password} onChange={handlePasswordChange} />
             </label>
             <br/>
 
-            <button type="submit">Submit</button>
+            <button className='border-2 border-black p-2' type="submit">Submit</button>
 
         </form>
         </div>

@@ -24,21 +24,32 @@ function App(): JSX.Element {
 
   return (
     <div>
-      <h1>Login</h1>
+      <h1>Proceed to Login</h1>
       <form onSubmit={loginUser}>
+		<label>
+			Email
         <input
+		className='border-2'
           value={email}
           onChange={(e: ChangeEvent<HTMLInputElement>) => setEmail(e.target.value)}
           type="email"
         />
-        <br />
-        <input
+		</label>
+        <br/>
+		<label>
+			Password
+		<input
+			className='border-2'
           value={password}
           onChange={(e: ChangeEvent<HTMLInputElement>) => setPassword(e.target.value)}
           type="password"
         />
+
+		</label>
+        
         <br />
-        <input type="submit" value="Login" />
+        {/* <input type="submit" value="Login" /> */}
+		<button className='border-2 border-black p-2' type="submit">Submit</button>
       </form>
     </div>
   );
