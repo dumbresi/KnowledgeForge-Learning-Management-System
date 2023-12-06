@@ -6,4 +6,4 @@ const app = express();
 const port =process.env.PORT;
 initialize(app);
 
-app.listen(port,()=>console.log("listening on port 3000"))
+app.listen(port,()=>console.log("listening on port"+ `${port}`))

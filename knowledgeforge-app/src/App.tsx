@@ -1,14 +1,16 @@
-import React from 'react';
+import React, {useState} from 'react';
+import courses from './models/Course';
 import logo from './logo.svg';
 import './App.css';
-import UserPage from './pages/UserPage';
+import AllCoursePage from './pages/AllCoursePage';
+import RegisterUserPage from './pages/RegisterUserPage';
+import LoginPage from './pages/LoginPage';
 
 function App() {
   return (
-    // <div className="App">
-    //   Knowledge Forge
-    // </div>
-    <div><UserPage /></div>
+    <div className="coursepage">
+      <LoginPage/>
+    </div>
   );
 }
 

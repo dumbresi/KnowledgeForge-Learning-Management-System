@@ -1,4 +1,3 @@
-import { type } from "os";
 import React from "react";
 
 type CourseCard ={
@@ -13,15 +12,19 @@ type CourseCard ={
         description: string,
         noOfModules: number,
         creationTime: string,
-        avg_star_rating: number
-
+        avg_star_rating: number,
+        moduleIDs: Array<any>
     }
 }
-const CourseCard =(props:CourseCard)=> {
+const CourseCard :React.FC<CourseCard>  =({ course })=> {
 
     return(
-        <div>
-            
+        <div className="course-card">
+            <img src={`${course.thumbnail}`}></img>
+            <p>{`${course.title}`}</p>
+            <p>{`${course.category}`}</p>
         </div>
     )
 }
+
+export default CourseCard
