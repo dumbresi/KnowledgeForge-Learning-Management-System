@@ -18,3 +18,47 @@ export const updateUser = async(updatedUser,id)=>{
 export const removeUser = async(id)=>{
     return await User.findByIdAndDelete(id).exec();
 }
+export const getOneUser = async(email)=>{
+    const result= await User.aggregate([
+        {
+            $match: {
+              email: email,
+            },
+          },
+          {
+            $project: {
+              userName: 1, // Include the 'username' field
+              email: 1,    // Include the 'email' field
+              contactNumber: 1,  
+              _id: 0,      // Exclude the '_id' field
+
+            },
+          },
+    ]);
+    return result[0];
+}
+export const registeredCourses = async(email)=>{
+    const result= await User.aggregate([
+        {
+            $match: {
+              email: email,
+            },
+          },
+          {
+            $lookup:{
+                from: "courses",
+              localField: "registeredCourses",
+              foreignField: "_id",
+              as: "myCourses"
+            }
+          },
+          {
+            $project: {
+              myCourses:1, 
+              _id: 0,      // Exclude the '_id' field
+
+            },
+          },
+    ]);
+    return result[0];
+}
