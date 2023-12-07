@@ -63,13 +63,13 @@ function Login(): JSX.Element {
     <div className="Login bg-white">
       <div className="tabs flex flex-row justify-between">
           <div
-            className={`tab ${activeTab === 'instructor' ? 'active' : ''} ml-8 border-2 p-2`}
+            className={`tab ${activeTab === 'instructor' ? 'active' : ''}  w-1/2 border-2 p-2 hover:bg-light_blue transition text-center`}
             onClick={() => handleTabClick('instructor')}
           >
             Instructor Login
           </div>
           <div
-            className={`tab ${activeTab === 'student' ? 'active' : ''} mr-8 border-2 align-center justify-center`}
+            className={`tab ${activeTab === 'student' ? 'active' : ''}  w-1/2 border-2 p-2  hover:bg-light_blue transition text-center`}
             onClick={() => handleTabClick('student')}
           >
             Student Login
@@ -82,11 +82,10 @@ function Login(): JSX.Element {
             <h2 className='m-auto text-center'>Instructor Login</h2>
             {/* Add instructor login form here */}
             <div className='flex-column justify-center items-center bg-[#fdebd7] w-fit bg-white m-auto w-auto'>
-              <h1 className='mb-10'>Proceed to Login</h1>
               <form onSubmit={loginUser}>
             
                 <input
-                  className='border-2'
+                  className='border-2 w-60 m-2'
                   value={email}
                   onChange={(e: ChangeEvent<HTMLInputElement>) => setEmail(e.target.value)}
                   type="email"
@@ -95,19 +94,18 @@ function Login(): JSX.Element {
                 <br/>
             
                 <input
-                  className='border-2'
+                  className='border-2 w-60 m-2'
                   value={password}
                   onChange={(e: ChangeEvent<HTMLInputElement>) => setPassword(e.target.value)}
                   type="password"
                   placeholder='Instructor Password'
                 />
         
-        <br />
+              <br />
         {/* <input type="submit" value="Login" /> */}
-		<button className='border-2 border-black p-2 rounded-md m-2 bg-light_blue' type="submit">Submit</button>
-      </form>
-
-    </div>
+		          <button className='border-2 border-black  rounded-md  bg-light_blue w-60 m-2' type="submit">Submit</button>
+            </form>
+                </div>
 
           </div>
         )}
@@ -117,11 +115,10 @@ function Login(): JSX.Element {
             <h2 className='text-center'>Student Login</h2>
             {/* Add student login form here */}
             <div className='flex-column justify-center items-center bg-[#fdebd7] w-fit bg-white m-auto w-auto'>
-              <h1 className='mb-10'>Proceed to Login</h1>
               <form onSubmit={loginUser}>
           
                 <input
-                className='border-2'
+                className='border-2 w-60 m-2'
                   value={email}
                   onChange={(e: ChangeEvent<HTMLInputElement>) => setEmail(e.target.value)}
                   type="email"
@@ -131,7 +128,7 @@ function Login(): JSX.Element {
                 <br/>
             
             <input
-              className='border-2'
+              className='border-2 w-60 m-2'
                   value={password}
                   onChange={(e: ChangeEvent<HTMLInputElement>) => setPassword(e.target.value)}
                   type="password"
@@ -140,7 +137,7 @@ function Login(): JSX.Element {
         
         <br />
         {/* <input type="submit" value="Login" /> */}
-		<button className='border-2 border-black p-2 rounded-md m-2 bg-light_blue' type="submit">Submit</button>
+		<button className='border-2 border-black  rounded-md  bg-light_blue w-60 m-2' type="submit">Submit</button>
       </form>
 
     </div>

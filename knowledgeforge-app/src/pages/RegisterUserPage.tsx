@@ -13,7 +13,7 @@ const RegisterUserPage : React.FC<RegisterUserPage>= ({isLogin}) =>{
     return (
         <div className=' flex flex-row justify-between bg-background_cream h-screen'>
             <div className='m-auto'>
-                <img src={logo} className='w-1/2 h-100'></img>
+                <img src={logo} className='w-1/2 h-100 ml-20'></img>
             </div>
             <div className='border-l w-2 border-solid border-gray-500 h-auto bg-light_blue'></div>
             <div className='align-center flex flex-col w-[500px] m-auto'>{(isLogin)?<LoginPage/>:<RegisterDialog/>}</div>
