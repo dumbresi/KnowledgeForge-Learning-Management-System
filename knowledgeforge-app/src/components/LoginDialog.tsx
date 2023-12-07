@@ -126,7 +126,7 @@ function Login(): JSX.Element {
         <br />
         {/* <input type="submit" value="Login" /> */}
 		<button className='border-2 border-black  rounded-md  bg-light_blue w-60 m-2' type="submit">Submit</button>
-    <div className='text-center m-auto'>New user? <button onClick={takeToSignUpPage}>Sign Up</button></div>
+    <div className='text-center m-auto'>New user? <button className='text-light_blue' onClick={takeToSignUpPage}>Sign Up</button></div>
       </form>
 
     </div>

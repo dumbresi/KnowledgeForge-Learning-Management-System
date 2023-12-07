@@ -44,6 +44,10 @@ const RegisterDialog = (props: Props) => {
         setActiveTab(tab);
       };
 
+    const takeToLoginPage=()=>{
+        navigate('/user/login')
+    }
+
     const handleSubmit=async (e:FormEvent) => {
         e.preventDefault();
         if(activeTab==='student'){
@@ -83,13 +87,13 @@ const RegisterDialog = (props: Props) => {
             className={`tab ${activeTab === 'instructor' ? 'active' : ''}  w-1/2 border-2 p-2 hover:bg-light_blue transition text-center`}
             onClick={() => handleTabClick('instructor')}
           >
-            Instructor Register
+            <button>Instructor Register</button>
           </div>
           <div
             className={`tab ${activeTab === 'student' ? 'active' : ''}  w-1/2 border-2 p-2  hover:bg-light_blue transition text-center`}
             onClick={() => handleTabClick('student')}
           >
-            Student Register
+            <button>Student Register</button>
           </div>
       </div>
       <div>
@@ -108,6 +112,7 @@ const RegisterDialog = (props: Props) => {
                 <input className='border-2 w-60' type="text" name="password" value={password} placeholder='Password'  onChange={handlePasswordChange} />
             <br/>
             <button className='border-2  p-1 mx-auto bg-light_blue rounded-md' type="submit">Create Account</button>
+            <div className='text-center m-2'>Already a user? <button className='text-light_blue' onClick={takeToLoginPage}>Log In</button></div>
         </form>
         </div>
         )
@@ -130,6 +135,7 @@ const RegisterDialog = (props: Props) => {
                 <input className='border-2 w-60' type="text" name="university" value={university} placeholder='University Name'  onChange={handleUniversity} />
             <br/>
             <button className='border-2  p-1 mx-auto bg-light_blue rounded-md' type="submit">Create Account</button>
+            <div className='text-center m-2'>Already a user? <button className='text-light_blue' onClick={takeToLoginPage}>Log In</button></div>
         </form>
         </div>
         )
