@@ -19,7 +19,7 @@ const instructorSchema = new schema({
   //   type: String,
   //   required: true,
   // },
-  contactnum: {
+  contactNumber: {
     type: String,
     required: true,
   },
