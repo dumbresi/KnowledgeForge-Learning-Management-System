@@ -36,7 +36,8 @@ const AllCoursePage = ()  => {
     // fetchData;
 
   return (
-    <div className='all-courses-page'>
+<div>
+    <div className='justify-center'>
       <nav>
         <ul>
           <li>
@@ -56,6 +57,7 @@ const AllCoursePage = ()  => {
             }
         </div>
     </div>
+</div>
   )
 }
 
