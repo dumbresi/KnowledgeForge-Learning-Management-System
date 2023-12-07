@@ -7,6 +7,7 @@ import AllCoursePage from './pages/AllCoursePage';
 import RegisterUserPage from './pages/RegisterUserPage';
 import LoginPage from './components/LoginDialog';
 import InstructorDetails from './pages/InstructorDetails';
+import * as Paths from './resources/paths'
 
 function App() {
 
@@ -24,8 +25,8 @@ function App() {
         </div>
       
       }/>
-				<Route path="/user/register" element={<RegisterUserPage isLogin={false}/>} />
-				<Route path="/user/login" element={<RegisterUserPage isLogin={true}/>}  />
+				<Route path={Paths.registerPath} element={<RegisterUserPage isLogin={false}/>} />
+				<Route path={Paths.loginPath} element={<RegisterUserPage isLogin={true}/>}  />
         {/* <Route path="/instructor/profile" element={<InstructorDetails(...instructor)/>} /> */}
       </Routes>
 				

@@ -2,6 +2,7 @@ import React, { ChangeEvent, FormEvent, useState } from 'react'
 import User from '../models/User'
 import { BrowserRouter, Route, Routes, Link,useNavigate } from 'react-router-dom'
 import * as AuthService from '../services/auth-service'
+import * as Paths from '../resources/paths'
 
 type Props = {}
 
@@ -58,7 +59,7 @@ const RegisterDialog = (props: Props) => {
                     throw new Error('Network response was not ok');
                   }
                 if(response.status===200){
-                    navigate('../user/login');
+                    navigate(Paths.loginPath);
                 }
                 
             }catch(error){

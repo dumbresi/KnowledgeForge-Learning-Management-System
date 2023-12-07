@@ -1,6 +1,7 @@
 import React, { useState, ChangeEvent, FormEvent } from 'react';
 import { BrowserRouter, Route, Routes, Link,useNavigate } from 'react-router-dom'
 import * as AuthService from '../services/auth-service'
+import * as Paths from '../resources/paths'
 
 function Login(): JSX.Element {
   const [email, setEmail] = useState<string>('');
@@ -43,7 +44,7 @@ function Login(): JSX.Element {
 
   const takeToSignUpPage=()=>{
     console.log("take user to register page")
-    navigate('/user/register');
+    navigate(Paths.registerPath);
   }
 
   return (
