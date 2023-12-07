@@ -1,6 +1,7 @@
 import React, { ChangeEvent, FormEvent, useState } from 'react'
 import User from '../models/User'
 import { BrowserRouter, Route, Routes, Link,useNavigate } from 'react-router-dom'
+import * as AuthService from '../services/auth-service'
 
 type Props = {}
 
@@ -47,13 +48,7 @@ const RegisterDialog = (props: Props) => {
         e.preventDefault();
         if(activeTab==='student'){
             try{
-                const response = await fetch('http://localhost:4000/auth/user/register',{
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                      },
-                      body: JSON.stringify({name,email,contactNumber,password}),
-                })
+                const response = await AuthService.registerUser(JSON.stringify({name,email,contactNumber,password}));
     
                 if (!response.ok) {
                     throw new Error('Network response was not ok');
@@ -68,13 +63,7 @@ const RegisterDialog = (props: Props) => {
         }
         if(activeTab==='instructor'){
             try {
-                const response = await fetch('http://localhost:4000/auth/instructor/register',{
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                      },
-                      body: JSON.stringify({name,email,contactNumber,password,university}),
-                })
+                const response = await AuthService.registerInstructor( JSON.stringify({name,email,contactNumber,password,university}));
                 if(response.status===200){
                     navigate('../user/login');
                 }

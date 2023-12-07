@@ -13,10 +13,6 @@ const userSchema = new schema({
     required: true,
     unique: true,
   },
-  // profile_picture: {
-  //   type: String,
-  //   required: true,
-  // },
   contactNumber: {
     type: String,
     required: true,
@@ -29,7 +25,6 @@ const userSchema = new schema({
     type: String,
     required: false,
   }
-  
 },
 {
   versionKey: false
