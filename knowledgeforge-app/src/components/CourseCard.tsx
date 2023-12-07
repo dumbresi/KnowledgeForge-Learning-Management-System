@@ -19,10 +19,24 @@ type CourseCard ={
 const CourseCard :React.FC<CourseCard>  =({ course })=> {
 
     return(
-        <div className="border-2 border-black m-2 rounded-md">
-            <img src={`${course.thumbnail}`}></img>
-            <p className="text-center">{`${course.title}`}</p>
-            <p className="text-center">{`${course.category}`}</p>
+        <div className="border border-gray-400 m-2 rounded-md bg-white h-60 flex flex-col">
+            
+            <div className="h-1/3 bg-red-400"><img alt='loading'src={`${course.thumbnail}`}></img></div>
+            <div className="px-4 pt-3 pb-2">{`${course.title}`}</div>
+            <div className="flex flex-row px-5 py-0">
+                <div className="flex flex-col text-xs text-gray-600">
+                    Number of lessons
+                    <h3>{course.noOfModules}</h3>
+                </div>
+            </div>
+            <hr className="h-2" />
+            
+            <div className="px-3 text-xs text-gray-600">
+                {course.description}
+                <p className="text-center">{`${course.category}`}</p>
+            </div>
+
+            
         </div>
     )
 }
