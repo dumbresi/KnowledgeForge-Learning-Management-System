@@ -7,6 +7,7 @@ import AllCoursePage from './pages/AllCoursePage';
 import RegisterUserPage from './pages/RegisterUserPage';
 import LoginPage from './components/LoginDialog';
 import InstructorDetails from './pages/InstructorDetails';
+import UserPage from './pages/UserPage';
 
 function App() {
 
@@ -21,11 +22,13 @@ function App() {
       <Route path="/" element={
         <div>
           <AllCoursePage/>
+          {/* {<UserPage/>} */}
         </div>
       
       }/>
 				<Route path="/user/register" element={<RegisterUserPage isLogin={false}/>} />
 				<Route path="/user/login" element={<RegisterUserPage isLogin={true}/>}  />
+        <Route path="/user/current" element={<UserPage/>}  />
         {/* <Route path="/instructor/profile" element={<InstructorDetails(...instructor)/>} /> */}
       </Routes>
 				
