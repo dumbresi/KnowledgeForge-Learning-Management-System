@@ -36,9 +36,9 @@ const AllCoursePage = ()  => {
     // fetchData;
 
   return (
-<div>
-    <div className='justify-center'>
-      <nav>
+<div className='h-screen bg-background_cream '>
+    <div className='flex flex-row justify-center'>
+    <nav>
         <ul>
           <li>
             <Link to="/user/register">Register</Link>
@@ -51,15 +51,20 @@ const AllCoursePage = ()  => {
           </li>
         </ul>
       </nav>
+    </div>
+      
         <h1>All Courses</h1>
-        <div className='course-list'>
+        <div className='w-[95%] h-auto rounded-md bg-white ab' >
+        <div className="grid gap-1 grid-cols-[repeat(auto-fill,minmax(300px,1fr))] p-2">
             {
                 courses.map(
                     (courseItem) =>( <CourseCard course={courseItem}/> )
                 )
             }
         </div>
-    </div>
+        </div>
+        
+    
 </div>
   )
 }

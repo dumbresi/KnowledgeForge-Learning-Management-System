@@ -1,6 +1,8 @@
 import React, { ChangeEvent, FormEvent, useState } from 'react'
 import User from '../models/User'
 import { BrowserRouter, Route, Routes, Link,useNavigate } from 'react-router-dom'
+import * as AuthService from '../services/auth-service'
+import * as Paths from '../resources/paths'
 
 type Props = {}
 
@@ -43,23 +45,21 @@ const RegisterDialog = (props: Props) => {
         setActiveTab(tab);
       };
 
+    const takeToLoginPage=()=>{
+        navigate('/user/login')
+    }
+
     const handleSubmit=async (e:FormEvent) => {
         e.preventDefault();
         if(activeTab==='student'){
             try{
-                const response = await fetch('http://localhost:4000/auth/user/register',{
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                      },
-                      body: JSON.stringify({name,email,contactNumber,password}),
-                })
+                const response = await AuthService.registerUser(JSON.stringify({name,email,contactNumber,password}));
     
                 if (!response.ok) {
                     throw new Error('Network response was not ok');
                   }
                 if(response.status===200){
-                    navigate('../user/login');
+                    navigate(Paths.loginPath);
                 }
                 
             }catch(error){
@@ -68,13 +68,7 @@ const RegisterDialog = (props: Props) => {
         }
         if(activeTab==='instructor'){
             try {
-                const response = await fetch('http://localhost:4000/auth/instructor/register',{
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                      },
-                      body: JSON.stringify({name,email,contactNumber,password,university}),
-                })
+                const response = await AuthService.registerInstructor( JSON.stringify({name,email,contactNumber,password,university}));
                 if(response.status===200){
                     navigate('../user/login');
                 }
@@ -94,13 +88,13 @@ const RegisterDialog = (props: Props) => {
             className={`tab ${activeTab === 'instructor' ? 'active' : ''}  w-1/2 border-2 p-2 hover:bg-light_blue transition text-center`}
             onClick={() => handleTabClick('instructor')}
           >
-            Instructor Register
+            <button>Instructor Register</button>
           </div>
           <div
             className={`tab ${activeTab === 'student' ? 'active' : ''}  w-1/2 border-2 p-2  hover:bg-light_blue transition text-center`}
             onClick={() => handleTabClick('student')}
           >
-            Student Register
+            <button>Student Register</button>
           </div>
       </div>
       <div>
@@ -119,6 +113,7 @@ const RegisterDialog = (props: Props) => {
                 <input className='border-2 w-60' type="text" name="password" value={password} placeholder='Password'  onChange={handlePasswordChange} />
             <br/>
             <button className='border-2  p-1 mx-auto bg-light_blue rounded-md' type="submit">Create Account</button>
+            <div className='text-center m-2'>Already a user? <button className='text-light_blue' onClick={takeToLoginPage}>Log In</button></div>
         </form>
         </div>
         )
@@ -141,6 +136,7 @@ const RegisterDialog = (props: Props) => {
                 <input className='border-2 w-60' type="text" name="university" value={university} placeholder='University Name'  onChange={handleUniversity} />
             <br/>
             <button className='border-2  p-1 mx-auto bg-light_blue rounded-md' type="submit">Create Account</button>
+            <div className='text-center m-2'>Already a user? <button className='text-light_blue' onClick={takeToLoginPage}>Log In</button></div>
         </form>
         </div>
         )

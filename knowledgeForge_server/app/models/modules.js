@@ -1,3 +1,4 @@
+import { ObjectId } from "mongodb";
 import mongoose from "mongoose";
 const schema = mongoose.Schema;
 //schema for the modules
@@ -27,7 +28,11 @@ const moduleSchema = new schema({
     creationTime: {
         type: Date,
         default: Date.now,
-      },   
+      },
+    video:{
+      type: ObjectId,
+      required: true,
+    }   
     
 },
 {

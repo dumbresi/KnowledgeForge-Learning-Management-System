@@ -16,6 +16,7 @@ const RegisterUserPage : React.FC<RegisterUserPage>= ({isLogin}) =>{
                 <img src={logo} className='w-1/2 h-100 ml-20'></img>
             </div>
             <div className='border-l w-2 border-solid border-gray-500 h-auto bg-light_blue'></div>
+            {/* Load the login or register component depending on the value of isLogin variable */}
             <div className='align-center flex flex-col w-[500px] m-auto'>{(isLogin)?<LoginPage/>:<RegisterDialog/>}</div>
         </div> 
        
