@@ -32,6 +32,10 @@ const moduleSchema = new schema({
     video:{
       type: ObjectId,
       required: true,
+    },
+    courseID:{
+      type:String,
+      required:true
     }   
     
 },
