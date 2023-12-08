@@ -1,7 +1,7 @@
 interface User{
     name: string,
     email: string,
-        contactNumber: string,
+    contactNumber: string,
     password: string,
     registeredCourses:string
 }
