@@ -47,6 +47,7 @@ export const deleteUser = async (request, response) => {
 }
 export const getOneUser = async (request, response) => {
     const token = request.cookies.token;
+    console.log(request);
         if (!token) {
             return response.status(401).json({ message: 'Unauthorized' });
           }
