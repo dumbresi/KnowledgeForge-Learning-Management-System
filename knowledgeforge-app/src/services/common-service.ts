@@ -14,7 +14,8 @@ export const commonGET = async <T>(path: string) : Promise<T[]> =>{
 
 export const commonGETOne = async <T>(path: string) : Promise<T> =>{
     const response = await fetch(baseUrl+path,{
-        method: 'GET'
+        method: 'GET',
+        credentials: 'include',
     })
 
     const data: T = await response.json();

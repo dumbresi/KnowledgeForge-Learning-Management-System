@@ -11,7 +11,10 @@ dotenv.config();
 export let gridFsBucket;
 const initialize = (app)=>{
     //debug
-    app.use(cors());
+    app.use(cors({
+        origin:'http://localhost:3003',
+        credentials:true,
+    }));
     app.use(express.json());
     app.use(express.urlencoded());
     app.use(cookieParser());

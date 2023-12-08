@@ -1,7 +1,7 @@
 import * as commonService from './common-service';
-import User from '../models/user';
+import User from '../models/User';
 
-const userPath = '/user';
+const userPath = '/user/current';
 export const getUser = async (): Promise<User> => {
     try {
         const user = await commonService.commonGETOne<User>(userPath);

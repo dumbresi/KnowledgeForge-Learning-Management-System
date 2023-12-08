@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import UserCard from "../components/UserCard";
 import * as UserService from "../services/user-service";
-import User from "../models/user";
+import User from "../models/User";
+import LeftNavigationPanel from "../components/LeftNavigationPanel";
 
 const UserPage = () => {
     const [user, setUser] = useState<User | null>(null); // User or null as initial state
@@ -19,13 +20,16 @@ const UserPage = () => {
     }, []);
 
     return (
-        <div className='user-page'>
-            <h1>Welcome to your profile!</h1>
+        <div className="flex">
+            <LeftNavigationPanel />
+            <div className='flex p-5'>
+            <h1 className="text-3xl mb-4">Welcome to your profile!</h1>
             {user ? (
                 <UserCard user={user} />
             ) : (
                 <p>Loading...</p>
             )}
+        </div>
         </div>
     );
 };
