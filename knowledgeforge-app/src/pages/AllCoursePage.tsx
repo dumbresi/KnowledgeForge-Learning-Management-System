@@ -46,6 +46,9 @@ const AllCoursePage = ()  => {
           <li>
             <Link to="/user/login">Login</Link>
           </li>
+          <li>
+            <Link to="/user/current">User Details</Link>
+          </li>
         </ul>
       </nav>
     </div>

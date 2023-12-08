@@ -6,4 +6,7 @@ interface User{
     registeredCourses:string
 }
 
+
 export default User;
+
+
