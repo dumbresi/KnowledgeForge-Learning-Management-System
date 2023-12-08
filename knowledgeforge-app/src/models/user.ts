@@ -1,9 +1,10 @@
 interface User{
-    name: string,
+    userID: string,
+    userName: string,
     email: string,
+    profile_picture: string,
     contactNumber: string,
-    password: string,
-    registeredCourses:string
+    access_token: string
 }
 
 
