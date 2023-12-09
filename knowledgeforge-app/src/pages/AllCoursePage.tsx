@@ -3,11 +3,13 @@ import CourseCard from '../components/CourseCard';
 import * as CourseService from '../services/course-service';
 import Course from '../models/Course';
 import { BrowserRouter, Route, Routes, Link } from 'react-router-dom'
+import SearchBox from '../components/SearchBox';
 
 
 const AllCoursePage = ()  => {
 
     const [courses, setCourses] =useState<Course[]>([]);
+    const [filteredCourses, setFilteredCourses] = useState<Course[]>([]);
 
     useEffect(() => {
         // Fetch course data from an API
@@ -24,16 +26,14 @@ const AllCoursePage = ()  => {
       }, []);
     
 
-    // const fetchData = async () => {
-    //     try{
-    //         const data = CourseService.getCourses();
-    //         setCourses(await data);
-    //     }catch(error){
-    //         console.error("Error fetching courses data: "+error);
-            
-    //     }
-    // }
-    // fetchData;
+      // const [courseList, setCourses]=useState([...courses]);
+  const searchHandler=(query:string)=>{
+    const filteredCourses=[...courses].filter(c=>c.title.toLowerCase().includes(query.toLowerCase()));
+    if(query!==""){
+      setCourses(filteredCourses);
+    }
+    console.log(filteredCourses);
+  }
 
   return (
 <div className='h-screen bg-background_cream '>
@@ -54,6 +54,7 @@ const AllCoursePage = ()  => {
     </div>
       
         <h1>All Courses</h1>
+        <div className='m-2'><SearchBox onSearch={searchHandler}/></div>
         <div className='w-[95%] h-auto rounded-md bg-white ab' >
         <div className="grid gap-1 grid-cols-[repeat(auto-fill,minmax(300px,1fr))] p-2">
             {
