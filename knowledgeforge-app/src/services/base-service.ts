@@ -24,6 +24,7 @@ export const post=async<T>(path:string,payload:any,params:any): Promise<Response
     const query: URLSearchParams=new URLSearchParams(params);
     const response = await fetch(baseURL+path+query,{
         method:'POST',
+        credentials:'include',
         headers: {
             'Content-Type': 'application/json',
           },

@@ -1,5 +1,5 @@
-interface User{
-    name: string,
+interface UserModel{
+    userName: string,
     email: string,
     contactNumber: string,
     password: string,
@@ -7,6 +7,4 @@ interface User{
 }
 
 
-export default User;
-
-
+export default UserModel;
