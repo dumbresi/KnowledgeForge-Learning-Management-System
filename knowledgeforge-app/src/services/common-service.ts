@@ -1,8 +1,8 @@
 
 const baseUrl = 'http://localhost:4000';
 
-export const commonGET = async <T>(path: string) : Promise<T[]> =>{
-    const response = await fetch(baseUrl+path,{
+export const commonGET = async <T>(path: string): Promise<T[]> => {
+    const response = await fetch(baseUrl + path, {
         method: 'GET'
     })
 
@@ -12,14 +12,13 @@ export const commonGET = async <T>(path: string) : Promise<T[]> =>{
 
 }
 
-export const commonGETOne = async <T>(path: string) : Promise<T> =>{
-    const response = await fetch(baseUrl+path,{
+export const commonGETOne = async <T>(path: string): Promise<T> => {
+    const response = await fetch(baseUrl + path, {
         method: 'GET',
         credentials: 'include',
     })
 
     const data: T = await response.json();
-
     return data;
 
 }
