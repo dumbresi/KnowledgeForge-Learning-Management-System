@@ -11,7 +11,7 @@ const CourseCard :React.FC<CourseCard>  =({ course })=> {
     return(
         <Link to={Paths.courseDetailsPath} state={course}>
         
-        <div className="border border-gray-400 m-2 rounded-md bg-white h-60 flex flex-col">
+        <div className="border border-gray-400 m-2 rounded-md bg-white h-60 flex flex-col hover:bg-gray-300 p-4">
             
             <div className="h-1/3 bg-red-400"><img alt='loading'src={`${course.thumbnail}`}></img></div>
             <div className="px-4 pt-3 pb-2">{`${course.title}`}</div>
