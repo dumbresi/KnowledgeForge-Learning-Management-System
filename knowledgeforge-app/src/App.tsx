@@ -9,6 +9,7 @@ import LoginPage from './components/LoginDialog';
 import InstructorDetails from './pages/InstructorDetails';
 import UserPage from './pages/UserPage';
 import * as Paths from './resources/paths'
+import CourseDetails from './components/CourseDetails';
 
 function App() {
 
@@ -29,6 +30,7 @@ function App() {
       }/>
 				<Route path={Paths.registerPath} element={<RegisterUserPage isLogin={false}/>} />
 				<Route path={Paths.loginPath} element={<RegisterUserPage isLogin={true}/>}  />
+        <Route path={Paths.courseDetailsPath} element={<CourseDetails/>}  />
         <Route path="/user/current" element={<UserPage/>}  />
         {/* <Route path="/instructor/profile" element={<InstructorDetails(...instructor)/>} /> */}
       </Routes>
