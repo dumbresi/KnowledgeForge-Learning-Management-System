@@ -8,7 +8,7 @@ module.exports = {
       colors: {
         // Configure your color palette here
         // Configure your color palette here
-        background_cream: '#FAF7F4',
+        background_cream: '#ECF1FA',
         light_blue: '#7fd5ef'
       }
     },
