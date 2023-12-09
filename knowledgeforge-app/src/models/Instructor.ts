@@ -1,7 +1,7 @@
 interface Instructor {
     name: string,
     email: string,
-    // contactNumber: string,
+    contactNumber: string,
     // password: string,
     university: string,
     // myCourses:Array<string>
