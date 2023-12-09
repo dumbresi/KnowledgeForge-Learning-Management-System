@@ -1,5 +1,5 @@
 import * as baseService from './base-service';
-import User from '../models/User'
+import User from '../models/UserModel'
 import Instructor from '../models/Instructor';
 
 const authPath='/auth';
