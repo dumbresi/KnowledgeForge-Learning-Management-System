@@ -12,13 +12,10 @@ import * as Paths from './resources/paths'
 import CourseDetails from './components/CourseDetails';
 
 function App() {
+  const isLogin = true;
 
-  const isLogin=true;
-  
   return (
     <div>
-      
-
       <BrowserRouter>
       <Routes>
       <Route path="/" element={
@@ -37,7 +34,6 @@ function App() {
 				
 			</BrowserRouter>
     </div>
-    
   );
 }
 
