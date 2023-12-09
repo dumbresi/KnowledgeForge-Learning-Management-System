@@ -1,25 +1,17 @@
 import React from "react";
+import { BrowserRouter, Route, Routes, Link,useNavigate } from 'react-router-dom'
+import Course from "../models/Course";
+import * as Paths from '../resources/paths'
 
 type CourseCard ={
-    course:{
-        title: string,
-        instructor: string,
-        duration: string,
-        fees: number,
-        category: string,
-        subCategory: string,
-        thumbnail: string,
-        description: string,
-        noOfModules: number,
-        creationTime: string,
-        avg_star_rating: number,
-        moduleIDs: Array<any>
-    }
+    course: Course
 }
 const CourseCard :React.FC<CourseCard>  =({ course })=> {
-
+    
     return(
-        <div className="border border-gray-400 m-2 rounded-md bg-white h-60 flex flex-col">
+        <Link to={Paths.courseDetailsPath} state={course}>
+        
+        <div className="border border-gray-400 m-2 rounded-md bg-white h-60 flex flex-col hover:bg-gray-300 p-4">
             
             <div className="h-1/3 bg-red-400"><img alt='loading'src={`${course.thumbnail}`}></img></div>
             <div className="px-4 pt-3 pb-2">{`${course.title}`}</div>
@@ -36,8 +28,8 @@ const CourseCard :React.FC<CourseCard>  =({ course })=> {
                 <p className="text-center">{`${course.category}`}</p>
             </div>
 
-            
         </div>
+        </Link>
     )
 }
 
