@@ -28,7 +28,7 @@ const courseSchema = new schema({
     required: true,
   },
   thumbnail: {
-    type: String,
+    type: Buffer,
     required: true,
   },
   description: {
@@ -47,10 +47,10 @@ const courseSchema = new schema({
     type: Number,
     required: false,
   },
-  moduleIDs:{
-    type:Array,
-    required:false
-  }
+  // moduleIDs:{
+  //   type:Array,
+  //   required:false
+  // }
 },
 {
   versionKey: false
