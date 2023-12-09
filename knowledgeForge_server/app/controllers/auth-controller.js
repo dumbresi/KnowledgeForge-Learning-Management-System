@@ -69,7 +69,7 @@ export const loginUser = async (request, response) => {
                     'secret123',
                     { expiresIn: '4h' }
                 )
-                response.cookie('token', token, { httpOnly: true, sameSite: 'None' });
+                response.cookie('token', token, { httpOnly: true, sameSite: 'Strict' });
                 response.json({ message: 'Login successful', user });
             } else {
                  response.json({ status: 'error', user: false })
