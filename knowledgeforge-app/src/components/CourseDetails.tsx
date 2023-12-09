@@ -1,77 +1,70 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
-import * as moduleService from '../services/module-services'
+import * as moduleService from '../services/module-services';
 import Course from '../models/Course';
 import ModuleCard from './ModuleCard';
 import Module from '../models/modules';
 
-type Props = {}
+type Props = {};
 
 const CourseDetails = (props: Props) => {
-    const location = useLocation();
-    const course: Course = location.state;
-    const [modules,setModules]= useState<Module[]>([]);
-    const [selectedModule,setSelectedModule]=useState<Module>();
+  const location = useLocation();
+  const course: Course = location.state;
+  const [modules, setModules] = useState<Module[]>([]);
+  const [selectedModule, setSelectedModule] = useState<Module>();
 
-    useEffect(() => {
-      const fetchData = async () => {
-        try {
-          const data = await moduleService.getModules(course._id);
-          setModules(data);
-          setSelectedModule(data[0]); // Access the first element of the updated state
-        } catch (error) {
-          console.error('Error fetching course data:', error);
-        }
-      };
-    
-      fetchData();
-    }, []);
-    
-    const changeSelectedModule=(mod:Module)=>{
-      setSelectedModule(mod);
-    }
-  
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const data = await moduleService.getModules(course._id);
+        setModules(data);
+        setSelectedModule(data[0]); // Access the first element of the updated state
+      } catch (error) {
+        console.error('Error fetching course data:', error);
+      }
+    };
 
+    fetchData();
+  }, []);
+
+  const changeSelectedModule = (mod: Module) => {
+    setSelectedModule(mod);
+  };
 
   return (
-    <div>
-        <div className='flex flex-row m-auto justify-between m-10'>
-          <div className='flex flex-col'>
-            <h1>{course.title}</h1>
-            <p>{course.description}</p>
-          </div>
-            
-            <img className='mr-20'alt='loading' src={`${course.thumbnail}`}></img>
+    <div className="container mx-auto">
+      <div className="md:flex md:items-center md:justify-between m-10">
+        <div className="mb-4 md:mb-0">
+          <h1 className="text-2xl md:text-4xl font-bold">{course.title}</h1>
+          <p className="text-sm md:text-base">{course.description}</p>
         </div>
 
-        <div className='p-1 w-full  bg-black'></div>
-        {/* Divider line between course details and modules */}
+        <img className="w-full md:w-1/2 h-auto md:ml-10" alt="loading" src={`${course.thumbnail}`} />
+      </div>
 
-        {/* Module container */}
-        <div className='flex flex-row justify-between'>
+      <hr className="w-full bg-black h-1" />
+
+      <div className="md:flex md:justify-between">
+        <div className="mb-4 md:mb-0">
+          <ul>
+            <li className="text-lg">{`${selectedModule?.title}`}</li>
+            <li className="text-sm md:text-base">{`${selectedModule?.description}`}</li>
+            <li className="text-xs md:text-sm">{"Duration" + `${selectedModule?.duration}`}</li>
+          </ul>
+        </div>
+
+        <div className="md:mr-20">
           <div>
-            <li>{`${selectedModule?.title}`}</li>
-            <li>{`${selectedModule?.description}`}</li>
-            <li>"Duration"+{`${selectedModule?.duration}`}</li>
-          </div>
-            <div className='mr-20'>
-              <div>
-                {modules.map(
-                        (moduleItem:Module) =>( 
-                          <div onClick={() => changeSelectedModule(moduleItem)}>
-                          <ModuleCard module={moduleItem} />
-                          </div>
-                        )
-                    )}
+            {modules.map((moduleItem: Module) => (
+              <div key={moduleItem._id} onClick={() => changeSelectedModule(moduleItem)}>
+                <ModuleCard module={moduleItem} />
               </div>
+            ))}
           </div>
-
-
         </div>
-        
-
+      </div>
     </div>
-  )
-}
+  );
+};
 
-export default CourseDetails
+export default CourseDetails;
