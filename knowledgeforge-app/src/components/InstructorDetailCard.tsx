@@ -7,7 +7,7 @@ type InstructorDetailCardProps = {
 
 const InstructorDetailCard: React.FC<InstructorDetailCardProps> = ({ instructor }) => {
   return (
-    <div className="min-h-screen flex items-center justify-end px-4 bg-slate-200 pr-32">
+    <div className="min-h-screen flex items-center justify-end px-4 bg-background_cream pr-32">
     <div className="p-40 max-w-8xl  bg-white w-3/4 rounded-lg shadow-xl">
       <div className="px-4 sm:px-0">
         <h3 className="text-lg font-semibold leading-7 text-gray-900">Instructor Profile</h3>
