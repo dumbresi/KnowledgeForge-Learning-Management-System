@@ -8,7 +8,7 @@ const InstructorDetail = () => {
   {
     name: "",
     email: "",
-    // contactNumber: "",
+    contactNumber: "",
     university: "",
     // password: "",
     // myCourses: []
@@ -30,7 +30,6 @@ const InstructorDetail = () => {
 
   return (
     <div className="instructor-details-page">
-      <h1>Instructor</h1>
       <div className="instructor">
         <InstructorDetailCard instructor={instructor} />
       </div>
