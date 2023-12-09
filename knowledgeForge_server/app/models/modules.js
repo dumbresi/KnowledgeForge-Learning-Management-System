@@ -16,10 +16,7 @@ const moduleSchema = new schema({
         type: Number,
         required: true,
     },
-    no_of_lectures: {
-        type: Number,
-        required: true,
-    },  
+     
     description: {
         type: String,
         required: true,
@@ -29,11 +26,11 @@ const moduleSchema = new schema({
         type: Date,
         default: Date.now,
       },
-    video:{
+    videoId:{
       type: ObjectId,
       required: true,
     },
-    courseID:{
+    courseId:{
       type:String,
       required:true
     }   
