@@ -29,7 +29,7 @@ function App() {
 				<Route path={Paths.loginPath} element={<RegisterUserPage isLogin={true}/>}  />
         <Route path={Paths.courseDetailsPath} element={<CourseDetails/>}  />
         <Route path="/user/current" element={<UserPage/>}  />
-        {/* <Route path="/instructor/profile" element={<InstructorDetails(...instructor)/>} /> */}
+        <Route path="/instructor/current" element={<InstructorDetails/>} />
       </Routes>
 				
 			</BrowserRouter>
