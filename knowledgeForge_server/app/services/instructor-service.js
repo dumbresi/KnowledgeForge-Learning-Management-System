@@ -42,13 +42,14 @@ export const getOneInsrtuctor = async(email)=>{
             $project: {
               name: 1, // Include the 'username' field
               email: 1,    // Include the 'email' field
-              contactnum: 1,  
+              contactNum: 1,  
               university: 1,
               _id: 0,      // Exclude the '_id' field
 
             },
           },
     ]);
+    console.log(result);
     return result[0];
 }
 export const getCourses = async(email)=>{

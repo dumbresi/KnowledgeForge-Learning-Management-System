@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import InstructorDetailCard from "../components/InstructorDetailCard";
 import * as InstructorService from "../services/instructor-service";
 import Instructor from "../models/Instructor";
+import Sidebar from "../components/Sidebar";
 
 const InstructorDetail = () => {
   const [instructor, setInstructor] = useState<Instructor>(
@@ -30,6 +31,7 @@ const InstructorDetail = () => {
 
   return (
     <div className="instructor-details-page">
+      
       <div className="instructor">
         <InstructorDetailCard instructor={instructor} />
       </div>
