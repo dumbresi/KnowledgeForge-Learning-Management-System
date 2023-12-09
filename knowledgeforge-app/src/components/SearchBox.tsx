@@ -14,7 +14,7 @@ export default (props: Props): ReactElement => {
 
   return (
     <div>
-      <input ref={inputRef} type="text" />
+      <input ref={inputRef} type="text" placeholder="Search Course" />
       <button type="submit" onClick={searchHandler} className="bg-light_blue">
         Search
       </button>

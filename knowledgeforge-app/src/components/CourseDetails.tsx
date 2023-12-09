@@ -19,8 +19,13 @@ const CourseDetails = (props: Props) => {
 
   return (
     <div>
-        <div>
+        <div className='flex flex-row m-auto justify-between m-10'>
             <h1>{course.title}</h1>
+            <img className='mr-20'alt='loading' src={`${course.thumbnail}`}></img>
+        </div>
+
+        <div>
+          Modules
         </div>
 
     </div>
