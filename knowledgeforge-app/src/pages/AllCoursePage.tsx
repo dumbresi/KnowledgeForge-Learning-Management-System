@@ -79,7 +79,7 @@ const AllCoursePage = () => {
           <Topbar />
         </div>
         <div className="grid gap-1 grid-cols-[repeat(auto-fill,minmax(300px,1fr))] p-2">
-          {filteredCourses.map((courseItem) => (
+          {courses.map((courseItem) => (
             <CourseCard course={courseItem} />
           ))}
         </div>
