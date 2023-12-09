@@ -4,7 +4,7 @@ import { setResponse, setErrorResponse} from './response-handler.js'
 import  jwt  from 'jsonwebtoken';
 
 export const findUser = async (request, response) =>{
-    console.log(request);
+    
     try{
         const searchQuery = {...request.query};
         const users = await UserService.searchUser(searchQuery);
