@@ -21,6 +21,7 @@ const AllCoursePage = ()  => {
           try {
             const data = CourseService.getCourses();
             setCourses(await data);
+            setFilteredCourses(courses);
           } catch (error) {
             console.error('Error fetching course data:', error);
           }
@@ -34,13 +35,15 @@ const AllCoursePage = ()  => {
   const searchHandler=(query:string)=>{
     const filteredCourses=[...courses].filter(c=>c.title.toLowerCase().includes(query.toLowerCase()));
     if(query!==""){
-      setCourses(filteredCourses);
+      setFilteredCourses(filteredCourses);
+    }else{
+      setFilteredCourses(courses);
     }
     console.log(filteredCourses);
   }
   const handleLogout=async()=>{
     const response = await AuthService.logout();
-    
+
     if(response.status==200){
       navigate(Paths.loginPath);
     }
@@ -148,7 +151,7 @@ const AllCoursePage = ()  => {
         <div className='w-[95%] h-auto rounded-md bg-white ab' >
         <div className="grid gap-1 grid-cols-[repeat(auto-fill,minmax(300px,1fr))] p-2">
             {
-                courses.map(
+                filteredCourses.map(
                     (courseItem) =>( <CourseCard course={courseItem}/> )
                 )
             }
