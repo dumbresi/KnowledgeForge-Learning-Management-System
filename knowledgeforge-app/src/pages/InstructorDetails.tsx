@@ -1,43 +1,41 @@
-import React from "react";
-import AllCoursePage from "./AllCoursePage";
-import "./CSS/InstructorDetails.css";
+import React, { useState, useEffect } from "react";
+import InstructorDetailCard from "../components/InstructorDetailCard";
+import * as InstructorService from "../services/instructor-service";
+import Instructor from "../models/Instructor";
 
-interface InstructorProps {
-  instructor_id: string;
-  name: string;
-  email: string;
-  profilePicture: string;
-  contactNumber: string;
-  university: string;
-  courses: string[];
-}
+const InstructorDetail = () => {
+  const [instructor, setInstructor] = useState<Instructor>(
+  {
+    name: "",
+    email: "",
+    // contactNumber: "",
+    university: "",
+    // password: "",
+    // myCourses: []
+  });
 
-const InstructorDetails: React.FC<InstructorProps> = ({
-  instructor_id,
-  name,
-  email,
-  profilePicture,
-  contactNumber,
-  university,
-  courses,
-}) => {
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const data = await InstructorService.getInstructors();
+        console.log(data);
+        setInstructor(data);
+      } catch (error) {
+        console.error("Error fetching instructor data: ", error);
+      }
+    };
+
+    fetchData();
+  }, []);
+
   return (
-    <div className="instructor-details">
-      <div>
-        <img src="components/profilepicture.png" alt={`Profile of ${name}`} />
-      </div>
-      <div>
-        <h2>{name}</h2>
-        <p>Email: {email}</p>
-        <p>Contact Number: {contactNumber}</p>
-        <p>University: {university}</p>
-        <h3>Courses:</h3>
-        <ul>
-          <AllCoursePage />
-        </ul>
+    <div className="instructor-details-page">
+      <h1>Instructor</h1>
+      <div className="instructor">
+        <InstructorDetailCard instructor={instructor} />
       </div>
     </div>
   );
 };
 
-export default InstructorDetails;
+export default InstructorDetail;
