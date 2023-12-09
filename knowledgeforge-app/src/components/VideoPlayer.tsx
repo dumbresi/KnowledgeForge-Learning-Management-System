@@ -24,7 +24,7 @@ const VideoPlayer = (props: VideoPlayer) => {
         width="800px"
         height="450px"
       /> */}
-      <video autoPlay={false} controls src={'http://localhost:4000/video/'+videoId}>
+      <video className='m-auto' width='500' height='200' autoPlay={false} controls src={'http://localhost:4000/video/'+videoId}>
       </video>
     </div>
   );

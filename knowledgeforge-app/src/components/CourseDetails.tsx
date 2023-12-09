@@ -53,13 +53,13 @@ const CourseDetails = (props: Props) => {
             <li className="text-xs md:text-sm">{"Duration" + `${selectedModule?.duration}`}</li>
           </ul>
 
-          <div className='b-2 border-2'>
+          <div className='b-2 border-2 h-2/4'>
             <VideoPlayer videoID={`${selectedModule?.videoId}`}></VideoPlayer>
           </div>
 
         </div>
 
-        <div className="md:w-1/3 md:mr-8">
+        <div className="md:w-1/3 md:mr-8 flex justify-center">
           <div>
             {modules.map((moduleItem: Module) => (
               <div key={moduleItem._id} onClick={() => changeSelectedModule(moduleItem)}>
