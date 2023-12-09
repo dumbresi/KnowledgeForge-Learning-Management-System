@@ -116,3 +116,12 @@ export const loginInstructor = async (request, response) => {
         setErrorResponse(err, response);
     }
 };
+
+export const logout = async(request,response)=>{
+    try {
+        response.clearCookie('token');
+        response.json({  message: 'Logged out successfully' });
+    } catch (error) {
+        setErrorResponse(error, response);
+    }
+}
