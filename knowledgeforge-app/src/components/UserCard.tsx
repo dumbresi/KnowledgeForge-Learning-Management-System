@@ -1,5 +1,5 @@
 import React from "react";
-import User from "../models/User";
+import User from "../models/UserModel";
 
 type UserCardProps ={
     user: User

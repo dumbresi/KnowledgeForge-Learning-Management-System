@@ -1,5 +1,5 @@
 import React, { ChangeEvent, FormEvent, useState } from 'react'
-import User from '../models/User'
+import User from '../models/UserModel'
 import { BrowserRouter, Route, Routes, Link,useNavigate } from 'react-router-dom'
 import * as AuthService from '../services/auth-service'
 import * as Paths from '../resources/paths'

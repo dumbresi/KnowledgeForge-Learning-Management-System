@@ -1,5 +1,5 @@
 import React, { ChangeEvent, FormEvent, useState } from 'react'
-import User from '../models/User'
+import User from '../models/UserModel'
 import { BrowserRouter, Route, Routes, Link,useNavigate } from 'react-router-dom'
 import RegisterDialog from '../components/RegisterDialog';
 import LoginPage from '../components/LoginDialog'
