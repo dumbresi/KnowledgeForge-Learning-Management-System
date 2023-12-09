@@ -5,5 +5,6 @@ interface Modules{
     module_no:number,
     description:string,
     creationTime:Date
+    videoId: string
 }
 export default Modules

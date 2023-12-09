@@ -4,6 +4,7 @@ import * as moduleService from '../services/module-services';
 import Course from '../models/Course';
 import ModuleCard from './ModuleCard';
 import Module from '../models/modules';
+import VideoPlayer from './VideoPlayer';
 
 type Props = {};
 
@@ -51,9 +52,14 @@ const CourseDetails = (props: Props) => {
             <li className="text-sm md:text-base">{`${selectedModule?.description}`}</li>
             <li className="text-xs md:text-sm">{"Duration" + `${selectedModule?.duration}`}</li>
           </ul>
+
+          <div className='b-2 border-2'>
+            <VideoPlayer videoID={`${selectedModule?.videoId}`}></VideoPlayer>
+          </div>
+
         </div>
 
-        <div className="md:mr-20">
+        <div className="md:w-1/3 md:mr-8">
           <div>
             {modules.map((moduleItem: Module) => (
               <div key={moduleItem._id} onClick={() => changeSelectedModule(moduleItem)}>
