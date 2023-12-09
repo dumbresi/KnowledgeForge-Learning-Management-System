@@ -1,14 +1,30 @@
 import React, { useState } from "react";
 import logo from "../resources/knowledgeForge.jpeg";
 import SearchBox from "./SearchBox";
-import searchHandler from "../pages/AllCoursePage";
+// import handleLogout from "../pages/AllCoursePage";
+import * as Paths from '../resources/paths'
+import * as AuthService from '../services/auth-service'
+
+
+
+import { BrowserRouter, Route, Routes, Link, useNavigate } from 'react-router-dom'
 
 const Sidebar = () => {
   const [isSidebarOpen, setSidebarOpen] = useState(false);
+  const navigate=useNavigate();
 
   const toggleSidebar = () => {
     setSidebarOpen(!isSidebarOpen);
   };
+
+  const handleLogout=async()=>{
+    const response = await AuthService.logout();
+
+    if(response.status==200){
+      navigate(Paths.loginPath);
+    }
+
+  }
 
   return (
     <div>
@@ -129,8 +145,7 @@ const Sidebar = () => {
             </li>
             <li>
               <a
-                rel="noopener noreferrer"
-                href="#"
+                onClick={handleLogout}
                 className="flex items-center p-2 space-x-3 rounded-md"
               >
                 <svg
