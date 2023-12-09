@@ -1,5 +1,7 @@
 import React, { useState, ChangeEvent, FormEvent } from 'react';
 import { BrowserRouter, Route, Routes, Link,useNavigate } from 'react-router-dom'
+import * as AuthService from '../services/auth-service'
+import * as Paths from '../resources/paths'
 
 function Login(): JSX.Element {
   const [email, setEmail] = useState<string>('');
@@ -17,16 +19,7 @@ function Login(): JSX.Element {
     event.preventDefault();
 
     if(activeTab==='student'){
-      const response = await fetch('http://localhost:4000/auth/user/login', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        email,
-        password,
-      }),
-    });
+      const response = await AuthService.loginUser(JSON.stringify({email,password}));
 
     const data = await response.json();
     // Handle the 'data' as needed
@@ -37,16 +30,7 @@ function Login(): JSX.Element {
 
     }
     if(activeTab==='instructor'){
-      const response = await fetch('http://localhost:4000/auth/user/login', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          email,
-          password,
-        }),
-      });
+      const response =  await AuthService.loginInstructor(JSON.stringify({email,password}));
   
       const data = await response.json();
       // Handle the 'data' as needed
@@ -55,8 +39,12 @@ function Login(): JSX.Element {
         navigate('/');
       }
     }
-    
 
+  }
+
+  const takeToSignUpPage=()=>{
+    console.log("take user to register page")
+    navigate(Paths.registerPath);
   }
 
   return (
@@ -104,6 +92,7 @@ function Login(): JSX.Element {
               <br />
         {/* <input type="submit" value="Login" /> */}
 		          <button className='border-2 border-black  rounded-md  bg-light_blue w-60 m-2' type="submit">Submit</button>
+              <div className='text-center m-auto'>New user? <button onClick={takeToSignUpPage}>Sign Up</button></div>
             </form>
                 </div>
 
@@ -138,6 +127,7 @@ function Login(): JSX.Element {
         <br />
         {/* <input type="submit" value="Login" /> */}
 		<button className='border-2 border-black  rounded-md  bg-light_blue w-60 m-2' type="submit">Submit</button>
+    <div className='text-center m-auto'>New user? <button className='text-light_blue' onClick={takeToSignUpPage}>Sign Up</button></div>
       </form>
 
     </div>

@@ -1,5 +1,5 @@
 import * as commonService from './common-service';
-import User from '../models/User';
+import User from '../models/UserModel';
 
 const userPath = '/user/current';
 export const getUser = async (): Promise<User> => {
