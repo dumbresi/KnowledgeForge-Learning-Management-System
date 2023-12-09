@@ -47,7 +47,8 @@ export const searchById =async(request,response)=>{
 
 export const getModules = async(request, response)=>{
     try{
-        const courseId = request.params._courseId;
+        const courseId = request.params.courseId;
+
         
         const allModules = await moduleServices.getModules(courseId);
         

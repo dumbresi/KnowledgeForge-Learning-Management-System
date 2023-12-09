@@ -23,29 +23,6 @@ export const findById=async(id)=>{
 
 export const getModules = async(courseId)=>{
     
-    const result = await Course.aggregate([
-        {
-            $match:{ _id: new mongoose.Types.ObjectId(courseId) }
-        },
-        {
-            $lookup: {
-              from: "modules",
-              localField: "moduleIDs",
-              foreignField: "_id",
-              as: "modules"
-            }
-          },
-        {
-            $project:{
-                _id: 0, // Exclude the _id field from the output
-      title: 1,
-      modules:1,
-      
-            }
-        }
-    ]).catch(error=>{
-        console.log(error);
-    });
-    
+    const result = await Module.find().where({courseId:courseId}).sort([['module_no',1]]);
     return result;
 }
