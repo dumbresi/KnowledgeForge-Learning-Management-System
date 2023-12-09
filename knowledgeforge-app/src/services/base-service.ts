@@ -19,7 +19,6 @@ export const GetOne = async <T>(path: string): Promise<T> => {
 
     const data: T = await response.json();
     return data;
-
 }
 
 export const search = async<T>(path: string, params: any):Promise<T[]>=>{

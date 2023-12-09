@@ -2,15 +2,18 @@ import React ,{useState, useEffect} from 'react'
 import CourseCard from '../components/CourseCard';
 import * as CourseService from '../services/course-service';
 import Course from '../models/Course';
-import { BrowserRouter, Route, Routes, Link } from 'react-router-dom'
+import { BrowserRouter, Route, Routes, Link, useNavigate } from 'react-router-dom'
 import SearchBox from '../components/SearchBox';
 import Sidebar from '../components/Sidebar';
+import * as Paths from '../resources/paths'
+import * as AuthService from '../services/auth-service'
 
 
 const AllCoursePage = ()  => {
 
     const [courses, setCourses] =useState<Course[]>([]);
     const [filteredCourses, setFilteredCourses] = useState<Course[]>([]);
+    const navigate = useNavigate();
 
     useEffect(() => {
         // Fetch course data from an API
@@ -35,10 +38,18 @@ const AllCoursePage = ()  => {
     }
     console.log(filteredCourses);
   }
+  const handleLogout=async()=>{
+    const response = await AuthService.logout();
+    
+    if(response.status==200){
+      navigate(Paths.loginPath);
+    }
+
+  }
 
   return (
  <div className='h-screen bg-background_cream flex '>
-     {/* <div className='flex flex-row justify-center'>
+     <div className='flex flex-row justify-center'>
     <nav>
         <ul>
           <li>
@@ -52,7 +63,7 @@ const AllCoursePage = ()  => {
           </li>
         </ul>
       </nav>
-    </div>  */}
+    </div> 
    <div className="h-3/4 p-3 space-y-2 w-60 dark:bg-gray-900 dark:text-gray-100">
     <div className="flex items-center p-2 space-x-4">
       <img src="https://source.unsplash.com/100x100/?portrait" alt="" className="w-12 h-12 rounded-full dark:bg-gray-500" />
@@ -120,7 +131,7 @@ const AllCoursePage = ()  => {
             </a>
           </li>
           <li>
-            <a rel="noopener noreferrer" href="#" className="flex items-center p-2 space-x-3 rounded-md">
+            <a onClick={handleLogout} rel="noopener noreferrer" href="#" className="flex items-center p-2 space-x-3 rounded-md">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" className="w-5 h-5 fill-current dark:text-gray-400">
                 <path d="M440,424V88H352V13.005L88,58.522V424H16v32h86.9L352,490.358V120h56V456h88V424ZM320,453.642,120,426.056V85.478L320,51Z"></path>
                 <rect width="32" height="64" x="256" y="232"></rect>
