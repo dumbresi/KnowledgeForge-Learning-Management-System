@@ -17,32 +17,35 @@ const AllCoursePage = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    // Fetch course data from an API
     const fetchData = async () => {
       try {
-        const data = CourseService.getCourses();
-        setCourses(await data);
-        setFilteredCourses(courses);
+        const data = await CourseService.getCourses();
+        setCourses(data);
+        setFilteredCourses(data);
+        
+        
       } catch (error) {
         console.error("Error fetching course data:", error);
       }
     };
-
+  
     fetchData();
-  }, []);
+  }, []); 
 
-  // const [courseList, setCourses]=useState([...courses]);
+
   const searchHandler = (query: string) => {
-    const filteredCourses = [...courses].filter((c) =>
+    console.log("search handler called");
+    const searchedCourse = courses.filter((c) =>
       c.title.toLowerCase().includes(query.toLowerCase())
     );
-    if (query!=="") {
-      setFilteredCourses(filteredCourses);
-    }else{
-      setFilteredCourses(courses);
+  
+    if (query !== "") {
+      setFilteredCourses((prevCourses) => [...searchedCourse]);
+    } else {
+      setFilteredCourses((prevCourses) => [...courses]);
     }
-    console.log(filteredCourses);
   };
+
   const handleLogout=async()=>{
     const response = await AuthService.logout();
 
@@ -76,10 +79,10 @@ const AllCoursePage = () => {
 
       <div className="w-[95%] h-auto rounded-md bg-background_cream ab">
         <div>
-          <Topbar />
+          <Topbar onSearch={searchHandler}/>
         </div>
         <div className="grid gap-1 grid-cols-[repeat(auto-fill,minmax(300px,1fr))] p-2">
-          {courses.map((courseItem) => (
+          {filteredCourses.map((courseItem) => (
             <CourseCard course={courseItem} />
           ))}
         </div>

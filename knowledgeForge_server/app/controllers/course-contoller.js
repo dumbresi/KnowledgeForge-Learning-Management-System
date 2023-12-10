@@ -8,11 +8,7 @@ import Course from '../models/course.js';
 const storage = multer.memoryStorage();
 const uploadImage = multer({ storage: storage });
 export const findCourse=async (request, response) =>{
-    
     try{
-        
-            
-              
         const searchQuery= {...request.query};
         const courses = await CourseService.searchCourse(searchQuery);
          setResponse(courses,response);

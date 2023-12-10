@@ -1,15 +1,22 @@
-import React from "react";
+import React,{useRef} from "react";
 import SearchBox from "./SearchBox";
-import searchHandler from "../pages/AllCoursePage";
+// import searchHandler from "../pages/AllCoursePage";
 import { BrowserRouter, Route, Routes, Link, useNavigate } from 'react-router-dom'
+import Course from "../models/Course";
 
-const Topbar = () => {
+type Props = {
+  onSearch: (query: string) => void ;
+};
+
+const Topbar = ({ onSearch }: Props) => {
+  
   return (
     <div>
       <nav className="bg-white border-gray-200 dark:bg-gray-900">
         <div className="flex justify-between items-center mx-auto max-w-screen-xl p-4">
           <div className="max-w-screen-x1 w-3/4">
-            <SearchBox onSearch={searchHandler} />
+          <SearchBox onSearch={onSearch} />
+          
           </div>
           <div className="flex items-center space-x-6 rtl:space-x-reverse">
             <a
