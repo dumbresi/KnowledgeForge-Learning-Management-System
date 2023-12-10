@@ -26,11 +26,17 @@ export const postUser = async (request, response)=>{
 }
 
 export const putUser = async (request, response) => {
+    const token = request.cookies.token;
+    
+        if (!token) {
+            return response.status(401).json({ message: 'Unauthorized' });
+          }
     try {
-        const userId = request.params.id;
+        const user = jwt.verify(token, 'secret123');
+        console.log(request.body);
         const updatedUser = request.body;
-        const user = await UserService.updateUser(updatedUser, userId);
-        setResponse(user, response);
+        const result = await UserService.updateUser(updatedUser, user.email);
+        setResponse(result, response);
     } catch (err) {
         setErrorResponse(err, response);
     }
@@ -47,7 +53,7 @@ export const deleteUser = async (request, response) => {
 }
 export const getOneUser = async (request, response) => {
     const token = request.cookies.token;
-    console.log(request);
+    
         if (!token) {
             return response.status(401).json({ message: 'Unauthorized' });
           }

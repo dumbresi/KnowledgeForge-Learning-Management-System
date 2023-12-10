@@ -7,14 +7,15 @@ const router = express.Router();
 
 router.route('/')
     .get(userController.findUser)
-    .post(userController.postUser);
+    .post(userController.postUser)
+    .put(userController.putUser);
 
 router.route('/:id')
-    .put(userController.putUser)
+    
     .delete(userController.deleteUser);
 router.route('/current')
     .get(userController.getOneUser);
 router.route('/registeredCourses')
     .get(userController.getRegisteredCourses);
-    
+
 export default router;
