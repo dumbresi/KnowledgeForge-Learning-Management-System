@@ -1,4 +1,4 @@
-import React, { useState, useEffect  } from "react";
+import React, { useState, useEffect, MouseEventHandler  } from "react";
 import logo from "../resources/knowledgeForge.jpeg";
 import SearchBox from "./SearchBox";
 import { BsArrowLeftCircle, BsChevronDown } from "react-icons/bs";
@@ -9,7 +9,11 @@ import * as Paths from '../resources/paths'
 import * as AuthService from '../services/auth-service'
 import { BrowserRouter, Route, Routes, Link,useNavigate } from 'react-router-dom'
 
-const Sidebar = () => {
+type Props = {
+  category: (query: string) => void;
+};
+
+const Sidebar = (props:Props) => {
   const [isSidebarOpen, setSidebarOpen] = useState(true);
   const [isSubmenuOpen, setSubmenuOpen] = useState(false);
   let smallScreen = useMediaQuery({ query: "(max-width: 768px)" });
@@ -39,6 +43,11 @@ const Sidebar = () => {
 
   const taketoHomePage=()=>{
     window.location.reload();
+  }
+
+  const setCategoryFilter=(title: string)=>{
+    // props.category(e.arguments);
+    props.category(title);
   }
 
   return (
@@ -83,7 +92,7 @@ const Sidebar = () => {
               {menu.submenu && isSubmenuOpen && isSidebarOpen && (
                 <ul>
                   {menu.submenuItems.map((submenuItem, index) => (
-                    <li key={index} className={`text-white text-sm flex items-center gap-x-4 cursor-pointer p-2 px-5 duration-500 hover:bg-light_white rounded-md`}>
+                    <li onClick={() => setCategoryFilter(submenuItem.title)} key={index} className={`text-white text-sm flex items-center gap-x-4 cursor-pointer p-2 px-5 duration-500 hover:bg-light_white rounded-md`}>
                       {submenuItem.title}
                     </li>
                   ))}

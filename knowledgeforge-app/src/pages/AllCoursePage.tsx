@@ -58,10 +58,22 @@ const AllCoursePage = (props:AllCoursePageProps) => {
 
   }
 
+  const filterCoursesByCategory=(category:string)=>{
+    const searchedCourse = courses.filter((c) =>
+      c.category.toLowerCase().includes(category.toLowerCase())
+    );
+  
+    if (category !== "") {
+      setFilteredCourses((prevCourses) => [...searchedCourse]);
+    } else {
+      setFilteredCourses((prevCourses) => [...courses]);
+    }
+  }
+
   return (
     <div className="h-screen bg-background_cream flex ">
       <div>
-        <Sidebar />
+        <Sidebar category={filterCoursesByCategory} />
       </div>
       
       {/* <div className='flex flex-row justify-center'>

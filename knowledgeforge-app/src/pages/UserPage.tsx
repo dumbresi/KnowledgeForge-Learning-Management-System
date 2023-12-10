@@ -20,9 +20,13 @@ const UserPage = () => {
         fetchData();
     }, []);
 
+    const category=()=>{
+
+    }
+
     return (
         <div>
-            <Sidebar/>
+            <Sidebar category={category}/>
             <div>
             {user ? (
                 <UserCard user={user} />
