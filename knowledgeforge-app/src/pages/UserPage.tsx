@@ -3,6 +3,7 @@ import UserCard from "../components/UserCard";
 import * as UserService from "../services/user-service";
 import User from "../models/UserModel";
 import LeftNavigationPanel from "../components/LeftNavigationPanel";
+import Sidebar from "../components/Sidebar";
 
 const UserPage = () => {
     const [user, setUser] = useState<User | null>(null); // User or null as initial state
@@ -20,10 +21,9 @@ const UserPage = () => {
     }, []);
 
     return (
-        <div className="flex">
-            <LeftNavigationPanel />
-            <div className='flex p-5'>
-            <h1 className="text-3xl mb-4">Welcome to your profile!</h1>
+        <div>
+            <Sidebar/>
+            <div>
             {user ? (
                 <UserCard user={user} />
             ) : (

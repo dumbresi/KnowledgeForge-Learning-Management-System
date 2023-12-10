@@ -10,8 +10,10 @@ export const saveUser = async (newUser)=>{
     return await user.save();
 }
 
-export const updateUser = async(updatedUser,id)=>{
-    const user = await User.findByIdAndUpdate(id,updatedUser).exec();
+export const updateUser = async(updatedUser,email)=>{
+  console.log(updatedUser);
+    const user = await User.findOneAndUpdate({email:email},updatedUser,{returnOriginal:false});
+    console.log(user);
     return user;
 }
 

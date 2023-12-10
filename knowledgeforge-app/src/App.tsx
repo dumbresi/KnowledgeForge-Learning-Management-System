@@ -10,6 +10,8 @@ import InstructorDetails from './pages/InstructorDetails';
 import UserPage from './pages/UserPage';
 import * as Paths from './resources/paths'
 import CourseDetails from './components/CourseDetails';
+import AddCourse from './components/AddCourseCard';
+import AddCoursePage from './pages/AddCoursePage';
 import Sidebar from './components/Sidebar';
 
 function App() {
@@ -32,6 +34,8 @@ function App() {
         <Route path={Paths.courseDetailsPath} element={<CourseDetails/>}  />
         <Route path="/user/current" element={<UserPage/>}  />
         <Route path="/instructor/current" element={<InstructorDetails/>} />
+        <Route path="/instructor/current/addcourse" element={<AddCoursePage/>}  />
+        
       </Routes>
 				
 			</BrowserRouter>

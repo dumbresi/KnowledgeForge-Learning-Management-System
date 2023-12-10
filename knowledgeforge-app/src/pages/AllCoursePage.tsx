@@ -58,7 +58,7 @@ const AllCoursePage = () => {
         <Sidebar />
       </div>
       
-      {/* <div className='flex flex-row justify-center'>
+      <div className='flex flex-row justify-center'>
     <nav>
         <ul>
           <li>
@@ -72,7 +72,7 @@ const AllCoursePage = () => {
           </li>
         </ul>
       </nav>
-    </div>  */}
+    </div> 
 
       <div className="w-[95%] h-auto rounded-md bg-background_cream ab">
         <div>
