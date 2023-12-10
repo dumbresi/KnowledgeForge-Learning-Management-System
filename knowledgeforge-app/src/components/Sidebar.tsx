@@ -42,7 +42,7 @@ const Sidebar = (props:Props) => {
   }
 
   const taketoHomePage=()=>{
-    window.location.reload();
+    navigate('/');
   }
 
   const setCategoryFilter=(title: string)=>{
