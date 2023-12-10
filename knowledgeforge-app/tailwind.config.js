@@ -9,7 +9,8 @@ module.exports = {
         // Configure your color palette here
         // Configure your color palette here
         background_cream: '#ECF1FA',
-        light_blue: '#7fd5ef'
+        light_blue: '#7fd5ef',
+        light_white: '#353436'
       }
     },
   },
