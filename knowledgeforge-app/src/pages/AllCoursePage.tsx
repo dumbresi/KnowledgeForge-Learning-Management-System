@@ -9,40 +9,46 @@ import logo from "../resources/knowledgeForge.jpeg";
 import Topbar from "../components/Topbar";
 import * as Paths from '../resources/paths'
 import * as AuthService from '../services/auth-service'
+import CoursesGrid from '../components/CoursesGrid';
 
-
-const AllCoursePage = () => {
+type AllCoursePageProps={
+  pageType:string
+}
+const AllCoursePage = (props:AllCoursePageProps) => {
   const [courses, setCourses] = useState<Course[]>([]);
   const [filteredCourses, setFilteredCourses] = useState<Course[]>([]);
   const navigate = useNavigate();
 
   useEffect(() => {
-    // Fetch course data from an API
     const fetchData = async () => {
       try {
-        const data = CourseService.getCourses();
-        setCourses(await data);
-        setFilteredCourses(courses);
+        const data = await CourseService.getCourses();
+        setCourses(data);
+        setFilteredCourses(data);
+        
+        
       } catch (error) {
         console.error("Error fetching course data:", error);
       }
     };
-
+  
     fetchData();
-  }, []);
+  }, []); 
 
-  // const [courseList, setCourses]=useState([...courses]);
+
   const searchHandler = (query: string) => {
-    const filteredCourses = [...courses].filter((c) =>
+    console.log("search handler called");
+    const searchedCourse = courses.filter((c) =>
       c.title.toLowerCase().includes(query.toLowerCase())
     );
-    if (query!=="") {
-      setFilteredCourses(filteredCourses);
-    }else{
-      setFilteredCourses(courses);
+  
+    if (query !== "") {
+      setFilteredCourses((prevCourses) => [...searchedCourse]);
+    } else {
+      setFilteredCourses((prevCourses) => [...courses]);
     }
-    console.log(filteredCourses);
   };
+
   const handleLogout=async()=>{
     const response = await AuthService.logout();
 
@@ -52,13 +58,25 @@ const AllCoursePage = () => {
 
   }
 
+  const filterCoursesByCategory=(category:string)=>{
+    const searchedCourse = courses.filter((c) =>
+      c.category.toLowerCase().includes(category.toLowerCase())
+    );
+  
+    if (category !== "") {
+      setFilteredCourses((prevCourses) => [...searchedCourse]);
+    } else {
+      setFilteredCourses((prevCourses) => [...courses]);
+    }
+  }
+
   return (
     <div className="h-screen bg-background_cream flex ">
       <div>
-        <Sidebar />
+        <Sidebar category={filterCoursesByCategory} />
       </div>
       
-      <div className='flex flex-row justify-center'>
+      {/* <div className='flex flex-row justify-center'>
     <nav>
         <ul>
           <li>
@@ -72,17 +90,21 @@ const AllCoursePage = () => {
           </li>
         </ul>
       </nav>
-    </div> 
+    </div>  */}
 
       <div className="w-[95%] h-auto rounded-md bg-background_cream ab">
         <div>
-          <Topbar />
+          <Topbar onSearch={searchHandler}/>
         </div>
-        <div className="grid gap-1 grid-cols-[repeat(auto-fill,minmax(300px,1fr))] p-2">
-          {courses.map((courseItem) => (
+        {
+        (props.pageType==='allCourses')?<CoursesGrid courses={filteredCourses}/>: ""
+        }
+        {/* <div className="grid gap-1 grid-cols-[repeat(auto-fill,minmax(300px,1fr))] p-2">
+          {filteredCourses.map((courseItem) => (
             <CourseCard course={courseItem} />
-          ))}
-        </div>
+          ))} 
+        </div> */}
+
       </div>
     </div>
   );

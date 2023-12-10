@@ -51,13 +51,17 @@ function Login(): JSX.Element {
     <div className="Login bg-white">
       <div className="tabs flex flex-row justify-between">
           <div
-            className={`tab ${activeTab === 'instructor' ? 'active' : ''}  w-1/2 border-2 p-2 hover:bg-light_blue transition text-center`}
+            className={`tab ${activeTab === 'instructor' ? 'active' : ''}  w-1/2 border-2 p-2 hover:bg-light_blue transition text-center  ${
+              activeTab === 'instructor' ? 'bg-light_blue text-white' : ''
+            }`}
             onClick={() => handleTabClick('instructor')}
           >
             Instructor Login
           </div>
           <div
-            className={`tab ${activeTab === 'student' ? 'active' : ''}  w-1/2 border-2 p-2  hover:bg-light_blue transition text-center`}
+            className={`tab ${activeTab === 'student' ? 'active' : ''}  w-1/2 border-2 p-2  hover:bg-light_blue transition text-center  ${
+              activeTab === 'student' ? 'bg-light_blue text-white' : ''
+            }`}
             onClick={() => handleTabClick('student')}
           >
             Student Login

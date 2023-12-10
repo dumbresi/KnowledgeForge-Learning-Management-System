@@ -85,13 +85,17 @@ const RegisterDialog = (props: Props) => {
     <div>
         <div className="tabs flex flex-row justify-between">
           <div
-            className={`tab ${activeTab === 'instructor' ? 'active' : ''}  w-1/2 border-2 p-2 hover:bg-light_blue transition text-center`}
+            className={`tab ${activeTab === 'instructor' ? 'active' : ''}  w-1/2 border-2 p-2 hover:bg-light_blue transition text-center ${
+                activeTab === 'instructor' ? 'bg-light_blue text-white' : ''
+              }`}
             onClick={() => handleTabClick('instructor')}
           >
             <button>Instructor Register</button>
           </div>
           <div
-            className={`tab ${activeTab === 'student' ? 'active' : ''}  w-1/2 border-2 p-2  hover:bg-light_blue transition text-center`}
+            className={`tab ${activeTab === 'student' ? 'active' : ''}  w-1/2 border-2 p-2  hover:bg-light_blue transition text-center ${
+                activeTab === 'student' ? 'bg-light_blue text-white' : ''
+              }`}
             onClick={() => handleTabClick('student')}
           >
             <button>Student Register</button>
@@ -100,7 +104,7 @@ const RegisterDialog = (props: Props) => {
       <div>
     {
         (activeTab==='student') && (
-            <div className='flex-column justify-center items-center bg-[#fdebd7] w-full bg-white m-auto w-auto'>
+            <div className='flex-column justify-center items-center bg-[#fdebd7] w-full bg-white m-auto w-auto '>
             <h1 className='mx-auto text-center'>Student Register</h1>
         
         <form onSubmit={handleSubmit} className='shadow-md p-8 mb-4 flex flex-col justify-center items-center '>

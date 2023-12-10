@@ -1,19 +1,19 @@
-import React, { useState, useEffect  } from "react";
+import React, { useState, useEffect, MouseEventHandler  } from "react";
 import logo from "../resources/knowledgeForge.jpeg";
 import SearchBox from "./SearchBox";
-// import handleLogout from "../pages/AllCoursePage";
 import { BsArrowLeftCircle, BsChevronDown } from "react-icons/bs";
 import { RiDashboardLine } from "react-icons/ri";
 import { useMediaQuery } from "react-responsive";
 import Menus from "./Menus";
 import * as Paths from '../resources/paths'
 import * as AuthService from '../services/auth-service'
+import { BrowserRouter, Route, Routes, Link,useNavigate } from 'react-router-dom'
 
+type Props = {
+  category: (query: string) => void;
+};
 
-
-import { BrowserRouter, Route, Routes, Link, useNavigate } from 'react-router-dom'
-
-const Sidebar = () => {
+const Sidebar = (props:Props) => {
   const [isSidebarOpen, setSidebarOpen] = useState(true);
   const [isSubmenuOpen, setSubmenuOpen] = useState(false);
   let smallScreen = useMediaQuery({ query: "(max-width: 768px)" });
@@ -32,18 +32,28 @@ const Sidebar = () => {
   };
 
   const handleLogout=async()=>{
+    
     const response = await AuthService.logout();
-
-    if(response.status==200){
+    console.log(response);
+    if(response!==null){
       navigate(Paths.loginPath);
     }
 
   }
 
+  const taketoHomePage=()=>{
+    window.location.reload();
+  }
+
+  const setCategoryFilter=(title: string)=>{
+    // props.category(e.arguments);
+    props.category(title);
+  }
+
   return (
     <div>
       <div className={`h-screen p-3 space-y-2 ${isSidebarOpen? "w-60" : "w-24"} dark:bg-gray-900 dark:text-gray-100 duration-500 relative`}>
-        <div className="flex items-center p-2 space-x-4">
+        <div className="flex items-center p-2 space-x-4" onClick={taketoHomePage}>
           <img
             src={logo}
             alt=""
@@ -62,7 +72,14 @@ const Sidebar = () => {
               <>
               <li
               key={index}
-              className={`text-white text-sm flex items-center gap-x-4 cursor-pointer p-2 ${menu.spacing ? "mt-14":"mt-2"} hover:bg-light_white rounded-md `}>
+              className={`text-white text-sm flex items-center gap-x-4 cursor-pointer p-2 ${menu.spacing ? "mt-14":"mt-2"} hover:bg-light_white rounded-md `}
+              onClick={()=>{if (menu.title === "Logout") {
+                handleLogout();
+              }
+              if(menu.title==="Dashboard"){
+                taketoHomePage();
+              }
+              }}>
                 <span className={`text-2xl block justify-center duration-500 ${!isSidebarOpen && "pl-4"} `}>{menu.icon}</span>
                 <span className={`text-base font-medium flex-1 origin-left duration-200 ${!isSidebarOpen && "hidden"}`}>{menu.title}</span>
                 {menu.submenu && isSidebarOpen && (
@@ -75,7 +92,7 @@ const Sidebar = () => {
               {menu.submenu && isSubmenuOpen && isSidebarOpen && (
                 <ul>
                   {menu.submenuItems.map((submenuItem, index) => (
-                    <li key={index} className={`text-white text-sm flex items-center gap-x-4 cursor-pointer p-2 px-5 duration-500 hover:bg-light_white rounded-md`}>
+                    <li onClick={() => setCategoryFilter(submenuItem.title)} key={index} className={`text-white text-sm flex items-center gap-x-4 cursor-pointer p-2 px-5 duration-500 hover:bg-light_white rounded-md`}>
                       {submenuItem.title}
                     </li>
                   ))}

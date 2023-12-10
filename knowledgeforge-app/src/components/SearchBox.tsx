@@ -7,18 +7,13 @@ type Props = {
 export default (props: Props): ReactElement => {
   const inputRef = useRef<HTMLInputElement | null>(null);
 
-  const searchHandler = () => {
+  const searchHandler = (event:React.FormEvent) => {
+    event.preventDefault();
     const query: string = inputRef.current ? inputRef.current.value : "";
     props.onSearch(query);
   };
 
   return (
-    // <div>
-    //   <input ref={inputRef} type="text" placeholder="Search Course" />
-    //   <button type="submit" onClick={searchHandler} className="bg-light_blue">
-    //     Search
-    //   </button>
-    // </div>
 
     <form>   
     <label htmlFor="default-search" className="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">Search</label>

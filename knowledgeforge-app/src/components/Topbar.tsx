@@ -1,10 +1,18 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect ,useRef} from "react";
 import SearchBox from "./SearchBox";
 import { logout } from "../services/auth-service";
-import { Link } from "react-router-dom";
+import { Link,useNavigate } from "react-router-dom";
+import Course from "../models/Course";
+import * as Paths from '../resources/paths'
 
-const Topbar = () => {
+
+type Props = {
+  onSearch: (query: string) => void ;
+};
+
+const Topbar = ({ onSearch }: Props) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false); // Initially set to false
+  const navigate=useNavigate();
 
   // Simulating a login action when the component mounts
   // useEffect(() => {
@@ -12,7 +20,8 @@ const Topbar = () => {
   // }, []);
 
   const handleLogin = () => {
-    return <Link to="/user/login" />;
+    navigate(Paths.loginPath)
+    // return <Link to="/user/login" />;
   };
   const handleLogout = async () => {
     try {
@@ -30,12 +39,14 @@ const Topbar = () => {
     throw new Error("Function not implemented.");
   }
 
+  
   return (
     <div>
       <nav className="bg-white border-gray-200 dark:bg-gray-900">
         <div className="flex justify-between items-center mx-auto max-w-screen-xl p-4">
           <div className="max-w-screen-x1 w-3/4">
-            <SearchBox onSearch={searchHandler} />
+          <SearchBox onSearch={onSearch} />
+          
           </div>
           <div className="flex items-center space-x-6 rtl:space-x-reverse">
             <h5 className="text-sm text-gray-500 dark:text-white">
