@@ -37,6 +37,10 @@ const Sidebar = () => {
 
   }
 
+  const taketoHomePage=()=>{
+    navigate(Paths.allCoursesPath);
+  }
+
   return (
     <div>
       <div className={`h-screen p-3 space-y-2 ${isSidebarOpen? "w-60" : "w-24"} dark:bg-gray-900 dark:text-gray-100 duration-500 relative`}>
@@ -45,6 +49,7 @@ const Sidebar = () => {
             src={logo}
             alt=""
             className="w-12 h-12 rounded-full dark:bg-gray-500"
+            onClick={taketoHomePage}
           />
           <div>
             <h2 className={`text-lg font-semibold origin-left duration-500 ${!isSidebarOpen && "scale-0"}`}>Knowledge Forge</h2>
