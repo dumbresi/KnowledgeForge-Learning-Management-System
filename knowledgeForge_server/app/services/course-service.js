@@ -1,5 +1,7 @@
 import Course from '../models/course.js'
-
+import multer from "multer";
+const storage = multer.memoryStorage();
+const uploadImage = multer({ storage: storage });
 export const searchCourse = async (params={}) => {
     const courses=await  Course.find(params).exec();
     console.log(courses);
@@ -7,8 +9,9 @@ export const searchCourse = async (params={}) => {
 }
 
 export const saveCourse = async (newCourse)=>{
-    const course = new Course(newCourse);
-    return await course.save();
+    
+    
+    return await newCourse.save();
 }
 
 export const updateCourse = async(updatedCourse,id)=>{
