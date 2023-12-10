@@ -5,8 +5,7 @@ import multer from "multer";
 import Course from '../models/course.js';
 
 
-const storage = multer.memoryStorage();
-const uploadImage = multer({ storage: storage });
+
 export const findCourse=async (request, response) =>{
     
     try{
@@ -24,14 +23,15 @@ export const findCourse=async (request, response) =>{
 
 export const postCourse=async (request, response)=>{
     try{
-        uploadImage.single('image') (req, res,async (error)=>{
-            // Assuming 'imageName' is sent in the request body
+        uploadImage.single('thumbnail') (request, response,async (error)=>{
+            
             if (error) {
+                console.log("//");
                 setErrorResponse(error, response);
                 return;
               }
               // Extract image data and content type
-              const imageData = req.file.buffer;
+              const imageData = request.file.buffer;
               const {
                 title,
                 description,
@@ -61,6 +61,7 @@ export const postCourse=async (request, response)=>{
                 thumbnail: imageData,
                 
               });
+              console.log(newCourse);
               const course = await CourseService.saveCourse(newCourse);
               setResponse(course, response)
         });
