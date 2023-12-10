@@ -25,15 +25,15 @@ const UserPage = () => {
     }
 
     return (
-        <div>
-            <Sidebar category={category}/>
-            <div>
-            {user ? (
-                <UserCard user={user} />
-            ) : (
-                <p>Loading...</p>
-            )}
-        </div>
+        <div className="flex">
+            <Sidebar category={category} />
+            <div className="flex-1 flex justify-center items-center bg-gray-100">
+                {user ? (
+                    <UserCard user={user} />
+                ) : (
+                    <p>Loading...</p>
+                )}
+            </div>
         </div>
     );
 };
