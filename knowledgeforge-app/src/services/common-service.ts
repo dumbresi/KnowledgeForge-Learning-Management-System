@@ -1,4 +1,3 @@
-
 const baseUrl = 'http://localhost:4000';
 
 export const commonGET = async <T>(path: string): Promise<T[]> => {

@@ -21,9 +21,9 @@ const UserPage = () => {
     }, []);
 
     return (
-        <div className="flex">
+        <div>
             <Sidebar/>
-            <div className='flex'>
+            <div>
             {user ? (
                 <UserCard user={user} />
             ) : (

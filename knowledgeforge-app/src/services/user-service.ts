@@ -14,6 +14,7 @@ export const getUser = async (): Promise<User> => {
 };
 
 
+
 // export const getUser = async (): Promise<User> => {
 //     try {
 //         const user = await commonService.commonGET<User>(userPath);
