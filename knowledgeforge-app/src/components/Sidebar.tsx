@@ -38,18 +38,17 @@ const Sidebar = () => {
   }
 
   const taketoHomePage=()=>{
-    navigate(Paths.allCoursesPath);
+    window.location.reload();
   }
 
   return (
     <div>
       <div className={`h-screen p-3 space-y-2 ${isSidebarOpen? "w-60" : "w-24"} dark:bg-gray-900 dark:text-gray-100 duration-500 relative`}>
-        <div className="flex items-center p-2 space-x-4">
+        <div className="flex items-center p-2 space-x-4" onClick={taketoHomePage}>
           <img
             src={logo}
             alt=""
             className="w-12 h-12 rounded-full dark:bg-gray-500"
-            onClick={taketoHomePage}
           />
           <div>
             <h2 className={`text-lg font-semibold origin-left duration-500 ${!isSidebarOpen && "scale-0"}`}>Knowledge Forge</h2>
@@ -67,7 +66,11 @@ const Sidebar = () => {
               className={`text-white text-sm flex items-center gap-x-4 cursor-pointer p-2 ${menu.spacing ? "mt-14":"mt-2"} hover:bg-light_white rounded-md `}
               onClick={()=>{if (menu.title === "Logout") {
                 handleLogout();
-              }}}>
+              }
+              if(menu.title==="Dashboard"){
+                taketoHomePage();
+              }
+              }}>
                 <span className={`text-2xl block justify-center duration-500 ${!isSidebarOpen && "pl-4"} `}>{menu.icon}</span>
                 <span className={`text-base font-medium flex-1 origin-left duration-200 ${!isSidebarOpen && "hidden"}`}>{menu.title}</span>
                 {menu.submenu && isSidebarOpen && (
