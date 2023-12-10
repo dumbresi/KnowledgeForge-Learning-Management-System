@@ -45,6 +45,10 @@ const Sidebar = (props:Props) => {
     navigate('/');
   }
 
+  const taketoSettingsPage=()=>{
+    navigate(Paths.settingsPath)
+  }
+
   const setCategoryFilter=(title: string)=>{
     // props.category(e.arguments);
     props.category(title);
@@ -78,6 +82,9 @@ const Sidebar = (props:Props) => {
               }
               if(menu.title==="Dashboard"){
                 taketoHomePage();
+              }
+              if(menu.title==='Settings'){
+                taketoSettingsPage();
               }
               }}>
                 <span className={`text-2xl block justify-center duration-500 ${!isSidebarOpen && "pl-4"} `}>{menu.icon}</span>
