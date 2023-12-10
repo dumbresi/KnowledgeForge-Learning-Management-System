@@ -119,7 +119,7 @@ export const loginInstructor = async (request, response) => {
 
 export const logout = async(request,response)=>{
     try {
-        response.clearCookie('token');
+        response.clearCookie('token',{ httpOnly: true, sameSite: 'Strict',maxAge:0 });
         response.json({  message: 'Logged out successfully' });
     } catch (error) {
         setErrorResponse(error, response);

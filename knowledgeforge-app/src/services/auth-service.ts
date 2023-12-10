@@ -23,3 +23,8 @@ export const loginInstructor = async (payload: any):Promise<Response>=>{
     const existingUser=baseService.post<Instructor>(authPath+'/instructor/login',payload,'');
     return existingUser;
 }
+
+export const logout= async(): Promise<Response> =>{
+    const logoutUser: Response = await baseService.GetOne(authPath+'/logout');
+    return logoutUser;
+}

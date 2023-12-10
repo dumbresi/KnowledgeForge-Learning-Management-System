@@ -1,11 +1,17 @@
 import React, { useState, useEffect  } from "react";
 import logo from "../resources/knowledgeForge.jpeg";
 import SearchBox from "./SearchBox";
-import searchHandler from "../pages/AllCoursePage";
+// import handleLogout from "../pages/AllCoursePage";
 import { BsArrowLeftCircle, BsChevronDown } from "react-icons/bs";
 import { RiDashboardLine } from "react-icons/ri";
 import { useMediaQuery } from "react-responsive";
 import Menus from "./Menus";
+import * as Paths from '../resources/paths'
+import * as AuthService from '../services/auth-service'
+
+
+
+import { BrowserRouter, Route, Routes, Link, useNavigate } from 'react-router-dom'
 
 const Sidebar = () => {
   const [isSidebarOpen, setSidebarOpen] = useState(true);
@@ -19,10 +25,20 @@ const Sidebar = () => {
       setSidebarOpen(true);
     }
   }, [smallScreen]);
+  const navigate=useNavigate();
 
   const toggleSidebar = () => {
     setSidebarOpen(!isSidebarOpen);
   };
+
+  const handleLogout=async()=>{
+    const response = await AuthService.logout();
+
+    if(response.status==200){
+      navigate(Paths.loginPath);
+    }
+
+  }
 
   return (
     <div>

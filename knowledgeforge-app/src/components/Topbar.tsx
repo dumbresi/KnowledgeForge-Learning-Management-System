@@ -1,6 +1,7 @@
 import React from "react";
 import SearchBox from "./SearchBox";
 import searchHandler from "../pages/AllCoursePage";
+import { BrowserRouter, Route, Routes, Link, useNavigate } from 'react-router-dom'
 
 const Topbar = () => {
   return (
@@ -21,7 +22,7 @@ const Topbar = () => {
               href="#"
               className="text-sm text-blue-600 dark:text-blue-500 hover:underline"
             >
-              Login
+              <Link to="/user/login">Login</Link>
             </a>
           </div>
         </div>

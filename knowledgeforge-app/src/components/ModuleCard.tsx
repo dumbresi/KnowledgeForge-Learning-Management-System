@@ -11,7 +11,7 @@ const ModuleCard = (props: ModuleCardProps) => {
     return (
         <div>
             <div>
-                <h1 className='bg-light_blue m-2'>{module.title}</h1>
+                <h1 className='bg-light_blue m-2 px-2 border-2'>{module.title}</h1>
             </div>
         </div>
     );
