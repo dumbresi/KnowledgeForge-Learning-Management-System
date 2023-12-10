@@ -60,6 +60,7 @@ export const getOneUser = async (request, response) => {
     try {
         const user = jwt.verify(token, 'secret123');
         const result = await UserService.getOneUser(user.email);
+        
         setResponse(result, response);
     } catch (err) {
         setErrorResponse(err, response);
