@@ -9,9 +9,12 @@ import logo from "../resources/knowledgeForge.jpeg";
 import Topbar from "../components/Topbar";
 import * as Paths from '../resources/paths'
 import * as AuthService from '../services/auth-service'
+import CoursesGrid from '../components/CoursesGrid';
 
-
-const AllCoursePage = () => {
+type AllCoursePageProps={
+  pageType:string
+}
+const AllCoursePage = (props:AllCoursePageProps) => {
   const [courses, setCourses] = useState<Course[]>([]);
   const [filteredCourses, setFilteredCourses] = useState<Course[]>([]);
   const navigate = useNavigate();
@@ -81,11 +84,15 @@ const AllCoursePage = () => {
         <div>
           <Topbar onSearch={searchHandler}/>
         </div>
-        <div className="grid gap-1 grid-cols-[repeat(auto-fill,minmax(300px,1fr))] p-2">
+        {
+        (props.pageType==='allCourses')?<CoursesGrid courses={filteredCourses}/>: ""
+        }
+        {/* <div className="grid gap-1 grid-cols-[repeat(auto-fill,minmax(300px,1fr))] p-2">
           {filteredCourses.map((courseItem) => (
             <CourseCard course={courseItem} />
-          ))}
-        </div>
+          ))} 
+        </div> */}
+
       </div>
     </div>
   );

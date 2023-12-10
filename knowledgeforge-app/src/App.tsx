@@ -23,7 +23,7 @@ function App() {
       <Routes>
       <Route path="/" element={
         <div>
-          <AllCoursePage/>
+          <AllCoursePage pageType={'allCourses'} />
           {/* {<UserPage/>} */}
         </div>
       
