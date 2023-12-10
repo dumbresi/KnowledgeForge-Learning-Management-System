@@ -7,7 +7,7 @@ export const setResponse = (data,response)=>{
 //setting a response if something goes wrong
 export const setErrorResponse = (err,response)=>{
     response.status(500).json({
-        code: err.message,
+        code: err.code,
         message: "Error occured while processing your request."
     })
 }
