@@ -1,6 +1,6 @@
-import React, { useState, useEffect },{useRef} from "react";
+import React, { useState, useEffect ,useRef} from "react";
 import SearchBox from "./SearchBox";
-// import { logout } from "../services/auth-service";
+import { logout } from "../services/auth-service";
 import { Link } from "react-router-dom";
 import Course from "../models/Course";
 
