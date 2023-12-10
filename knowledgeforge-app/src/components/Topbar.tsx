@@ -1,8 +1,10 @@
 import React, { useState, useEffect ,useRef} from "react";
 import SearchBox from "./SearchBox";
 import { logout } from "../services/auth-service";
-import { Link } from "react-router-dom";
+import { Link,useNavigate } from "react-router-dom";
 import Course from "../models/Course";
+import * as Paths from '../resources/paths'
+
 
 type Props = {
   onSearch: (query: string) => void ;
@@ -10,6 +12,7 @@ type Props = {
 
 const Topbar = ({ onSearch }: Props) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false); // Initially set to false
+  const navigate=useNavigate();
 
   // Simulating a login action when the component mounts
   // useEffect(() => {
@@ -17,7 +20,8 @@ const Topbar = ({ onSearch }: Props) => {
   // }, []);
 
   const handleLogin = () => {
-    return <Link to="/user/login" />;
+    navigate(Paths.loginPath)
+    // return <Link to="/user/login" />;
   };
   const handleLogout = async () => {
     try {
