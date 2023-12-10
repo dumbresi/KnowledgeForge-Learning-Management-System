@@ -28,7 +28,8 @@ const SettingsPage: React.FC = () => {
     // This is a sensitive operation and should be handled with caution
     // It might involve asking for confirmation, password verification, etc.
     // For this example, we'll just navigate to the login page
-    AuthService.deleteAccount({"email":"sid@gmail.com"});
+    
+    // AuthService.deleteAccount({"email":"sid@gmail.com"});
     navigate(Paths.loginPath);
   };
 
