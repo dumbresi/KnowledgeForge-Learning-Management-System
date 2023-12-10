@@ -17,18 +17,21 @@ import Sidebar from './components/Sidebar';
 function App() {
   const isLogin = true;
 
+  const category=(category:string)=>{
+// TODO
+  }
   return (
     <div>
       <BrowserRouter>
       <Routes>
       <Route path="/" element={
         <div>
-          <AllCoursePage/>
+          <AllCoursePage pageType={'allCourses'} />
           {/* {<UserPage/>} */}
         </div>
       
       }/>
-        <Route element={<Sidebar/>}></Route>
+        <Route element={<Sidebar category={category}/>}></Route>
 				<Route path={Paths.registerPath} element={<RegisterUserPage isLogin={false}/>} />
 				<Route path={Paths.loginPath} element={<RegisterUserPage isLogin={true}/>}  />
         <Route path={Paths.courseDetailsPath} element={<CourseDetails/>}  />

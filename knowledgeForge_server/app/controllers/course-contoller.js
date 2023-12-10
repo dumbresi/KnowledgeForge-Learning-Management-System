@@ -7,11 +7,7 @@ import Course from '../models/course.js';
 
 
 export const findCourse=async (request, response) =>{
-    
     try{
-        
-            
-              
         const searchQuery= {...request.query};
         const courses = await CourseService.searchCourse(searchQuery);
          setResponse(courses,response);

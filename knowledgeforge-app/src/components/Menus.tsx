@@ -6,9 +6,9 @@ const Menus = [
     { title: "Dashboard", icon: <RiDashboardLine/> },
     { title: "Categories",  icon: <BsList />, submenu: true,
         submenuItems: [
-            {title: "Submenu 1"},
-            {title: "Submenu 2"},
-            {title: "Submenu 3"},
+            {title: "Programming"},
+            {title: "Machine Learning"},
+            {title: "Cybersecurity"},
         ],
     },
     {title: "Wishlist",  icon: <BsBookmarkStar /> },
