@@ -40,7 +40,7 @@ const CourseDetails = (props: Props) => {
           <p className="text-sm md:text-base">{course.description}</p>
         </div>
 
-        <img className="w-full md:w-1/2 h-auto md:ml-10" alt="loading" src={`${course.thumbnail}`} />
+        <img className="w-full md:w-1/2 h-auto md:ml-10" alt="loading" src={course.thumbnail} />
       </div>
 
       <hr className="w-full bg-black h-1" />
@@ -48,21 +48,26 @@ const CourseDetails = (props: Props) => {
       <div className="md:flex md:justify-between">
         <div className="mb-4 md:mb-0">
           <ul>
-            <li className="text-lg">{`${selectedModule?.title}`}</li>
-            <li className="text-sm md:text-base">{`${selectedModule?.description}`}</li>
-            <li className="text-xs md:text-sm">{"Duration" + `${selectedModule?.duration}`}</li>
+            <li className="text-lg">{selectedModule?.title}</li>
+            <li className="text-sm md:text-base">{selectedModule?.description}</li>
+            <li className="text-xs md:text-sm">Duration: {selectedModule?.duration}</li>
           </ul>
 
-          <div className='b-2 border-2 h-2/4'>
-            <VideoPlayer videoID={`${selectedModule?.videoId}`}></VideoPlayer>
+          <div className="border-2 h-2/4">
+            <VideoPlayer videoID={`${selectedModule?.videoId}`} />
           </div>
-
         </div>
 
         <div className="md:w-1/3 md:mr-8 flex justify-center">
           <div>
             {modules.map((moduleItem: Module) => (
-              <div key={moduleItem._id} onClick={() => changeSelectedModule(moduleItem)}>
+              <div
+                key={moduleItem._id}
+                onClick={() => changeSelectedModule(moduleItem)}
+                className={`cursor-pointer ${
+                  selectedModule?._id === moduleItem._id ? 'bg-gray-200' : ''
+                }`}
+              >
                 <ModuleCard module={moduleItem} />
               </div>
             ))}
@@ -72,5 +77,4 @@ const CourseDetails = (props: Props) => {
     </div>
   );
 };
-
 export default CourseDetails;
