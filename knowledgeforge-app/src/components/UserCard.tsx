@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
 import UserModel from "../models/UserModel";
+import { useDispatch } from "react-redux";
+import { updateUserSuccess } from "../redux/user/userSlice";
 
 type UserCardProps = {
   user: {
@@ -11,6 +13,7 @@ type UserCardProps = {
 
 const UserCard: React.FC<UserCardProps> = ({ user }) => {
   const [isEditing, setIsEditing] = useState(false);
+  const dispatch=useDispatch();
   const [editedUser, setEditedUser] = useState<UserModel>({
     userName: user.userName,
     email: '',
@@ -55,13 +58,16 @@ const UserCard: React.FC<UserCardProps> = ({ user }) => {
         })
       },
       );
-      console.log( result.json());
-      console.log(updatedUser);
+      // console.log( result.json());
+      // console.log(updatedUser);
       if (result.ok) {
         const updatedUserData = await result.json();
         console.log(updatedUserData); // Log the updated user data
         setUpdatedUser(updatedUserData);
         setEditedUser(updatedUserData);
+
+        dispatch(updateUserSuccess(updatedUserData));
+        console.log("User data:"+updatedUserData)
       } else {
         // Handle unsuccessful response
       }
