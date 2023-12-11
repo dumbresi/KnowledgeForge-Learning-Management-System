@@ -48,6 +48,7 @@ const Sidebar = (props:Props) => {
 
   const taketoHomePage=()=>{
     navigate('/');
+    props.category('');
   }
 
   const taketoSettingsPage=()=>{
