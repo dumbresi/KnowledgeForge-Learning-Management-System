@@ -1,5 +1,6 @@
 import React, { ChangeEvent, MouseEventHandler, useRef, useState } from "react";
 
+
 const AddCourseCard = () => {
   const [formData, setFormData] = useState({
     title:'',
@@ -8,45 +9,73 @@ const AddCourseCard = () => {
     fees: 0,
     category: '',
     subCategory: '',
-    thumbnail: null as File | null,
+    thumbnail: null,
     description: '',
     noOfModules: 0,
     creationTime: '',
     avg_star_rating: 0,
+    thumbnailBase64:''
   });
 
-  const handleInputChange = (e:ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+  const handleInputChange = (e:any ) => {
     const { name, value } = e.target;
-    const files = (e.target as HTMLInputElement).files;
-    setFormData((prevFormData) => ({
-      ...prevFormData,
-      [name]: name === 'creationTime' ? new Date().toISOString() : files ? files[0] : value,
-    }));
+    setFormData({
+      ...formData,
+      [name]: value,
+    });
   };
 
-  const handleFileUpload = async() => {
-    
+  const handleFileUpload = (e:any) => {
+    const file = e.target.files[0];
 
-    // Now 'formData' contains all the necessary data
-    
-    console.log('Form Data:', formData);
-    const response = await fetch('http://localhost:4000/courses',{
-      method:'POST',
-      credentials:'include',
-      headers:{
+    if (file) {
+      const reader = new FileReader();
+
+      reader.onloadend = () => {
+        const base64String = reader.result?.toString();
+        setFormData({
+          ...formData,
+          thumbnail: file,
+          thumbnailBase64: base64String||'', // Extract the base64 string
+        });
+      };
+
+      reader.readAsDataURL(file);
+    }
+  };
+
+  const handleApiCall = () => {
+    // Your API call logic here
+    const apiData = {
+      title: formData.title,
+      description: formData.description,
+      instructor: formData.instructor,
+      duration: formData.duration,
+      category: formData.category,
+      subCategory: formData.subCategory,
+      fees: Number(formData.fees),
+      noOfModules: Number(formData.noOfModules),
+      thumbnail: formData.thumbnailBase64, 
+      creationTime:Date().toString()
+    };
+    console.log(apiData);
+    // Make your API call using apiData
+    // Example using fetch:
+    fetch('http://localhost:4000/courses', {
+      method: 'POST',
+      headers: {
         'Content-Type': 'application/json',
       },
-      body:JSON.stringify(formData)
-    });
-    console.log(response.json);
-    // You can use 'formData' for your upload logic, e.g., send it to the server
-    // fetch('/your-upload-endpoint', {
-    //   method: 'POST',
-    //   body: yourFormDataObject,
-    // })
-    //   .then(response => response.json())
-    //   .then(data => console.log(data))
-    //   .catch(error => console.error(error));
+      body: JSON.stringify(apiData),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        // Handle the API response
+        console.log(data);
+      })
+      .catch((error) => {
+        console.error('Error:', error);
+      });
   };
 
   return (
@@ -172,13 +201,13 @@ const AddCourseCard = () => {
             id="thumbnail"
             name="thumbnail"
             className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring-blue-500"
-            onChange={handleInputChange}
+            onChange={handleFileUpload}
             
           />
           <button
             className="ml-2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
             //handle onclick
-            onClick={handleFileUpload}
+            onClick={handleApiCall}
           >
             Upload
           </button>

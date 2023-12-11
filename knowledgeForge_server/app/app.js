@@ -18,7 +18,7 @@ const initialize = async(app)=>{
         origin:'http://localhost:3000',
         credentials:true,
     }));
-    app.use(express.json());
+    app.use(express.json({limit:'10mb'}));
     app.use(express.urlencoded());
     app.use(cookieParser());
     
@@ -35,7 +35,7 @@ const initialize = async(app)=>{
         });
     });
     const imageStorage = multer.memoryStorage();
-uploadImage = multer({ storage: imageStorage }).single('thumbnail');
+uploadImage = multer({ storage: imageStorage }).single();
     const storage = await new GridFsStorage({
         url:process.env.MONGO_CONN,
         file: (req, file) => {
