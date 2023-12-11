@@ -79,3 +79,31 @@ export const getRegisteredCourses = async (request, response) => {
         setErrorResponse(err, response);
     }
 }
+export const checkRegistration = async (request, response) => {
+    const courseId = request.params.id;
+    const token = request.cookies.token;
+        if (!token) {
+            return response.status(401).json({ message: 'Unauthorized' });
+          }
+    try {
+        const user = jwt.verify(token, 'secret123');
+        const result = await UserService.checkIfRegistered(user.email, courseId);
+        setResponse({registered:result}, response);
+    } catch (err) {
+        setErrorResponse(err, response);
+    }
+}
+export const registerInCourse = async (request, response) => {
+    const courseId = request.params.id;
+    const token = request.cookies.token;
+        if (!token) {
+            return response.status(401).json({ message: 'Unauthorized' });
+          }
+    try {
+        const user = jwt.verify(token, 'secret123');
+        const result = await UserService.addCourseToUser(user.email, courseId);
+        setResponse(result, response);
+    } catch (err) {
+        setErrorResponse(err, response);
+    }
+}
