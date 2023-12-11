@@ -6,6 +6,8 @@ import Course from "../models/Course";
 import * as Paths from '../resources/paths'
 import { useSelector } from 'react-redux';
 import { RootState } from '../redux/store'
+import { signOut } from "../redux/user/userSlice";
+import { useDispatch } from "react-redux";
 
 type Props = {
   onSearch: (query: string) => void ;
@@ -14,6 +16,7 @@ type Props = {
 const Topbar = ({ onSearch }: Props) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false); // Initially set to false
   const navigate=useNavigate();
+  const dispatch=useDispatch();
   const { currentUser, loading, error } = useSelector((state:RootState)=>state.user);
   // Simulating a login action when the component mounts
   // useEffect(() => {
@@ -28,6 +31,7 @@ const Topbar = ({ onSearch }: Props) => {
     try {
       await logout();
       setIsLoggedIn(false);
+      dispatch(signOut());
       // Handle successful logout actions, if needed
     } catch (error) {
       console.error("Logout failed:", error);
