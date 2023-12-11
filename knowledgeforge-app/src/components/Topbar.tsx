@@ -5,7 +5,7 @@ import { Link,useNavigate } from "react-router-dom";
 import Course from "../models/Course";
 import * as Paths from '../resources/paths'
 import { useSelector } from 'react-redux';
-import { RootState } from '../redux/store'
+import { RootState } from '../redux/store';
 import { signOut } from "../redux/user/userSlice";
 import { useDispatch } from "react-redux";
 
