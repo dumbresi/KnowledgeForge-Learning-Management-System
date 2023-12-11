@@ -18,11 +18,11 @@ const root = ReactDOM.createRoot(
 root.render(
 
   <Provider store={store}>
-    <I18nextProvider i18n={i18n}>
+    {/* <I18nextProvider i18n={i18n}> */}
     <PersistGate persistor={persistor} loading={null}>
       <App />
     </PersistGate>
-    </I18nextProvider>
+    {/* </I18nextProvider> */}
   </Provider>
 );
 
