@@ -8,6 +8,8 @@ import Menus from "./Menus";
 import * as Paths from '../resources/paths'
 import * as AuthService from '../services/auth-service'
 import { BrowserRouter, Route, Routes, Link,useNavigate } from 'react-router-dom'
+import { signOut } from "../redux/user/userSlice";
+import { useDispatch } from "react-redux";
 
 type Props = {
   category: (query: string) => void;
@@ -17,6 +19,7 @@ const Sidebar = (props:Props) => {
   const [isSidebarOpen, setSidebarOpen] = useState(true);
   const [isSubmenuOpen, setSubmenuOpen] = useState(false);
   let smallScreen = useMediaQuery({ query: "(max-width: 768px)" });
+  const dispatch=useDispatch();
 
   useEffect(() => {
     if (smallScreen) {
@@ -35,14 +38,20 @@ const Sidebar = (props:Props) => {
     
     const response = await AuthService.logout();
     console.log(response);
+    
     if(response!==null){
+      dispatch(signOut());
       navigate(Paths.loginPath);
     }
 
   }
 
   const taketoHomePage=()=>{
-    window.location.reload();
+    navigate('/');
+  }
+
+  const taketoSettingsPage=()=>{
+    navigate(Paths.settingsPath)
   }
 
   const setCategoryFilter=(title: string)=>{
@@ -78,6 +87,9 @@ const Sidebar = (props:Props) => {
               }
               if(menu.title==="Dashboard"){
                 taketoHomePage();
+              }
+              if(menu.title==='Settings'){
+                taketoSettingsPage();
               }
               }}>
                 <span className={`text-2xl block justify-center duration-500 ${!isSidebarOpen && "pl-4"} `}>{menu.icon}</span>
