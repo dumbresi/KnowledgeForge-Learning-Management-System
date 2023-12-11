@@ -53,11 +53,13 @@ const Sidebar = (props:Props) => {
   }
 
   const takeToHomePage=()=>{
+    props.category('');
     navigate(Paths.homePath);
   }
   const takeToProfilePage=()=>{
-    navigate(Paths.userDetailsPath);
     props.category('');
+    navigate(Paths.userDetailsPath);
+    
   }
 
   const taketoLoginPage=()=>{
