@@ -8,10 +8,13 @@ export const searchCourse = async (params={}) => {
     return courses;
 }
 
-export const saveCourse = async (newCourse)=>{
+export const saveCourse = async (course)=>{
     
-    
-    return await newCourse.save();
+    const newCourse = new Course(course);
+    console.log(newCourse);
+    return await newCourse.save().catch((err)=>{
+        console.log(err);
+    });
 }
 
 export const updateCourse = async(updatedCourse,id)=>{

@@ -19,48 +19,11 @@ export const findCourse=async (request, response) =>{
 
 export const postCourse=async (request, response)=>{
     try{
-        uploadImage.single('thumbnail') (request, response,async (error)=>{
-            
-            if (error) {
-                console.log("//");
-                setErrorResponse(error, response);
-                return;
-              }
-              // Extract image data and content type
-              const imageData = request.file.buffer;
-              const {
-                title,
-                description,
-                instructor,
-                category,
-                duration,
-                fees,
-                subCategory,
-                noOfModules,
-                creationTime,
-                avg_star_rating
-                // Add more fields as needed
-              } = request.body;
-          
-              // Create a new Image document with additional fields and save it to MongoDB
-              const newCourse = new Course({
-                title,
-                description,
-                instructor,
-                category,
-                duration,
-                fees,
-                subCategory,
-                noOfModules,
-                creationTime,
-                avg_star_rating,
-                thumbnail: imageData,
-                
-              });
-              console.log(newCourse);
+       const newCourse=request.body;
+       console.log(request.body);
               const course = await CourseService.saveCourse(newCourse);
               setResponse(course, response)
-        });
+       
         
         
         
