@@ -5,14 +5,19 @@ import Course from '../models/Course';
 import ModuleCard from './ModuleCard';
 import Module from '../models/modules';
 import VideoPlayer from './VideoPlayer';
+import * as UserService from '../services/user-service';
+import { useSelector } from 'react-redux';
+import { RootState } from '../redux/store';
 
 type Props = {};
 
-const CourseDetails = (props: Props) => {
+const CourseDetails: React.FC<Props> = () => {
   const location = useLocation();
   const course: Course = location.state;
   const [modules, setModules] = useState<Module[]>([]);
-  const [selectedModule, setSelectedModule] = useState<Module>();
+  const [selectedModule, setSelectedModule] = useState<Module | undefined>(undefined);
+  const [isEnrolled, setIsEnrolled] = useState(false);
+  const { currentUser, loading, error } = useSelector((state:RootState)=>state.user);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -32,12 +37,44 @@ const CourseDetails = (props: Props) => {
     // Additional logic to handle video player update when selectedModule changes
     // For example, you can set a ref to the VideoPlayer component and manually trigger an update
     // using the ref when selectedModule changes.
-    console.log("selectedmodule changed");
+    console.log('selectedModule changed');
   }, [selectedModule]);
 
-  const changeSelectedModule = async (mod: Module) => {
-    console.log("module changed");
+  useEffect(()=>{
+    const checkRegistration=async ()=>{
+      
+      try {
+        const response = await UserService.checkRegistration(course._id);
+        setIsEnrolled(response.registered);
+        
+         
+       
+      } catch (error) {
+        console.log(error);
+      }
+    }
+    checkRegistration();
+    
+  },[])
+
+  const changeSelectedModule = (mod: Module) => {
+    console.log('module changed');
     setSelectedModule(mod);
+  };
+
+  const enrollForCourse = async () => {
+    try {
+      if(currentUser){
+        const response =await UserService.registerforCourse(JSON.stringify({}), course._id);
+        if(response?.status==200){
+          setIsEnrolled(true);
+        }
+      }else{
+
+      }
+    } catch (error) {
+      console.error('Error enrolling for the course:', error);
+    }
   };
 
   return (
@@ -53,38 +90,48 @@ const CourseDetails = (props: Props) => {
 
       <hr className="w-full bg-black h-1" />
 
-      <div className="md:flex md:justify-between">
-        <div className="mb-4 md:mb-0">
-          <ul>
-            <li className="text-lg">{selectedModule?.title}</li>
-            <li className="text-sm md:text-base">{selectedModule?.description}</li>
-            <li className="text-xs md:text-sm">Duration: {selectedModule?.duration}</li>
-          </ul>
+      {isEnrolled ? (
+        <div className="md:flex md:justify-between">
+          <div className="mb-4 md:mb-0">
+            <ul>
+              <li className="text-lg">{selectedModule?.title}</li>
+              <li className="text-sm md:text-base">{selectedModule?.description}</li>
+              <li className="text-xs md:text-sm">Duration: {selectedModule?.duration}</li>
+            </ul>
 
-          <div className="border-2 h-2/4">
-            <VideoPlayer videoID={`${selectedModule?.videoId}`} />
+            <div className="border-2 h-2/4">
+              <VideoPlayer videoID={`${selectedModule?.videoId}`} />
+            </div>
+          </div>
+
+          <div className="md:w-1/3 md:mr-8 flex justify-center">
+            <div>
+              {modules.map((moduleItem: Module) => (
+                <div
+                  key={moduleItem._id}
+                  onClick={() => {
+                    changeSelectedModule(moduleItem);
+                  }}
+                  className={`cursor-pointer ${
+                    selectedModule?._id === moduleItem._id ? 'bg-gray-200' : ''
+                  }`}
+                >
+                  <ModuleCard module={moduleItem} />
+                </div>
+              ))}
+            </div>
           </div>
         </div>
-
-        <div className="md:w-1/3 md:mr-8 flex justify-center">
+      ) : (
+        <div> {/* Render something for users who are not enrolled */}
+          You are not enrolled in this course.
           <div>
-            {modules.map((moduleItem: Module) => (
-              <div
-                key={moduleItem._id}
-                onClick={() =>{ 
-                  changeSelectedModule(moduleItem);
-                }}
-                className={`cursor-pointer ${
-                  selectedModule?._id === moduleItem._id ? 'bg-gray-200' : ''
-                }`}
-              >
-                <ModuleCard module={moduleItem} />
-              </div>
-            ))}
+          <button onClick={enrollForCourse}className='bg-light_blue mx-auto'>Enroll Now</button>
           </div>
         </div>
-      </div>
+      )}
     </div>
   );
 };
+
 export default CourseDetails;
