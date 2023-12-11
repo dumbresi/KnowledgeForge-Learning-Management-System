@@ -77,7 +77,7 @@ const UserCard: React.FC<UserCardProps> = ({ user }) => {
     <div className="p-10 w-full max-w-3xl bg-white rounded-lg shadow-xl">
         <div className="flex items-center justify-between mb-6">
           <div>
-            <h3 className="text-2xl font-semibold leading-7 text-gray-900">{isEditing ? "Edit User" : user.userName}</h3>
+            <h3 className="text-2xl font-semibold leading-7 text-gray-900">{isEditing ? "Edit User" : editedUser.userName}</h3>
             <p className="mt-1 max-w-2xl text-sm leading-6 text-gray-500">Welcome to your profile.</p>
           </div>
           <button className="bg-blue-500 hover:bg-blue-700 text-white text-sm font-bold py-2 px-4 rounded" onClick={isEditing ? handleSaveClick : handleEditClick}>
