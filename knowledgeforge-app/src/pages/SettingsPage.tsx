@@ -3,10 +3,13 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import * as Paths from '../resources/paths'
 import * as AuthService from '../services/auth-service'
+import { useSelector } from 'react-redux';
+import { RootState } from '../redux/store';
 
 const SettingsPage: React.FC = () => {
   const [darkMode, setDarkMode] = useState(false);
   const navigate = useNavigate();
+  const { currentUser, loading, error } = useSelector((state:RootState)=>state.user);
 
   const toggleDarkMode = () => {
     setDarkMode(!darkMode);
@@ -33,6 +36,10 @@ const SettingsPage: React.FC = () => {
     navigate(Paths.loginPath);
   };
 
+  const takeToLoginPage=()=>{
+    navigate(Paths.loginPath);
+  }
+
   const goToAccountDetails=()=>{
     navigate(Paths.userDetailsPath);
   }
@@ -44,12 +51,20 @@ const SettingsPage: React.FC = () => {
       <div className="bg-white p-6 rounded-lg shadow-md">
         <div className="mb-6">
           <h2 className="text-xl font-semibold mb-2">Account Details</h2>
+          {(currentUser)?
           <button
-            className="text-blue-500 hover:underline focus:outline-none"
-            onClick={() => goToAccountDetails()}
+          className="text-blue-500 hover:underline focus:outline-none"
+          onClick={() => goToAccountDetails()}
           >
-            View Account Details
+          View Account Details
           </button>
+          :
+          <div>
+            Please <button onClick={takeToLoginPage} className='text-blue-500 hover:underline focus:outline-none'>Login</button> to get your account details
+          </div>
+          }
+          
+
         </div>
 
         <div className="mb-6">
@@ -67,21 +82,27 @@ const SettingsPage: React.FC = () => {
           </div>
         </div>
 
+        {(currentUser)?
         <div className="mb-6">
-          <h2 className="text-xl font-semibold mb-2">Actions</h2>
-          <button
-            className="bg-blue-500 text-white py-2 px-4 rounded-md mr-2 hover:bg-blue-600 focus:outline-none"
-            onClick={handleLogout}
-          >
-            Logout
-          </button>
-          <button
-            className="bg-red-500 text-white py-2 px-4 rounded-md hover:bg-red-600 focus:outline-none"
-            onClick={handleDeleteAccount}
-          >
-            Delete Account
-          </button>
-        </div>
+        <h2 className="text-xl font-semibold mb-2">Actions</h2>
+        <button
+          className="bg-blue-500 text-white py-2 px-4 rounded-md mr-2 hover:bg-blue-600 focus:outline-none"
+          onClick={handleLogout}
+        >
+          Logout
+        </button>
+        <button
+          className="bg-red-500 text-white py-2 px-4 rounded-md hover:bg-red-600 focus:outline-none"
+          onClick={handleDeleteAccount}
+        >
+          Delete Account
+        </button>
+      </div>
+
+        :<></>}
+        
+
+
       </div>
     </div>
   );
