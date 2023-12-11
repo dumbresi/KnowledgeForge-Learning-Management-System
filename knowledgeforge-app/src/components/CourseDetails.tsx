@@ -5,6 +5,9 @@ import Course from '../models/Course';
 import ModuleCard from './ModuleCard';
 import Module from '../models/modules';
 import VideoPlayer from './VideoPlayer';
+import * as UserService from '../services/user-service';
+import { useSelector } from 'react-redux';
+import { RootState } from '../redux/store';
 
 type Props = {};
 
@@ -14,6 +17,7 @@ const CourseDetails: React.FC<Props> = () => {
   const [modules, setModules] = useState<Module[]>([]);
   const [selectedModule, setSelectedModule] = useState<Module | undefined>(undefined);
   const [isEnrolled, setIsEnrolled] = useState(false);
+  const { currentUser, loading, error } = useSelector((state:RootState)=>state.user);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -36,14 +40,42 @@ const CourseDetails: React.FC<Props> = () => {
     console.log('selectedModule changed');
   }, [selectedModule]);
 
+  useEffect(()=>{
+    const checkRegistration=async ()=>{
+      
+      try {
+        const response = await UserService.checkRegistration(course._id);
+        setIsEnrolled(response.registered);
+        
+         
+       
+      } catch (error) {
+        console.log(error);
+      }
+    }
+    checkRegistration();
+    
+  },[])
+
   const changeSelectedModule = (mod: Module) => {
     console.log('module changed');
     setSelectedModule(mod);
   };
 
-  const enrollForCourse=()=>{
-    setIsEnrolled(true);
-  }
+  const enrollForCourse = async () => {
+    try {
+      if(currentUser){
+        const response =await UserService.registerforCourse(JSON.stringify({}), course._id);
+        if(response?.status==200){
+          setIsEnrolled(true);
+        }
+      }else{
+
+      }
+    } catch (error) {
+      console.error('Error enrolling for the course:', error);
+    }
+  };
 
   return (
     <div className="container mx-auto">
