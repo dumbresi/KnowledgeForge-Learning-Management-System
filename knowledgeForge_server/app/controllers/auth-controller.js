@@ -69,8 +69,13 @@ export const loginUser = async (request, response) => {
                     'secret123',
                     { expiresIn: '4h' }
                 )
+                const sanitizedUser ={
+                    userName: user.userName,
+  email: user.email,
+  contactNumber: user.contactNumber,
+                }
                 response.cookie('token', token, { httpOnly: true, sameSite: 'Strict' });
-                response.json({ message: 'Login successful', user });
+                response.json({ message: 'Login successful', sanitizedUser });
             } else {
                  response.json({ status: 'error', user: false })
             }

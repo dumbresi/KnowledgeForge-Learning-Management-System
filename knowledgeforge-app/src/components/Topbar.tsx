@@ -4,7 +4,10 @@ import { logout } from "../services/auth-service";
 import { Link,useNavigate } from "react-router-dom";
 import Course from "../models/Course";
 import * as Paths from '../resources/paths'
-
+import { useSelector } from 'react-redux';
+import { RootState } from '../redux/store'
+import { signOut } from "../redux/user/userSlice";
+import { useDispatch } from "react-redux";
 
 type Props = {
   onSearch: (query: string) => void ;
@@ -13,7 +16,8 @@ type Props = {
 const Topbar = ({ onSearch }: Props) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false); // Initially set to false
   const navigate=useNavigate();
-
+  const dispatch=useDispatch();
+  const { currentUser, loading, error } = useSelector((state:RootState)=>state.user);
   // Simulating a login action when the component mounts
   // useEffect(() => {
   //   setIsLoggedIn(true);
@@ -27,6 +31,7 @@ const Topbar = ({ onSearch }: Props) => {
     try {
       await logout();
       setIsLoggedIn(false);
+      dispatch(signOut());
       // Handle successful logout actions, if needed
     } catch (error) {
       console.error("Logout failed:", error);
@@ -50,9 +55,9 @@ const Topbar = ({ onSearch }: Props) => {
           </div>
           <div className="flex items-center space-x-6 rtl:space-x-reverse">
             <h5 className="text-sm text-gray-500 dark:text-white">
-              Your Name
+              {currentUser?.userName}
             </h5>
-            {isLoggedIn ? (
+            {currentUser?.userName ? (
                 <button onClick={handleLogout} className="text-white">
                   Logout
                 </button>

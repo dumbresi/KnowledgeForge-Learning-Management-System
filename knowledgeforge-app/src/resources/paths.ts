@@ -3,3 +3,7 @@ export const loginPath='/user/login';
 export const registerPath='/user/register';
 export const courseDetailsPath='/course/details';
 export const allCoursesPath='/';
+export const settingsPath='/settings';
+export const userDetailsPath="/user/current";
+export const instructorDetailsPath="/instructor/current";
+export const addCoursePath="/instructor/current/addcourse";

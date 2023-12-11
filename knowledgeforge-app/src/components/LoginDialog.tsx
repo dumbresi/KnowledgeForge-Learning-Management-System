@@ -2,6 +2,12 @@ import React, { useState, ChangeEvent, FormEvent } from 'react';
 import { BrowserRouter, Route, Routes, Link,useNavigate } from 'react-router-dom'
 import * as AuthService from '../services/auth-service'
 import * as Paths from '../resources/paths'
+import { useDispatch, useSelector } from 'react-redux';
+import {
+  
+  signInSuccess,
+  
+} from '../redux/user/userSlice';
 
 function Login(): JSX.Element {
   const [email, setEmail] = useState<string>('');
@@ -10,6 +16,7 @@ function Login(): JSX.Element {
   const [activeTab, setActiveTab] = useState('student');
 
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const handleTabClick = (tab: React.SetStateAction<string>) => {
     setActiveTab(tab);
@@ -23,8 +30,9 @@ function Login(): JSX.Element {
 
     const data = await response.json();
     // Handle the 'data' as needed
-
+    
     if(response.status===200){
+      dispatch(signInSuccess(data.sanitizedUser))
       navigate('/');
     }
 

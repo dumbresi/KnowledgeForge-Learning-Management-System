@@ -15,16 +15,16 @@ const UserCard: React.FC<UserCardProps> = ({ user }) => {
     userName: user.userName,
     email: '',
     contactNumber: user.contactNumber,
-    password: '', // Initialize with an empty string or default value
-    registeredCourses: '', // Initialize with an empty array or default value
+    // password: '', // Initialize with an empty string or default value
+    // registeredCourses: '', // Initialize with an empty array or default value
   });
     // State to manage the updated user data from the API response
     const [updatedUser, setUpdatedUser] = useState<UserModel>({
       userName: user.userName,
       email: '',
       contactNumber: user.contactNumber,
-      password: '',
-      registeredCourses: '',
+      // password: '',
+      // registeredCourses: '',
     });
 
 

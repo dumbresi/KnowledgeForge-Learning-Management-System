@@ -11,6 +11,7 @@ import {GridFsStorage} from 'multer-gridfs-storage';
 dotenv.config();
 export let gridFsBucket;
 export let upload;
+export let uploadImage;
 const initialize = async(app)=>{
     //debug
     app.use(cors({
@@ -33,6 +34,8 @@ const initialize = async(app)=>{
           bucketName: 'videos',
         });
     });
+    const imageStorage = multer.memoryStorage();
+uploadImage = multer({ storage: imageStorage }).single('thumbnail');
     const storage = await new GridFsStorage({
         url:process.env.MONGO_CONN,
         file: (req, file) => {
