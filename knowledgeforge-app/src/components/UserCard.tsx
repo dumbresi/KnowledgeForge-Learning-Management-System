@@ -15,16 +15,16 @@ const UserCard: React.FC<UserCardProps> = ({ user }) => {
     userName: user.userName,
     email: '',
     contactNumber: user.contactNumber,
-    password: '', // Initialize with an empty string or default value
-    registeredCourses: '', // Initialize with an empty array or default value
+    // password: '', // Initialize with an empty string or default value
+    // registeredCourses: '', // Initialize with an empty array or default value
   });
     // State to manage the updated user data from the API response
     const [updatedUser, setUpdatedUser] = useState<UserModel>({
       userName: user.userName,
       email: '',
       contactNumber: user.contactNumber,
-      password: '',
-      registeredCourses: '',
+      // password: '',
+      // registeredCourses: '',
     });
 
 
@@ -73,8 +73,8 @@ const UserCard: React.FC<UserCardProps> = ({ user }) => {
   };
 
   return (
-    <div className="min-h-screen items-center justify-end px-4 bg-background_cream pr-32">
-      <div className="p-40 max-w-8xl bg-white w-3/4 rounded-lg shadow-xl">
+    <div className="min-h-screen flex items-center justify-center px-4 bg-background_cream">
+    <div className="p-10 w-full max-w-3xl bg-white rounded-lg shadow-xl">
         <div className="flex items-center justify-between mb-6">
           <div>
             <h3 className="text-2xl font-semibold leading-7 text-gray-900">{isEditing ? "Edit User" : user.userName}</h3>
