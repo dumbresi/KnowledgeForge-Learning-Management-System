@@ -1,16 +1,20 @@
 import React, { useState, useEffect, MouseEventHandler  } from "react";
 import logo from "../resources/knowledgeForge.jpeg";
 import SearchBox from "./SearchBox";
+import { RiDashboardLine, RiLogoutCircleRLine, RiSettings5Line, RiLoginCircleLine } from "react-icons/ri";
+import { BsBookmarkStar, BsList } from "react-icons/bs";
 import { BsArrowLeftCircle, BsChevronDown } from "react-icons/bs";
-import { RiDashboardLine } from "react-icons/ri";
+import { AiTwotoneMail } from "react-icons/ai";
 import { useMediaQuery } from "react-responsive";
-import Menus from "./Menus";
+// import Menus from "./Menus";
 import * as Paths from '../resources/paths'
 import * as AuthService from '../services/auth-service'
 import { BrowserRouter, Route, Routes, Link,useNavigate } from 'react-router-dom'
 import { signOut } from "../redux/user/userSlice";
 import { useDispatch } from "react-redux";
 
+import { useSelector } from 'react-redux';
+import { RootState } from '../redux/store'
 
 type Props = {
   category: (query: string) => void;
@@ -21,6 +25,7 @@ const Sidebar = (props:Props) => {
   const [isSubmenuOpen, setSubmenuOpen] = useState(false);
   let smallScreen = useMediaQuery({ query: "(max-width: 768px)" });
   const dispatch=useDispatch();
+  const { currentUser, loading, error } = useSelector((state:RootState)=>state.user);
 
   useEffect(() => {
     if (smallScreen) {
@@ -48,10 +53,17 @@ const Sidebar = (props:Props) => {
   }
 
   const takeToHomePage=()=>{
+    props.category('');
     navigate(Paths.homePath);
   }
   const takeToProfilePage=()=>{
+    props.category('');
     navigate(Paths.userDetailsPath);
+    
+  }
+
+  const taketoLoginPage=()=>{
+    navigate(Paths.loginPath);
   }
 
   const takeToSettingsPage=()=>{
@@ -62,6 +74,25 @@ const Sidebar = (props:Props) => {
     // props.category(e.arguments);
     props.category(title);
   }
+
+  const Menus = [
+    { title: "Dashboard", icon: <RiDashboardLine/> },
+    { title: "Categories",  icon: <BsList />, submenu: true,
+        submenuItems: [
+            {title: "Programming"},
+            {title: "Machine Learning"},
+            {title: "Cybersecurity"},
+        ],
+    },
+    {title: "Wishlist",  icon: <BsBookmarkStar /> },
+    {title: "Contact",  icon: <AiTwotoneMail /> },
+    {title: "Settings", spacing: true, icon: <RiSettings5Line /> },
+    ...(currentUser
+        ? [{ title: "Logout",  icon: <RiLogoutCircleRLine /> }]
+        : [{ title: "Login",  icon: <RiLoginCircleLine /> }]
+      ),
+    
+];
 
   return (
     <div>
@@ -97,6 +128,13 @@ const Sidebar = (props:Props) => {
               }
               if(menu.title==='Settings'){
                 takeToSettingsPage();
+              }
+          
+              if(menu.title==='Login'){
+                taketoLoginPage();
+              }
+              if(menu.title==='Login'){
+                taketoLoginPage();
               }
               }}>
                 <span className={`text-2xl block justify-center duration-500 ${!isSidebarOpen && "pl-4"} `}>{menu.icon}</span>

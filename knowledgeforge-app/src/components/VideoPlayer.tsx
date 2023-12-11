@@ -1,31 +1,35 @@
-import React, { useState } from 'react';
-import * as VideoService from '../services/video-service'
+import React, { useState, useEffect } from 'react';
+import ReactPlayer from 'react-player';
 
-type VideoPlayer={
-    videoID: string
-}
-const VideoPlayer = (props: VideoPlayer) => {
-    const videoId=props.videoID;
-    const [vid, setvid]=useState();
+type VideoPlayerProps = {
+  videoID: string;
+};
 
-    // try {
-    //     const data= VideoService.getVideo(videoId);
-    //     const videoSource: string=await data;
-    //     setvid(videoSource);
-    // } catch (error) {
-        
-    // }
+const VideoPlayer = (props: VideoPlayerProps) => {
+  const videoID  = props.videoID;
+  const [videoURL, setVideoURL] = useState(`http://localhost:4000/video/${videoID}`);
+
+  // Use useEffect to update videoURL when videoID changes
+  useEffect(() => {
+    console.log('Video ID changed. Updating videoURL:', videoID)
+    setVideoURL(`http://localhost:4000/video/${videoID}`);
+  }, [videoID]);
 
   return (
     <div className="w-full h-screen flex justify-center items-center">
-      {/* <ReactPlayer
-        url={filePath}
+      <ReactPlayer
+        url={videoURL}
         controls
-        width="800px"
-        height="450px"
-      /> */}
-      <video className='m-auto' width='500' height='200' autoPlay={false} controls src={'http://localhost:4000/video/'+videoId}>
-      </video>
+        width="100%"
+        height="100%"
+        config={{
+          file: {
+            attributes: {
+              controlsList: 'nodownload', // Disable download button
+            },
+          },
+        }}
+      />
     </div>
   );
 };

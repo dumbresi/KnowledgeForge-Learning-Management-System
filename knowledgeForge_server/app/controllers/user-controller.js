@@ -88,7 +88,12 @@ export const checkRegistration = async (request, response) => {
     try {
         const user = jwt.verify(token, 'secret123');
         const result = await UserService.checkIfRegistered(user.email, courseId);
-        setResponse({registered:result}, response);
+        if(result){
+            response.status(200).json({registered:true});
+        }
+        else{
+            response.status(401).json({registered:false});
+        }
     } catch (err) {
         setErrorResponse(err, response);
     }
