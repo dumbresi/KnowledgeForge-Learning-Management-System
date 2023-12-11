@@ -2,7 +2,8 @@ const baseURL = 'http://localhost:4000';
 
 export const GET = async <T>(path: string) : Promise<T[]> =>{
     const response = await fetch(baseURL+path,{
-        method: 'GET'
+        method: 'GET',
+        credentials:'include'
     })
 
     const data: T[] = await response.json();
