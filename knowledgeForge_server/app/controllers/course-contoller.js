@@ -20,7 +20,7 @@ export const findCourse=async (request, response) =>{
 export const postCourse=async (request, response)=>{
     try{
        const newCourse=request.body;
-       console.log(request.body);
+       
               const course = await CourseService.saveCourse(newCourse);
               setResponse(course, response)
        

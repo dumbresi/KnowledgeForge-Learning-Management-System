@@ -22,7 +22,7 @@ const userSchema = new schema({
     required: true,
   },
   registeredCourses:{
-    type: String,
+    type: Array,
     required: false,
   }
 },

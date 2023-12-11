@@ -11,7 +11,7 @@ export const searchCourse = async (params={}) => {
 export const saveCourse = async (course)=>{
     
     const newCourse = new Course(course);
-    console.log(newCourse);
+    
     return await newCourse.save().catch((err)=>{
         console.log(err);
     });

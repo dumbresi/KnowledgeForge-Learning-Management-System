@@ -1,5 +1,5 @@
 import User from '../models/user.js'
-
+import mongoose from 'mongoose';
 export const searchUser = async (params={}) => {
     const users = await User.find(params).exec();
     return users;
@@ -63,4 +63,24 @@ export const registeredCourses = async(email)=>{
           },
     ]);
     return result[0];
+}
+
+export const checkIfRegistered = async(email, courseId)=>{
+  const result= await User.findOne({email:email})
+  if(result.registeredCourses.includes(courseId))
+  {
+    return true;
+  }else{
+    return false;
+  }
+  
+}
+export const addCourseToUser = async(email, courseId)=>{
+  const result= await User.findOne({email:email})
+  result.registeredCourses.push(new mongoose.Types.ObjectId(courseId) );
+  
+  
+    return await result.save();
+  
+  
 }
