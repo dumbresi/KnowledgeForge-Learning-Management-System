@@ -4,6 +4,7 @@ interface User {
   userName: string;
   email: string;
   contactNumber: string;
+  userType: string
 }
 
 interface UserState {

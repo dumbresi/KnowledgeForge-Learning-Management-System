@@ -3,11 +3,8 @@ import { BrowserRouter, Route, Routes, Link,useNavigate } from 'react-router-dom
 import * as AuthService from '../services/auth-service'
 import * as Paths from '../resources/paths'
 import { useDispatch, useSelector } from 'react-redux';
-import {
-  
-  signInSuccess,
-  
-} from '../redux/user/userSlice';
+import {signInSuccess} from '../redux/user/userSlice';
+import UserModel from '../models/UserModel';
 
 function Login(): JSX.Element {
   const [email, setEmail] = useState<string>('');
@@ -29,10 +26,15 @@ function Login(): JSX.Element {
       const response = await AuthService.loginUser(JSON.stringify({email,password}));
 
     const data = await response.json();
-    // Handle the 'data' as needed
+    const storeData= {
+      userName:data.userName,
+      email:data.email,
+      contactNumber:data.contactNumber,
+      userType:'user'
+    }
     
     if(response.status===200){
-      dispatch(signInSuccess(data.sanitizedUser))
+      dispatch(signInSuccess(storeData))
       navigate('/');
     }
 
@@ -42,8 +44,15 @@ function Login(): JSX.Element {
   
       const data = await response.json();
       // Handle the 'data' as needed
-  
+      const storeData= {
+        userName:data.userName,
+        email:data.email,
+        contactNumber:data.contactNumber,
+        userType:'user'
+      }
+      
       if(response.status===200){
+        dispatch(signInSuccess(storeData))
         navigate('/');
       }
     }

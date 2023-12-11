@@ -4,7 +4,7 @@ const storage = multer.memoryStorage();
 const uploadImage = multer({ storage: storage });
 export const searchCourse = async (params={}) => {
     const courses=await  Course.find(params).exec();
-    console.log(courses);
+   
     return courses;
 }
 
