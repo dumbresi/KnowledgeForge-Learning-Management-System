@@ -73,11 +73,11 @@ const UserCard: React.FC<UserCardProps> = ({ user }) => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center px-4 bg-background_cream">
-    <div className="p-10 w-full max-w-3xl bg-white rounded-lg shadow-xl">
+    <div className="min-h-screen items-center justify-center px-4 bg-background-cream">
+    <div className="flex-1 max-w-4xl mx-auto pt-8 mt-8 bg-white rounded-lg shadow-xl p-6">
         <div className="flex items-center justify-between mb-6">
           <div>
-            <h3 className="text-2xl font-semibold leading-7 text-gray-900">{isEditing ? "Edit User" : user.userName}</h3>
+            <h3 className="text-3xl font-semibold leading-7 text-gray-900">{isEditing ? "Edit User" : user.userName}</h3>
             <p className="mt-1 max-w-2xl text-sm leading-6 text-gray-500">Welcome to your profile.</p>
           </div>
           <button className="bg-blue-500 hover:bg-blue-700 text-white text-sm font-bold py-2 px-4 rounded" onClick={isEditing ? handleSaveClick : handleEditClick}>
@@ -87,7 +87,7 @@ const UserCard: React.FC<UserCardProps> = ({ user }) => {
         <div className="mt-6 border-t border-gray-100">
           <dl className="divide-y divide-gray-100">
             <div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
-              <dt className="text-sm font-medium leading-6 text-gray-900">Full name</dt>
+              <dt className="text-md font-medium leading-6 text-gray-900">Full name</dt>
               {isEditing ? (
                 <input
                   type="text"
@@ -97,15 +97,15 @@ const UserCard: React.FC<UserCardProps> = ({ user }) => {
                   className="border rounded px-2 py-1 w-full"
                 />
               ) : (
-                <dd className="mt-1 text-sm leading-6 text-gray-700">{editedUser.userName}</dd>
+                <dd className="mt-1 text-md leading-6 text-gray-700">{editedUser.userName}</dd>
               )}
             </div>
             <div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
-              <dt className="text-sm font-medium leading-6 text-gray-900">Email</dt>
-                <dl>{user.email}</dl>
+              <dt className="text-md font-medium leading-6 text-gray-900">Email</dt>
+                <dl className="text-md">{user.email}</dl>
             </div>
             <div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
-              <dt className="text-sm font-medium leading-6 text-gray-900">Contact</dt>
+              <dt className="text-md font-medium leading-6 text-gray-900">Contact</dt>
               {isEditing ? (
                 <input
                   type="text"
@@ -115,7 +115,7 @@ const UserCard: React.FC<UserCardProps> = ({ user }) => {
                   className="border rounded px-2 py-1 w-full"
                 />
               ) : (
-                <dd className="mt-1 text-sm leading-6 text-gray-700">{editedUser.contactNumber}</dd>
+                <dd className="mt-1 text-md leading-6 text-gray-700">{editedUser.contactNumber}</dd>
               )}
             </div>
           </dl>
