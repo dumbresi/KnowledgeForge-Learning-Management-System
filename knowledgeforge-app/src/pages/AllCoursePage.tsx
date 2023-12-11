@@ -1,4 +1,4 @@
-import React ,{useState, useEffect} from 'react'
+import React ,{useState, useEffect, startTransition} from 'react'
 import CourseCard from '../components/CourseCard';
 import * as CourseService from '../services/course-service';
 import Course from '../models/Course';
@@ -70,8 +70,10 @@ const AllCoursePage = (props:AllCoursePageProps) => {
     }
   }
 
+
   return (
     <div className="h-screen bg-background_cream flex ">
+      
       <div>
         <Sidebar category={filterCoursesByCategory} />
       </div>
