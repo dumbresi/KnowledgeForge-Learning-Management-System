@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import UserCard from "../components/UserCard";
 import * as UserService from "../services/user-service";
 import User from "../models/UserModel";
-import LeftNavigationPanel from "../components/LeftNavigationPanel";
 import Sidebar from "../components/Sidebar";
 
 const UserPage = () => {
