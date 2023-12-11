@@ -26,9 +26,17 @@ const CourseDetails = (props: Props) => {
     };
 
     fetchData();
-  }, []);
+  }, [course._id]);
 
-  const changeSelectedModule = (mod: Module) => {
+  useEffect(() => {
+    // Additional logic to handle video player update when selectedModule changes
+    // For example, you can set a ref to the VideoPlayer component and manually trigger an update
+    // using the ref when selectedModule changes.
+    console.log("selectedmodule changed");
+  }, [selectedModule]);
+
+  const changeSelectedModule = async (mod: Module) => {
+    console.log("module changed");
     setSelectedModule(mod);
   };
 
@@ -63,7 +71,9 @@ const CourseDetails = (props: Props) => {
             {modules.map((moduleItem: Module) => (
               <div
                 key={moduleItem._id}
-                onClick={() => changeSelectedModule(moduleItem)}
+                onClick={() =>{ 
+                  changeSelectedModule(moduleItem);
+                }}
                 className={`cursor-pointer ${
                   selectedModule?._id === moduleItem._id ? 'bg-gray-200' : ''
                 }`}
