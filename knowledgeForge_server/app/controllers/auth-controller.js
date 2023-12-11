@@ -54,7 +54,8 @@ export const loginUser = async (request, response) => {
             email: request.body.email,
         });
         if (!user) {
-            response.send( { status: 'error', error: 'user doesn\'t exist' });
+            response.status(404).send( { status: 'error', error: 'user doesn\'t exist' });;
+            
         }else{
             const isPasswordValid = await bcrypt.compare(
                 request.body.password,

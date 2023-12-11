@@ -28,7 +28,7 @@ const courseSchema = new schema({
     required: true,
   },
   thumbnail: {
-    type: Buffer,
+    type: String,
     required: true,
   },
   description: {
