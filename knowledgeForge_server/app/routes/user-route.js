@@ -17,5 +17,8 @@ router.route('/current')
     .get(userController.getOneUser);
 router.route('/registeredCourses')
     .get(userController.getRegisteredCourses);
+router.route('/registeredCourses/:id')
+    .get(userController.checkRegistration)
+    .post(userController.registerInCourse);
 
 export default router;
