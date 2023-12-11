@@ -9,6 +9,7 @@ import * as Paths from '../resources/paths'
 import * as AuthService from '../services/auth-service'
 import { BrowserRouter, Route, Routes, Link,useNavigate } from 'react-router-dom'
 
+
 type Props = {
   category: (query: string) => void;
 };
@@ -41,8 +42,11 @@ const Sidebar = (props:Props) => {
 
   }
 
-  const taketoHomePage=()=>{
-    window.location.reload();
+  const takeToHomePage=()=>{
+    navigate('/');
+  }
+  const takeToProfilePage=()=>{
+    navigate('/user/current');
   }
 
   const setCategoryFilter=(title: string)=>{
@@ -53,7 +57,7 @@ const Sidebar = (props:Props) => {
   return (
     <div>
       <div className={`h-screen p-3 space-y-2 ${isSidebarOpen? "w-60" : "w-24"} dark:bg-gray-900 dark:text-gray-100 duration-500 relative`}>
-        <div className="flex items-center p-2 space-x-4" onClick={taketoHomePage}>
+        <div className="flex items-center p-2 space-x-4" onClick={takeToHomePage}>
           <img
             src={logo}
             alt=""
@@ -76,19 +80,21 @@ const Sidebar = (props:Props) => {
               onClick={()=>{if (menu.title === "Logout") {
                 handleLogout();
               }
+              if(menu.title==="Profile"){
+                takeToProfilePage();
+              }
               if(menu.title==="Dashboard"){
-                taketoHomePage();
+                takeToHomePage();
               }
               }}>
                 <span className={`text-2xl block justify-center duration-500 ${!isSidebarOpen && "pl-4"} `}>{menu.icon}</span>
                 <span className={`text-base font-medium flex-1 origin-left duration-200 ${!isSidebarOpen && "hidden"}`}>{menu.title}</span>
                 {menu.submenu && isSidebarOpen && (
-                  <BsChevronDown className="" onClick={() => 
+                  <BsChevronDown className="" onClick={() =>
                     setSubmenuOpen(!isSubmenuOpen)
                   }/>
                 )}
               </li>
-                
               {menu.submenu && isSubmenuOpen && isSidebarOpen && (
                 <ul>
                   {menu.submenuItems.map((submenuItem, index) => (
