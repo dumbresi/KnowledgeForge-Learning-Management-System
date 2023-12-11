@@ -47,11 +47,14 @@ const Sidebar = (props:Props) => {
 
   }
 
-  const taketoHomePage=()=>{
-    navigate('/');
+  const takeToHomePage=()=>{
+    navigate(Paths.homePath);
+  }
+  const takeToProfilePage=()=>{
+    navigate(Paths.userDetailsPath);
   }
 
-  const taketoSettingsPage=()=>{
+  const takeToSettingsPage=()=>{
     navigate(Paths.settingsPath)
   }
 
@@ -93,7 +96,7 @@ const Sidebar = (props:Props) => {
                 takeToHomePage();
               }
               if(menu.title==='Settings'){
-                taketoSettingsPage();
+                takeToSettingsPage();
               }
               }}>
                 <span className={`text-2xl block justify-center duration-500 ${!isSidebarOpen && "pl-4"} `}>{menu.icon}</span>

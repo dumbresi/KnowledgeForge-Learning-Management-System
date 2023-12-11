@@ -73,7 +73,7 @@ const UserCard: React.FC<UserCardProps> = ({ user }) => {
   };
 
   return (
-    <div className="min-h-screen items-center justify-center px-4 bg-background_cream">
+    <div className="min-h-screen items-center justify-center px-4 bg-background-cream">
     <div className="flex-1 max-w-4xl mx-auto pt-8 mt-8 bg-white rounded-lg shadow-xl p-6">
         <div className="flex items-center justify-between mb-6">
           <div>

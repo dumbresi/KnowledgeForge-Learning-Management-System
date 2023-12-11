@@ -62,7 +62,7 @@ const AddCourseCard = () => {
           type="text"
           id="title"
           name="title"
-          className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring-blue-500"
+          className="mt-1 block w-full border border-black rounded-md shadow-sm focus:border-black-500 focus:ring-black-500 pl-2"
           placeholder="Enter course title"
           onChange={handleInputChange}
         />
@@ -76,7 +76,7 @@ const AddCourseCard = () => {
           id="description"
           name="description"
           rows={4}
-          className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring-blue-500"
+          className="mt-1 block w-full border border-black rounded-md shadow-sm focus:border-black-500 focus:ring-black-500 pl-2"
           placeholder="Enter course description"
           onChange={handleInputChange}
         ></textarea>
@@ -89,7 +89,7 @@ const AddCourseCard = () => {
           id="instructor"
           name="instructor"
           type="text"
-          className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring-blue-500"
+          className="mt-1 block w-full border border-black rounded-md shadow-sm focus:border-black-500 focus:ring-black-500 pl-2"
           placeholder="Enter course description"
           onChange={handleInputChange}
         ></input>
@@ -102,7 +102,7 @@ const AddCourseCard = () => {
           id="duration"
           name="duration"
           type="text"
-          className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring-blue-500"
+          className="mt-1 block w-full border border-black rounded-md shadow-sm focus:border-black-500 focus:ring-black-500 pl-2"
           placeholder="Enter course description"
           onChange={handleInputChange}
         ></input>
@@ -115,7 +115,7 @@ const AddCourseCard = () => {
           id="category"
           name="category"
           type="text"
-          className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring-blue-500"
+          className="mt-1 block w-full border border-black rounded-md shadow-sm focus:border-black-500 focus:ring-black-500 pl-2"
           placeholder="Enter course description"
           onChange={handleInputChange}
         ></input>
@@ -128,7 +128,7 @@ const AddCourseCard = () => {
           id="subCategory"
           name="subCategory"
           type="text"
-          className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring-blue-500"
+          className="mt-1 block w-full border border-black rounded-md shadow-sm focus:border-black-500 focus:ring-black-500 pl-2"
           placeholder="Enter course description"
           onChange={handleInputChange}
         ></input>
@@ -142,7 +142,7 @@ const AddCourseCard = () => {
           name="fees"
           type="number"
           step="0.01"
-          className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring-blue-500"
+          className="mt-1 block w-full border border-black rounded-md shadow-sm focus:border-black-500 focus:ring-black-500 pl-2"
           placeholder="Enter course description"
           onChange={handleInputChange}
         ></input>
@@ -155,8 +155,8 @@ const AddCourseCard = () => {
           id="noOfModules"
           name="noOfModules"
           type="number"
-          
-          className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring-blue-500"
+
+          className="mt-1 block w-full border border-black rounded-md shadow-sm focus:border-black-500 focus:ring-black-500 pl-2"
           placeholder="Enter course description"
           onChange={handleInputChange}
         ></input>
@@ -171,9 +171,8 @@ const AddCourseCard = () => {
             accept="image/*"
             id="thumbnail"
             name="thumbnail"
-            className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring-blue-500"
+            className="mt-1 block w-full rounded-md focus:border-blue-500 focus:ring-blue-500"
             onChange={handleInputChange}
-            
           />
           <button
             className="ml-2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
