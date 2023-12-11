@@ -1,5 +1,5 @@
 import { RiDashboardLine, RiLogoutCircleRLine, RiSettings5Line } from "react-icons/ri";
-import { BsBookmarkStar, BsList } from "react-icons/bs";
+import { BsBookmarkStar, BsList, BsPerson } from "react-icons/bs";
 import { AiTwotoneMail } from "react-icons/ai";
 
 const Menus = [
@@ -12,6 +12,7 @@ const Menus = [
         ],
     },
     {title: "Wishlist",  icon: <BsBookmarkStar /> },
+    {title: "Profile",  icon: <BsPerson /> },
     {title: "Contact",  icon: <AiTwotoneMail /> },
     {title: "Settings", spacing: true, icon: <RiSettings5Line /> },
     {title: "Logout",  icon: <RiLogoutCircleRLine />}

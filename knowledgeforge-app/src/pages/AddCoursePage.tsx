@@ -7,7 +7,7 @@ const AddCoursePage = () => {
 
     }
     return (
-        <div className="flex">
+        <div className="flex bg-background-cream">
             <Sidebar category={category}/>
             <div className='flex'>
             <AddCourseCard/>
