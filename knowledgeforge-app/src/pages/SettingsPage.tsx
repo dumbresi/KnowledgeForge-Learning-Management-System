@@ -6,6 +6,7 @@ import * as AuthService from "../services/auth-service";
 import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
 import { RootState } from "../redux/store";
+import Sidebar from "../components/Sidebar";
 
 const SettingsPage: React.FC = () => {
   const [darkMode, setDarkMode] = useState(false);
@@ -50,13 +51,16 @@ const SettingsPage: React.FC = () => {
   const goToInstructorAccountDetails = () => {
     navigate(Paths.instructorDetailsPath);
   };
+  
+
 
   return (
-    <div>
-      <div className="container mx-auto p-8 bg-zinc-100 h-full">
+    <div className="flex h-screen w-full overflow-hidden">
+      
+      <div className="container p-8  w-full ">
       <h1 className="text-3xl font-bold mb-6">{t("Settings")}</h1>
 
-      <div className="bg-white p-6 rounded-lg shadow-md">
+      <div className="bg-zinc-100 p-6 rounded-lg shadow-md">
         <div className="mb-6">
           <h2 className="text-xl font-semibold mb-2">{t("Account Details")}</h2>
           {currentUser ? (
