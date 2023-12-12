@@ -78,9 +78,11 @@ function Login(): JSX.Element {
         <div
           className={`tab ${
             activeTab === "instructor" ? "active" : ""
-          }  w-1/2 border-2 p-2 hover:bg-light_blue transition text-center  ${
-            activeTab === "instructor" ? "bg-light_blue text-white" : ""
-          }`}
+          } w-1/2 border-2 p-2 hover:bg-light_blue transition text-center ${
+            activeTab === "instructor"
+              ? "border-light_blue bg-light_blue text-white"
+              : "border-transparent text-gray-700"
+          } rounded-tl-lg shadow-md`}
           onClick={() => handleTabClick("instructor")}
         >
           Instructor Login
@@ -88,9 +90,11 @@ function Login(): JSX.Element {
         <div
           className={`tab ${
             activeTab === "student" ? "active" : ""
-          }  w-1/2 border-2 p-2  hover:bg-light_blue transition text-center  ${
-            activeTab === "student" ? "bg-light_blue text-white" : ""
-          }`}
+          } w-1/2 border-2 p-2 hover:bg-light_blue transition text-center ${
+            activeTab === "student"
+              ? "border-light_blue bg-light_blue text-white"
+              : "border-transparent text-gray-700"
+          } rounded-tr-lg shadow-md`}
           onClick={() => handleTabClick("student")}
         >
           Student Login
@@ -129,7 +133,7 @@ function Login(): JSX.Element {
                 <br />
                 {/* <input type="submit" value="Login" /> */}
                 <button className="submit-button" type="submit">
-                  Submit
+                  Login
                 </button>
                 <br />
                 <br />
@@ -179,9 +183,9 @@ function Login(): JSX.Element {
                 <br />
 
                 {/* <input type="submit" value="Login" /> */}
-                
+
                 <button className="submit-button m-auto" type="submit">
-                  Submit
+                  Login
                 </button>
 
                 <br />
