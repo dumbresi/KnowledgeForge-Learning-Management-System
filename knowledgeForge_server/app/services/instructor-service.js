@@ -24,7 +24,7 @@ export const saveInstructor = async (newInstructor) => {
 // Function to update an existing instructor based on the provided ID
 export const updateInstructor = async (updatedInstructor, email) => {
     // Using the 'findByIdAndUpdate' method to update the instructor
-    const instructor = await Instructor.findByOneAndUpdate({email:email},updatedInstructor,{returnOriginal:false}).exec();
+    const instructor = await Instructor.findOneAndUpdate({email:email},updatedInstructor,{returnOriginal:false});
     return instructor;
 }
 

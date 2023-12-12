@@ -3,6 +3,7 @@ import { response } from 'express';
 import * as InstructorService from '../services/instructor-service.js';
 import { setResponse, setErrorResponse } from './response-handler.js';
 import jwt from 'jsonwebtoken';
+import { updateCourse } from './course-contoller.js';
 
 // Find instructors controller
 export const findInstructor = async (request, response) => {
@@ -50,6 +51,7 @@ export const putInstructor = async (request, response) => {
         // Extract instructor ID and updated data from the request
         
         const updatedInstructor = request.body;
+        
         const instructor = jwt.verify(token, 'secret123');
         
         // Call service to update instructor
