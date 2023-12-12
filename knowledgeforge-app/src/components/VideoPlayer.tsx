@@ -1,17 +1,20 @@
-import React, { useState, useEffect } from 'react';
-import ReactPlayer from 'react-player';
+import React, { useState, useEffect } from "react";
+import ReactPlayer from "react-player";
 
 type VideoPlayerProps = {
   videoID: string;
+  className?: string;
 };
 
 const VideoPlayer = (props: VideoPlayerProps) => {
-  const videoID  = props.videoID;
-  const [videoURL, setVideoURL] = useState(`http://localhost:4000/video/${videoID}`);
+  const videoID = props.videoID;
+  const [videoURL, setVideoURL] = useState(
+    `http://localhost:4000/video/${videoID}`
+  );
 
   // Use useEffect to update videoURL when videoID changes
   useEffect(() => {
-    console.log('Video ID changed. Updating videoURL:', videoID)
+    console.log("Video ID changed. Updating videoURL:", videoID);
     setVideoURL(`http://localhost:4000/video/${videoID}`);
   }, [videoID]);
 
@@ -25,7 +28,7 @@ const VideoPlayer = (props: VideoPlayerProps) => {
         config={{
           file: {
             attributes: {
-              controlsList: 'nodownload', // Disable download button
+              controlsList: "nodownload", // Disable download button
             },
           },
         }}

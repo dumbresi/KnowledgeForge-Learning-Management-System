@@ -136,16 +136,21 @@ const CourseDetails: React.FC<Props> = () => {
                   <li className="mb-2 font-bold text-2xl">
                     {selectedModule?.title}
                   </li>
-                  <li className="text-base text-gray-600 mb-4">
+                  <li className="text-base text-gray-600 mt-4 mb-4">
                     {selectedModule?.description}
                   </li>
-                  <li className="text-sm text-gray-600">
+                  <li className="text-sm text-gray-600 mb-4">
                     Duration: {selectedModule?.duration}
                   </li>
                 </ul>
 
-                <div className="border-2 h-96 rounded-lg overflow-hidden">
-                  <VideoPlayer videoID={`${selectedModule?.videoId}`} />
+                <div className="border-2 h-96 rounded-lg overflow-scroll">
+                  <div className="relative h-full w-full">
+                    <VideoPlayer
+                      videoID={`${selectedModule?.videoId}`}
+                      // className="absolute top-0 left-0 w-full h-full object-contain"
+                    />
+                  </div>
                 </div>
               </div>
 
