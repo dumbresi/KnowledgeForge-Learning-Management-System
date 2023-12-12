@@ -1,44 +1,46 @@
-import React from 'react';
-import AddModuleCard from '../components/AddModuleCard';
-import { useLocation } from 'react-router-dom';
-import { useNavigate } from 'react-router-dom';
-import * as Paths from '../resources/paths';
-
+import React from "react";
+import AddModuleCard from "../components/AddModuleCard";
+import { useLocation } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import * as Paths from "../resources/paths";
+import Sidebar from "../components/Sidebar";
 
 const AddModulePage = () => {
   const location = useLocation();
   const noOfModules = location.state.noOfModules;
-  const CourseId= location.state.courseId;
-  const navigate=useNavigate();
-//   const courseID= props.courseId;
+  const CourseId = location.state.courseId;
+  const navigate = useNavigate();
+  const category = () => {};
+  //   const courseID= props.courseId;
 
   const renderModuleCards = () => {
-    console.log("no of modules:"+noOfModules);
+    console.log("no of modules:" + noOfModules);
     const moduleCards = [];
     for (let i = 0; i < noOfModules; i++) {
-      moduleCards.push(<AddModuleCard moduleNo={i+1} courseId={`${CourseId}`}/>);
+      moduleCards.push(
+        <AddModuleCard moduleNo={i + 1} courseId={`${CourseId}`} />
+      );
     }
     return moduleCards;
   };
 
-  const handleSubmit=()=>{
+  const handleSubmit = () => {
     navigate(Paths.allCoursesPath);
-  }
+  };
 
   return (
-    <div className='bg-light_blue flex flex-col' >
-        AddModule Page
-        <div className='m-2'>
-        {renderModuleCards()}
+    <div className="flex flex-row">
+      <div className="flex w-1/6 h-screen bg-background-cream">
+        <Sidebar category={category} />
+      </div>
+      <div className="flex flex-col justify-between items-center bg-white rounded-lg p-8 shadow-2xl w-full md:w-1/4">
+        <div className="flex flex-col justify-between items-center px-10">
+          {renderModuleCards()}
         </div>
-
-        <button
-            className="mt-4 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-            onClick={handleSubmit}
-          >
-            Done
-          </button>
-        
+        <button className="submit-button" onClick={handleSubmit}>
+          Done
+        </button>
+      </div>
     </div>
   );
 };

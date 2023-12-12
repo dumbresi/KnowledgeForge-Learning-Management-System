@@ -6,28 +6,27 @@ import {
   Link,
   useNavigate,
 } from "react-router-dom";
-import * as Patths from '../resources/paths';
+import * as Patths from "../resources/paths";
 import Course from "../models/Course";
-
 
 const AddCourseCard = () => {
   const [formData, setFormData] = useState({
-    title:'',
-    instructor: '',
-    duration: '',
+    title: "",
+    instructor: "",
+    duration: "",
     fees: 0,
-    category: '',
-    subCategory: '',
+    category: "",
+    subCategory: "",
     thumbnail: null,
-    description: '',
+    description: "",
     noOfModules: 0,
-    creationTime: '',
+    creationTime: "",
     avg_star_rating: 0,
-    thumbnailBase64:''
+    thumbnailBase64: "",
   });
-  const navigate=useNavigate();
+  const navigate = useNavigate();
 
-  const handleInputChange = (e:any ) => {
+  const handleInputChange = (e: any) => {
     const { name, value } = e.target;
     setFormData({
       ...formData,
@@ -35,7 +34,7 @@ const AddCourseCard = () => {
     });
   };
 
-  const handleFileUpload = (e:any) => {
+  const handleFileUpload = (e: any) => {
     const file = e.target.files[0];
 
     if (file) {
@@ -46,7 +45,7 @@ const AddCourseCard = () => {
         setFormData({
           ...formData,
           thumbnail: file,
-          thumbnailBase64: base64String||'', // Extract the base64 string
+          thumbnailBase64: base64String || "", // Extract the base64 string
         });
       };
 
@@ -65,131 +64,156 @@ const AddCourseCard = () => {
       subCategory: formData.subCategory,
       fees: Number(formData.fees),
       noOfModules: Number(formData.noOfModules),
-      thumbnail: formData.thumbnailBase64, 
-      creationTime:Date().toString()
+      thumbnail: formData.thumbnailBase64,
+      creationTime: Date().toString(),
     };
     console.log(apiData);
     // Make your API call using apiData
     // Example using fetch:
-    const req = fetch('http://localhost:4000/courses', {
-  method: 'POST',
-  headers: {
-    'Content-Type': 'application/json',
-  },
-  body: JSON.stringify(apiData),
-})
-  .then((response) => {
-    if (response.status === 200) {
-      // Return the promise for response.json()
-      return response.json();
-    } else {
-      // Handle non-200 status codes (e.g., show an error message)
-      throw new Error('Failed to create course');
-    }
-  })
-  .then((res: Course) => {
-    // Now you can access the parsed JSON data in the 'res' variable
-    navigate(Patths.addModulePage, { state: { noOfModules: Number(formData.noOfModules), courseId: res._id } });
-    // Return res if you want to use it in the next then block
-    return res;
-  })
-  .then((data) => {
-    // Handle the API response
-    console.log(data);
-  })
-  .catch((error) => {
-    // Handle errors here
-    console.error(error);
-  });
-
+    const req = fetch("http://localhost:4000/courses", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(apiData),
+    })
+      .then((response) => {
+        if (response.status === 200) {
+          // Return the promise for response.json()
+          return response.json();
+        } else {
+          // Handle non-200 status codes (e.g., show an error message)
+          throw new Error("Failed to create course");
+        }
+      })
+      .then((res: Course) => {
+        // Now you can access the parsed JSON data in the 'res' variable
+        navigate(Patths.addModulePage, {
+          state: {
+            noOfModules: Number(formData.noOfModules),
+            courseId: res._id,
+          },
+        });
+        // Return res if you want to use it in the next then block
+        return res;
+      })
+      .then((data) => {
+        // Handle the API response
+        console.log(data);
+      })
+      .catch((error) => {
+        // Handle errors here
+        console.error(error);
+      });
   };
 
   return (
-    <div className="flex flex-col items-center justify-normal min-h-screen py-8 px-20">
-      <h3 className="text-2xl font-semibold leading-7 text-gray-900">Add Course</h3>
-      <p className="mt-1 max-w-2xl text-sm leading-6 text-gray-500">Add a new course.</p>
+    <div className="flex flex-col items-center justify-normal min-h-screen py-8 px-4">
+      <h3 className="text-2xl font-semibold text-gray-900">Add Course</h3>
+      <p className="mt-1 text-sm text-gray-500">Add a new course.</p>
 
       <div className="mt-8 w-full max-w-md">
-        <label htmlFor="title" className="block text-sm font-medium text-gray-700">
+        <label
+          htmlFor="title"
+          className="block text-sm font-medium text-gray-700"
+        >
           Course Title
         </label>
         <input
           type="text"
           id="title"
           name="title"
-          className="mt-1 block w-full border border-black rounded-md shadow-sm focus:border-black-500 focus:ring-black-500 pl-2"
+          className="input-field"
           placeholder="Enter course title"
           onChange={handleInputChange}
         />
       </div>
 
       <div className="mt-4 w-full max-w-md">
-        <label htmlFor="description" className="block text-sm font-medium text-gray-700">
+        <label
+          htmlFor="description"
+          className="block text-sm font-medium text-gray-700"
+        >
           Course Description
         </label>
         <textarea
           id="description"
           name="description"
           rows={4}
-          className="mt-1 block w-full border border-black rounded-md shadow-sm focus:border-black-500 focus:ring-black-500 pl-2"
+          className="input-field"
           placeholder="Enter course description"
           onChange={handleInputChange}
         ></textarea>
       </div>
       <div className="mt-4 w-full max-w-md">
-        <label htmlFor="description" className="block text-sm font-medium text-gray-700">
+        <label
+          htmlFor="description"
+          className="block text-sm font-medium text-gray-700"
+        >
           Instructor
         </label>
         <input
           id="instructor"
           name="instructor"
           type="text"
-          className="mt-1 block w-full border border-black rounded-md shadow-sm focus:border-black-500 focus:ring-black-500 pl-2"
+          className="input-field"
           placeholder="Enter course description"
           onChange={handleInputChange}
         ></input>
       </div>
       <div className="mt-4 w-full max-w-md">
-        <label htmlFor="description" className="block text-sm font-medium text-gray-700">
+        <label
+          htmlFor="description"
+          className="block text-sm font-medium text-gray-700"
+        >
           Course Duration
         </label>
         <input
           id="duration"
           name="duration"
           type="text"
-          className="mt-1 block w-full border border-black rounded-md shadow-sm focus:border-black-500 focus:ring-black-500 pl-2"
+          className="input-field"
           placeholder="Enter course description"
           onChange={handleInputChange}
         ></input>
       </div>
       <div className="mt-4 w-full max-w-md">
-        <label htmlFor="description" className="block text-sm font-medium text-gray-700">
+        <label
+          htmlFor="description"
+          className="block text-sm font-medium text-gray-700"
+        >
           Course Category
         </label>
         <input
           id="category"
           name="category"
           type="text"
-          className="mt-1 block w-full border border-black rounded-md shadow-sm focus:border-black-500 focus:ring-black-500 pl-2"
+          className="input-field"
           placeholder="Enter course description"
           onChange={handleInputChange}
         ></input>
       </div>
       <div className="mt-4 w-full max-w-md">
-        <label htmlFor="description" className="block text-sm font-medium text-gray-700">
+        <label
+          htmlFor="description"
+          className="block text-sm font-medium text-gray-700"
+        >
           Course SubCategory
         </label>
         <input
           id="subCategory"
           name="subCategory"
           type="text"
-          className="mt-1 block w-full border border-black rounded-md shadow-sm focus:border-black-500 focus:ring-black-500 pl-2"
+          className="input-field"
           placeholder="Enter course description"
           onChange={handleInputChange}
         ></input>
       </div>
       <div className="mt-4 w-full max-w-md">
-        <label htmlFor="description" className="block text-sm font-medium text-gray-700">
+        <label
+          htmlFor="description"
+          className="block text-sm font-medium text-gray-700"
+        >
           Course fee
         </label>
         <input
@@ -197,27 +221,32 @@ const AddCourseCard = () => {
           name="fees"
           type="number"
           step="0.01"
-          className="mt-1 block w-full border border-black rounded-md shadow-sm focus:border-black-500 focus:ring-black-500 pl-2"
+          className="input-field"
           placeholder="Enter course description"
           onChange={handleInputChange}
         ></input>
       </div>
       <div className="mt-4 w-full max-w-md">
-        <label htmlFor="description" className="block text-sm font-medium text-gray-700">
+        <label
+          htmlFor="description"
+          className="block text-sm font-medium text-gray-700"
+        >
           No of Modules
         </label>
         <input
           id="noOfModules"
           name="noOfModules"
           type="number"
-
-          className="mt-1 block w-full border border-black rounded-md shadow-sm focus:border-black-500 focus:ring-black-500 pl-2"
+          className="input-field"
           placeholder="Enter course description"
           onChange={handleInputChange}
         ></input>
       </div>
       <div className="mt-4 w-full max-w-md">
-        <label htmlFor="image" className="block text-sm font-medium text-gray-700">
+        <label
+          htmlFor="image"
+          className="block text-sm font-medium text-gray-700"
+        >
           Upload Image
         </label>
         <div className="flex items-center">
@@ -228,10 +257,9 @@ const AddCourseCard = () => {
             name="thumbnail"
             className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring-blue-500"
             onChange={handleFileUpload}
-            
           />
           <button
-            className="ml-2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+            className="submit-button"
             //handle onclick
             onClick={handleApiCall}
           >
