@@ -108,7 +108,7 @@ const AddCourseCard = () => {
   };
 
   return (
-    <div className="flex flex-col items-center justify-normal min-h-screen py-8">
+    <div className="flex flex-col items-center justify-normal px-4">
       <h3 className="text-3xl font-semibold text-gray-900 mr-20">Add Course</h3>
       <p className="mt-1 text-sm text-gray-500 mr-20">Add a new course</p>
 
@@ -255,7 +255,7 @@ const AddCourseCard = () => {
             accept="image/*"
             id="thumbnail"
             name="thumbnail"
-            className="mt-1 block w-full border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 rounded-lg"
+            className="mt-1 block w-full border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
             onChange={handleFileUpload}
           />
           <button
