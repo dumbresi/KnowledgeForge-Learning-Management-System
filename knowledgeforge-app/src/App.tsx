@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import courses from './models/Course';
 import logo from './logo.svg';
 import './App.css';
-import { BrowserRouter, Route, Routes, Link, Router } from 'react-router-dom'
+import { BrowserRouter, Route, Routes, Link, Router, redirectDocument } from 'react-router-dom'
 import AllCoursePage from './pages/AllCoursePage';
 import RegisterUserPage from './pages/RegisterUserPage';
 import LoginPage from './components/LoginDialog';
@@ -19,6 +19,20 @@ import UserCourses from './pages/UserCourses';
 function App() {
   const isLogin = true;
 
+React.useEffect(() => {
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+      navigator.serviceWorker.register('./service-worker.ts')
+        .then(registration => {
+          console.log('Service Worker registered:', registration);
+        })
+        .catch(error => {
+          console.log('Service Worker registration failed:', error);
+        });
+    });
+  }
+}, []);
+
   const category=(category:string)=>{
 // TODO
   }
@@ -31,8 +45,9 @@ function App() {
           <AllCoursePage pageType={'allCourses'} />
           {/* {<UserPage/>} */}
         </div>
-      
       }/>
+
+
         <Route element={<Sidebar category={category}/>}></Route>
 				<Route path={Paths.registerPath} element={<RegisterUserPage isLogin={false}/>} />
 				<Route path={Paths.loginPath} element={<RegisterUserPage isLogin={true}/>}  />
@@ -50,3 +65,5 @@ function App() {
 }
 
 export default App;
+
+

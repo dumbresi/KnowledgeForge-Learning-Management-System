@@ -82,7 +82,7 @@ self.addEventListener('message', (event) => {
 
 registerRoute(
   ({ url }) => {
-    return url.pathname.includes('/')
+    return url.pathname.includes('/knowledgeforge-app/service-worker.ts')
   },
   // || url.pathname.includes('course') || url.pathname.includes('instructor') || url.pathname.includes('/')
   new CacheFirst({
