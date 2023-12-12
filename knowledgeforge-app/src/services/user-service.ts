@@ -1,8 +1,9 @@
 import * as commonService from './common-service';
 import User from '../models/UserModel';
 import * as baseService from './base-service';
-
-const userPath = 'http://localhost:4000/user';
+import Course from '../models/Course';
+const localhost='http://localhost:4000'
+const userPath = '/user';
 const getUserPath='/current'
 export const getUser = async (): Promise<User> => {
     try {
@@ -15,12 +16,14 @@ export const getUser = async (): Promise<User> => {
     }
 };
 
-export const getRegisteredCourses=async () => {
+export const getRegisteredCourses=async (): Promise<Course[]> => {
     try {
-        const registeredCourses= await baseService.GET(userPath+'/registeredCourses');
-        return registeredCourses;
+        const registeredCourses= await baseService.GetOne<{myCourses:[]}>(userPath+'/registeredCourses');
+        const result= registeredCourses.myCourses;
+        return result;
     } catch (error) {
         console.log(error);
+        throw new Error('Error fetching user data: ' + error);
     }
 }
 
@@ -35,7 +38,7 @@ export const registerforCourse=async (payload:string,userId:string) => {
 
 export const checkRegistration = async (courseId: string):Promise<{registered:boolean}>=> {
     try {
-      const response = await fetch(userPath +'/registeredCourses'+'/'+courseId, {
+      const response = await fetch(localhost+userPath +'/registeredCourses'+'/'+courseId, {
         headers: {
             'Content-Type': 'application/json',
           },
