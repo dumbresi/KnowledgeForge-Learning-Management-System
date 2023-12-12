@@ -20,6 +20,12 @@ export const updateUser = async(updatedUser,email)=>{
 export const removeUser = async(id)=>{
     return await User.findByIdAndDelete(id).exec();
 }
+export const addProgressToCourse = async(email,courseId,moduleNo)=>{
+  return await User.findOneAndUpdate({email:email},{"$set":{[`courseProgress.${courseId}`]:moduleNo}});
+}
+export const getProgress = async(email,courseId)=>{
+  return await User.findOne({email:email},{_id:0,[`courseProgress.${courseId}`]:1});
+}
 export const getOneUser = async(email)=>{
     const result= await User.aggregate([
         {

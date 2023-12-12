@@ -106,7 +106,45 @@ export const registerInCourse = async (request, response) => {
           }
     try {
         const user = jwt.verify(token, 'secret123');
-        const result = await UserService.addCourseToUser(user.email, courseId);
+        
+            const result = await UserService.addCourseToUser(user.email, courseId);
+        setResponse(result, response);
+        await UserService.addProgressToCourse(user.email, courseId,0)
+        
+    } catch (err) {
+        setErrorResponse(err, response);
+    }
+}
+
+export const updateCourseProgress= async (request, response) => {
+    
+    const token = request.cookies.token;
+        if (!token) {
+            return response.status(401).json({ message: 'Unauthorized' });
+          }
+    try {
+        const user = jwt.verify(token, 'secret123');
+        
+        const courseId=request.body.courseId;
+        const moduleNo=request.body.moduleNo;
+        const result = await UserService.addProgressToCourse(user.email, courseId,moduleNo);
+        setResponse(result, response);
+    } catch (err) {
+        setErrorResponse(err, response);
+    }
+}
+export const getCourseProgress = async (request, response) => {
+    
+    const token = request.cookies.token;
+        if (!token) {
+            return response.status(401).json({ message: 'Unauthorized' });
+          }
+    try {
+        const user = jwt.verify(token, 'secret123');
+        
+        const courseId=request.body.courseId;
+        
+        const result = await UserService.getProgress(user.email, courseId);
         setResponse(result, response);
     } catch (err) {
         setErrorResponse(err, response);
