@@ -11,18 +11,20 @@ export const searchInstructor = async (params = {}) => {
 
 // Function to save a new instructor
 export const saveInstructor = async (newInstructor) => {
-    console.log(newInstructor);
+    
     // Creating a new instance of the 'Instructor' model with the provided data
     const instructor = new Instructor(newInstructor);
     
     // Saving the new instructor to the database
-    return await instructor.save();
+    return await instructor.save().catch((err)=>{
+      console.log(err.toString());
+    });
 }
 
 // Function to update an existing instructor based on the provided ID
-export const updateInstructor = async (updatedInstructor, id) => {
+export const updateInstructor = async (updatedInstructor, email) => {
     // Using the 'findByIdAndUpdate' method to update the instructor
-    const instructor = await Instructor.findByIdAndUpdate(id, updatedInstructor).exec();
+    const instructor = await Instructor.findByOneAndUpdate({email:email},updatedInstructor,{returnOriginal:false}).exec();
     return instructor;
 }
 

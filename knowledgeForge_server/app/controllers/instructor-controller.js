@@ -41,16 +41,22 @@ export const postInstructor = async (request, response) => {
 
 // Update existing instructor controller
 export const putInstructor = async (request, response) => {
+    const token = request.cookies.token;
+    
+    if (!token) {
+        return response.status(401).json({ message: 'Unauthorized' });
+      }
     try {
         // Extract instructor ID and updated data from the request
-        const instructorId = request.params.id;
+        
         const updatedInstructor = request.body;
-
+        const instructor = jwt.verify(token, 'secret123');
+        
         // Call service to update instructor
-        const instructor = await InstructorService.updateInstructor(updatedInstructor, instructorId);
+        const result = await InstructorService.updateInstructor(updatedInstructor, instructor.email);
 
         // Set response using helper function
-        setResponse(instructor, response);
+        setResponse(result, response);
     } catch (err) {
         // Set error response
         setErrorResponse(err, response);
