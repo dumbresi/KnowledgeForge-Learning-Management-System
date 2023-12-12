@@ -73,12 +73,28 @@ const AllCoursePage = (props: AllCoursePageProps) => {
   };
 
   return (
-    <div className="h-screen bg-background_cream flex ">
-      <div>
+    <div className=" bg-zinc-100 flex h-full">
+      <div className="flex">
         <Sidebar category={filterCoursesByCategory} />
       </div>
 
-      <div className="w-[95%] h-auto rounded-md bg-background_cream ab">
+      {/* <div className='flex flex-row justify-center'>
+    <nav>
+        <ul>
+          <li>
+            <Link to="/user/register">Register</Link>
+          </li>
+          <li>
+            <Link to="/user/login">Login</Link>
+          </li>
+          <li>
+            <Link to="/user/current">User Details</Link>
+          </li>
+        </ul>
+      </nav>
+    </div>  */}
+
+      <div className="w-[95%] h-auto rounded-md bg-zinc-100 ab">
         <div>
           <Topbar onSearch={searchHandler} />
         </div>
