@@ -13,10 +13,10 @@ const router = express.Router();
 // Define routes for handling instructor data
 router.route('/')
     .get(instructorController.findInstructor) // GET request to retrieve instructor data
-    .post(instructorController.postInstructor); // POST request to create a new instructor
-
+    .post(instructorController.postInstructor) // POST request to create a new instructor
+    .put(instructorController.putInstructor);
 router.route('/:id')
-    .put(instructorController.putInstructor) // PUT request to update an existing instructor
+     // PUT request to update an existing instructor
     .delete(instructorController.deleteInstructor); // DELETE request to remove an existing instructor
 router.route('/current')
     .get(instructorController.getOneInsrtuctor);
