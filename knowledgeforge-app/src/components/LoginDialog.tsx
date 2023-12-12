@@ -27,12 +27,12 @@ function Login(): JSX.Element {
 
     const data = await response.json();
     const storeData= {
-      userName:data.userName,
-      email:data.email,
-      contactNumber:data.contactNumber,
+      userName:data.sanitizedUser.userName,
+      email:data.sanitizedUser.email,
+      contactNumber:data.sanitizedUser.contactNumber,
       userType:'user'
     }
-    
+    console.log(storeData);
     if(response.status===200){
       dispatch(signInSuccess(storeData))
       navigate('/');
