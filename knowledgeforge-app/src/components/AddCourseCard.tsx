@@ -108,14 +108,14 @@ const AddCourseCard = () => {
   };
 
   return (
-    <div className="flex flex-col items-center justify-normal min-h-screen py-8 px-4">
-      <h3 className="text-2xl font-semibold text-gray-900">Add Course</h3>
-      <p className="mt-1 text-sm text-gray-500">Add a new course.</p>
+    <div className="flex flex-col items-center justify-normal min-h-screen py-8">
+      <h3 className="text-3xl font-semibold text-gray-900 mr-20">Add Course</h3>
+      <p className="mt-1 text-sm text-gray-500 mr-20">Add a new course</p>
 
       <div className="mt-8 w-full max-w-md">
         <label
           htmlFor="title"
-          className="block text-sm font-medium text-gray-700"
+          className="block text-sm font-medium text-gray-700 pb-1"
         >
           Course Title
         </label>
@@ -123,7 +123,7 @@ const AddCourseCard = () => {
           type="text"
           id="title"
           name="title"
-          className="input-field"
+          className="input-field rounded-lg"
           placeholder="Enter course title"
           onChange={handleInputChange}
         />
@@ -132,7 +132,7 @@ const AddCourseCard = () => {
       <div className="mt-4 w-full max-w-md">
         <label
           htmlFor="description"
-          className="block text-sm font-medium text-gray-700"
+          className="block text-sm font-medium text-gray-700 pb-1"
         >
           Course Description
         </label>
@@ -140,7 +140,7 @@ const AddCourseCard = () => {
           id="description"
           name="description"
           rows={4}
-          className="input-field"
+          className="input-field rounded-lg"
           placeholder="Enter course description"
           onChange={handleInputChange}
         ></textarea>
@@ -148,7 +148,7 @@ const AddCourseCard = () => {
       <div className="mt-4 w-full max-w-md">
         <label
           htmlFor="description"
-          className="block text-sm font-medium text-gray-700"
+          className="block text-sm font-medium text-gray-700 pb-1"
         >
           Instructor
         </label>
@@ -156,7 +156,7 @@ const AddCourseCard = () => {
           id="instructor"
           name="instructor"
           type="text"
-          className="input-field"
+          className="input-field rounded-lg"
           placeholder="Enter course description"
           onChange={handleInputChange}
         ></input>
@@ -164,7 +164,7 @@ const AddCourseCard = () => {
       <div className="mt-4 w-full max-w-md">
         <label
           htmlFor="description"
-          className="block text-sm font-medium text-gray-700"
+          className="block text-sm font-medium text-gray-700 pb-1"
         >
           Course Duration
         </label>
@@ -172,7 +172,7 @@ const AddCourseCard = () => {
           id="duration"
           name="duration"
           type="text"
-          className="input-field"
+          className="input-field rounded-lg"
           placeholder="Enter course description"
           onChange={handleInputChange}
         ></input>
@@ -180,7 +180,7 @@ const AddCourseCard = () => {
       <div className="mt-4 w-full max-w-md">
         <label
           htmlFor="description"
-          className="block text-sm font-medium text-gray-700"
+          className="block text-sm font-medium text-gray-700 pb-1"
         >
           Course Category
         </label>
@@ -188,7 +188,7 @@ const AddCourseCard = () => {
           id="category"
           name="category"
           type="text"
-          className="input-field"
+          className="input-field rounded-lg"
           placeholder="Enter course description"
           onChange={handleInputChange}
         ></input>
@@ -196,7 +196,7 @@ const AddCourseCard = () => {
       <div className="mt-4 w-full max-w-md">
         <label
           htmlFor="description"
-          className="block text-sm font-medium text-gray-700"
+          className="block text-sm font-medium text-gray-700 pb-1"
         >
           Course SubCategory
         </label>
@@ -204,7 +204,7 @@ const AddCourseCard = () => {
           id="subCategory"
           name="subCategory"
           type="text"
-          className="input-field"
+          className="input-field rounded-lg"
           placeholder="Enter course description"
           onChange={handleInputChange}
         ></input>
@@ -212,7 +212,7 @@ const AddCourseCard = () => {
       <div className="mt-4 w-full max-w-md">
         <label
           htmlFor="description"
-          className="block text-sm font-medium text-gray-700"
+          className="block text-sm font-medium text-gray-700 pb-1"
         >
           Course fee
         </label>
@@ -221,7 +221,7 @@ const AddCourseCard = () => {
           name="fees"
           type="number"
           step="0.01"
-          className="input-field"
+          className="input-field rounded-lg"
           placeholder="Enter course description"
           onChange={handleInputChange}
         ></input>
@@ -229,7 +229,7 @@ const AddCourseCard = () => {
       <div className="mt-4 w-full max-w-md">
         <label
           htmlFor="description"
-          className="block text-sm font-medium text-gray-700"
+          className="block text-sm font-medium text-gray-700 pb-1"
         >
           No of Modules
         </label>
@@ -237,7 +237,7 @@ const AddCourseCard = () => {
           id="noOfModules"
           name="noOfModules"
           type="number"
-          className="input-field"
+          className="input-field rounded-lg"
           placeholder="Enter course description"
           onChange={handleInputChange}
         ></input>
@@ -245,7 +245,7 @@ const AddCourseCard = () => {
       <div className="mt-4 w-full max-w-md">
         <label
           htmlFor="image"
-          className="block text-sm font-medium text-gray-700"
+          className="block text-sm font-medium text-gray-700 pb-1"
         >
           Upload Image
         </label>
@@ -255,11 +255,11 @@ const AddCourseCard = () => {
             accept="image/*"
             id="thumbnail"
             name="thumbnail"
-            className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring-blue-500"
+            className="mt-1 block w-full border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 rounded-lg"
             onChange={handleFileUpload}
           />
           <button
-            className="submit-button"
+            className="submit-button ml-2"
             //handle onclick
             onClick={handleApiCall}
           >
