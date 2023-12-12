@@ -8,3 +8,4 @@ export const userDetailsPath="/user/current";
 export const instructorDetailsPath="/instructor/current";
 export const addCoursePath="/instructor/current/addcourse";
 export const userCourses='/user/registeredCourses'
+export const addModulePage='/instructor/current/addcourse/addModule'
