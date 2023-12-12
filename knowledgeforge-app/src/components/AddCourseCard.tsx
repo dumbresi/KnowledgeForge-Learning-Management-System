@@ -1,4 +1,13 @@
 import React, { ChangeEvent, MouseEventHandler, useRef, useState } from "react";
+import {
+  BrowserRouter,
+  Route,
+  Routes,
+  Link,
+  useNavigate,
+} from "react-router-dom";
+import * as Patths from "../resources/paths";
+import Course from "../models/Course";
 
 const AddCourseCard = () => {
   const [formData, setFormData] = useState({
@@ -15,6 +24,7 @@ const AddCourseCard = () => {
     avg_star_rating: 0,
     thumbnailBase64: "",
   });
+  const navigate = useNavigate();
 
   const handleInputChange = (e: any) => {
     const { name, value } = e.target;
@@ -60,20 +70,40 @@ const AddCourseCard = () => {
     console.log(apiData);
     // Make your API call using apiData
     // Example using fetch:
-    fetch("http://localhost:4000/courses", {
+    const req = fetch("http://localhost:4000/courses", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(apiData),
     })
-      .then((response) => response.json())
+      .then((response) => {
+        if (response.status === 200) {
+          // Return the promise for response.json()
+          return response.json();
+        } else {
+          // Handle non-200 status codes (e.g., show an error message)
+          throw new Error("Failed to create course");
+        }
+      })
+      .then((res: Course) => {
+        // Now you can access the parsed JSON data in the 'res' variable
+        navigate(Patths.addModulePage, {
+          state: {
+            noOfModules: Number(formData.noOfModules),
+            courseId: res._id,
+          },
+        });
+        // Return res if you want to use it in the next then block
+        return res;
+      })
       .then((data) => {
         // Handle the API response
         console.log(data);
       })
       .catch((error) => {
-        console.error("Error:", error);
+        // Handle errors here
+        console.error(error);
       });
   };
 

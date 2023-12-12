@@ -15,6 +15,7 @@ import AddCoursePage from './pages/AddCoursePage';
 import Sidebar from './components/Sidebar';
 import SettingsPage from './pages/SettingsPage';
 import UserCourses from './pages/UserCourses';
+import AddModulePage from './pages/AddModulePage';
 
 function App() {
   const isLogin = true;
@@ -57,6 +58,7 @@ React.useEffect(() => {
         <Route path={Paths.addCoursePath} element={<AddCoursePage/>}  />
         <Route path={Paths.settingsPath} element={<SettingsPage/>}  />
         <Route path={Paths.userCourses} element={<UserCourses/>}  />
+        <Route path={Paths.addModulePage} element={<AddModulePage/>}  />
       </Routes>
 				
 			</BrowserRouter>
