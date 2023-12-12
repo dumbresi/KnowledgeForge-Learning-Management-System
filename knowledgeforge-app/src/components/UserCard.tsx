@@ -82,7 +82,7 @@ const UserCard: React.FC<UserCardProps> = ({ user }) => {
 
 
   return (
-    <div className="min-h-screen items-center justify-center px-4 ">
+    <div className="min-h-screen items-center justify-center px-4">
       <div className="flex-1 max-w-4xl mx-auto pt-8 mt-8 bg-slate-200 rounded-lg shadow-xl p-6">
         <div className="flex items-center justify-between mb-6">
           <div>
@@ -93,12 +93,7 @@ const UserCard: React.FC<UserCardProps> = ({ user }) => {
               {t("Welcome to your profile.")}
             </p>
           </div>
-          <button
-            className="bg-orange-500 hover:bg-orange-700 text-white text-sm font-bold py-2 px-4 rounded"
-            onClick={isEditing ? handleSaveClick : handleEditClick}
-          >
-            {isEditing ? t("Save") : t("Edit")}
-          </button>
+          
         </div>
         <div className="mt-6 border-t border-gray-100">
           <dl className="divide-y divide-gray-100">
@@ -146,8 +141,19 @@ const UserCard: React.FC<UserCardProps> = ({ user }) => {
                 </dd>
               )}
             </div>
+            <div>
+            </div>
+            
           </dl>
         </div>
+        <div className="mt-5">
+            <button
+            className="bg-orange-500 hover:bg-orange-700 text-white text-sm font-bold py-2 px-4 rounded"
+            onClick={isEditing ? handleSaveClick : handleEditClick}
+          >
+            {isEditing ? t("Save") : t("Edit")}
+          </button>
+            </div>
       </div>
     </div>
   );
