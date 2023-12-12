@@ -7,3 +7,4 @@ export const settingsPath='/settings';
 export const userDetailsPath="/user/current";
 export const instructorDetailsPath="/instructor/current";
 export const addCoursePath="/instructor/current/addcourse";
+export const userCourses='/user/registeredCourses'
