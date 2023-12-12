@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
@@ -8,24 +8,38 @@ import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
 import i18n from "./i18n";
 import { I18nextProvider } from 'react-i18next';
-import { startTransition } from 'react';
+import * as serviceWorkerRegistration from "./ServiceWorkerRegistration"
 
-
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('./service-worker.ts')
+    .then((registration) => {
+      console.log('Service Worker registered with scope:', registration.scope);
+    })
+    .catch((error) => {
+      console.error('Service Worker registration failed:', error);
+    });
+}
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
+
 root.render(
 
   <Provider store={store}>
-    {/* <I18nextProvider i18n={i18n}> */}
+   
     <PersistGate persistor={persistor} loading={null}>
+    <I18nextProvider i18n={i18n}>
+      <Suspense fallback={<div>loading..</div>}>
       <App />
+      </Suspense>
+      
+      </I18nextProvider>
     </PersistGate>
-    {/* </I18nextProvider> */}
+    
   </Provider>
 );
-
+serviceWorkerRegistration.register();
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
 // or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals

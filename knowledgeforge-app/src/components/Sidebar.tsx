@@ -107,8 +107,8 @@ const Sidebar = (props:Props) => {
 ];
 
   return (
-    <div>
-      <div className={`h-screen p-3 space-y-2 ${isSidebarOpen? "w-60" : "w-24"} dark:bg-gray-900 dark:text-gray-100 duration-500 relative`}>
+    <div className="flex h-full">
+      <div className={`h-full p-3 space-y-2 ${isSidebarOpen? "w-60" : "w-24"} dark:bg-gray-900 dark:text-gray-100 duration-500 relative`}>
         <div className="flex items-center p-2 space-x-4" onClick={takeToHomePage}>
           <img
             src={logo}

@@ -1,158 +1,250 @@
-import React, { ChangeEvent, FormEvent, useState } from 'react'
-import User from '../models/UserModel'
-import { BrowserRouter, Route, Routes, Link,useNavigate } from 'react-router-dom'
-import * as AuthService from '../services/auth-service'
-import * as Paths from '../resources/paths'
+import React, { ChangeEvent, FormEvent, useState } from "react";
+import User from "../models/UserModel";
+import {
+  BrowserRouter,
+  Route,
+  Routes,
+  Link,
+  useNavigate,
+} from "react-router-dom";
+import * as AuthService from "../services/auth-service";
+import * as Paths from "../resources/paths";
 
-type Props = {}
+type Props = {};
 
 const RegisterDialog = (props: Props) => {
+  const [name, setname] = useState("");
+  const [email, setEmailID] = useState("");
+  const [contactNumber, setContactNumber] = useState("");
+  const [password, setPassword] = useState("");
+  const [university, setUniversity] = useState("");
 
-    const [name, setname]= useState('');
-    const [email,setEmailID]=useState('');
-    const [contactNumber,setContactNumber]=useState('');
-    const [password,setPassword]=useState('');
-    const [university,setUniversity]=useState('');
+  const [activeTab, setActiveTab] = useState("student");
 
-    const [activeTab, setActiveTab]=useState('student');
+  const navigate = useNavigate();
 
-    const navigate = useNavigate();
+  const handleNameChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setname(value);
+  };
 
-    const handleNameChange=(e:ChangeEvent<HTMLInputElement>)=>{
-        const {name,value}= e.target;
-        setname(value);
-    }
+  const handleEmailChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setEmailID(value);
+  };
 
-    const handleEmailChange=(e:ChangeEvent<HTMLInputElement>)=>{
-        const {name,value}= e.target;
-        setEmailID(value);
-    }
+  const handleNumberChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setContactNumber(value);
+  };
 
-    const handleNumberChange=(e:ChangeEvent<HTMLInputElement>)=>{
-        const {name,value}= e.target;
-        setContactNumber(value);
-    }
+  const handlePasswordChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setPassword(value);
+  };
+  const handleUniversity = (e: ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setUniversity(value);
+  };
+  const handleTabClick = (tab: React.SetStateAction<string>) => {
+    setActiveTab(tab);
+  };
 
-    const handlePasswordChange=(e:ChangeEvent<HTMLInputElement>)=>{
-        const {name,value}= e.target;
-        setPassword(value);
-    }
-    const handleUniversity=(e:ChangeEvent<HTMLInputElement>)=>{
-        const {name,value}= e.target;
-        setUniversity(value);
-    }
-    const handleTabClick = (tab: React.SetStateAction<string>) => {
-        setActiveTab(tab);
-      };
+  const takeToLoginPage = () => {
+    navigate("/user/login");
+  };
 
-    const takeToLoginPage=()=>{
-        navigate('/user/login')
-    }
+  const handleSubmit = async (e: FormEvent) => {
+    e.preventDefault();
+    if (activeTab === "student") {
+      try {
+        const response = await AuthService.registerUser(
+          JSON.stringify({ name, email, contactNumber, password })
+        );
 
-    const handleSubmit=async (e:FormEvent) => {
-        e.preventDefault();
-        if(activeTab==='student'){
-            try{
-                const response = await AuthService.registerUser(JSON.stringify({name,email,contactNumber,password}));
-    
-                if (!response.ok) {
-                    throw new Error('Network response was not ok');
-                  }
-                if(response.status===200){
-                    navigate(Paths.loginPath);
-                }
-                
-            }catch(error){
-                console.error('Error submitting data',error)
-            } 
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
         }
-        if(activeTab==='instructor'){
-            try {
-                const response = await AuthService.registerInstructor( JSON.stringify({name,email,contactNumber,password,university}));
-                if(response.status===200){
-                    navigate('../user/login');
-                }
-
-            } catch (error) {
-                console.error('Error submitting data',error)
-            }
+        if (response.status === 200) {
+          navigate(Paths.loginPath);
         }
-        
+      } catch (error) {
+        console.error("Error submitting data", error);
+      }
     }
-
+    if (activeTab === "instructor") {
+      try {
+        const response = await AuthService.registerInstructor(
+          JSON.stringify({ name, email, contactNumber, password, university })
+        );
+        if (response.status === 200) {
+          navigate("../user/login");
+        }
+      } catch (error) {
+        console.error("Error submitting data", error);
+      }
+    }
+  };
 
   return (
     <div>
-        <div className="tabs duration-300 flex flex-row justify-between">
-          <div
-            className={`tab ${activeTab === 'instructor' ? 'active' : ''}  w-1/2 border-2 p-2 hover:bg-light_blue transition text-center ${
-                activeTab === 'instructor' ? 'bg-light_blue text-white' : ''
-              }`}
-            onClick={() => handleTabClick('instructor')}
-          >
-            <button>Instructor Register</button>
-          </div>
-          <div
-            className={`tab ${activeTab === 'student' ? 'active' : ''}  w-1/2 border-2 p-2  hover:bg-light_blue transition text-center ${
-                activeTab === 'student' ? 'bg-light_blue text-white' : ''
-              }`}
-            onClick={() => handleTabClick('student')}
-          >
-            <button>Student Register</button>
-          </div>
+      <div className="tabs duration-300 flex flex-row justify-between">
+        <div
+          className={`tab ${
+            activeTab === "instructor" ? "active" : ""
+          } w-1/2 border-t-2 border-r-2 p-2 hover:bg-light_blue transition text-center ${
+            activeTab === "instructor"
+              ? "border-light_blue bg-light_blue text-white"
+              : "border-transparent text-gray-700"
+          } rounded-tl-lg shadow-md`}
+          onClick={() => handleTabClick("instructor")}
+        >
+          <button className="focus:outline-none transform transition-transform hover:scale-105">
+            Instructor Register
+          </button>
+        </div>
+        <div
+          className={`tab ${
+            activeTab === "student" ? "active" : ""
+          } w-1/2 border-t-2 border-l-2 p-2 hover:bg-light_blue transition text-center ${
+            activeTab === "student"
+              ? "border-light_blue bg-light_blue text-white"
+              : "border-transparent text-gray-700"
+          } rounded-tr-lg shadow-md`}
+          onClick={() => handleTabClick("student")}
+        >
+          <button className="focus:outline-none transform transition-transform hover:scale-105">
+            Student Register
+          </button>
+        </div>
       </div>
+
       <div>
-    {
-        (activeTab==='student') && (
-            <div className='flex-column duration-300 justify-center items-center bg-[#fdebd7] w-full bg-white m-auto w-auto '>
-        
-        <form onSubmit={handleSubmit} className='p-8 mb-4 flex flex-col justify-center items-center '>
-            <input className='input-field' type='text' name='name' value={name} placeholder='Name' onChange={handleNameChange}/>
-            <br/>
-                <input className='input-field' type="email" name="email" value={email} placeholder='Email Id'  onChange={handleEmailChange} />
-            <br/>
-                <input className='input-field' type="text" name="number" value={contactNumber} placeholder='Contact Number' onChange={handleNumberChange} />
-            <br/>
-                <input className='input-field' type="text" name="password" value={password} placeholder='Password'  onChange={handlePasswordChange} />
-            <br/>
-            <br/>
-            <button className='submit-button' type="submit">Create Account</button>
-            <br/>
-            <div className='text-center m-2'>Already a user? <button className='text-light_blue' onClick={takeToLoginPage}>Log In</button></div>
-        </form>
-        </div>
-        )
-    }
+        {activeTab === "student" && (
+          <div className="flex-column duration-300 justify-center items-center bg-[#fdebd7] w-full bg-white m-auto w-auto ">
+            <form
+              onSubmit={handleSubmit}
+              className="p-8 mb-4 flex flex-col justify-center items-center "
+            >
+              <input
+                className="input-field"
+                type="text"
+                name="name"
+                value={name}
+                placeholder="Name"
+                onChange={handleNameChange}
+              />
+              <br />
+              <input
+                className="input-field"
+                type="email"
+                name="email"
+                value={email}
+                placeholder="Email Id"
+                onChange={handleEmailChange}
+              />
+              <br />
+              <input
+                className="input-field"
+                type="text"
+                name="number"
+                value={contactNumber}
+                placeholder="Contact Number"
+                onChange={handleNumberChange}
+              />
+              <br />
+              <input
+                className="input-field"
+                type="text"
+                name="password"
+                value={password}
+                placeholder="Password"
+                onChange={handlePasswordChange}
+              />
+              <br />
+              <br />
+              <button className="submit-button" type="submit">
+                Create Account
+              </button>
+              <br />
+              <div className="text-center m-2">
+                Already a user?{" "}
+                <button className="text-light_blue" onClick={takeToLoginPage}>
+                  Log In
+                </button>
+              </div>
+            </form>
+          </div>
+        )}
 
-{
-        (activeTab==='instructor') && (
-            <div className='flex-column justify-center items-center bg-[#fdebd7] w-full bg-white m-auto w-auto'>
-        
-        <form onSubmit={handleSubmit} className='p-8 mb-4 flex flex-col justify-center items-center '>
-            <input className='input-field' type='text' name='name' value={name} placeholder='Name' onChange={handleNameChange}/>
-            <br/>
-                <input className='input-field' type="email" name="email" value={email} placeholder='Email Id'  onChange={handleEmailChange} />
-            <br/>
-                <input className='input-field' type="text" name="number" value={contactNumber} placeholder='Contact Number' onChange={handleNumberChange} />
-            <br/>
-                <input className='input-field' type="text" name="password" value={password} placeholder='Password'  onChange={handlePasswordChange} />
-            <br/>
-                <input className='input-field' type="text" name="university" value={university} placeholder='University Name'  onChange={handleUniversity} />
-            <br/>
-            <br/>
-            <button className='submit-button' type="submit">Create Account</button>
-            <br/>
-            <div className='text-center m-2'>Already a user? <button className='text-light_blue' onClick={takeToLoginPage}>Log In</button></div>
-        </form>
-        </div>
-        )
-    }
+        {activeTab === "instructor" && (
+          <div className="flex-column justify-center items-center bg-[#fdebd7] w-full bg-white m-auto w-auto">
+            <form
+              onSubmit={handleSubmit}
+              className="p-8 mb-4 flex flex-col justify-center items-center "
+            >
+              <input
+                className="input-field"
+                type="text"
+                name="name"
+                value={name}
+                placeholder="Name"
+                onChange={handleNameChange}
+              />
+              <br />
+              <input
+                className="input-field"
+                type="email"
+                name="email"
+                value={email}
+                placeholder="Email Id"
+                onChange={handleEmailChange}
+              />
+              <br />
+              <input
+                className="input-field"
+                type="text"
+                name="number"
+                value={contactNumber}
+                placeholder="Contact Number"
+                onChange={handleNumberChange}
+              />
+              <br />
+              <input
+                className="input-field"
+                type="text"
+                name="password"
+                value={password}
+                placeholder="Password"
+                onChange={handlePasswordChange}
+              />
+              <br />
+              <input
+                className="input-field"
+                type="text"
+                name="university"
+                value={university}
+                placeholder="University Name"
+                onChange={handleUniversity}
+              />
+              <br />
+              <br />
+              <button className="submit-button" type="submit">
+                Create Account
+              </button>
+              <br />
+              <div className="text-center m-2">
+                Already a user?{" "}
+                <button className="text-light_blue" onClick={takeToLoginPage}>
+                  Log In
+                </button>
+              </div>
+            </form>
+          </div>
+        )}
+      </div>
     </div>
-
-    </div>
-
-
   );
-}
+};
 
 export default RegisterDialog;

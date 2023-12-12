@@ -9,7 +9,7 @@ type Props = {
 const CoursesGrid = ({courses}:Props) => {
   return (
     <div>
-        <div className="grid gap-1 grid-cols-[repeat(auto-fill,minmax(300px,1fr))] p-2">
+        <div className="grid gap-1 grid-cols-[repeat(auto-fill,minmax(300px,1fr))] p-2 bg-zinc-100">
           {courses.map((courseItem) => (
             <div className="m-2"><CourseCard course={courseItem} /></div>
           ))}
