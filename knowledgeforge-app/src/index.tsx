@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ReactElement } from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
@@ -8,21 +8,27 @@ import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
 import i18n from "./i18n";
 import { I18nextProvider } from 'react-i18next';
-import { startTransition } from 'react';
+import { startTransition , Suspense} from 'react';
 
 
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
+
 root.render(
 
   <Provider store={store}>
-    {/* <I18nextProvider i18n={i18n}> */}
+   
     <PersistGate persistor={persistor} loading={null}>
+    <I18nextProvider i18n={i18n}>
+      <Suspense fallback={<div>loading..</div>}>
       <App />
+      </Suspense>
+      
+      </I18nextProvider>
     </PersistGate>
-    {/* </I18nextProvider> */}
+    
   </Provider>
 );
 
