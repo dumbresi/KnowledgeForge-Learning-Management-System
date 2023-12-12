@@ -8,9 +8,17 @@ import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
 import i18n from "./i18n";
 import { I18nextProvider } from 'react-i18next';
-import * as serviceWorkerRegistration from "./Service Worker Registration"
+import * as serviceWorkerRegistration from "./ServiceWorkerRegistration"
 
-
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('./service-worker.ts')
+    .then((registration) => {
+      console.log('Service Worker registered with scope:', registration.scope);
+    })
+    .catch((error) => {
+      console.error('Service Worker registration failed:', error);
+    });
+}
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
