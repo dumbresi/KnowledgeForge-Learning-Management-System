@@ -83,7 +83,7 @@ const RegisterDialog = (props: Props) => {
 
   return (
     <div>
-        <div className="tabs flex flex-row justify-between">
+        <div className="tabs duration-300 flex flex-row justify-between">
           <div
             className={`tab ${activeTab === 'instructor' ? 'active' : ''}  w-1/2 border-2 p-2 hover:bg-light_blue transition text-center ${
                 activeTab === 'instructor' ? 'bg-light_blue text-white' : ''
@@ -104,19 +104,20 @@ const RegisterDialog = (props: Props) => {
       <div>
     {
         (activeTab==='student') && (
-            <div className='flex-column justify-center items-center bg-[#fdebd7] w-full bg-white m-auto w-auto '>
-            <h1 className='mx-auto text-center'>Student Register</h1>
+            <div className='flex-column duration-300 justify-center items-center bg-[#fdebd7] w-full bg-white m-auto w-auto '>
         
-        <form onSubmit={handleSubmit} className='shadow-md p-8 mb-4 flex flex-col justify-center items-center '>
-            <input className='border-2 w-60' type='text' name='name' value={name} placeholder='Name' onChange={handleNameChange}/>
+        <form onSubmit={handleSubmit} className='p-8 mb-4 flex flex-col justify-center items-center '>
+            <input className='input-field' type='text' name='name' value={name} placeholder='Name' onChange={handleNameChange}/>
             <br/>
-                <input className='border-2 w-60' type="email" name="email" value={email} placeholder='Email Id'  onChange={handleEmailChange} />
+                <input className='input-field' type="email" name="email" value={email} placeholder='Email Id'  onChange={handleEmailChange} />
             <br/>
-                <input className='border-2 w-60' type="text" name="number" value={contactNumber} placeholder='Contact Number' onChange={handleNumberChange} />
+                <input className='input-field' type="text" name="number" value={contactNumber} placeholder='Contact Number' onChange={handleNumberChange} />
             <br/>
-                <input className='border-2 w-60' type="text" name="password" value={password} placeholder='Password'  onChange={handlePasswordChange} />
+                <input className='input-field' type="text" name="password" value={password} placeholder='Password'  onChange={handlePasswordChange} />
             <br/>
-            <button className='border-2  p-1 mx-auto bg-light_blue rounded-md' type="submit">Create Account</button>
+            <br/>
+            <button className='submit-button' type="submit">Create Account</button>
+            <br/>
             <div className='text-center m-2'>Already a user? <button className='text-light_blue' onClick={takeToLoginPage}>Log In</button></div>
         </form>
         </div>
@@ -126,20 +127,21 @@ const RegisterDialog = (props: Props) => {
 {
         (activeTab==='instructor') && (
             <div className='flex-column justify-center items-center bg-[#fdebd7] w-full bg-white m-auto w-auto'>
-            <h1 className='mx-auto text-center'>Instructor Register</h1>
         
-        <form onSubmit={handleSubmit} className='shadow-md p-8 mb-4 flex flex-col justify-center items-center '>
-            <input className='border-2 w-60' type='text' name='name' value={name} placeholder='Name' onChange={handleNameChange}/>
+        <form onSubmit={handleSubmit} className='p-8 mb-4 flex flex-col justify-center items-center '>
+            <input className='input-field' type='text' name='name' value={name} placeholder='Name' onChange={handleNameChange}/>
             <br/>
-                <input className='border-2 w-60' type="email" name="email" value={email} placeholder='Email Id'  onChange={handleEmailChange} />
+                <input className='input-field' type="email" name="email" value={email} placeholder='Email Id'  onChange={handleEmailChange} />
             <br/>
-                <input className='border-2 w-60' type="text" name="number" value={contactNumber} placeholder='Contact Number' onChange={handleNumberChange} />
+                <input className='input-field' type="text" name="number" value={contactNumber} placeholder='Contact Number' onChange={handleNumberChange} />
             <br/>
-                <input className='border-2 w-60' type="text" name="password" value={password} placeholder='Password'  onChange={handlePasswordChange} />
+                <input className='input-field' type="text" name="password" value={password} placeholder='Password'  onChange={handlePasswordChange} />
             <br/>
-                <input className='border-2 w-60' type="text" name="university" value={university} placeholder='University Name'  onChange={handleUniversity} />
+                <input className='input-field' type="text" name="university" value={university} placeholder='University Name'  onChange={handleUniversity} />
             <br/>
-            <button className='border-2  p-1 mx-auto bg-light_blue rounded-md' type="submit">Create Account</button>
+            <br/>
+            <button className='submit-button' type="submit">Create Account</button>
+            <br/>
             <div className='text-center m-2'>Already a user? <button className='text-light_blue' onClick={takeToLoginPage}>Log In</button></div>
         </form>
         </div>
