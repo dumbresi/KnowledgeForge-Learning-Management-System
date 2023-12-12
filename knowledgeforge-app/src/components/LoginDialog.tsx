@@ -54,9 +54,9 @@ function Login(): JSX.Element {
       const data = await response.json();
       // Handle the 'data' as needed
       const storeData= {
-        userName:data.userName,
-        email:data.email,
-        contactNumber:data.contactNumber,
+        userName:data.instructor.name,
+        email:data.instructor.email,
+        contactNumber:data.instructor.contactNumber,
         userType:'instructor'
       }
       
