@@ -82,49 +82,68 @@ const UserCard: React.FC<UserCardProps> = ({ user }) => {
 
 
   return (
-    <div className="min-h-screen items-center justify-center px-4 bg-background-cream">
-    <div className="flex-1 max-w-4xl mx-auto pt-8 mt-8 bg-white rounded-lg shadow-xl p-6">
+    <div className="min-h-screen items-center justify-center px-4 ">
+      <div className="flex-1 max-w-4xl mx-auto pt-8 mt-8 bg-slate-200 rounded-lg shadow-xl p-6">
         <div className="flex items-center justify-between mb-6">
           <div>
-            <h3 className="text-3xl font-semibold leading-7 text-gray-900">{isEditing ? t("Edit User") : editedUser.userName}</h3>
-            <p className="mt-1 max-w-2xl text-sm leading-6 text-gray-500">{t("Welcome to your profile.")}</p>
+            <h3 className="text-3xl font-semibold leading-7 text-gray-900">
+              {isEditing ? t("Edit User") : editedUser.userName}
+            </h3>
+            <p className="mt-1 max-w-2xl text-sm leading-6 text-gray-500">
+              {t("Welcome to your profile.")}
+            </p>
           </div>
-          <button className="bg-blue-500 hover:bg-blue-700 text-white text-sm font-bold py-2 px-4 rounded" onClick={isEditing ? handleSaveClick : handleEditClick}>
+          <button
+            className="bg-orange-500 hover:bg-orange-700 text-white text-sm font-bold py-2 px-4 rounded"
+            onClick={isEditing ? handleSaveClick : handleEditClick}
+          >
             {isEditing ? t("Save") : t("Edit")}
           </button>
         </div>
         <div className="mt-6 border-t border-gray-100">
           <dl className="divide-y divide-gray-100">
-            <div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
-              <dt className="text-md font-medium leading-6 text-gray-900">{t("Full name")}</dt>
+            <div className="px-4 py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+              <dt className="text-md font-medium leading-6 text-gray-900">
+                {t("Full name")}
+              </dt>
               {isEditing ? (
                 <input
                   type="text"
                   name="userName"
                   value={editedUser.userName}
                   onChange={handleInputChange}
-                  className="border rounded px-2 py-1 w-full"
+                  className="border rounded px-3 py-2 w-full focus:outline-none focus:border-blue-500"
                 />
               ) : (
-                <dd className="mt-1 text-md leading-6 text-gray-700">{editedUser.userName}</dd>
+                <dd className="mt-1 text-md leading-6 text-gray-700">
+                  {editedUser.userName}
+                </dd>
               )}
             </div>
-            <div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
-              <dt className="text-md font-medium leading-6 text-gray-900">{t("Email")}</dt>
-                <dl className="text-md">{user.email}</dl>
+            <div className="px-4 py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+              <dt className="text-md font-medium leading-6 text-gray-900">
+                {t("Email")}
+              </dt>
+              <dd className="mt-1 text-md leading-6 text-gray-700">
+                {user.email}
+              </dd>
             </div>
-            <div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
-              <dt className="text-md font-medium leading-6 text-gray-900">{t("Contact")}</dt>
+            <div className="px-4 py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+              <dt className="text-md font-medium leading-6 text-gray-900">
+                {t("Contact")}
+              </dt>
               {isEditing ? (
                 <input
                   type="text"
                   name="contactNumber"
                   value={editedUser.contactNumber}
                   onChange={handleInputChange}
-                  className="border rounded px-2 py-1 w-full"
+                  className="border rounded px-3 py-2 w-full focus:outline-none focus:border-blue-500"
                 />
               ) : (
-                <dd className="mt-1 text-md leading-6 text-gray-700">{editedUser.contactNumber}</dd>
+                <dd className="mt-1 text-md leading-6 text-gray-700">
+                  {editedUser.contactNumber}
+                </dd>
               )}
             </div>
           </dl>
