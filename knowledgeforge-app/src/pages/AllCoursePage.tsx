@@ -72,9 +72,9 @@ const AllCoursePage = (props:AllCoursePageProps) => {
 
 
   return (
-    <div className="h-screen bg-background_cream flex ">
+    <div className="h-screen bg-background_cream flex">
       
-      <div>
+      <div className='flex-h-screen'>
         <Sidebar category={filterCoursesByCategory} />
       </div>
       
