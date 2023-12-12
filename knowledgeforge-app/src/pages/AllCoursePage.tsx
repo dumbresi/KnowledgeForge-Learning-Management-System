@@ -72,9 +72,9 @@ const AllCoursePage = (props:AllCoursePageProps) => {
 
 
   return (
-    <div className="h-screen bg-background_cream flex">
+    <div className=" bg-zinc-100 flex h-full">
       
-      <div className='flex-h-screen'>
+      <div className='flex'>
         <Sidebar category={filterCoursesByCategory} />
       </div>
       
@@ -94,7 +94,7 @@ const AllCoursePage = (props:AllCoursePageProps) => {
       </nav>
     </div>  */}
 
-      <div className="w-[95%] h-auto rounded-md bg-background_cream ab">
+      <div className="w-[95%] h-auto rounded-md bg-zinc-100 ab">
         <div>
           <Topbar onSearch={searchHandler}/>
         </div>
