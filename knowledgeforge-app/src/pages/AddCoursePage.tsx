@@ -6,13 +6,11 @@ const AddCoursePage = () => {
   const category = () => {};
   return (
     <div className="flex flex-row">
-      <div className="flex w-1/6 bg-background-cream">
+      <div className="flex bg-background-cream">
         <Sidebar category={category} />
-        <div className="flex flex-col justify-between items-center p-4">
-          <div className="flex flex-col justify-between items-center bg-white rounded-lg ml-32 p-8 shadow-2xl w-full md:w-full">
-            <AddCourseCard />
-          </div>
-        </div>
+      </div>
+      <div className="flex w-1/2 h-3/5 my-5 justify-between items-center bg-white rounded-lg ml-32 p-8 shadow-2xl">
+        <AddCourseCard />
       </div>
     </div>
   );

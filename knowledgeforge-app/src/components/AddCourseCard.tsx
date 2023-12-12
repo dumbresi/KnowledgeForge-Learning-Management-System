@@ -108,7 +108,7 @@ const AddCourseCard = () => {
   };
 
   return (
-    <div className="flex flex-col items-center justify-normal min-h-screen py-8 px-4">
+    <div className="items-center justify-normal min-h-screen px-4">
       <h3 className="text-2xl font-semibold text-gray-900">Add Course</h3>
       <p className="mt-1 text-sm text-gray-500">Add a new course.</p>
 
