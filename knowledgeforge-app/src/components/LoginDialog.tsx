@@ -57,7 +57,7 @@ function Login(): JSX.Element {
         userName:data.userName,
         email:data.email,
         contactNumber:data.contactNumber,
-        userType:'user'
+        userType:'instructor'
       }
       
       if(response.status===200){
