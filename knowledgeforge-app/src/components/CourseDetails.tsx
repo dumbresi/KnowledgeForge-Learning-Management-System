@@ -9,6 +9,8 @@ import * as UserService from "../services/user-service";
 import { useSelector } from "react-redux";
 import { RootState } from "../redux/store";
 import sampleThumb from "../resources/placeholder.jpg";
+import Sidebar from "./Sidebar";
+import { FaStar } from "react-icons/fa";
 
 type Props = {};
 
@@ -91,80 +93,100 @@ const CourseDetails: React.FC<Props> = () => {
     }
   };
 
+  const ingore = () => {};
+
   return (
-    <div className="container mx-auto mt-10 p-4">
-      <div className="md:flex md:items-center md:justify-between">
-        <div className="mb-4 md:mb-0">
-          <h1 className="text-3xl md:text-4xl font-bold mb-2">
-            {course.title}
-          </h1>
-          <p className="text-sm md:text-base text-gray-600 mb-4">
-            {course.description}
-          </p>
-        </div>
-
-        <img
-          className={`w-full md:w-1/2 h-36 object-cover rounded-lg md:ml-10 ${
-            thumbnailError ? "h-36" : ""
-          }`}
-          alt="Course Thumbnail"
-          src={thumbnailUrl}
-          onError={handleThumbnailError}
-        />
-      </div>
-
-      <hr className="w-full border-t my-6" />
-
-      {isEnrolled ? (
-        <div className="md:flex md:justify-between">
-          <div className="mb-4 md:mb-0 md:w-2/3">
-            <ul>
-              <li className="text-lg mb-2">{selectedModule?.title}</li>
-              <li className="text-base text-gray-600 mb-4">
-                {selectedModule?.description}
-              </li>
-              <li className="text-sm text-gray-600">
-                Duration: {selectedModule?.duration}
-              </li>
-            </ul>
-
-            <div className="border-2 h-96 rounded-lg overflow-hidden">
-              <VideoPlayer videoID={`${selectedModule?.videoId}`} />
+    <>
+      <div className="flex">
+        <Sidebar category={ingore} />
+        <div className="container mx-auto mt-10 p-4">
+          <div className="md:flex md:items-center md:justify-between">
+            <div className="mb-4 md:mb-0">
+              <h1 className="text-3xl md:text-4xl font-bold mb-2">
+                {course.title}
+              </h1>
+              <p className="text-sm md:text-base text-gray-600 mb-4 mt-4">
+                {course.description}
+              </p>
+              <div className="flex flex-row text-yellow-500">
+                <FaStar />
+                <FaStar />
+                <FaStar />
+                <FaStar />
+                <FaStar />
+              </div>
             </div>
+
+            <img
+              className={`w-full md:w-1/2 h-36 object-cover rounded-lg md:ml-10 ${
+                thumbnailError ? "h-36" : ""
+              }`}
+              alt="Course Thumbnail"
+              src={thumbnailUrl}
+              onError={handleThumbnailError}
+            />
           </div>
 
-          <div className="md:w-1/3 md:mr-8 flex flex-col items-center">
-            <div className="w-full mb-4">
-              {modules.map((moduleItem: Module) => (
-                <div
-                  key={moduleItem._id}
-                  onClick={() => {
-                    changeSelectedModule(moduleItem);
-                  }}
-                  className={`cursor-pointer bg-white rounded-lg shadow-md p-4 mb-2 ${
-                    selectedModule?._id === moduleItem._id ? "bg-gray-200" : ""
-                  }`}
-                >
-                  <ModuleCard module={moduleItem} />
+          <hr className="w-full border-t my-6" />
+
+          {isEnrolled ? (
+            <div className="md:flex md:justify-between">
+              <div className="mb-4 md:mb-0 md:w-2/3">
+                <ul>
+                  <li className="mb-2 font-bold text-2xl">
+                    {selectedModule?.title}
+                  </li>
+                  <li className="text-base text-gray-600 mt-4 mb-4">
+                    {selectedModule?.description}
+                  </li>
+                  <li className="text-sm text-gray-600 mb-4">
+                    Duration: {selectedModule?.duration}
+                  </li>
+                </ul>
+
+                <div className="border-2 w-11/12 h-96 rounded-lg overflow-auto">
+                  <VideoPlayer videoID={`${selectedModule?.videoId}`} />
                 </div>
-              ))}
+              </div>
+
+              <div className="md:w-1/3 md:mr-8 flex flex-col items-center">
+                <div className="w-full mb-4">
+                  {modules.map((moduleItem: Module) => (
+                    <div
+                      key={moduleItem._id}
+                      onClick={() => {
+                        changeSelectedModule(moduleItem);
+                      }}
+                      className={`cursor-pointer bg-gray-200 rounded-lg shadow-md p-4 mb-2 ${
+                        selectedModule?._id === moduleItem._id
+                          ? "bg-gray-200"
+                          : ""
+                      }`}
+                    >
+                      <ModuleCard module={moduleItem} />
+                    </div>
+                  ))}
+                </div>
+              </div>
             </div>
-          </div>
+          ) : (
+            <div className="text-center">
+              {" "}
+              {/* Render something for users who are not enrolled */}
+              <p className="text-lg mb-4">
+                You are not enrolled in this course.
+              </p>
+              <button
+                onClick={enrollForCourse}
+                className="bg-light_blue text-white px-4 py-2 rounded-lg"
+              >
+                Enroll Now
+              </button>
+            </div>
+          )}
         </div>
-      ) : (
-        <div className="text-center">
-          {" "}
-          {/* Render something for users who are not enrolled */}
-          <p className="text-lg mb-4">You are not enrolled in this course.</p>
-          <button
-            onClick={enrollForCourse}
-            className="bg-light_blue text-white px-4 py-2 rounded-lg"
-          >
-            Enroll Now
-          </button>
-        </div>
-      )}
-    </div>
+      </div>
+    </>
   );
 };
 

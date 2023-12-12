@@ -56,7 +56,7 @@ const CourseCard: React.FC<CourseCardProps> = ({ course }) => {
             </div>
           </div>
           <hr className="my-2" />
-          <div className="px-4 text-gray-600">
+          <div className="px-4 text-gray-600 overflow-hidden">
             <p>{course.description}</p>
             <p className="text-center mt-2">{course.category}</p>
           </div>
