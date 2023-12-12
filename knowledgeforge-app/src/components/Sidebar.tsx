@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect, MouseEventHandler  } from "react";
 import logo from "../resources/knowledgeForge.jpeg";
 import SearchBox from "./SearchBox";
@@ -15,6 +16,7 @@ import { useDispatch } from "react-redux";
 
 import { useSelector } from 'react-redux';
 import { RootState } from '../redux/store'
+import { useTranslation } from "react-i18next";
 
 type Props = {
   category: (query: string) => void;
@@ -26,6 +28,7 @@ const Sidebar = (props:Props) => {
   let smallScreen = useMediaQuery({ query: "(max-width: 768px)" });
   const dispatch=useDispatch();
   const { currentUser, loading, error } = useSelector((state:RootState)=>state.user);
+  const { t } = useTranslation('common');
 
   useEffect(() => {
     if (smallScreen) {
@@ -80,22 +83,21 @@ const Sidebar = (props:Props) => {
   }
 
   const Menus = [
-    { title: "Dashboard", icon: <RiDashboardLine/> },
-    { title: "Categories",  icon: <BsList />, submenu: true,
+    { title: t("Dashboard"), icon: <RiDashboardLine/> },
+    { title: t("Categories"),  icon: <BsList />, submenu: true,
         submenuItems: [
-            {title: "Programming"},
-            {title: "Machine Learning"},
-            {title: "Cybersecurity"},
+            {title: t("Programming")},
+            {title: t("Machine Learning")},
+            {title: t("Cybersecurity")},
         ],
     },
-    {title: "Wishlist",  icon: <BsBookmarkStar /> },
-    {title: "Contact",  icon: <AiTwotoneMail /> },
-    {title: "Settings", spacing: true, icon: <RiSettings5Line /> },
+    {title: t("Wishlist"),  icon: <BsBookmarkStar /> },
+    {title: t("Contact"),  icon: <AiTwotoneMail /> },
+    {title: t("Settings"), spacing: true, icon: <RiSettings5Line /> },
     ...(currentUser
-        ? [{ title: "Logout",  icon: <RiLogoutCircleRLine /> }]
-        : [{ title: "Login",  icon: <RiLoginCircleLine /> }]
+        ? [{ title: t("Logout"),  icon: <RiLogoutCircleRLine /> }]
+        : [{ title: t("Login"),  icon: <RiLoginCircleLine /> }]
       ),
-    
 ];
 
   return (
@@ -108,7 +110,7 @@ const Sidebar = (props:Props) => {
             className="w-12 h-12 rounded-full dark:bg-gray-500"
           />
           <div>
-            <h2 className={`text-lg font-semibold origin-left duration-500 ${!isSidebarOpen && "scale-0"}`}>Knowledge Forge</h2>
+            <h2 className={`text-lg font-semibold origin-left duration-500 ${!isSidebarOpen && "scale-0"}`}>{t("Knowledge Forge")}</h2>
           </div>
         </div>
         <div>
@@ -121,23 +123,19 @@ const Sidebar = (props:Props) => {
               <li
               key={index}
               className={`text-white text-sm flex items-center gap-x-4 cursor-pointer p-2 ${menu.spacing ? "mt-14":"mt-2"} hover:bg-light_white rounded-md `}
-              onClick={()=>{if (menu.title === "Logout") {
+              onClick={()=>{if (menu.title === t("Logout")) {
                 handleLogout();
               }
               if(menu.title==="Profile"){
                 takeToProfilePage();
               }
-              if(menu.title==="Dashboard"){
+              if(menu.title===t("Dashboard")){
                 takeToHomePage();
               }
-              if(menu.title==='Settings'){
+              if(menu.title===t("Settings")){
                 takeToSettingsPage();
               }
-          
-              if(menu.title==='Login'){
-                taketoLoginPage();
-              }
-              if(menu.title==='Login'){
+              if(menu.title===t('Login')){
                 taketoLoginPage();
               }
               if(menu.title==='Wishlist'){
