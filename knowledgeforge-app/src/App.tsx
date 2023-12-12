@@ -14,6 +14,7 @@ import AddCourse from './components/AddCourseCard';
 import AddCoursePage from './pages/AddCoursePage';
 import Sidebar from './components/Sidebar';
 import SettingsPage from './pages/SettingsPage';
+import UserCourses from './pages/UserCourses';
 
 function App() {
   const isLogin = true;
@@ -40,6 +41,7 @@ function App() {
         <Route path={Paths.instructorDetailsPath} element={<InstructorDetails/>} />
         <Route path={Paths.addCoursePath} element={<AddCoursePage/>}  />
         <Route path={Paths.settingsPath} element={<SettingsPage/>}  />
+        <Route path={Paths.userCourses} element={<UserCourses/>}  />
       </Routes>
 				
 			</BrowserRouter>

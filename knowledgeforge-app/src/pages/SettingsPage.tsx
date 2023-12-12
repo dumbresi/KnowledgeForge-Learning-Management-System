@@ -4,10 +4,13 @@ import { useNavigate } from 'react-router-dom';
 import * as Paths from '../resources/paths'
 import * as AuthService from '../services/auth-service'
 import { useTranslation } from 'react-i18next';
+import { useSelector } from 'react-redux';
+import { RootState } from '../redux/store';
 
 const SettingsPage: React.FC = () => {
   const [darkMode, setDarkMode] = useState(false);
   const navigate = useNavigate();
+  const { currentUser, loading, error } = useSelector((state:RootState)=>state.user);
 
   const toggleDarkMode = () => {
     setDarkMode(!darkMode);
@@ -36,6 +39,10 @@ const SettingsPage: React.FC = () => {
     navigate(Paths.loginPath);
   };
 
+  const takeToLoginPage=()=>{
+    navigate(Paths.loginPath);
+  }
+
   const goToAccountDetails=()=>{
     navigate(Paths.userDetailsPath);
   }
@@ -47,12 +54,20 @@ const SettingsPage: React.FC = () => {
       <div className="bg-white p-6 rounded-lg shadow-md">
         <div className="mb-6">
           <h2 className="text-xl font-semibold mb-2">{t("Account Details")}</h2>
+          {(currentUser)?
           <button
-            className="text-blue-500 hover:underline focus:outline-none"
-            onClick={() => goToAccountDetails()}
+          className="text-blue-500 hover:underline focus:outline-none"
+          onClick={() => goToAccountDetails()}
           >
-            {t("View Account Details")}
+          {t("View Account Details")}
           </button>
+          :
+          <div>
+            Please <button onClick={takeToLoginPage} className='text-blue-500 hover:underline focus:outline-none'>Login</button> to get your account details
+          </div>
+          }
+          
+
         </div>
 
         <div className="mb-6">
@@ -70,21 +85,27 @@ const SettingsPage: React.FC = () => {
           </div>
         </div>
 
+        {(currentUser)?
         <div className="mb-6">
-          <h2 className="text-xl font-semibold mb-2">{t("Actions")}</h2>
-          <button
-            className="bg-blue-500 text-white py-2 px-4 rounded-md mr-2 hover:bg-blue-600 focus:outline-none"
-            onClick={handleLogout}
-          >
-            {t("Logout")}
-          </button>
-          <button
-            className="bg-red-500 text-white py-2 px-4 rounded-md hover:bg-red-600 focus:outline-none"
-            onClick={handleDeleteAccount}
-          >
-            {t("Delete Account")}
-          </button>
-        </div>
+        <h2 className="text-xl font-semibold mb-2">{t("Actions")}</h2>
+        <button
+          className="bg-blue-500 text-white py-2 px-4 rounded-md mr-2 hover:bg-blue-600 focus:outline-none"
+          onClick={handleLogout}
+        >
+          {t("Logout")}
+        </button>
+        <button
+          className="bg-red-500 text-white py-2 px-4 rounded-md hover:bg-red-600 focus:outline-none"
+          onClick={handleDeleteAccount}
+        >
+          {t("Delete Account")}
+        </button>
+      </div>
+
+        :<></>}
+        
+
+
       </div>
     </div>
   );

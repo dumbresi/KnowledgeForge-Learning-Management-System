@@ -78,6 +78,10 @@ const Sidebar = (props:Props) => {
     props.category(title);
   }
 
+  const showRegisteredCourses=()=>{
+    navigate(Paths.userCourses);
+  }
+
   const Menus = [
     { title: t("Dashboard"), icon: <RiDashboardLine/> },
     { title: t("Categories"),  icon: <BsList />, submenu: true,
@@ -133,6 +137,9 @@ const Sidebar = (props:Props) => {
               }
               if(menu.title===t('Login')){
                 taketoLoginPage();
+              }
+              if(menu.title==='Wishlist'){
+                showRegisteredCourses();
               }
               }}>
                 <span className={`text-2xl block justify-center duration-500 ${!isSidebarOpen && "pl-4"} `}>{menu.icon}</span>
