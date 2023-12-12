@@ -24,6 +24,11 @@ const userSchema = new schema({
   registeredCourses:{
     type: Array,
     required: false,
+  },
+  courseProgress:{
+    type:Object,
+    required:false,
+    default:{}
   }
 },
 {
