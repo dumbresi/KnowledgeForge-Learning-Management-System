@@ -92,12 +92,12 @@ const AddModuleCard = (props: Props) => {
 
   return (
     <div
-      className={`m-2 flex flex-col hover:shadow-lg items-center justify-normal py-8 px-8 border-2 ${
-        isExpanded ? "h-auto" : "h-20"
-      } duration-1000`}
+      className={`m-2 flex flex-col rounded-3xl hover:shadow-lg items-center justify-normal py-5 px-8 border-2 bg-background_cream ${
+        isExpanded ? "h-auto bg-white" : "h-20 bg-sky-100"
+      } duration-500`}
     >
       <h3
-        className="text-2xl font-semibold leading-7 text-gray-900 cursor-pointer"
+        className="text-xl font-semibold leading-7 text-gray-900 cursor-pointe md:text-2xl"
         onClick={toggleExpansion}
       >
         Add Module
