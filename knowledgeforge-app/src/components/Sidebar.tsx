@@ -29,6 +29,7 @@ const Sidebar = (props:Props) => {
   const dispatch=useDispatch();
   const { currentUser, loading, error } = useSelector((state:RootState)=>state.user);
   const { t } = useTranslation('common');
+  const isUser= currentUser?.userType==='user';
 
   useEffect(() => {
     if (smallScreen) {
@@ -82,6 +83,9 @@ const Sidebar = (props:Props) => {
     navigate(Paths.userCourses);
   }
 
+  const goToAddCoursePage=()=>{
+    navigate(Paths.addCoursePath);
+  }
   const Menus = [
     { title: t("Dashboard"), icon: <RiDashboardLine/> },
     { title: t("Categories"),  icon: <BsList />, submenu: true,
@@ -91,7 +95,9 @@ const Sidebar = (props:Props) => {
             {title: t("Cybersecurity")},
         ],
     },
-    {title: t("Wishlist"),  icon: <BsBookmarkStar /> },
+    ...(currentUser?[
+      ...(isUser?[ {title: t("My Courses"),  icon: <BsBookmarkStar /> }]:[{title: t("Add Course"), icon:<BsBookmarkStar/>}])
+    ]:[]),
     {title: t("Contact"),  icon: <AiTwotoneMail /> },
     {title: t("Settings"), spacing: true, icon: <RiSettings5Line /> },
     ...(currentUser
@@ -138,8 +144,11 @@ const Sidebar = (props:Props) => {
               if(menu.title===t('Login')){
                 taketoLoginPage();
               }
-              if(menu.title==='Wishlist'){
+              if(menu.title==='My Courses'){
                 showRegisteredCourses();
+              }
+              if(menu.title==='Add Course'){
+                goToAddCoursePage();
               }
               }}>
                 <span className={`text-2xl block justify-center duration-500 ${!isSidebarOpen && "pl-4"} `}>{menu.icon}</span>
