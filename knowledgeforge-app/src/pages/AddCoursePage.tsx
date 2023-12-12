@@ -5,11 +5,11 @@ import Sidebar from "../components/Sidebar";
 const AddCoursePage = () => {
   const category = () => {};
   return (
-    <div className="flex flex-row">
-      <div className="flex w-1/6 bg-background-cream">
+    <div className="flex-row">
+      <div className="flex bg-zinc-100">
         <Sidebar category={category} />
-        <div className="flex flex-col justify-between items-center p-4">
-          <div className="flex flex-col justify-between items-center bg-white rounded-lg ml-32 p-8 shadow-2xl w-full md:w-full">
+        <div className="flex-grow flex justify-center items-center p-4">
+          <div className="flex flex-col items-center bg-white rounded-lg p-8 shadow-2xl w-full md:w-full">
             <AddCourseCard />
           </div>
         </div>

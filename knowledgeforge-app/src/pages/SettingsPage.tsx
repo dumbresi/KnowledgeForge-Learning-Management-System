@@ -56,13 +56,12 @@ const SettingsPage: React.FC = () => {
 
   return (
     <div className="flex h-screen w-full overflow-hidden">
-      
-      <div className="container p-8  w-full ">
-      <h1 className="text-3xl font-bold mb-6">{t("Settings")}</h1>
+      <div className="container p-8  w-full ml-12 mt-6">
+      <h1 className="text-4xl font-semibold mb-6">{t("Settings")}</h1>
 
       <div className="bg-zinc-100 p-6 rounded-lg shadow-md">
         <div className="mb-6">
-          <h2 className="text-xl font-semibold mb-2">{t("Account Details")}</h2>
+          <h2 className="text-2xl font-semibold mb-2">{t("Account Details")}</h2>
           {currentUser ? (
             currentUser.userType === "user" ? (
               <button
@@ -94,7 +93,7 @@ const SettingsPage: React.FC = () => {
         </div>
 
         <div className="mb-6">
-          <h2 className="text-xl font-semibold mb-2">{t("Theme")}</h2>
+          <h2 className="text-2xl font-semibold mb-2">{t("Theme")}</h2>
           <div className="flex items-center">
             <span className="mr-2">{t("Dark Mode")}</span>
             <button
@@ -110,9 +109,9 @@ const SettingsPage: React.FC = () => {
 
         {currentUser ? (
           <div className="mb-6">
-            <h2 className="text-xl font-semibold mb-2">{t("Actions")}</h2>
+            <h2 className="text-2xl font-semibold mb-2">{t("Actions")}</h2>
             <button
-              className="bg-blue-500 text-white py-2 px-4 rounded-md mr-2 hover:bg-blue-600 focus:outline-none"
+              className="bg-blue-500 text-white py-2 px-4 rounded-md mr-2 hover:bg-blue-600 focus:outline-none mt-2"
               onClick={handleLogout}
             >
               {t("Logout")}
