@@ -105,7 +105,7 @@ const CourseDetails: React.FC<Props> = () => {
               <h1 className="text-3xl md:text-4xl font-bold mb-2">
                 {course.title}
               </h1>
-              <p className="text-sm md:text-base text-gray-600 mb-4 mt-4">
+              <p className="text-sm md:text-base italic  text-gray-600 mb-4 mt-4">
                 {course.description}
               </p>
               <div className="flex flex-row text-yellow-500">
@@ -118,7 +118,7 @@ const CourseDetails: React.FC<Props> = () => {
             </div>
 
             <img
-              className={`w-full md:w-1/2 h-36 object-cover rounded-lg md:ml-10 ${
+              className={`w-full md:w-1/2 h-36 object-cover shadow-lg rounded-lg md:ml-10 ${
                 thumbnailError ? "h-36" : ""
               }`}
               alt="Course Thumbnail"
@@ -127,7 +127,7 @@ const CourseDetails: React.FC<Props> = () => {
             />
           </div>
 
-          <hr className="w-full border-t my-6" />
+          <hr className="w-full border-t-2 shadow-lg border-gray-300 my-6" />
 
           {isEnrolled ? (
             <div className="md:flex md:justify-between">
@@ -136,28 +136,31 @@ const CourseDetails: React.FC<Props> = () => {
                   <li className="mb-2 font-bold text-2xl">
                     {selectedModule?.title}
                   </li>
-                  <li className="text-base text-gray-600 mt-4 mb-4">
+                  <li className="text-base italic  text-gray-600 mt-4 mb-1">
                     {selectedModule?.description}
                   </li>
-                  <li className="text-sm text-gray-600 mb-4">
+                  <li className="text-sm italic  text-gray-600 mb-4">
                     Duration: {selectedModule?.duration}
                   </li>
                 </ul>
 
-                <div className="border-2 w-11/12 h-96 rounded-lg overflow-auto">
+                <div className="border-2 w-11/12 h-96 rounded-lg shadow-xl overflow-auto">
                   <VideoPlayer videoID={`${selectedModule?.videoId}`} />
                 </div>
               </div>
 
               <div className="md:w-1/3 md:mr-8 flex flex-col items-center">
                 <div className="w-full mb-4">
+                  <h2 className="font-bold text-xl text-gray-800 mb-4">
+                    List of Modules
+                  </h2>
                   {modules.map((moduleItem: Module) => (
                     <div
                       key={moduleItem._id}
                       onClick={() => {
                         changeSelectedModule(moduleItem);
                       }}
-                      className={`cursor-pointer bg-gray-200 rounded-lg shadow-md p-4 mb-2 ${
+                      className={`cursor-pointer hover:shadow-lg bg-gray-200 rounded-lg shadow-md p-2 mb-4 duration-300 ${
                         selectedModule?._id === moduleItem._id
                           ? "bg-gray-200"
                           : ""
