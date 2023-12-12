@@ -32,19 +32,18 @@ function Login(): JSX.Element {
         JSON.stringify({ email, password })
       );
 
-    const data = await response.json();
-    const storeData= {
-      userName:data.sanitizedUser.userName,
-      email:data.sanitizedUser.email,
-      contactNumber:data.sanitizedUser.contactNumber,
-      userType:'user'
-    }
-    console.log(storeData);
-    if(response.status===200){
-      dispatch(signInSuccess(storeData))
-      navigate('/');
-    }
-
+      const data = await response.json();
+      const storeData = {
+        userName: data.sanitizedUser.userName,
+        email: data.sanitizedUser.email,
+        contactNumber: data.sanitizedUser.contactNumber,
+        userType: "user",
+      };
+      console.log(storeData);
+      if (response.status === 200) {
+        dispatch(signInSuccess(storeData));
+        navigate("/");
+      }
     }
     if (activeTab === "instructor") {
       const response = await AuthService.loginInstructor(
@@ -53,16 +52,16 @@ function Login(): JSX.Element {
 
       const data = await response.json();
       // Handle the 'data' as needed
-      const storeData= {
-        userName:data.instructor.name,
-        email:data.instructor.email,
-        contactNumber:data.instructor.contactNumber,
-        userType:'instructor'
-      }
-      
-      if(response.status===200){
-        dispatch(signInSuccess(storeData))
-        navigate('/');
+      const storeData = {
+        userName: data.instructor.name,
+        email: data.instructor.email,
+        contactNumber: data.instructor.contactNumber,
+        userType: "instructor",
+      };
+
+      if (response.status === 200) {
+        dispatch(signInSuccess(storeData));
+        navigate("/");
       }
     }
   }
@@ -78,11 +77,11 @@ function Login(): JSX.Element {
         <div
           className={`tab ${
             activeTab === "instructor" ? "active" : ""
-          } w-1/2 border-2 p-2 hover:bg-light_blue transition text-center ${
+          } w-1/2 border-2 p-2  duration-300 transition text-center ${
             activeTab === "instructor"
-              ? "border-light_blue bg-light_blue text-white"
-              : "border-transparent text-gray-700"
-          } rounded-tl-lg shadow-md`}
+              ? "border-stone-600 bg-sky-800 text-white font-semibold"
+              : "border-transparent text-gray-700 hover:bg-sky-100"
+          } rounded-tl-lg shadow-xl`}
           onClick={() => handleTabClick("instructor")}
         >
           Instructor Login
@@ -90,11 +89,11 @@ function Login(): JSX.Element {
         <div
           className={`tab ${
             activeTab === "student" ? "active" : ""
-          } w-1/2 border-2 p-2 hover:bg-light_blue transition text-center ${
+          } w-1/2 border-2 p-2 transition duration-300 text-center ${
             activeTab === "student"
-              ? "border-light_blue bg-light_blue text-white"
-              : "border-transparent text-gray-700"
-          } rounded-tr-lg shadow-md`}
+              ? " border-stone-600 bg-sky-800 text-white font-semibold"
+              : "border-transparent text-gray-700 hover:bg-sky-100"
+          } rounded-tr-lg shadow-xl`}
           onClick={() => handleTabClick("student")}
         >
           Student Login
@@ -140,7 +139,7 @@ function Login(): JSX.Element {
                 <div className="text-center m-auto">
                   New user?{" "}
                   <button
-                    className="text-light_blue hover:underline"
+                    className="text-sky-500 hover:underline"
                     onClick={takeToSignUpPage}
                   >
                     Sign Up
@@ -194,7 +193,7 @@ function Login(): JSX.Element {
                 <div className="text-center m-auto">
                   New user?{" "}
                   <button
-                    className="text-light_blue hover:underline"
+                    className="text-sky-500 hover:underline"
                     onClick={takeToSignUpPage}
                   >
                     Sign Up
