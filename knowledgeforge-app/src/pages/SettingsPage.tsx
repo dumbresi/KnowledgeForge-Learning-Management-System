@@ -52,7 +52,8 @@ const SettingsPage: React.FC = () => {
   };
 
   return (
-    <div className="container mx-auto p-8">
+    <div>
+      <div className="container mx-auto p-8 bg-zinc-100 h-full">
       <h1 className="text-3xl font-bold mb-6">{t("Settings")}</h1>
 
       <div className="bg-white p-6 rounded-lg shadow-md">
@@ -123,6 +124,8 @@ const SettingsPage: React.FC = () => {
           <></>
         )}
       </div>
+    </div>
+  
     </div>
   );
 };
