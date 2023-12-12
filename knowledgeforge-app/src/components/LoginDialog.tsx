@@ -32,13 +32,19 @@ function Login(): JSX.Element {
         JSON.stringify({ email, password })
       );
 
-      const data = await response.json();
-      // Handle the 'data' as needed
+    const data = await response.json();
+    const storeData= {
+      userName:data.sanitizedUser.userName,
+      email:data.sanitizedUser.email,
+      contactNumber:data.sanitizedUser.contactNumber,
+      userType:'user'
+    }
+    console.log(storeData);
+    if(response.status===200){
+      dispatch(signInSuccess(storeData))
+      navigate('/');
+    }
 
-      if (response.status === 200) {
-        dispatch(signInSuccess(data.sanitizedUser));
-        navigate("/");
-      }
     }
     if (activeTab === "instructor") {
       const response = await AuthService.loginInstructor(
@@ -47,9 +53,16 @@ function Login(): JSX.Element {
 
       const data = await response.json();
       // Handle the 'data' as needed
-
-      if (response.status === 200) {
-        navigate("/");
+      const storeData= {
+        userName:data.userName,
+        email:data.email,
+        contactNumber:data.contactNumber,
+        userType:'user'
+      }
+      
+      if(response.status===200){
+        dispatch(signInSuccess(storeData))
+        navigate('/');
       }
     }
   }
