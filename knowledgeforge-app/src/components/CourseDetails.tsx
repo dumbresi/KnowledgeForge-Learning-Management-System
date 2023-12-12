@@ -144,13 +144,8 @@ const CourseDetails: React.FC<Props> = () => {
                   </li>
                 </ul>
 
-                <div className="border-2 h-96 rounded-lg overflow-scroll">
-                  <div className="relative h-full w-full">
-                    <VideoPlayer
-                      videoID={`${selectedModule?.videoId}`}
-                      // className="absolute top-0 left-0 w-full h-full object-contain"
-                    />
-                  </div>
+                <div className="border-2 w-11/12 h-96 rounded-lg overflow-auto">
+                  <VideoPlayer videoID={`${selectedModule?.videoId}`} />
                 </div>
               </div>
 
@@ -162,7 +157,7 @@ const CourseDetails: React.FC<Props> = () => {
                       onClick={() => {
                         changeSelectedModule(moduleItem);
                       }}
-                      className={`cursor-pointer bg-white rounded-lg shadow-md p-4 mb-2 ${
+                      className={`cursor-pointer bg-gray-200 rounded-lg shadow-md p-4 mb-2 ${
                         selectedModule?._id === moduleItem._id
                           ? "bg-gray-200"
                           : ""
