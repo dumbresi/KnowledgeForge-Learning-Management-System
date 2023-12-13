@@ -23,6 +23,8 @@ import { RootState } from "../redux/store";
 type AllCoursePageProps = {
   pageType: string;
 };
+
+// Home page to display all the courses to the user and instructor's all courses to the instructor
 const AllCoursePage = (props: AllCoursePageProps) => {
   const [courses, setCourses] = useState<Course[]>([]);
   const [filteredCourses, setFilteredCourses] = useState<Course[]>([]);

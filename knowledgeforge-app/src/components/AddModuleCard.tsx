@@ -2,6 +2,7 @@
 import React, { ChangeEvent, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSpinner } from "@fortawesome/free-solid-svg-icons";
+import * as ModuleService from '../services/module-services';
 
 type Props = {
   moduleNo: Number;
@@ -36,6 +37,7 @@ const AddModuleCard = (props: Props) => {
       ...formData,
       [name]: value,
     });
+    setAddModuleText("Add Module");
   };
 
   const handleTextChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
@@ -61,7 +63,10 @@ const AddModuleCard = (props: Props) => {
     try {
       const videoFormData: FormData = new FormData();
       videoFormData.append("video", videoFile as Blob);
-      const response = await fetch("http://localhost:4000/video", {
+      
+      const response = 
+    //   await ModuleService.uploadModuleVideo(videoFormData); //Some error in modularizzation
+      await fetch("http://localhost:4000/video", {
         method: "POST",
         body: videoFormData,
       });
@@ -72,6 +77,7 @@ const AddModuleCard = (props: Props) => {
         setFormData({ ...formData, videoId: generatedVideoId });
         setUploadVideoText("Video Uploaded");;
         setIsVideoUploaded(true);
+        setAddModuleText("Add Module");
       } else {
         console.error("Video upload failed");
       }
@@ -83,13 +89,18 @@ const AddModuleCard = (props: Props) => {
   };
 
   const handleApiCall = () => {
-    fetch("http://localhost:4000/modules", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(formData),
-    })
+    if(!isVideoUploaded){
+        setAddModuleText("Please Upload all files");
+        return;
+    }
+    ModuleService.AddModule(JSON.stringify(formData))
+    // fetch("http://localhost:4000/modules", {
+    //   method: "POST",
+    //   headers: {
+    //     "Content-Type": "application/json",
+    //   },
+    //   body: JSON.stringify(formData),
+    // })
       .then((response) => response.json())
       .then((data) => {
         setAddModuleText("Module Added");
@@ -149,6 +160,7 @@ const AddModuleCard = (props: Props) => {
             <textarea
               id="description"
               name="description"
+              required
               rows={4}
               className="input-field"
               placeholder="Enter module description"
@@ -164,6 +176,7 @@ const AddModuleCard = (props: Props) => {
             <input
               id="duration"
               name="duration"
+              required
               type="text"
               className="input-field"
               placeholder="Enter module duration"
@@ -181,6 +194,7 @@ const AddModuleCard = (props: Props) => {
                 type="file"
                 id="videoFile"
                 name="videoFile"
+                required
                 accept="video/*"
                 className="input-field"
                 onChange={handleFileChange}
@@ -188,7 +202,8 @@ const AddModuleCard = (props: Props) => {
               {videoFile && (
                 <button
                   className="submit-button"
-                  onClick={!isVideoUploaded ? handleVideoUpload : undefined}
+                //   If video is uploaded then handle video upload, if video is still uploading, then disable the upload button
+                  onClick={!isVideoUploaded ? handleVideoUpload : undefined} 
                   disabled={isUploading}
                 >
                   {isUploading ? (
