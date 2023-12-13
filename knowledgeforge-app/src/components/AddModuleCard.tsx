@@ -8,10 +8,10 @@ type Props = {
 const AddModuleCard = (props: Props) => {
   const date: Date = new Date();
   const courseID = props.courseId;
-  const [uploadVideotext,setUploadVideoText]=useState("Upload Video");
-  const [addModuletext,setAddModuleText]=useState("Add Module");
-  const [isModuleAdded,setisModuleAdded]= useState(false);
-  const [isVideoUploaded,setIsVideoUploaded]=useState(false);
+  const [uploadVideotext, setUploadVideoText] = useState("Upload Video");
+  const [addModuletext, setAddModuleText] = useState("Add Module");
+  const [isModuleAdded, setisModuleAdded] = useState(false);
+  const [isVideoUploaded, setIsVideoUploaded] = useState(false);
   const [formData, setFormData] = useState({
     title: "",
     duration: "",
@@ -67,7 +67,7 @@ const AddModuleCard = (props: Props) => {
       const generatedVideoId = result.fileId;
       setFormData({ ...formData, videoId: generatedVideoId });
     });
-    setUploadVideoText("Video Uploaded")
+    setUploadVideoText("Video Uploaded");
     console.log(response);
   };
 
@@ -178,7 +178,10 @@ const AddModuleCard = (props: Props) => {
                 onChange={handleFileChange}
               />
               {videoFile && (
-                <button className="submit-button" onClick={!isVideoUploaded? handleVideoUpload:undefined}>
+                <button
+                  className="submit-button"
+                  onClick={!isVideoUploaded ? handleVideoUpload : undefined}
+                >
                   Upload Video
                 </button>
               )}
