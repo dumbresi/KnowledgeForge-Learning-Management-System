@@ -10,6 +10,8 @@ const AddModuleCard = (props: Props) => {
   const courseID = props.courseId;
   const [uploadVideotext,setUploadVideoText]=useState("Upload Video");
   const [addModuletext,setAddModuleText]=useState("Add Module");
+  const [isModuleAdded,setisModuleAdded]= useState(false);
+  const [isVideoUploaded,setIsVideoUploaded]=useState(false);
   const [formData, setFormData] = useState({
     title: "",
     duration: "",
@@ -83,6 +85,7 @@ const AddModuleCard = (props: Props) => {
       .then((data) => {
         // Handle the API response
         setAddModuleText("Module Added");
+        setisModuleAdded(true);
         console.log(data);
       })
       .catch((error) => {
@@ -175,7 +178,7 @@ const AddModuleCard = (props: Props) => {
                 onChange={handleFileChange}
               />
               {videoFile && (
-                <button className="submit-button" onClick={handleVideoUpload}>
+                <button className="submit-button" onClick={!isVideoUploaded? handleVideoUpload:undefined}>
                   Upload Video
                 </button>
               )}
@@ -183,7 +186,7 @@ const AddModuleCard = (props: Props) => {
           </div>
           <button
             className="mt-4 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-            onClick={handleApiCall}
+            onClick={!isModuleAdded ? handleApiCall : undefined}
           >
             {addModuletext}
           </button>
