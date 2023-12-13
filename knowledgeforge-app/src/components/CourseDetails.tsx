@@ -22,7 +22,7 @@ const CourseDetails: React.FC<Props> = () => {
   const [modules, setModules] = useState<Module[]>([]);
   const [doneButtonColor, setDoneButtonColor] = useState("bg-gray-500");
   const [moduleNo, setModuleNo] = useState(1);
-  const [completedModule, setCompletedModule] = useState<Number[]>([]);
+  const [completedModule, setCompletedModule] = useState<number[]>([1]);
   const [selectedModule, setSelectedModule] = useState<Module | undefined>(
     undefined
   );
@@ -67,7 +67,7 @@ const CourseDetails: React.FC<Props> = () => {
   useEffect(() => {
     // Additional logic to handle video player update when selectedModule changes
 
-    console.log("selectedModule changed");
+    console.log("selectedModule module:"+moduleNo);
   }, [selectedModule]);
 
   useEffect(() => {
@@ -92,10 +92,7 @@ const CourseDetails: React.FC<Props> = () => {
             { length: modNum },
             (_, index) => index + 1
           );
-          setCompletedModule((prevCompletedModules) => [
-            ...prevCompletedModules,
-            ...newCompletedModules,
-          ]);
+          setCompletedModule(newCompletedModules);
           console.log("check progress");
           console.log("latest module:" + modNum);
         } else {
@@ -153,6 +150,16 @@ const CourseDetails: React.FC<Props> = () => {
       console.error("Error marking module as done:", error);
     }
   };
+
+  function areAllModulesCompleted(completedModules: number[], index: number): boolean {
+    // Generate an array of numbers from 1 to index
+    const numbersToCheck = Array.from({ length: index }, (_, i) => i + 1);
+  
+    // Check if all numbers in the range are present in completedModules
+    const allCompleted = numbersToCheck.every(num => completedModules.includes(num));
+  
+    return allCompleted;
+  }
 
   return (
     <>
@@ -226,7 +233,10 @@ const CourseDetails: React.FC<Props> = () => {
                       key={moduleItem._id}
                       onClick={() => {
                         setModuleNo(index + 1);
+                        if(areAllModulesCompleted(completedModule,index)){
                         changeSelectedModule(moduleItem);
+                        }
+                        console.log("Completed Modules:"+completedModule);
                       }}
                       className={`cursor-pointer bg-white shadow-md py-2 hover:shadow-lg transition duration-300 ${
                         selectedModule?._id === moduleItem._id

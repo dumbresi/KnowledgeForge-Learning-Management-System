@@ -7,6 +7,10 @@ import * as Paths from '../resources/paths'
 import { useSelector } from 'react-redux';
 import { RootState } from '../redux/store';
 import { useTranslation } from "react-i18next";
+import i18n from "../i18n";
+import LocaleContext from "../LocaleContext";
+
+
 
 type Props = {
   onSearch: (query: string) => void ;
@@ -46,33 +50,56 @@ const Topbar = ({ onSearch }: Props) => {
   function searchHandler(query: string): void {
     throw new Error("Function not implemented.");
   }
+  
+  const [locale, setLocale] = useState(i18n.language);
+  i18n.on('languageChanged', (lng) => setLocale(i18n.language));
+  const handleChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    i18n.changeLanguage(event.target.value);
+  }
 
   return (
-    <div>
+    <LocaleContext.Provider value={{ locale, setLocale }}>
+      <div>
       <nav className="bg-white border-gray-200 dark:bg-gray-900">
         <div className="flex justify-between items-center mx-auto max-w-screen-xl p-4">
           <div className="max-w-screen-x1 w-3/4">
-          <SearchBox onSearch={onSearch} />
+            <SearchBox onSearch={onSearch} />
           </div>
           <div className="flex items-center space-x-6 rtl:space-x-reverse">
-          <button className="text-xl font-semibold text-gray-500 dark:text-white" onClick={takeToProfilePage}>
-            {currentUser?.userName}
-          </button>
+            <button className="text-xl font-semibold text-gray-500 dark:text-white" onClick={takeToProfilePage}>
+              {currentUser?.userName}
+            </button>
+            <div >
+              <select className= "bg-gray-900 text-white" value={locale} onChange={handleChange}>
+              <option value="en">English</option>
+              <option value="ja">Japanese</option>
+              <option value="es">Spanish</option>
+              <option value="ar">Arabic</option>
+              <option value="bn">Bengali</option>
+              <option value="cn">Chinese</option>
+              <option value="fr">French</option>
+              <option value="hi">Hindi</option>
+              <option value="pa">Punjabi</option>
+              <option value="pt">Portugese</option>
+              <option value="ru">Russian</option>
+              </select>
+            </div>
 
             {/* {currentUser?.userName ? (
-                <button onClick={handleLogout} className="text-white end-2.5 bottom-2.5 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-1.5 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-                  {t("Logout")}
-                </button>
-              ) : (
-                <button onClick={handleLogin} className="text-white end-2.5 bottom-2.5 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-1.5 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-                >
-                  {t("Login")}
-                </button>
-              )} */}
+        <button onClick={handleLogout} className="text-white end-2.5 bottom-2.5 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-1.5 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+          {t("Logout")}
+        </button>
+      ) : (
+        <button onClick={handleLogin} className="text-white end-2.5 bottom-2.5 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-1.5 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+        >
+          {t("Login")}
+        </button>
+      )} */}
           </div>
         </div>
       </nav>
     </div>
+    </LocaleContext.Provider>
   );
 };
 
