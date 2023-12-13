@@ -12,3 +12,9 @@ export const postCourses = async (payload:Course) =>{
     const newCourse= baseService.post<Course>(coursePath,payload,'')
     return newCourse;
 }
+
+export const addInstructorCourses=async (payload:string): Promise<Response> => {
+    const addCourse= baseService.post(coursePath,payload,"");
+    return addCourse;
+    
+}

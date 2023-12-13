@@ -7,7 +7,7 @@ import CoursesGrid from '../components/CoursesGrid';
 import Sidebar from '../components/Sidebar';
 
 type Props = {}
-
+// Show user's enrolled courses in the page
 const UserCourses  = (props: Props) => {
   const [enrolledCourses,setEnrolledCourses]=useState<Course[]>([])
   const { currentUser, loading, error } = useSelector((state:RootState)=>state.user);
