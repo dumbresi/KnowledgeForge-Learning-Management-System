@@ -67,7 +67,7 @@ const CourseDetails: React.FC<Props> = () => {
   useEffect(() => {
     // Additional logic to handle video player update when selectedModule changes
 
-    console.log("selectedModule changed");
+    console.log("selectedModule module:"+moduleNo);
   }, [selectedModule]);
 
   useEffect(() => {
@@ -92,10 +92,7 @@ const CourseDetails: React.FC<Props> = () => {
             { length: modNum },
             (_, index) => index + 1
           );
-          setCompletedModule((prevCompletedModules) => [
-            ...prevCompletedModules,
-            ...newCompletedModules,
-          ]);
+          setCompletedModule(newCompletedModules);
           console.log("check progress");
           console.log("latest module:" + modNum);
         } else {
@@ -223,7 +220,9 @@ const CourseDetails: React.FC<Props> = () => {
                       key={moduleItem._id}
                       onClick={() => {
                         setModuleNo(index + 1);
+                        if(completedModule.includes(0) && index===0 || completedModule.includes(index)){
                         changeSelectedModule(moduleItem);
+                        }
                       }}
                       className={`cursor-pointer hover:shadow-lg bg-sky-200 rounded-lg shadow-md p-2 mb-4 duration-300 ${
                         selectedModule?._id === moduleItem._id
