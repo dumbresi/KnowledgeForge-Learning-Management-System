@@ -6,6 +6,12 @@ const localhost='http://localhost:4000'
 const userPath = '/user';
 const getUserPath='/current'
 
+interface CourseProgress {
+    courseProgress: {
+      [key: string]: number;
+    };
+  }
+
 export const getUser = async (): Promise<User> => {
     try {
         const user = await commonService.commonGETOne<User>(userDetailsPath);
@@ -16,6 +22,7 @@ export const getUser = async (): Promise<User> => {
         throw new Error('Error fetching user data: ' + error);
     }
 };
+ 
 
 export const getRegisteredCourses=async (): Promise<Course[]> => {
     try {
@@ -54,4 +61,27 @@ export const checkRegistration = async (courseId: string):Promise<{registered:bo
       throw error;
     }
   };
+
+export const updateCourseProgress=async(payload:string)=>{
+    try {
+        const response : Response = await baseService.post(userPath+'/courseProgress',payload,'');
+        return response;
+    } catch (error) {
+        
+    }
+}
+
+export const getCourseModuleProgress=async(courseid:string)=>{
+    try {
+        const response:CourseProgress= await baseService.getDatafromPayload(userPath+`/courseProgress/${courseid}`);
+         
+        const courseId = courseid; // Replace with the actual courseId
+        const courseProgressValue = response.courseProgress[courseId];
+        console.log("data:"+courseProgressValue);
+        const progress = courseProgressValue;
+        return progress;
+    } catch (error) {
+        console.log(error);
+    }
+}
 

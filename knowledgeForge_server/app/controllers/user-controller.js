@@ -142,7 +142,7 @@ export const getCourseProgress = async (request, response) => {
     try {
         const user = jwt.verify(token, 'secret123');
         
-        const courseId=request.body.courseId;
+        const courseId=request.params.id;
         
         const result = await UserService.getProgress(user.email, courseId);
         setResponse(result, response);
