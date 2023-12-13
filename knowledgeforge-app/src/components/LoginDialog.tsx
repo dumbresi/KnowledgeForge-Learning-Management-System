@@ -137,7 +137,7 @@ function Login(): JSX.Element {
                 <br />
                 <br />
                 <div className="text-center m-auto">
-                  New user?{" "}
+                  New Instructor?{" "}
                   <button
                     className="text-sky-500 hover:underline"
                     onClick={takeToSignUpPage}
