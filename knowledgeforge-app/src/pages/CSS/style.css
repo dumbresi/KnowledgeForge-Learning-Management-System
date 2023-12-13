@@ -4,7 +4,7 @@
 
 @layer components {
     .input-field {
-        @apply border w-36 py-2 px-2 rounded shadow hover:border-gray-500 duration-300 ring-1 ring-inset ring-gray-300 md:w-80;
+        @apply border w-36 py-2 px-4 rounded shadow hover:border-gray-500 duration-300 ring-1 ring-inset ring-gray-300 md:w-80;
     }
 
     .submit-button {

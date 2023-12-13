@@ -99,7 +99,7 @@ const AddModuleCard = (props: Props) => {
 
   return (
     <div
-      className={`m-2 flex flex-col rounded-3xl hover:shadow-lg items-center justify-normal py-5 px-8 border-2 bg-background_cream ${
+      className={`m-2 flex flex-col rounded-3xl hover:shadow-lg items-center hover:cursor-pointer justify-normal py-5 px-8 border-2 bg-background_cream ${
         isExpanded ? "h-auto bg-white" : "h-20 bg-sky-100"
       } duration-500`}
     >
