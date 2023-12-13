@@ -5,8 +5,7 @@ import Instructor from "../models/Instructor";
 import Sidebar from "../components/Sidebar";
 
 const InstructorDetail = () => {
-  const [instructor, setInstructor] = useState<Instructor>(
-  {
+  const [instructor, setInstructor] = useState<Instructor>({
     name: "",
     email: "",
     contactNumber: "",
@@ -14,6 +13,8 @@ const InstructorDetail = () => {
     // password: "",
     // myCourses: []
   });
+
+  const category = () => {};
 
   useEffect(() => {
     const fetchData = async () => {
@@ -30,9 +31,9 @@ const InstructorDetail = () => {
   }, []);
 
   return (
-    <div className="instructor-details-page">
-      
-      <div className="instructor">
+    <div className="flex flex-row instructor-details-page">
+      <Sidebar category={category} />
+      <div className="w-screen instructor">
         <InstructorDetailCard instructor={instructor} />
       </div>
     </div>
