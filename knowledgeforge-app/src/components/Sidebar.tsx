@@ -187,6 +187,9 @@ const Sidebar = (props: Props) => {
                     if (menu.title === "Add Course") {
                       goToAddCoursePage();
                     }
+                    if (menu.title === "Categories") {
+                      setSubmenuOpen(!isSubmenuOpen);
+                    }
                   }}
                 >
                   <span
