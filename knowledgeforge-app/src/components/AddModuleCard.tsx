@@ -1,4 +1,7 @@
+// Import necessary dependencies or components
 import React, { ChangeEvent, useState } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faSpinner } from "@fortawesome/free-solid-svg-icons";
 
 type Props = {
   moduleNo: Number;
@@ -8,10 +11,11 @@ type Props = {
 const AddModuleCard = (props: Props) => {
   const date: Date = new Date();
   const courseID = props.courseId;
-  const [uploadVideotext,setUploadVideoText]=useState("Upload Video");
-  const [addModuletext,setAddModuleText]=useState("Add Module");
-  const [isModuleAdded,setisModuleAdded]= useState(false);
-  const [isVideoUploaded,setIsVideoUploaded]=useState(false);
+  const [uploadVideotext, setUploadVideoText] = useState("Upload Video");
+  const [addModuletext, setAddModuleText] = useState("Add Module");
+  const [isModuleAdded, setisModuleAdded] = useState(false);
+  const [isVideoUploaded, setIsVideoUploaded] = useState(false);
+  const [isUploading, setIsUploading] = useState(false);
   const [formData, setFormData] = useState({
     title: "",
     duration: "",
@@ -20,12 +24,9 @@ const AddModuleCard = (props: Props) => {
     creationTime: date,
     videoId: "",
     courseId: courseID,
-    // videoFile: null as File | null,
   });
 
-  const [videoFile, setvideoFile] = useState<Blob>();
-
-  const [videodata, setVideoData] = useState<File>();
+  const [videoFile, setVideoFile] = useState<Blob>();
 
   const [isExpanded, setIsExpanded] = useState(false);
 
@@ -49,31 +50,39 @@ const AddModuleCard = (props: Props) => {
     const file = e.target.files?.[0];
 
     if (file) {
-      setvideoFile(file);
+      setVideoFile(file);
       console.log("file" + file);
     }
   };
 
   const handleVideoUpload = async () => {
-    const videoFormData: FormData = new FormData();
-    videoFormData.append("video", videoFile as Blob);
-    const response = await fetch("http://localhost:4000/video", {
-      method: "POST",
+    setIsUploading(true);
 
-      body: videoFormData,
-    }).then(async (value) => {
-      type responseType = { message: string; fileId: string };
-      const result: responseType = await value.json(); // Parse JSON response
-      const generatedVideoId = result.fileId;
-      setFormData({ ...formData, videoId: generatedVideoId });
-    });
-    setUploadVideoText("Video Uploaded")
-    console.log(response);
+    try {
+      const videoFormData: FormData = new FormData();
+      videoFormData.append("video", videoFile as Blob);
+      const response = await fetch("http://localhost:4000/video", {
+        method: "POST",
+        body: videoFormData,
+      });
+
+      if (response.ok) {
+        const result = await response.json();
+        const generatedVideoId = result.fileId;
+        setFormData({ ...formData, videoId: generatedVideoId });
+        setUploadVideoText("Video Uploaded");
+        setIsVideoUploaded(true);
+      } else {
+        console.error("Video upload failed");
+      }
+    } catch (error) {
+      console.error("Error uploading video:", error);
+    } finally {
+      setIsUploading(false);
+    }
   };
 
   const handleApiCall = () => {
-    // Your API call logic here
-    // Example using fetch:
     fetch("http://localhost:4000/modules", {
       method: "POST",
       headers: {
@@ -83,7 +92,6 @@ const AddModuleCard = (props: Props) => {
     })
       .then((response) => response.json())
       .then((data) => {
-        // Handle the API response
         setAddModuleText("Module Added");
         setisModuleAdded(true);
         console.log(data);
@@ -104,7 +112,7 @@ const AddModuleCard = (props: Props) => {
       } duration-500`}
     >
       <h3
-        className="text-xl font-semibold leading-7 text-gray-900 cursor-pointe md:text-2xl"
+        className="text-xl font-semibold leading-7 text-gray-900 cursor-pointer md:text-2xl"
         onClick={toggleExpansion}
       >
         Add Module
@@ -178,8 +186,19 @@ const AddModuleCard = (props: Props) => {
                 onChange={handleFileChange}
               />
               {videoFile && (
-                <button className="submit-button" onClick={!isVideoUploaded? handleVideoUpload:undefined}>
-                  Upload Video
+                <button
+                  className="submit-button"
+                  onClick={!isVideoUploaded ? handleVideoUpload : undefined}
+                  disabled={isUploading}
+                >
+                  {isUploading ? (
+                    <>
+                      <FontAwesomeIcon icon={faSpinner} spin />
+                      {" Uploading..."}
+                    </>
+                  ) : (
+                    "Upload Video"
+                  )}
                 </button>
               )}
             </div>
