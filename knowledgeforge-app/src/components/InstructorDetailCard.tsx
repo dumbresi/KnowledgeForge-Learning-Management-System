@@ -158,7 +158,7 @@ const InstructorDetailCard: React.FC<InstructorDetailCardProps> = ({
                 />
               ) : (
                 <dd className="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
-                  {editedInstructor.contactNumber}
+                  {currentUser?.contactNumber}
                 </dd>
               )}
             </div>
