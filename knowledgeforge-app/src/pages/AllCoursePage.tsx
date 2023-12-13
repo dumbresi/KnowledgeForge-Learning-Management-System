@@ -74,7 +74,7 @@ const AllCoursePage = (props: AllCoursePageProps) => {
 
   return (
     <div className=" bg-zinc-100 flex h-full">
-      <div className="flex">
+      <div className="flex flex-col h-screen">
         <Sidebar category={filterCoursesByCategory} />
       </div>
 
