@@ -1,12 +1,15 @@
 import React, { useEffect, useState } from "react";
 import Instructor from "../models/Instructor";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { updateUserSuccess } from "../redux/user/userSlice";
 import { useTranslation } from "react-i18next";
+import { RootState } from "../redux/store";
 
 type InstructorDetailCardProps = {
   instructor: Instructor;
 };
+
+
 
 const InstructorDetailCard: React.FC<InstructorDetailCardProps> = ({
   instructor,
@@ -15,16 +18,24 @@ const InstructorDetailCard: React.FC<InstructorDetailCardProps> = ({
   const dispatch = useDispatch();
   const [editedInstructor, setEditedInstructor] = useState<Instructor>({
     name: instructor.name,
-    email: instructor.email,
+    email: '',
     university: instructor.university,
     contactNumber: instructor.contactNumber,
     // Add other properties if needed
   });
+  const { currentUser } = useSelector((state:RootState)=>state.user);
 
-  useEffect(() => {}, [isEditing]);
+
+  // useEffect(()=>{
+
+  // },[isEditing]);
+  // const handleEditClick = () => {
+  //   setIsEditing(!isEditing);
+  // };
   const handleEditClick = () => {
     setIsEditing(!isEditing);
   };
+
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -53,20 +64,26 @@ const InstructorDetailCard: React.FC<InstructorDetailCardProps> = ({
         }),
       });
       if (result.ok) {
-        const updatedUserData = await result.json();
-        console.log(updatedUserData); // Log the updated user data
-        setEditedInstructor(updatedUserData);
+        const updatedInstructorData = await result.json();
+        console.log(updatedInstructorData); // Log the updated user data
+        setEditedInstructor(updatedInstructorData);
+        console.log(editedInstructor);
         // setEditedUser(updatedUserData);
+        const storeData = {
+          userName: updatedInstructorData.name,
+          email: updatedInstructorData.email,
+          contactNumber: updatedInstructorData.contactNumber,
+          userType: "instructor",
+        };
 
-        dispatch(
-          updateUserSuccess({
-            userName: updatedUserData.name,
-            contactNumber: updatedUserData.contactNumber,
-            email: updatedUserData.email,
-            userType: "instructor",
-          })
-        );
-        console.log("User data:" + updatedUserData);
+        dispatch(updateUserSuccess(storeData));
+
+        // dispatch(updateUserSuccess({
+        //   userName: updatedInstructorData.name, contactNumber: updatedInstructorData.contactNumber,
+        //   email: updatedInstructorData.email,
+        //   userType: "instructor"
+        // }));
+        // console.log("Instructor data:"+updatedInstructorData)
       } else {
         // Handle unsuccessful response
       }
@@ -85,13 +102,15 @@ const InstructorDetailCard: React.FC<InstructorDetailCardProps> = ({
 
   return (
     <div className="min-h-screen flex items-center justify-end px-4 bg-background_cream pr-32">
-      <div className="p-40 max-w-8xl bg-white w-3/4 rounded-lg shadow-xl">
+      <div className="p-12 max-w-8xl bg-white w-3/4 rounded-lg shadow-xl">
         <div className="px-4 sm:px-0">
-          <h3 className="text-lg font-semibold leading-7 text-gray-900">
-            {isEditing ? t("Edit Instructor") : instructor.name}
+          <div className="p-2">
+            <h3 className="text-2xl font-semibold leading-7 text-gray-900 ">
+            {isEditing ? t("Edit Instructor") : (currentUser?.userName || 'instructor' )}
           </h3>
-          <p className="mt-1 max-w-2xl text-sm leading-6 text-gray-500">
-            {t("Following are your details")}
+          </div>
+          <p className="mt-1 ml-2 max-w-2xl text-sm leading-6 text-gray-500">
+            {t("Welcome to your profile.")}
           </p>
         </div>
         <div className="mt-6 border-t border-gray-100">
@@ -117,18 +136,12 @@ const InstructorDetailCard: React.FC<InstructorDetailCardProps> = ({
                   className="border rounded px-3 py-2 w-full focus:outline-none focus:border-blue-500"
                 />
               ) : (
-                <dd className="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
-                  {editedInstructor.name}
-                </dd>
+                <dd className="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">{currentUser?.userName}</dd>
               )}
             </div>
             <div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
-              <dt className="text-sm font-medium leading-6 text-gray-900">
-                {t("Email")}
-              </dt>
-              <dd className="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
-                {instructor.email}
-              </dd>
+              <dt className="text-sm font-medium leading-6 text-gray-900">{t("Email")}</dt>
+              <dd className="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">{currentUser?.email}</dd>
             </div>
 
             <div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
@@ -138,14 +151,14 @@ const InstructorDetailCard: React.FC<InstructorDetailCardProps> = ({
               {isEditing ? (
                 <input
                   type="text"
-                  name="contactNumber"
+                  name= "contactNumber"
                   value={editedInstructor.contactNumber}
                   onChange={handleInputChange}
                   className="border rounded px-3 py-2 w-full focus:outline-none focus:border-blue-500"
                 />
               ) : (
                 <dd className="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
-                  {editedInstructor.contactNumber}
+                  {currentUser?.contactNumber}
                 </dd>
               )}
             </div>

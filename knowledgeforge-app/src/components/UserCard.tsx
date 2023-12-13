@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
 import UserModel from "../models/UserModel";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { updateUserSuccess } from "../redux/user/userSlice";
 import { useTranslation } from "react-i18next";
+import { RootState } from "../redux/store";
 
 type UserCardProps = {
   user: {
@@ -15,15 +16,8 @@ type UserCardProps = {
 const UserCard: React.FC<UserCardProps> = ({ user }) => {
   const [isEditing, setIsEditing] = useState(false);
   const dispatch = useDispatch();
-  const [editedUser, setEditedUser] = useState<UserModel>({
-    userName: user.userName,
-    email: "",
-    contactNumber: user.contactNumber,
-    // password: '', // Initialize with an empty string or default value
-    // registeredCourses: '', // Initialize with an empty array or default value
-  });
   // State to manage the updated user data from the API response
-  const [updatedUser, setUpdatedUser] = useState<UserModel>({
+  const [editedUser, setEditedUser] = useState<UserModel>({
     userName: user.userName,
     email: "",
     contactNumber: user.contactNumber,
@@ -41,6 +35,8 @@ const UserCard: React.FC<UserCardProps> = ({ user }) => {
       [name]: value,
     }));
   };
+  const { currentUser } = useSelector((state:RootState)=>state.user);
+
 
   const handleSaveClick = async () => {
     try {
@@ -53,16 +49,16 @@ const UserCard: React.FC<UserCardProps> = ({ user }) => {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          userName: editedUser.userName,
-          contactNumber: editedUser.contactNumber,
+          "userName": editedUser.userName,
+          "contactNumber": editedUser.contactNumber,
         }),
       });
       // console.log( result.json());
       // console.log(updatedUser);
       if (result.ok) {
         const updatedUserData = await result.json();
-        console.log(updatedUserData); // Log the updated user data
-        setUpdatedUser(updatedUserData);
+        // console.log(updatedUserData); // Log the updated user data
+        // setUpdatedUser(updatedUserData);
         setEditedUser(updatedUserData);
         const storeData = {
           userName: updatedUserData.userName,
@@ -71,7 +67,7 @@ const UserCard: React.FC<UserCardProps> = ({ user }) => {
           userType: "user",
         };
         dispatch(updateUserSuccess(storeData));
-        console.log("User data:" + updatedUserData);
+        // console.log("User data:" + updatedUserData);
       } else {
         // Handle unsuccessful response
       }
@@ -126,7 +122,7 @@ const UserCard: React.FC<UserCardProps> = ({ user }) => {
                 {t("Email")}
               </dt>
               <dd className="mt-1 text-md leading-6 text-gray-700">
-                {user.email}
+                {currentUser?.contactNumber}
               </dd>
             </div>
             <div className="px-4 py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
