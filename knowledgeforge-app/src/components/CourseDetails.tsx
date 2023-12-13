@@ -102,9 +102,7 @@ const CourseDetails: React.FC<Props> = () => {
         <div className="container mx-auto mt-10 p-4 ml-2">
           <div className="md:flex md:items-center md:justify-between">
             <div className="mb-4 md:mb-0">
-              <h1 className="text-3xl md:text-4xl  mb-2">
-                {course.title}
-              </h1>
+              <h1 className="text-3xl md:text-4xl  mb-2">{course.title}</h1>
               <p className="text-sm md:text-base italic  text-gray-600 mb-4 mt-4">
                 {course.description}
               </p>
@@ -132,23 +130,19 @@ const CourseDetails: React.FC<Props> = () => {
           {isEnrolled ? (
             <div className="md:flex md:justify-between mt-12">
               <div className="mb-4 md:mb-0 md:w-2/3">
-                
-
                 <div className="border-2 w-11/12 h-96 rounded-lg shadow-xl overflow-auto">
                   <VideoPlayer videoID={`${selectedModule?.videoId}`} />
                 </div>
                 <div className="mt-6">
-                <ul>
-                  <li className="mb-2 text-3xl">
-                    {selectedModule?.title}
-                  </li>
-                  <li className="text-base italic  text-gray-600 mt-4 mb-1">
-                    {selectedModule?.description}
-                  </li>
-                  <li className="text-sm italic  text-gray-600 mb-4">
-                    Duration: {selectedModule?.duration}
-                  </li>
-                </ul>
+                  <ul>
+                    <li className="mb-2 text-3xl">{selectedModule?.title}</li>
+                    <li className="text-base italic  text-gray-600 mt-4 mb-1">
+                      {selectedModule?.description}
+                    </li>
+                    <li className="text-sm italic  text-gray-600 mb-4">
+                      Duration: {selectedModule?.duration}
+                    </li>
+                  </ul>
                 </div>
               </div>
 
@@ -184,7 +178,7 @@ const CourseDetails: React.FC<Props> = () => {
               </p>
               <button
                 onClick={enrollForCourse}
-                className="bg-light_blue text-white px-4 py-2 rounded-lg"
+                className="bg-sky-800 font-semibold shadow-md duration-300 text-white px-4 py-2 rounded-lg hover:shadow-xl"
               >
                 Enroll Now
               </button>
