@@ -124,7 +124,7 @@ const AddCourseCard = () => {
           id="title"
           name="title"
           className="input-field rounded-lg"
-          placeholder="Enter course title"
+          placeholder="Enter Course Title"
           onChange={handleInputChange}
         />
       </div>
@@ -141,13 +141,13 @@ const AddCourseCard = () => {
           name="description"
           rows={4}
           className="input-field rounded-lg"
-          placeholder="Enter course description"
+          placeholder="Enter Course Description"
           onChange={handleInputChange}
         ></textarea>
       </div>
       <div className="mt-4 w-full max-w-md">
         <label
-          htmlFor="description"
+          htmlFor="instructor"
           className="block text-sm font-medium text-gray-700 pb-1"
         >
           Instructor
@@ -157,13 +157,13 @@ const AddCourseCard = () => {
           name="instructor"
           type="text"
           className="input-field rounded-lg"
-          placeholder="Enter course description"
+          placeholder="Enter Instructor Name"
           onChange={handleInputChange}
         ></input>
       </div>
       <div className="mt-4 w-full max-w-md">
         <label
-          htmlFor="description"
+          htmlFor="duration"
           className="block text-sm font-medium text-gray-700 pb-1"
         >
           Course Duration
@@ -173,13 +173,13 @@ const AddCourseCard = () => {
           name="duration"
           type="text"
           className="input-field rounded-lg"
-          placeholder="Enter course description"
+          placeholder="Enter Course Duration"
           onChange={handleInputChange}
         ></input>
       </div>
       <div className="mt-4 w-full max-w-md">
         <label
-          htmlFor="description"
+          htmlFor="category"
           className="block text-sm font-medium text-gray-700 pb-1"
         >
           Course Category
@@ -188,9 +188,13 @@ const AddCourseCard = () => {
           id="category"
           name="category"
           className="input-field rounded-lg"
-          placeholder="Enter course description"
+          placeholder="Select Course Category"
           onChange={handleInputChange}
         >
+          <option disabled selected>
+            {" "}
+            Select Course Category{" "}
+          </option>
           <option value="DigitalMarketing">Digital Marketing</option>
           <option value="DataScience">Data Science</option>
           <option value="Writing">Writing</option>
@@ -206,26 +210,26 @@ const AddCourseCard = () => {
       </div>
       <div className="mt-4 w-full max-w-md">
         <label
-          htmlFor="description"
+          htmlFor="subCategory"
           className="block text-sm font-medium text-gray-700 pb-1"
         >
-          Course SubCategory
+          Course Sub-Category
         </label>
         <input
           id="subCategory"
           name="subCategory"
           className="input-field rounded-lg"
           type="text"
-          placeholder="Enter course description"
+          placeholder="Enter Course Sub-Category"
           onChange={handleInputChange}
         ></input>
       </div>
       <div className="mt-4 w-full max-w-md">
         <label
-          htmlFor="description"
+          htmlFor="fees"
           className="block text-sm font-medium text-gray-700 pb-1"
         >
-          Course fee
+          Course Fee ($)
         </label>
         <input
           id="fees"
@@ -233,13 +237,13 @@ const AddCourseCard = () => {
           type="number"
           step="0.01"
           className="input-field rounded-lg"
-          placeholder="Enter course description"
+          placeholder="Enter Course Fees"
           onChange={handleInputChange}
         ></input>
       </div>
       <div className="mt-4 w-full max-w-md">
         <label
-          htmlFor="description"
+          htmlFor="noOfModules"
           className="block text-sm font-medium text-gray-700 pb-1"
         >
           No of Modules
@@ -249,7 +253,7 @@ const AddCourseCard = () => {
           name="noOfModules"
           type="number"
           className="input-field rounded-lg"
-          placeholder="Enter course description"
+          placeholder="Enter Course Modules Count"
           onChange={handleInputChange}
         ></input>
       </div>
