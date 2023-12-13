@@ -11,6 +11,8 @@ import { RootState } from "../redux/store";
 import sampleThumb from "../resources/placeholder.jpg";
 import Sidebar from "./Sidebar";
 import { FaStar, FaCheck } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
+import * as Paths from '../resources/paths';
 
 type Props = {};
 
@@ -23,6 +25,7 @@ const CourseDetails: React.FC<Props> = () => {
   const [doneButtonColor, setDoneButtonColor] = useState("bg-gray-500");
   const [moduleNo, setModuleNo] = useState(1);
   const [completedModule, setCompletedModule] = useState<number[]>([1]);
+  const navigate= useNavigate();
   const [selectedModule, setSelectedModule] = useState<Module | undefined>(
     undefined
   );
@@ -161,6 +164,10 @@ const CourseDetails: React.FC<Props> = () => {
     return allCompleted;
   }
 
+  const takeToLogin=()=>{
+    navigate(Paths.loginPath);
+  }
+
   return (
     <>
       <div className="flex h-screen">
@@ -192,7 +199,8 @@ const CourseDetails: React.FC<Props> = () => {
           </div>
 
           <hr className="w-full border-t-2 shadow-lg border-gray-300 my-6" />
-
+          {currentUser?.userType==='user'?
+          <>
           {isEnrolled ? (
             <div className="md:flex md:justify-between mt-12">
               <div className="mb-4 md:mb-0 md:w-2/3">
@@ -268,6 +276,14 @@ const CourseDetails: React.FC<Props> = () => {
               </button>
             </div>
           )}
+          </>
+          :
+          <>
+          <div>
+            Please <button onClick={takeToLogin}>Login</button> using Student Id
+          </div>
+          </>
+          }
         </div>
       </div>
     </>
