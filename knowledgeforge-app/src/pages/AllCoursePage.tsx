@@ -1,7 +1,7 @@
 import React, { useState, useEffect, startTransition } from "react";
 import CourseCard from "../components/CourseCard";
 import * as CourseService from "../services/course-service";
-import * as InstructorService from'../services/instructor-service';
+import * as InstructorService from "../services/instructor-service";
 import Course from "../models/Course";
 import {
   BrowserRouter,
@@ -19,6 +19,7 @@ import * as AuthService from "../services/auth-service";
 import CoursesGrid from "../components/CoursesGrid";
 import { useSelector } from "react-redux";
 import { RootState } from "../redux/store";
+import { ToastContainer } from "react-toastify";
 
 type AllCoursePageProps = {
   pageType: string;
@@ -36,16 +37,15 @@ const AllCoursePage = (props: AllCoursePageProps) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        if(currentUser?.userType==='instructor'){
-          const data= await InstructorService.getInstructorCourses();
+        if (currentUser?.userType === "instructor") {
+          const data = await InstructorService.getInstructorCourses();
           setCourses(data);
           setFilteredCourses(data);
-        }else{
-        const data = await CourseService.getCourses();
-        setCourses(data);
-        setFilteredCourses(data);
+        } else {
+          const data = await CourseService.getCourses();
+          setCourses(data);
+          setFilteredCourses(data);
         }
-        
       } catch (error) {
         console.error("Error fetching course data:", error);
       }
@@ -89,6 +89,7 @@ const AllCoursePage = (props: AllCoursePageProps) => {
 
   return (
     <div className=" bg-zinc-100 flex h-auto">
+      <ToastContainer />
       <div className="flex flex-row h-auto">
         <Sidebar category={filterCoursesByCategory} />
       </div>

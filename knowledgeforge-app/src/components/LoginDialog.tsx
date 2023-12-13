@@ -10,8 +10,23 @@ import * as AuthService from "../services/auth-service";
 import * as Paths from "../resources/paths";
 import { useDispatch, useSelector } from "react-redux";
 import { signInSuccess } from "../redux/user/userSlice";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function Login(): JSX.Element {
+  const handleSuccessfulLogin = () => {
+    toast.success("Login Successful", {
+      position: "top-right",
+      autoClose: 3000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "light",
+    });
+  };
+
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
 
@@ -42,6 +57,7 @@ function Login(): JSX.Element {
       console.log(storeData);
       if (response.status === 200) {
         dispatch(signInSuccess(storeData));
+        handleSuccessfulLogin();
         navigate("/");
       }
     }
@@ -61,6 +77,8 @@ function Login(): JSX.Element {
 
       if (response.status === 200) {
         dispatch(signInSuccess(storeData));
+        console.log("Logged in");
+        handleSuccessfulLogin();
         navigate("/");
       }
     }
