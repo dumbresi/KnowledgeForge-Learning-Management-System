@@ -113,4 +113,19 @@ export const getInstructorCourses = async (request, response) => {
         setErrorResponse(err, response);
     }
 }
+export const addCourseToInstructor = async (request, response) => {
+    const token = request.cookies.token;
+    const courseId = request.params.id;
+        if (!token) {
+            return response.status(401).json({ message: 'Unauthorized' });
+          }
+    try {
+        const instructor = jwt.verify(token, 'secret123');
+        
+        const result = await InstructorService.addCourse(instructor.email,courseId);
+        setResponse(result, response);
+    } catch (err) {
+        setErrorResponse(err, response);
+    }
+}
 
