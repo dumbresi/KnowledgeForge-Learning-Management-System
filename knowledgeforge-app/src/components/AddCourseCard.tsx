@@ -8,6 +8,7 @@ import {
 } from "react-router-dom";
 import * as Patths from "../resources/paths";
 import Course from "../models/Course";
+import * as instructorService from '../services/instructor-service'; 
 
 const AddCourseCard = () => {
   const [formData, setFormData] = useState({
@@ -25,6 +26,7 @@ const AddCourseCard = () => {
     thumbnailBase64: "",
   });
   const navigate = useNavigate();
+  const [imageuploadText,setimageUploadtext]= useState('Upload Image');
 
   const handleInputChange = (e: any) => {
     const { name, value } = e.target;
@@ -48,7 +50,7 @@ const AddCourseCard = () => {
           thumbnailBase64: base64String || "", // Extract the base64 string
         });
       };
-
+      setimageUploadtext("Image uploaded");
       reader.readAsDataURL(file);
     }
   };
@@ -88,12 +90,16 @@ const AddCourseCard = () => {
       })
       .then((res: Course) => {
         // Now you can access the parsed JSON data in the 'res' variable
-        navigate(Patths.addModulePage, {
-          state: {
-            noOfModules: Number(formData.noOfModules),
-            courseId: res._id,
-          },
-        });
+        const response=instructorService.addCoursetoInstructor(res._id);
+        if(response!==undefined){
+          navigate(Patths.addModulePage, {
+            state: {
+              noOfModules: Number(formData.noOfModules),
+              courseId: res._id,
+            },
+          });
+        }
+       
         // Return res if you want to use it in the next then block
         return res;
       })
@@ -262,7 +268,7 @@ const AddCourseCard = () => {
           htmlFor="image"
           className="block text-sm font-medium text-gray-700 pb-1"
         >
-          Upload Image
+          {imageuploadText}
         </label>
         <div className="flex items-center">
           <input

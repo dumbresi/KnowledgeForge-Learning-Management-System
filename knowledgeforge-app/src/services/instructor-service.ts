@@ -21,3 +21,8 @@ export const getInstructorCourses=async () =>{
     const instCourses= response.courses
     return instCourses;
 }
+
+export const addCoursetoInstructor=async(payload:string)=>{
+    const response= await BaseService.post(instructorCoursePath+"/"+payload,'','');
+    return response;
+}

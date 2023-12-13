@@ -1,6 +1,7 @@
 // Importing the 'Instructor' model
 import Course from '../models/course.js';
 import Instructor from '../models/instructor.js';
+import mongoose from 'mongoose';
 
 // Function to search for instructors based on specified parameters
 export const searchInstructor = async (params = {}) => {
@@ -82,5 +83,5 @@ export const getCourses = async(email)=>{
 }
 export const addCourse = async (email,courseId) => {
   // Using the 'findByIdAndDelete' method to delete the instructor
-  return await Instructor.findOneAndUpdate({email:email},{$push:{myCourses:courseId}},{returnOriginal:false});
+  return await Instructor.findOneAndUpdate({email:email},{$push:{myCourses:new mongoose.Types.ObjectId(courseId)}},{returnOriginal:false});
 }
