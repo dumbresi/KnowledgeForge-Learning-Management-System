@@ -20,7 +20,7 @@ const InstructorDetailCard: React.FC<InstructorDetailCardProps> = ({ instructor 
     contactNumber: instructor.contactNumber,
     // Add other properties if needed
   });
-  const { currentUser, loading, error } = useSelector((state:RootState)=>state.user);
+  const { currentUser } = useSelector((state:RootState)=>state.user);
 
 
   // useEffect(()=>{
@@ -83,7 +83,7 @@ const InstructorDetailCard: React.FC<InstructorDetailCardProps> = ({ instructor 
         //   email: updatedInstructorData.email,
         //   userType: "instructor"
         // }));
-        console.log("Instructor data:"+updatedInstructorData)
+        // console.log("Instructor data:"+updatedInstructorData)
       } else {
         // Handle unsuccessful response
       }
@@ -131,7 +131,7 @@ const InstructorDetailCard: React.FC<InstructorDetailCardProps> = ({ instructor 
             </div>
             <div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
               <dt className="text-sm font-medium leading-6 text-gray-900">{t("Email")}</dt>
-              <dd className="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">{instructor.email}</dd>
+              <dd className="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">{currentUser?.email}</dd>
             </div>
 
             <div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
