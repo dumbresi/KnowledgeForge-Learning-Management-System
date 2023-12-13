@@ -227,16 +227,19 @@ useEffect(()=>{
                     <div
                       key={moduleItem._id}
                       onClick={() => {
-                        changeSelectedModule(moduleItem);
                         setModuleNo(index+1);
+                        if(completedModule.includes(moduleNo-1)){
+                          changeSelectedModule(moduleItem);
+                        }
+                        
                       }}
                       className={`cursor-pointer hover:shadow-lg bg-gray-200 rounded-lg shadow-md p-2 mb-4 duration-300 ${
                         selectedModule?._id === moduleItem._id
                           ? "bg-gray-200"
-                          : ""
+                          : "bg-gray-500"
                       }`}
                     >
-                      <ModuleCard module={moduleItem} />
+                      <ModuleCard module={moduleItem} completed={completedModule.includes(index+1)} />
                     </div>
                   ))}
                 </div>
