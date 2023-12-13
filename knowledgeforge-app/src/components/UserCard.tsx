@@ -97,6 +97,14 @@ const UserCard: React.FC<UserCardProps> = ({ user }) => {
           <dl className="divide-y divide-gray-100">
             <div className="px-4 py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
               <dt className="text-md font-medium leading-6 text-gray-900">
+                Account Type
+              </dt>
+              <div className="mt-1 text-md leading-6 text-gray-700">
+                Student
+              </div>
+            </div>
+            <div className="px-4 py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+              <dt className="text-md font-medium leading-6 text-gray-900">
                 {t("Full name")}
               </dt>
               {isEditing ? (
