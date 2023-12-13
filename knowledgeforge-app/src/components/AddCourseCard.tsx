@@ -8,12 +8,18 @@ import {
 } from "react-router-dom";
 import * as Patths from "../resources/paths";
 import Course from "../models/Course";
-import * as instructorService from '../services/instructor-service'; 
+import * as instructorService from "../services/instructor-service";
+import { RootState } from "../redux/store";
+import { useSelector } from "react-redux";
 
 const AddCourseCard = () => {
+  const { currentUser, loading, error } = useSelector(
+    (state: RootState) => state.user
+  );
+
   const [formData, setFormData] = useState({
     title: "",
-    instructor: "",
+    instructor: currentUser?.userName,
     duration: "",
     fees: 0,
     category: "",
@@ -89,7 +95,7 @@ const AddCourseCard = () => {
       })
       .then((res: Course) => {
         // Now you can access the parsed JSON data in the 'res' variable
-        const result=instructorService.addCoursetoInstructor(res._id);
+        const result = instructorService.addCoursetoInstructor(res._id);
         console.log(result);
         navigate(Patths.addModulePage, {
           state: {
@@ -159,9 +165,11 @@ const AddCourseCard = () => {
           id="instructor"
           name="instructor"
           type="text"
-          className="input-field rounded-lg"
+          className="input-field rounded-lg text-gray-500"
           placeholder="Enter Instructor Name"
           onChange={handleInputChange}
+          value={currentUser?.userName}
+          readOnly
         ></input>
       </div>
       <div className="mt-4 w-full max-w-md">
@@ -241,6 +249,7 @@ const AddCourseCard = () => {
           step="0.01"
           className="input-field rounded-lg"
           placeholder="Enter Course Fees"
+          min={0}
           onChange={handleInputChange}
         ></input>
       </div>
@@ -257,6 +266,7 @@ const AddCourseCard = () => {
           type="number"
           className="input-field rounded-lg"
           placeholder="Enter Course Modules Count"
+          min={0}
           onChange={handleInputChange}
         ></input>
       </div>
