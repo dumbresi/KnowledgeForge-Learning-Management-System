@@ -28,7 +28,7 @@ const UserPage = () => {
             <Sidebar category={category} />
             <div className="flex-1 justify-center items-center mt-6">
                 {user ? (
-                    <UserCard user={user} />
+                    <UserCard usermodel={user} />
                 ) : (
                     <p>Loading...</p>
                 )}

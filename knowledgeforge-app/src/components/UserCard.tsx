@@ -5,31 +5,32 @@ import { updateUserSuccess } from "../redux/user/userSlice";
 import { useTranslation } from "react-i18next";
 
 type UserCardProps = {
-  user: {
-    userName: string;
-    email: string;
-    contactNumber: string;
-  };
+  // user: {
+  //   userName: string;
+  //   email: string;
+  //   contactNumber: string;
+  // };
+  usermodel:UserModel;
 };
 
-const UserCard: React.FC<UserCardProps> = ({ user }) => {
+const UserCard: React.FC<UserCardProps> = ({ usermodel }) => {
   const [isEditing, setIsEditing] = useState(false);
-  const dispatch=useDispatch();
+  const dispatch = useDispatch();
   const [editedUser, setEditedUser] = useState<UserModel>({
-    userName: user.userName,
+    userName: usermodel.userName,
     email: '',
-    contactNumber: user.contactNumber,
+    contactNumber: usermodel.contactNumber,
     // password: '', // Initialize with an empty string or default value
     // registeredCourses: '', // Initialize with an empty array or default value
   });
     // State to manage the updated user data from the API response
-    const [updatedUser, setUpdatedUser] = useState<UserModel>({
-      userName: user.userName,
-      email: '',
-      contactNumber: user.contactNumber,
-      // password: '',
-      // registeredCourses: '',
-    });
+    // const [updatedUser, setUpdatedUser] = useState<UserModel>({
+    //   userName: user.userName,
+    //   email: '',
+    //   contactNumber: user.contactNumber,
+    //   // password: '',
+    //   // registeredCourses: '',
+    // });
 
 
   const handleEditClick = () => {
@@ -64,7 +65,7 @@ const UserCard: React.FC<UserCardProps> = ({ user }) => {
       if (result.ok) {
         const updatedUserData = await result.json();
         console.log(updatedUserData); // Log the updated user data
-        setUpdatedUser(updatedUserData);
+        // setUpdatedUser(updatedUserData);
         setEditedUser(updatedUserData);
         const storeData = {
           userName: updatedUserData.userName,
@@ -125,7 +126,7 @@ const UserCard: React.FC<UserCardProps> = ({ user }) => {
                 {t("Email")}
               </dt>
               <dd className="mt-1 text-md leading-6 text-gray-700">
-                {user.email}
+                {usermodel.email}
               </dd>
             </div>
             <div className="px-4 py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">

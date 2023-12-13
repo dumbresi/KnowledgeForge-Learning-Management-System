@@ -1,30 +1,38 @@
 import React, { useEffect, useState } from "react";
 import Instructor from "../models/Instructor";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { updateUserSuccess } from "../redux/user/userSlice";
 import { useTranslation } from "react-i18next";
+import { RootState } from "../redux/store";
 
 type InstructorDetailCardProps = {
   instructor: Instructor;
 };
+
 
 const InstructorDetailCard: React.FC<InstructorDetailCardProps> = ({ instructor }) => {
   const [isEditing, setIsEditing] = useState(false);
   const dispatch = useDispatch();
   const [editedInstructor, setEditedInstructor] = useState<Instructor>({
     name: instructor.name,
-    email: instructor.email,
+    email: '',
     university: instructor.university,
     contactNumber: instructor.contactNumber,
     // Add other properties if needed
   });
+  const { currentUser, loading, error } = useSelector((state:RootState)=>state.user);
 
-  useEffect(()=>{
 
-  },[isEditing]);
+  // useEffect(()=>{
+
+  // },[isEditing]);
+  // const handleEditClick = () => {
+  //   setIsEditing(!isEditing);
+  // };
   const handleEditClick = () => {
     setIsEditing(!isEditing);
   };
+
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -56,17 +64,26 @@ const InstructorDetailCard: React.FC<InstructorDetailCardProps> = ({ instructor 
       },
       );
       if (result.ok) {
-        const updatedUserData = await result.json();
-        console.log(updatedUserData); // Log the updated user data
-        setEditedInstructor(updatedUserData);
+        const updatedInstructorData = await result.json();
+        console.log(updatedInstructorData); // Log the updated user data
+        setEditedInstructor(updatedInstructorData);
+        console.log(editedInstructor);
         // setEditedUser(updatedUserData);
+        const storeData = {
+          userName: updatedInstructorData.name,
+          email: updatedInstructorData.email,
+          contactNumber: updatedInstructorData.contactNumber,
+          userType: "instructor",
+        };
 
-        dispatch(updateUserSuccess({
-          userName: updatedUserData.name, contactNumber: updatedUserData.contactNumber,
-          email: updatedUserData.email,
-          userType: "instructor"
-        }));
-        console.log("User data:"+updatedUserData)
+        dispatch(updateUserSuccess(storeData));
+
+        // dispatch(updateUserSuccess({
+        //   userName: updatedInstructorData.name, contactNumber: updatedInstructorData.contactNumber,
+        //   email: updatedInstructorData.email,
+        //   userType: "instructor"
+        // }));
+        console.log("Instructor data:"+updatedInstructorData)
       } else {
         // Handle unsuccessful response
       }
@@ -88,7 +105,7 @@ const InstructorDetailCard: React.FC<InstructorDetailCardProps> = ({ instructor 
       <div className="p-40 max-w-8xl bg-white w-3/4 rounded-lg shadow-xl">
         <div className="px-4 sm:px-0">
           <h3 className="text-lg font-semibold leading-7 text-gray-900">
-            {isEditing ? t("Edit Instructor") : instructor.name}
+            {isEditing ? t("Edit Instructor") : currentUser?.userName}
           </h3>
           <p className="mt-1 max-w-2xl text-sm leading-6 text-gray-500">
             {t("Following are your details")}
@@ -107,7 +124,7 @@ const InstructorDetailCard: React.FC<InstructorDetailCardProps> = ({ instructor 
                   className="border rounded px-3 py-2 w-full focus:outline-none focus:border-blue-500"
                 />
               ) : (
-                <dd className="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">{editedInstructor.name}</dd>
+                <dd className="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">{currentUser?.userName}</dd>
               )}
             </div>
             <div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
@@ -126,7 +143,7 @@ const InstructorDetailCard: React.FC<InstructorDetailCardProps> = ({ instructor 
                   className="border rounded px-3 py-2 w-full focus:outline-none focus:border-blue-500"
                 />
               ) : (
-                <dd className="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">{editedInstructor.contactNumber}</dd>
+                <dd className="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">{currentUser?.contactNumber}</dd>
               )}
             </div>
           </dl>
