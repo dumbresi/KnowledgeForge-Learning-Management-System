@@ -97,7 +97,7 @@ const InstructorDetailCard: React.FC<InstructorDetailCardProps> = ({
         <div className="mt-6 border-t border-gray-100">
           <dl className="divide-y divide-gray-100">
             <div className="px-4 py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
-              <dt className="text-md font-medium leading-6 text-gray-900">
+              <dt className="text-sm font-medium leading-6 text-gray-900">
                 Account Type
               </dt>
               <div className="mt-1 text-md leading-6 text-gray-700">
