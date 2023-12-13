@@ -8,6 +8,8 @@ import {
 } from "react-router-dom";
 import * as Patths from "../resources/paths";
 import Course from "../models/Course";
+import { useSelector } from "react-redux";
+import { RootState } from "../redux/store";
 
 const AddCourseCard = () => {
   const [formData, setFormData] = useState({
@@ -26,6 +28,9 @@ const AddCourseCard = () => {
   });
   const navigate = useNavigate();
 
+  const { currentUser, loading, error } = useSelector(
+    (state: RootState) => state.user
+  );
   const handleInputChange = (e: any) => {
     const { name, value } = e.target;
     setFormData({
@@ -152,14 +157,13 @@ const AddCourseCard = () => {
         >
           Instructor
         </label>
-        <input
+        <div
           id="instructor"
-          name="instructor"
-          type="text"
-          className="input-field rounded-lg"
-          placeholder="Enter Instructor Name"
+          className="input-field"
           onChange={handleInputChange}
-        ></input>
+        >
+          {currentUser?.userName}
+        </div>
       </div>
       <div className="mt-4 w-full max-w-md">
         <label
