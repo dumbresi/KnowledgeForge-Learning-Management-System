@@ -27,6 +27,10 @@ function Login(): JSX.Element {
     });
   };
 
+  const handleLoginFailed=(message: string)=>{
+    console.log("login failed:"+message);
+  }
+
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
 
@@ -43,44 +47,58 @@ function Login(): JSX.Element {
     event.preventDefault();
 
     if (activeTab === "student") {
-      const response = await AuthService.loginUser(
-        JSON.stringify({ email, password })
-      );
-
-      const data = await response.json();
-      const storeData = {
-        userName: data.sanitizedUser.userName,
-        email: data.sanitizedUser.email,
-        contactNumber: data.sanitizedUser.contactNumber,
-        userType: "user",
-      };
-      console.log(storeData);
-      if (response.status === 200) {
-        dispatch(signInSuccess(storeData));
-        handleSuccessfulLogin();
-        navigate("/");
+      try {
+        const response = await AuthService.loginUser(
+          JSON.stringify({ email, password })
+        );
+        if(response.status===200){
+          const data = await response.json();
+          const storeData = {
+            userName: data.sanitizedUser.userName,
+            email: data.sanitizedUser.email,
+            contactNumber: data.sanitizedUser.contactNumber,
+            userType: "user",
+          };
+          console.log(storeData);
+          dispatch(signInSuccess(storeData));
+          handleSuccessfulLogin();
+          navigate("/");
+        }else{
+          handleLoginFailed(response.statusText);
+        }
+      } catch (error) {
+        handleLoginFailed("Login error");
       }
+      
     }
     if (activeTab === "instructor") {
-      const response = await AuthService.loginInstructor(
-        JSON.stringify({ email, password })
-      );
-
-      const data = await response.json();
-      // Handle the 'data' as needed
-      const storeData = {
-        userName: data.instructor.name,
-        email: data.instructor.email,
-        contactNumber: data.instructor.contactNumber,
-        userType: "instructor",
-      };
-
-      if (response.status === 200) {
+      try {
+        const response = await AuthService.loginInstructor(
+          JSON.stringify({ email, password })
+        );
+        if(response.ok){
+          const data = await response.json();
+        // Handle the 'data' as needed
+        const storeData = {
+          userName: data.instructor.name,
+          email: data.instructor.email,
+          contactNumber: data.instructor.contactNumber,
+          userType: "instructor",
+        };
         dispatch(signInSuccess(storeData));
-        console.log("Logged in");
-        handleSuccessfulLogin();
-        navigate("/");
+          console.log("Logged in");
+          handleSuccessfulLogin();
+          navigate("/");
+        }else{
+          handleLoginFailed(response.statusText);
+        }
+      } catch (error) {
+        handleLoginFailed("Login Failed");
       }
+      
+      
+
+      
     }
   }
 

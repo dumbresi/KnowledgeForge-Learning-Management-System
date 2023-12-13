@@ -44,16 +44,23 @@ export const search = async<T>(path: string, params: any):Promise<T[]>=>{
 
 export const post=async<T>(path:string,payload:any,params:any): Promise<Response> =>{
     const query: URLSearchParams=new URLSearchParams(params);
-    const response = await fetch(baseURL+path+query,{
-        method:'POST',
-        credentials:'include',
-        headers: {
-            'Content-Type': 'application/json',
-          },
-          body: payload
-    })
-    const data=await response;
-    return data;
+    try {
+        const response = await fetch(baseURL+path+query,{
+            method:'POST',
+            credentials:'include',
+            headers: {
+                'Content-Type': 'application/json',
+              },
+              body: payload
+        })
+        const data=await response;
+        return data;
+        
+    } catch (error) {
+        throw new Error("API failed");
+        
+    }
+    
 }
 
 export const postData=async<T>(path:string,payload:any,params:any):Promise<Response> =>{
