@@ -70,7 +70,7 @@ const CourseDetails: React.FC<Props> = () => {
   useEffect(() => {
     // Additional logic to handle video player update when selectedModule changes
 
-    console.log("selectedModule module:"+moduleNo);
+    console.log("selectedModule module:" + moduleNo);
   }, [selectedModule]);
 
   useEffect(() => {
@@ -154,13 +154,18 @@ const CourseDetails: React.FC<Props> = () => {
     }
   };
 
-  function areAllModulesCompleted(completedModules: number[], index: number): boolean {
+  function areAllModulesCompleted(
+    completedModules: number[],
+    index: number
+  ): boolean {
     // Generate an array of numbers from 1 to index
     const numbersToCheck = Array.from({ length: index }, (_, i) => i + 1);
-  
+
     // Check if all numbers in the range are present in completedModules
-    const allCompleted = numbersToCheck.every(num => completedModules.includes(num));
-  
+    const allCompleted = numbersToCheck.every((num) =>
+      completedModules.includes(num)
+    );
+
     return allCompleted;
   }
 
@@ -204,12 +209,17 @@ const CourseDetails: React.FC<Props> = () => {
           {isEnrolled ? (
             <div className="md:flex md:justify-between mt-12">
               <div className="mb-4 md:mb-0 md:w-2/3">
+                <div className="mb-4 font-bold text-3xl">
+                  Lesson {selectedModule?.module_no}
+                </div>
                 <div className="border-2 w-11/12 h-96 rounded-lg shadow-xl overflow-auto">
                   <VideoPlayer videoID={`${selectedModule?.videoId}`} />
                 </div>
                 <div className="mt-6">
                   <ul>
-                    <li className="mb-2 text-3xl">{selectedModule?.title}</li>
+                    <li className="mb-2 font-semibold text-3xl">
+                      {selectedModule?.title}
+                    </li>
                     <li className="text-base italic  text-gray-600 mt-4 mb-1">
                       {selectedModule?.description}
                     </li>
@@ -241,10 +251,10 @@ const CourseDetails: React.FC<Props> = () => {
                       key={moduleItem._id}
                       onClick={() => {
                         setModuleNo(index + 1);
-                        if(areAllModulesCompleted(completedModule,index)){
-                        changeSelectedModule(moduleItem);
+                        if (areAllModulesCompleted(completedModule, index)) {
+                          changeSelectedModule(moduleItem);
                         }
-                        console.log("Completed Modules:"+completedModule);
+                        console.log("Completed Modules:" + completedModule);
                       }}
                       className={`cursor-pointer bg-white shadow-md py-2 hover:shadow-lg transition duration-300 ${
                         selectedModule?._id === moduleItem._id
