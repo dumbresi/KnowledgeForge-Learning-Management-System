@@ -92,7 +92,7 @@ const SettingsPage: React.FC = () => {
           )}
         </div>
 
-        <div className="mb-6">
+        {/* <div className="mb-6">
           <h2 className="text-2xl font-semibold mb-2">{t("Theme")}</h2>
           <div className="flex items-center">
             <span className="mr-2">{t("Dark Mode")}</span>
@@ -105,7 +105,7 @@ const SettingsPage: React.FC = () => {
               {darkMode ? t("Turn off") : t("Turn on")}
             </button>
           </div>
-        </div>
+        </div> */}
 
         {currentUser ? (
           <div className="mb-6">

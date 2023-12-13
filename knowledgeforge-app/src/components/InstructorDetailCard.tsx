@@ -102,13 +102,15 @@ const InstructorDetailCard: React.FC<InstructorDetailCardProps> = ({ instructor 
 
   return (
     <div className="min-h-screen flex items-center justify-end px-4 bg-background_cream pr-32">
-      <div className="p-40 max-w-8xl bg-white w-3/4 rounded-lg shadow-xl">
+      <div className="p-12 max-w-8xl bg-white w-3/4 rounded-lg shadow-xl">
         <div className="px-4 sm:px-0">
-          <h3 className="text-lg font-semibold leading-7 text-gray-900">
-            {isEditing ? t("Edit Instructor") : currentUser?.userName}
+          <div className="p-2">
+            <h3 className="text-2xl font-semibold leading-7 text-gray-900 ">
+            {isEditing ? t("Edit Instructor") : (currentUser?.userName || 'instructor' )}
           </h3>
-          <p className="mt-1 max-w-2xl text-sm leading-6 text-gray-500">
-            {t("Following are your details")}
+          </div>
+          <p className="mt-1 ml-2 max-w-2xl text-sm leading-6 text-gray-500">
+            {t("Welcome to your profile.")}
           </p>
         </div>
         <div className="mt-6 border-t border-gray-100">
@@ -133,11 +135,11 @@ const InstructorDetailCard: React.FC<InstructorDetailCardProps> = ({ instructor 
             </div>
 
             <div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
-              <dt className="text-sm font-medium leading-6 text-gray-900">{t("Contact Number")}</dt>
+              <dt className="text-sm font-medium leading-6 text-gray-900">{t("Contact")}</dt>
               {isEditing ? (
                 <input
                   type="text"
-                  name="contactNumber"
+                  name= "contactNumber"
                   value={editedInstructor.contactNumber}
                   onChange={handleInputChange}
                   className="border rounded px-3 py-2 w-full focus:outline-none focus:border-blue-500"
