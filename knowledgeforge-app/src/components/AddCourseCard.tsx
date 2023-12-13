@@ -8,7 +8,7 @@ import {
 } from "react-router-dom";
 import * as Patths from "../resources/paths";
 import Course from "../models/Course";
-import * as instructorService from '../services/instructor-service'; 
+import * as instructorService from "../services/instructor-service";
 
 const AddCourseCard = () => {
   const [formData, setFormData] = useState({
@@ -89,7 +89,7 @@ const AddCourseCard = () => {
       })
       .then((res: Course) => {
         // Now you can access the parsed JSON data in the 'res' variable
-        const result=instructorService.addCoursetoInstructor(res._id);
+        const result = instructorService.addCoursetoInstructor(res._id);
         console.log(result);
         navigate(Patths.addModulePage, {
           state: {
@@ -241,6 +241,7 @@ const AddCourseCard = () => {
           step="0.01"
           className="input-field rounded-lg"
           placeholder="Enter Course Fees"
+          min={0}
           onChange={handleInputChange}
         ></input>
       </div>
@@ -257,6 +258,7 @@ const AddCourseCard = () => {
           type="number"
           className="input-field rounded-lg"
           placeholder="Enter Course Modules Count"
+          min={0}
           onChange={handleInputChange}
         ></input>
       </div>
