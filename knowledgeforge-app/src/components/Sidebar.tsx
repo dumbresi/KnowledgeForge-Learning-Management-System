@@ -84,6 +84,10 @@ const Sidebar = (props: Props) => {
     navigate(Paths.settingsPath);
   };
 
+  const takeToContactPage = () => {
+    navigate(Paths.contactUs);
+  };
+
   const setCategoryFilter = (title: string) => {
     // props.category(e.arguments);
     props.category(title);
@@ -176,7 +180,7 @@ const Sidebar = (props: Props) => {
                     if (menu.title === t("Dashboard")) {
                       takeToHomePage();
                     }
-                    if(menu.title===t("Categories")){
+                    if (menu.title === t("Categories")) {
                       takeToHomePage();
                     }
                     if (menu.title === t("Settings")) {
@@ -193,6 +197,9 @@ const Sidebar = (props: Props) => {
                     }
                     if (menu.title === "Categories") {
                       setSubmenuOpen(!isSubmenuOpen);
+                    }
+                    if (menu.title === "Contact") {
+                      takeToContactPage();
                     }
                   }}
                 >
