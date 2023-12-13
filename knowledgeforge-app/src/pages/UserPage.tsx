@@ -26,7 +26,7 @@ const UserPage = () => {
     return (
         <div className="flex">
             <Sidebar category={category} />
-            <div className="flex-1 justify-center items-center">
+            <div className="flex-1 justify-center items-center mt-6">
                 {user ? (
                     <UserCard user={user} />
                 ) : (

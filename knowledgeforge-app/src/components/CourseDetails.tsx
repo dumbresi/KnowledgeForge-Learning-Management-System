@@ -157,12 +157,12 @@ useEffect(()=>{
 
   return (
     <>
-      <div className="flex h-screen">
+      <div className="flex h-screen bg-neutral-100">
         <Sidebar category={ingore} />
-        <div className="container mx-auto mt-10 p-4">
+        <div className="container mx-auto mt-10 p-4 ml-2">
           <div className="md:flex md:items-center md:justify-between">
             <div className="mb-4 md:mb-0">
-              <h1 className="text-3xl md:text-4xl font-bold mb-2">
+              <h1 className="text-3xl md:text-4xl  mb-2">
                 {course.title}
               </h1>
               <p className="text-sm md:text-base italic  text-gray-600 mb-4 mt-4">
@@ -190,10 +190,16 @@ useEffect(()=>{
           <hr className="w-full border-t-2 shadow-lg border-gray-300 my-6" />
 
           {isEnrolled ? (
-            <div className="md:flex md:justify-between">
+            <div className="md:flex md:justify-between mt-12">
               <div className="mb-4 md:mb-0 md:w-2/3">
+                
+
+                <div className="border-2 w-11/12 h-96 rounded-lg shadow-xl overflow-auto">
+                  <VideoPlayer videoID={`${selectedModule?.videoId}`} />
+                </div>
+                <div className="mt-6">
                 <ul>
-                  <li className="mb-2 font-bold text-2xl">
+                  <li className="mb-2 text-3xl">
                     {selectedModule?.title}
                   </li>
                   <li className="text-base italic  text-gray-600 mt-4 mb-1">
@@ -203,9 +209,6 @@ useEffect(()=>{
                     Duration: {selectedModule?.duration}
                   </li>
                 </ul>
-
-                <div className="border-2 w-11/12 h-96 rounded-lg shadow-xl overflow-auto">
-                  <VideoPlayer videoID={`${selectedModule?.videoId}`} />
                 </div>
 
                 <button
@@ -220,7 +223,7 @@ useEffect(()=>{
 
               <div className="md:w-1/3 md:mr-8 flex flex-col items-center">
                 <div className="w-full mb-4">
-                  <h2 className="font-bold text-xl text-gray-800 mb-4">
+                  <h2 className="text-3xl  text-gray-800 mb-8">
                     List of Modules
                   </h2>
                   {modules.map((moduleItem: Module, index: number) => (
@@ -233,7 +236,7 @@ useEffect(()=>{
                         }
                         
                       }}
-                      className={`cursor-pointer hover:shadow-lg bg-gray-200 rounded-lg shadow-md p-2 mb-4 duration-300 ${
+                      className={`cursor-pointer hover:shadow-lg bg-sky-200 rounded-lg shadow-md p-2 mb-4 duration-300 ${
                         selectedModule?._id === moduleItem._id
                           ? "bg-gray-200"
                           : "bg-gray-500"

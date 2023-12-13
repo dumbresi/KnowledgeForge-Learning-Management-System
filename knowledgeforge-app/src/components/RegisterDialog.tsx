@@ -92,28 +92,28 @@ const RegisterDialog = (props: Props) => {
         <div
           className={`tab ${
             activeTab === "instructor" ? "active" : ""
-          } w-1/2 border-t-2 border-r-2 p-2 hover:bg-light_blue transition text-center ${
+          } w-1/2 border-t-2 border-r-2 p-2 transition text-center ${
             activeTab === "instructor"
-              ? "border-light_blue bg-light_blue text-white"
-              : "border-transparent text-gray-700"
+              ? "border-stone-600 bg-sky-800 text-white font-semibold"
+              : "border-transparent text-gray-700 hover:bg-sky-100"
           } rounded-tl-lg shadow-md`}
           onClick={() => handleTabClick("instructor")}
         >
-          <button className="focus:outline-none transform transition-transform hover:scale-105">
+          <button className="focus:outline-none transform transition-transform">
             Instructor Register
           </button>
         </div>
         <div
           className={`tab ${
             activeTab === "student" ? "active" : ""
-          } w-1/2 border-t-2 border-l-2 p-2 hover:bg-light_blue transition text-center ${
+          } w-1/2 border-t-2 border-l-2 p-2 transition text-center ${
             activeTab === "student"
-              ? "border-light_blue bg-light_blue text-white"
-              : "border-transparent text-gray-700"
+              ? "border-stone-600 bg-sky-800 text-white font-semibold"
+              : "border-transparent text-gray-700 hover:bg-sky-100"
           } rounded-tr-lg shadow-md`}
           onClick={() => handleTabClick("student")}
         >
-          <button className="focus:outline-none transform transition-transform hover:scale-105">
+          <button className="focus:outline-none transform transition-transform">
             Student Register
           </button>
         </div>

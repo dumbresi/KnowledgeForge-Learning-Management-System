@@ -23,17 +23,17 @@ const UserCourses  = (props: Props) => {
     
   },[])
   return (
-    <div className='flex'>
-       
-        <div>
+    <div className=' h-full'>
+      <div className='flex'>
+        <div className=' flex'>
           <Sidebar category={()=>{}}/>
         </div>
-        <div className="w-[95%] h-auto rounded-md bg-background_cream ab ">
+        <div className="w-[95%] h-full rounded-md bg-background_cream ab ">
         {
         (currentUser && enrolledCourses!==undefined)?<CoursesGrid courses={enrolledCourses}/>: "Please Login to see enrolled courses"
         }
-
       </div>
+    </div>
     </div>
   )
 }

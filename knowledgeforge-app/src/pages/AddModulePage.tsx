@@ -33,11 +33,11 @@ const AddModulePage = () => {
       <div className="flex w-1/6 h-screen bg-background-cream">
         <Sidebar category={category} />
       </div>
-      <div className="flex flex-col justify-between items-center bg-white rounded-lg p-8 shadow-2xl w-full md:w-1/4">
-        <div className="flex flex-col justify-between items-center px-10">
+      <div className="flex flex-col w-1/2 h-11/12 my-5 justify-between  bg-white border-8 border-double border-zinc-500 rounded-3xl p-8 shadow-2xl">
+        <div className="flex flex-col w-1/2 h-4/5 rounded-3xl">
           {renderModuleCards()}
         </div>
-        <button className="submit-button" onClick={handleSubmit}>
+        <button className="submit-button w-24" onClick={handleSubmit}>
           Done
         </button>
       </div>
