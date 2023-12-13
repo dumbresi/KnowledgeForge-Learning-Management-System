@@ -8,8 +8,6 @@ import {
 } from "react-router-dom";
 import * as Patths from "../resources/paths";
 import Course from "../models/Course";
-import { useSelector } from "react-redux";
-import { RootState } from "../redux/store";
 import * as instructorService from '../services/instructor-service'; 
 
 const AddCourseCard = () => {
@@ -28,11 +26,7 @@ const AddCourseCard = () => {
     thumbnailBase64: "",
   });
   const navigate = useNavigate();
-  const [imageuploadText,setimageUploadtext]= useState('Upload Image');
 
-  const { currentUser, loading, error } = useSelector(
-    (state: RootState) => state.user
-  );
   const handleInputChange = (e: any) => {
     const { name, value } = e.target;
     setFormData({
@@ -55,7 +49,7 @@ const AddCourseCard = () => {
           thumbnailBase64: base64String || "", // Extract the base64 string
         });
       };
-      setimageUploadtext("Image uploaded");
+
       reader.readAsDataURL(file);
     }
   };
@@ -95,16 +89,14 @@ const AddCourseCard = () => {
       })
       .then((res: Course) => {
         // Now you can access the parsed JSON data in the 'res' variable
-        const response=instructorService.addCoursetoInstructor(res._id);
-        if(response!==undefined){
-          navigate(Patths.addModulePage, {
-            state: {
-              noOfModules: Number(formData.noOfModules),
-              courseId: res._id,
-            },
-          });
-        }
-       
+        const result=instructorService.addCoursetoInstructor(res._id);
+        console.log(result);
+        navigate(Patths.addModulePage, {
+          state: {
+            noOfModules: Number(formData.noOfModules),
+            courseId: res._id,
+          },
+        });
         // Return res if you want to use it in the next then block
         return res;
       })
@@ -163,13 +155,14 @@ const AddCourseCard = () => {
         >
           Instructor
         </label>
-        <div
+        <input
           id="instructor"
-          className="input-field"
+          name="instructor"
+          type="text"
+          className="input-field rounded-lg"
+          placeholder="Enter Instructor Name"
           onChange={handleInputChange}
-        >
-          {currentUser?.userName}
-        </div>
+        ></input>
       </div>
       <div className="mt-4 w-full max-w-md">
         <label
@@ -272,7 +265,7 @@ const AddCourseCard = () => {
           htmlFor="image"
           className="block text-sm font-medium text-gray-700 pb-1"
         >
-          {imageuploadText}
+          Upload Image
         </label>
         <div className="flex items-center">
           <input
