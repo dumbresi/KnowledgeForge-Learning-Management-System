@@ -9,6 +9,7 @@ import {
 } from "react-router-dom";
 import * as AuthService from "../services/auth-service";
 import * as Paths from "../resources/paths";
+import { toast } from "react-toastify";
 
 type Props = {};
 
@@ -23,9 +24,31 @@ const RegisterDialog = (props: Props) => {
 
   const navigate = useNavigate();
 
-  const hanleRegistrationFailed=()=>{
+  const handleSuccessfulCreation = () => {
+    toast.success("Account Created", {
+      position: "top-right",
+      autoClose: 3000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "light",
+    });
+  };
 
-  }
+  const handleFailedCreation = () => {
+    toast.error("Invalid", {
+      position: "top-right",
+      autoClose: 3000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "light",
+    });
+  };
 
   const handleNameChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -67,11 +90,12 @@ const RegisterDialog = (props: Props) => {
         );
 
         if (!response.ok) {
-          hanleRegistrationFailed();
+          handleFailedCreation();
           throw new Error("Network response was not ok");
         }
         if (response.status === 200) {
           navigate(Paths.loginPath);
+          handleSuccessfulCreation();
         }
       } catch (error) {
         console.error("Error submitting data", error);
@@ -84,8 +108,9 @@ const RegisterDialog = (props: Props) => {
         );
         if (response.status === 200) {
           navigate("../user/login");
-        }else{
-          hanleRegistrationFailed();
+          handleSuccessfulCreation();
+        } else {
+          handleFailedCreation();
         }
       } catch (error) {
         console.error("Error submitting data", error);

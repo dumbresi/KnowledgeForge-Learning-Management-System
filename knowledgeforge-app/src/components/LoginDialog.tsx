@@ -27,9 +27,22 @@ function Login(): JSX.Element {
     });
   };
 
-  const handleLoginFailed=(message: string)=>{
-    console.log("login failed:"+message);
-  }
+  const handleFailedLogin = () => {
+    toast.error("Invalid Login", {
+      position: "top-right",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "light",
+    });
+  };
+
+  // const handleLoginFailed = (message: string) => {
+  //   console.log("login failed:" + message);
+  // };
 
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
@@ -51,7 +64,7 @@ function Login(): JSX.Element {
         const response = await AuthService.loginUser(
           JSON.stringify({ email, password })
         );
-        if(response.status===200){
+        if (response.status === 200) {
           const data = await response.json();
           const storeData = {
             userName: data.sanitizedUser.userName,
@@ -63,42 +76,37 @@ function Login(): JSX.Element {
           dispatch(signInSuccess(storeData));
           handleSuccessfulLogin();
           navigate("/");
-        }else{
-          handleLoginFailed(response.statusText);
+        } else {
+          handleFailedLogin();
         }
       } catch (error) {
-        handleLoginFailed("Login error");
+        handleFailedLogin();
       }
-      
     }
     if (activeTab === "instructor") {
       try {
         const response = await AuthService.loginInstructor(
           JSON.stringify({ email, password })
         );
-        if(response.ok){
+        if (response.ok) {
           const data = await response.json();
-        // Handle the 'data' as needed
-        const storeData = {
-          userName: data.instructor.name,
-          email: data.instructor.email,
-          contactNumber: data.instructor.contactNumber,
-          userType: "instructor",
-        };
-        dispatch(signInSuccess(storeData));
+          // Handle the 'data' as needed
+          const storeData = {
+            userName: data.instructor.name,
+            email: data.instructor.email,
+            contactNumber: data.instructor.contactNumber,
+            userType: "instructor",
+          };
+          dispatch(signInSuccess(storeData));
           console.log("Logged in");
           handleSuccessfulLogin();
           navigate("/");
-        }else{
-          handleLoginFailed(response.statusText);
+        } else {
+          handleFailedLogin();
         }
       } catch (error) {
-        handleLoginFailed("Login Failed");
+        handleFailedLogin();
       }
-      
-      
-
-      
     }
   }
 
@@ -109,6 +117,7 @@ function Login(): JSX.Element {
 
   return (
     <div className="Login bg-white">
+      <ToastContainer />
       <div className="tabs flex flex-row justify-between">
         <div
           className={`tab ${
