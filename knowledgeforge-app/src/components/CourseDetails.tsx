@@ -21,8 +21,8 @@ const CourseDetails: React.FC<Props> = () => {
   const course: Course = location.state;
   const [modules, setModules] = useState<Module[]>([]);
   const [doneButtonColor, setDoneButtonColor] = useState("bg-gray-500");
-  const [moduleNo,setModuleNo]=useState(1);
-  const [completedModule,setCompletedModule]=useState<Number[]>([]);
+  const [moduleNo, setModuleNo] = useState(1);
+  const [completedModule, setCompletedModule] = useState<Number[]>([]);
   const [selectedModule, setSelectedModule] = useState<Module | undefined>(
     undefined
   );
@@ -41,13 +41,13 @@ const CourseDetails: React.FC<Props> = () => {
     ? placeholderImage
     : course.thumbnail || placeholderImage;
 
-  useEffect(()=>{
-    if(completedModule.includes(moduleNo)){
-      setDoneButtonColor('bg-green-500');
-    }else{
+  useEffect(() => {
+    if (completedModule.includes(moduleNo)) {
+      setDoneButtonColor("bg-green-500");
+    } else {
       setDoneButtonColor("bg-gray-500");
     }
-  },[selectedModule,completedModule]);
+  }, [selectedModule, completedModule]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -81,32 +81,32 @@ const CourseDetails: React.FC<Props> = () => {
     };
 
     checkRegistration();
-    
   }, []);
-useEffect(()=>{
-  const checkProgress = async () => {
-    
-    if (isEnrolled) {
-      const response = await UserService.getCourseModuleProgress(course._id);
-      if (response !== undefined) {
-        const modNum: number = response;
-        const newCompletedModules = Array.from({ length: modNum }, (_, index) => index + 1);
-        setCompletedModule((prevCompletedModules) => [
-          ...prevCompletedModules,
-          ...newCompletedModules,
-        ]);
-        console.log("check progress");
-        console.log("latest module:" + modNum);
+  useEffect(() => {
+    const checkProgress = async () => {
+      if (isEnrolled) {
+        const response = await UserService.getCourseModuleProgress(course._id);
+        if (response !== undefined) {
+          const modNum: number = response;
+          const newCompletedModules = Array.from(
+            { length: modNum },
+            (_, index) => index + 1
+          );
+          setCompletedModule((prevCompletedModules) => [
+            ...prevCompletedModules,
+            ...newCompletedModules,
+          ]);
+          console.log("check progress");
+          console.log("latest module:" + modNum);
+        } else {
+          console.log("  response undefined" + response);
+        }
       } else {
-        console.log("  response undefined" + response);
+        console.log("user not enrolled");
       }
-    }else{
-      console.log("user not enrolled");
-    }
-  };
-  checkProgress();
-},[isEnrolled])
-
+    };
+    checkProgress();
+  }, [isEnrolled]);
 
   const changeSelectedModule = (mod: Module) => {
     console.log("module changed");
@@ -136,12 +136,13 @@ useEffect(()=>{
     try {
       // Add logic to mark the module as done (e.g., make an API call)
       // You can use the selectedModule?._id to identify the current module
-      const response = await UserService.updateCourseProgress(JSON.stringify(
-        {
+      const response = await UserService.updateCourseProgress(
+        JSON.stringify({
           courseId: course._id,
-          moduleNo: moduleNo
-        }));
-      if(response!==undefined && response.ok){
+          moduleNo: moduleNo,
+        })
+      );
+      if (response !== undefined && response.ok) {
         setCompletedModule((prevCompletedModules) => [
           ...prevCompletedModules,
           moduleNo,
@@ -152,8 +153,6 @@ useEffect(()=>{
       console.error("Error marking module as done:", error);
     }
   };
-
-  
 
   return (
     <>
@@ -206,13 +205,12 @@ useEffect(()=>{
                 </div>
 
                 <button
-        className={`${doneButtonColor} text-white px-4 py-2 rounded-lg mt-4`}
-        onClick={markModuleAsDone}
-      >
-        <FaCheck className="mr-2" />
-        Mark as Done
-      </button>
-
+                  className={`${doneButtonColor} text-white px-4 py-2 rounded-lg mt-4`}
+                  onClick={markModuleAsDone}
+                >
+                  <FaCheck className="mr-2" />
+                  Mark as Done
+                </button>
               </div>
 
               <div className="md:w-1/3 md:mr-8 flex flex-col items-center">
@@ -224,11 +222,8 @@ useEffect(()=>{
                     <div
                       key={moduleItem._id}
                       onClick={() => {
-                        setModuleNo(index+1);
-                        if(completedModule.includes(moduleNo-1)){
-                          changeSelectedModule(moduleItem);
-                        }
-                        
+                        setModuleNo(index + 1);
+                        changeSelectedModule(moduleItem);
                       }}
                       className={`cursor-pointer hover:shadow-lg bg-sky-200 rounded-lg shadow-md p-2 mb-4 duration-300 ${
                         selectedModule?._id === moduleItem._id
@@ -236,7 +231,10 @@ useEffect(()=>{
                           : "bg-gray-500"
                       }`}
                     >
-                      <ModuleCard module={moduleItem} completed={completedModule.includes(index+1)} />
+                      <ModuleCard
+                        module={moduleItem}
+                        completed={completedModule.includes(index + 1)}
+                      />
                     </div>
                   ))}
                 </div>

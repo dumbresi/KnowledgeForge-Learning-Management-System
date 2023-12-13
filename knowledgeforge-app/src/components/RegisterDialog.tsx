@@ -59,7 +59,7 @@ const RegisterDialog = (props: Props) => {
     if (activeTab === "student") {
       try {
         const response = await AuthService.registerUser(
-          JSON.stringify({ name, email, contactNumber, password })
+          JSON.stringify({ userName: name, email, contactNumber, password })
         );
 
         if (!response.ok) {
@@ -155,7 +155,7 @@ const RegisterDialog = (props: Props) => {
               <br />
               <input
                 className="input-field"
-                type="text"
+                type="password"
                 name="password"
                 value={password}
                 placeholder="Password"
@@ -212,7 +212,7 @@ const RegisterDialog = (props: Props) => {
               <br />
               <input
                 className="input-field"
-                type="text"
+                type="password"
                 name="password"
                 value={password}
                 placeholder="Password"
