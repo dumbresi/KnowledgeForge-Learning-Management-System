@@ -8,6 +8,8 @@ type Props = {
 const AddModuleCard = (props: Props) => {
   const date: Date = new Date();
   const courseID = props.courseId;
+  const [uploadVideotext,setUploadVideoText]=useState("Upload Video");
+  const [addModuletext,setAddModuleText]=useState("Add Module");
   const [formData, setFormData] = useState({
     title: "",
     duration: "",
@@ -63,6 +65,7 @@ const AddModuleCard = (props: Props) => {
       const generatedVideoId = result.fileId;
       setFormData({ ...formData, videoId: generatedVideoId });
     });
+    setUploadVideoText("Video Uploaded")
     console.log(response);
   };
 
@@ -79,6 +82,7 @@ const AddModuleCard = (props: Props) => {
       .then((response) => response.json())
       .then((data) => {
         // Handle the API response
+        setAddModuleText("Module Added");
         console.log(data);
       })
       .catch((error) => {
@@ -160,7 +164,7 @@ const AddModuleCard = (props: Props) => {
                 htmlFor="videoFile"
                 className="block text-sm font-medium text-gray-700"
               >
-                Upload Video File
+                {uploadVideotext}
               </label>
               <input
                 type="file"
@@ -181,7 +185,7 @@ const AddModuleCard = (props: Props) => {
             className="mt-4 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
             onClick={handleApiCall}
           >
-            Add
+            {addModuletext}
           </button>
         </>
       )}
