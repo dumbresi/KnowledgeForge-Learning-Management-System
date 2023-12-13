@@ -156,7 +156,7 @@ const CourseDetails: React.FC<Props> = () => {
 
   return (
     <>
-      <div className="flex h-screen bg-neutral-100">
+      <div className="flex h-screen">
         <Sidebar category={ingore} />
         <div className="container mx-auto mt-10 p-4 ml-2">
           <div className="md:flex md:items-center md:justify-between">
@@ -208,16 +208,19 @@ const CourseDetails: React.FC<Props> = () => {
                   className={`${doneButtonColor} text-white px-4 py-2 rounded-lg mt-4`}
                   onClick={markModuleAsDone}
                 >
-                  <FaCheck className="mr-2" />
-                  Mark as Done
+                  <div className="mr-2 flex flex-row">
+                    <FaCheck className="mr-5 mt-1" />
+                    Mark as Done
+                  </div>
                 </button>
               </div>
 
-              <div className="md:w-1/3 md:mr-8 flex flex-col items-center">
-                <div className="w-full mb-4">
-                  <h2 className="text-3xl  text-gray-800 mb-8">
+              <div className="md:w-1/3 md:mr-8 flex flex-col items-center rounded-2xl">
+                <div className="w-full mb-4 ">
+                  <h2 className="text-2xl bg-white font-bold text-gray-800 p-4">
                     List of Modules
                   </h2>
+                  <hr className="border-t-2 shadow-lg border-gray-300" />
                   {modules.map((moduleItem: Module, index: number) => (
                     <div
                       key={moduleItem._id}
@@ -225,10 +228,10 @@ const CourseDetails: React.FC<Props> = () => {
                         setModuleNo(index + 1);
                         changeSelectedModule(moduleItem);
                       }}
-                      className={`cursor-pointer hover:shadow-lg bg-sky-200 rounded-lg shadow-md p-2 mb-4 duration-300 ${
+                      className={`cursor-pointer bg-white shadow-md py-2 hover:shadow-lg transition duration-300 ${
                         selectedModule?._id === moduleItem._id
-                          ? "bg-gray-200"
-                          : "bg-gray-500"
+                          ? "bg-gray-100"
+                          : ""
                       }`}
                     >
                       <ModuleCard
