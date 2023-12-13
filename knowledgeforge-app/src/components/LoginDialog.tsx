@@ -12,6 +12,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { signInSuccess } from "../redux/user/userSlice";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { useLocation } from "react-router-dom";
 
 function Login(): JSX.Element {
   const handleSuccessfulLogin = () => {
@@ -43,11 +44,12 @@ function Login(): JSX.Element {
   // const handleLoginFailed = (message: string) => {
   //   console.log("login failed:" + message);
   // };
-
+  const location= useLocation();
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
 
-  const [activeTab, setActiveTab] = useState("student");
+  const [activeTab, setActiveTab] = useState<string>(() => (location.state !== null ? location.state : "student"));
+  console.log("active tab:"+location.state);
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -75,7 +77,7 @@ function Login(): JSX.Element {
           console.log(storeData);
           dispatch(signInSuccess(storeData));
           handleSuccessfulLogin();
-          navigate("/");
+          navigate("/",{replace:true});
         } else {
           handleFailedLogin();
         }
@@ -100,7 +102,7 @@ function Login(): JSX.Element {
           dispatch(signInSuccess(storeData));
           console.log("Logged in");
           handleSuccessfulLogin();
-          navigate("/");
+          navigate("/",{replace:true});
         } else {
           handleFailedLogin();
         }
@@ -110,9 +112,9 @@ function Login(): JSX.Element {
     }
   }
 
-  const takeToSignUpPage = () => {
+  const takeToSignUpPage = (userType: string) => {
     console.log("take user to register page");
-    navigate(Paths.registerPath);
+    navigate(Paths.registerPath,{state: userType,replace:true});
   };
 
   return (
@@ -185,7 +187,7 @@ function Login(): JSX.Element {
                   New Instructor?{" "}
                   <button
                     className="text-sky-500 hover:underline"
-                    onClick={takeToSignUpPage}
+                    onClick={()=>{takeToSignUpPage("instructor")}}
                   >
                     Sign Up
                   </button>
@@ -239,7 +241,7 @@ function Login(): JSX.Element {
                   New user?{" "}
                   <button
                     className="text-sky-500 hover:underline"
-                    onClick={takeToSignUpPage}
+                    onClick={()=>{takeToSignUpPage("student")}}
                   >
                     Sign Up
                   </button>
