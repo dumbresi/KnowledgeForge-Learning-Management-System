@@ -23,6 +23,10 @@ const RegisterDialog = (props: Props) => {
 
   const navigate = useNavigate();
 
+  const hanleRegistrationFailed=()=>{
+
+  }
+
   const handleNameChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setname(value);
@@ -63,6 +67,7 @@ const RegisterDialog = (props: Props) => {
         );
 
         if (!response.ok) {
+          hanleRegistrationFailed();
           throw new Error("Network response was not ok");
         }
         if (response.status === 200) {
@@ -79,6 +84,8 @@ const RegisterDialog = (props: Props) => {
         );
         if (response.status === 200) {
           navigate("../user/login");
+        }else{
+          hanleRegistrationFailed();
         }
       } catch (error) {
         console.error("Error submitting data", error);
