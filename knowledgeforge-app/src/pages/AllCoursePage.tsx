@@ -24,6 +24,8 @@ import { ToastContainer } from "react-toastify";
 type AllCoursePageProps = {
   pageType: string;
 };
+
+// Home page to display all the courses to the user and instructor's all courses to the instructor
 const AllCoursePage = (props: AllCoursePageProps) => {
   const [courses, setCourses] = useState<Course[]>([]);
   const [filteredCourses, setFilteredCourses] = useState<Course[]>([]);
@@ -86,7 +88,7 @@ const AllCoursePage = (props: AllCoursePageProps) => {
   };
 
   return (
-    <div className=" bg-zinc-100 flex h-screen">
+    <div className=" bg-zinc-100 flex h-auto">
       <ToastContainer />
       <div className="flex flex-row h-auto">
         <Sidebar category={filterCoursesByCategory} />

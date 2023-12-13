@@ -19,12 +19,11 @@ const SettingsPage: React.FC = () => {
 
   const toggleDarkMode = () => {
     setDarkMode(!darkMode);
-    // Add logic to update the theme (e.g., using context or localStorage)
   };
   const { t } = useTranslation("common");
 
   const handleLogout = async () => {
-    // Add logout logic (e.g., clearing authentication tokens)
+    // Logout api call
     const response = await AuthService.logout();
     console.log(response);
     if (response !== null) {
@@ -33,11 +32,6 @@ const SettingsPage: React.FC = () => {
   };
 
   const handleDeleteAccount = () => {
-    // Add logic to delete the user's account
-    // This is a sensitive operation and should be handled with caution
-    // It might involve asking for confirmation, password verification, etc.
-    // For this example, we'll just navigate to the login page
-
     // AuthService.deleteAccount({"email":"sid@gmail.com"});
     navigate(Paths.loginPath);
   };

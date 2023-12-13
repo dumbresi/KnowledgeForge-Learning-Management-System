@@ -13,3 +13,13 @@ export const getModules=async (id:string) : Promise<Modules[]>=> {
     const modules = await baseServices.GET<Modules>(modulesResourcePath+'/course/'+id);
     return modules;
 }
+
+export const AddModule=async (payload:string): Promise<Response> => {
+    const response = await baseServices.post(modulesResourcePath,payload,'');
+    return response;
+}
+
+export const uploadModuleVideo=async(payload:FormData) : Promise<Response> =>{
+    const response= await baseServices.postData("/video",+payload,'');
+    return response;
+}
