@@ -9,11 +9,17 @@ import {
 import * as Patths from "../resources/paths";
 import Course from "../models/Course";
 import * as instructorService from "../services/instructor-service";
+import { RootState } from "../redux/store";
+import { useSelector } from "react-redux";
 
 const AddCourseCard = () => {
+  const { currentUser, loading, error } = useSelector(
+    (state: RootState) => state.user
+  );
+
   const [formData, setFormData] = useState({
     title: "",
-    instructor: "",
+    instructor: currentUser?.userName,
     duration: "",
     fees: 0,
     category: "",
@@ -159,9 +165,11 @@ const AddCourseCard = () => {
           id="instructor"
           name="instructor"
           type="text"
-          className="input-field rounded-lg"
+          className="input-field rounded-lg text-gray-500"
           placeholder="Enter Instructor Name"
           onChange={handleInputChange}
+          value={currentUser?.userName}
+          readOnly
         ></input>
       </div>
       <div className="mt-4 w-full max-w-md">
