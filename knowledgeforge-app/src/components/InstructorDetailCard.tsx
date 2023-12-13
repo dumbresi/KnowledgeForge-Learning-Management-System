@@ -10,7 +10,10 @@ type InstructorDetailCardProps = {
 };
 
 
-const InstructorDetailCard: React.FC<InstructorDetailCardProps> = ({ instructor }) => {
+
+const InstructorDetailCard: React.FC<InstructorDetailCardProps> = ({
+  instructor,
+}) => {
   const [isEditing, setIsEditing] = useState(false);
   const dispatch = useDispatch();
   const [editedInstructor, setEditedInstructor] = useState<Instructor>({
@@ -47,22 +50,19 @@ const InstructorDetailCard: React.FC<InstructorDetailCardProps> = ({ instructor 
       // Make API call to update instructor data
       // Example:
       // const result = await updateInstructor(editedInstructor);
-      
-      setIsEditing(false);
-      const result = await fetch('http://localhost:4000/instructor',{
-        method:'PUT',
-        credentials:'include',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body:JSON.stringify({
-           "name":editedInstructor.name,
-           "contactNumber":editedInstructor.contactNumber
-        })
 
-        
-      },
-      );
+      setIsEditing(false);
+      const result = await fetch("http://localhost:4000/instructor", {
+        method: "PUT",
+        credentials: "include",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          name: editedInstructor.name,
+          contactNumber: editedInstructor.contactNumber,
+        }),
+      });
       if (result.ok) {
         const updatedInstructorData = await result.json();
         console.log(updatedInstructorData); // Log the updated user data
@@ -87,7 +87,7 @@ const InstructorDetailCard: React.FC<InstructorDetailCardProps> = ({ instructor 
       } else {
         // Handle unsuccessful response
       }
-      
+
       // Simulate API response for demonstration purposes
       // const updatedInstructorData = { ...editedInstructor, id: instructor.id };
 
@@ -98,7 +98,7 @@ const InstructorDetailCard: React.FC<InstructorDetailCardProps> = ({ instructor 
     }
   };
 
-  const { t } = useTranslation('common');
+  const { t } = useTranslation("common");
 
   return (
     <div className="min-h-screen flex items-center justify-end px-4 bg-background_cream pr-32">
@@ -115,8 +115,18 @@ const InstructorDetailCard: React.FC<InstructorDetailCardProps> = ({ instructor 
         </div>
         <div className="mt-6 border-t border-gray-100">
           <dl className="divide-y divide-gray-100">
+            <div className="px-4 py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+              <dt className="text-sm font-medium leading-6 text-gray-900">
+                Account Type
+              </dt>
+              <div className="mt-1 text-md leading-6 text-gray-700">
+                Instructor
+              </div>
+            </div>
             <div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
-              <dt className="text-sm font-medium leading-6 text-gray-900">{t("Full name")}</dt>
+              <dt className="text-sm font-medium leading-6 text-gray-900">
+                {t("Full name")}
+              </dt>
               {isEditing ? (
                 <input
                   type="text"
@@ -135,7 +145,9 @@ const InstructorDetailCard: React.FC<InstructorDetailCardProps> = ({ instructor 
             </div>
 
             <div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
-              <dt className="text-sm font-medium leading-6 text-gray-900">{t("Contact")}</dt>
+              <dt className="text-sm font-medium leading-6 text-gray-900">
+                {t("Contact Number")}
+              </dt>
               {isEditing ? (
                 <input
                   type="text"
@@ -145,7 +157,9 @@ const InstructorDetailCard: React.FC<InstructorDetailCardProps> = ({ instructor 
                   className="border rounded px-3 py-2 w-full focus:outline-none focus:border-blue-500"
                 />
               ) : (
-                <dd className="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">{currentUser?.contactNumber}</dd>
+                <dd className="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
+                  {editedInstructor.contactNumber}
+                </dd>
               )}
             </div>
           </dl>
