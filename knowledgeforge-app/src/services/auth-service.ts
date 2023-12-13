@@ -10,8 +10,14 @@ export const registerUser =async (payload:string): Promise<Response> => {
 }
 
 export const loginUser = async (payload: any):Promise<Response>=>{
-    const existingUser=baseService.post<User>(authPath+'/user/login',payload,'');
+    try {
+        const existingUser=baseService.post<User>(authPath+'/user/login',payload,'');
     return existingUser;
+    } catch (error) {
+        throw new Error("Login Failed");
+        
+    }
+    
 }
 
 export const registerInstructor =async (payload:any):Promise<Response> => {
@@ -20,8 +26,14 @@ export const registerInstructor =async (payload:any):Promise<Response> => {
 }
 
 export const loginInstructor = async (payload: any):Promise<Response>=>{
-    const existingUser=baseService.post<Instructor>(authPath+'/instructor/login',payload,'');
+    try {
+        const existingUser=baseService.post<Instructor>(authPath+'/instructor/login',payload,'');
     return existingUser;
+    } catch (error) {
+        throw new Error("Login Error");
+        
+    }
+    
 }
 
 export const logout= async(): Promise<Response> =>{

@@ -175,6 +175,9 @@ const Sidebar = (props: Props) => {
                     if (menu.title === t("Dashboard")) {
                       takeToHomePage();
                     }
+                    if(menu.title===t("Categories")){
+                      takeToHomePage();
+                    }
                     if (menu.title === t("Settings")) {
                       takeToSettingsPage();
                     }
