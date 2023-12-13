@@ -80,3 +80,7 @@ export const getCourses = async(email)=>{
     ]);
     return result[0];
 }
+export const addCourse = async (email,courseId) => {
+  // Using the 'findByIdAndDelete' method to delete the instructor
+  return await Instructor.findOneAndUpdate({email:email},{$push:{myCourses:courseId}},{returnOriginal:false});
+}

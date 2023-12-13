@@ -22,5 +22,9 @@ router.route('/current')
     .get(instructorController.getOneInsrtuctor);
 router.route('/mycourses')
     .get(instructorController.getInstructorCourses);
+router.route('/mycourses/:id')
+    .post(instructorController.addCourseToInstructor);
+    
+
 // Exporting the router for use in other files
 export default router;

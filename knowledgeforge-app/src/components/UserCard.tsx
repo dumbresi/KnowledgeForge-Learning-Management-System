@@ -66,8 +66,13 @@ const UserCard: React.FC<UserCardProps> = ({ user }) => {
         console.log(updatedUserData); // Log the updated user data
         setUpdatedUser(updatedUserData);
         setEditedUser(updatedUserData);
-
-        dispatch(updateUserSuccess(updatedUserData));
+        const storeData = {
+          userName: updatedUserData.userName,
+          email: updatedUserData.email,
+          contactNumber: updatedUserData.contactNumber,
+          userType: "user",
+        };
+        dispatch(updateUserSuccess(storeData));
         console.log("User data:"+updatedUserData)
       } else {
         // Handle unsuccessful response
