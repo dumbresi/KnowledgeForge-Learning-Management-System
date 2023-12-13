@@ -22,7 +22,7 @@ const CourseDetails: React.FC<Props> = () => {
   const [modules, setModules] = useState<Module[]>([]);
   const [doneButtonColor, setDoneButtonColor] = useState("bg-gray-500");
   const [moduleNo, setModuleNo] = useState(1);
-  const [completedModule, setCompletedModule] = useState<Number[]>([]);
+  const [completedModule, setCompletedModule] = useState<number[]>([1]);
   const [selectedModule, setSelectedModule] = useState<Module | undefined>(
     undefined
   );
@@ -151,6 +151,16 @@ const CourseDetails: React.FC<Props> = () => {
     }
   };
 
+  function areAllModulesCompleted(completedModules: number[], index: number): boolean {
+    // Generate an array of numbers from 1 to index
+    const numbersToCheck = Array.from({ length: index }, (_, i) => i + 1);
+  
+    // Check if all numbers in the range are present in completedModules
+    const allCompleted = numbersToCheck.every(num => completedModules.includes(num));
+  
+    return allCompleted;
+  }
+
   return (
     <>
       <div className="flex h-screen bg-neutral-100">
@@ -220,9 +230,10 @@ const CourseDetails: React.FC<Props> = () => {
                       key={moduleItem._id}
                       onClick={() => {
                         setModuleNo(index + 1);
-                        if(completedModule.includes(0) && index===0 || completedModule.includes(index)){
+                        if(areAllModulesCompleted(completedModule,index)){
                         changeSelectedModule(moduleItem);
                         }
+                        console.log("Completed Modules:"+completedModule);
                       }}
                       className={`cursor-pointer hover:shadow-lg bg-sky-200 rounded-lg shadow-md p-2 mb-4 duration-300 ${
                         selectedModule?._id === moduleItem._id
