@@ -55,3 +55,13 @@ export const post=async<T>(path:string,payload:any,params:any): Promise<Response
     const data=await response;
     return data;
 }
+
+export const postData=async<T>(path:string,payload:any,params:any):Promise<Response> =>{
+    const query: URLSearchParams=new URLSearchParams(params);
+    const response=await fetch(baseURL+path+query,{
+        method:'POST',
+        body:payload
+    })
+    const data=await response;
+    return data;
+}

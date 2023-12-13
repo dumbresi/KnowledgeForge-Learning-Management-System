@@ -123,7 +123,7 @@ const Sidebar = (props: Props) => {
   ];
 
   return (
-    <div>
+    <div className="h-full">
       <div
         className={`h-full p-3 space-y-2 ${
           isSidebarOpen ? "w-60" : "w-24"

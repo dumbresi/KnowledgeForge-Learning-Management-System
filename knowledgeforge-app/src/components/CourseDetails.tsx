@@ -204,9 +204,9 @@ const CourseDetails: React.FC<Props> = () => {
           </div>
 
           <hr className="w-full border-t-2 shadow-lg border-gray-300 my-6" />
-          {currentUser?.userType==='user'?
+          {currentUser?
           <>
-          {isEnrolled ? (
+          {(isEnrolled || currentUser?.userType==='instructor') ? (
             <div className="md:flex md:justify-between mt-12">
               <div className="mb-4 md:mb-0 md:w-2/3">
                 <div className="mb-4 font-bold text-3xl">

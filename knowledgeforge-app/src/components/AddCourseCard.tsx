@@ -11,11 +11,14 @@ import Course from "../models/Course";
 import * as instructorService from "../services/instructor-service";
 import { RootState } from "../redux/store";
 import { useSelector } from "react-redux";
+import * as CourseService from '../services/course-service'; 
 
+// Add course card for the instructor to add courses
 const AddCourseCard = () => {
   const { currentUser, loading, error } = useSelector(
     (state: RootState) => state.user
   );
+  const [uploadText, setUploadText]=useState("Add Course");
 
   const [formData, setFormData] = useState({
     title: "",
@@ -39,6 +42,7 @@ const AddCourseCard = () => {
       ...formData,
       [name]: value,
     });
+    setUploadText("Add Course");
   };
 
   const handleFileUpload = (e: any) => {
@@ -55,13 +59,13 @@ const AddCourseCard = () => {
           thumbnailBase64: base64String || "", // Extract the base64 string
         });
       };
-
+      setUploadText("Add Course");
       reader.readAsDataURL(file);
     }
   };
 
-  const handleApiCall = () => {
-    // Your API call logic here
+  const handleApiCall = async() => {
+    // API call logic
     const apiData = {
       title: formData.title,
       description: formData.description,
@@ -75,16 +79,26 @@ const AddCourseCard = () => {
       creationTime: Date().toString(),
     };
     console.log(apiData);
-    // Make your API call using apiData
-    // Example using fetch:
-    const req = fetch("http://localhost:4000/courses", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(apiData),
-    })
-      .then((response) => {
+    if(apiData.category===""|| apiData.description==="" || apiData.noOfModules===0 ||
+      apiData.title==='' || apiData.thumbnail==='' || apiData.duration==='' ){
+      setUploadText("Fill all detials");
+      return;
+    }
+    if(apiData.noOfModules<0){
+      setUploadText("Please enter valid number of modules");
+      return;
+    }
+    // Make API call using apiData
+    // const response :Promise<Response> =
+     await CourseService.addInstructorCourses(JSON.stringify(apiData)).
+    // fetch("http://localhost:4000/courses", {
+    //   method: "POST",
+    //   headers: {
+    //     "Content-Type": "application/json",
+    //   },
+    //   body: JSON.stringify(apiData),
+    // }
+      then((response: Response) => {
         if (response.status === 200) {
           // Return the promise for response.json()
           return response.json();
@@ -94,7 +108,7 @@ const AddCourseCard = () => {
         }
       })
       .then((res: Course) => {
-        // Now you can access the parsed JSON data in the 'res' variable
+        //access the parsed JSON data in the 'res' variable
         const result = instructorService.addCoursetoInstructor(res._id);
         console.log(result);
         navigate(Patths.addModulePage, {
@@ -111,7 +125,7 @@ const AddCourseCard = () => {
         console.log(data);
       })
       .catch((error) => {
-        // Handle errors here
+        // Handle errors
         console.error(error);
       });
   };
@@ -132,6 +146,7 @@ const AddCourseCard = () => {
           type="text"
           id="title"
           name="title"
+          required
           className="input-field rounded-lg"
           placeholder="Enter Course Title"
           onChange={handleInputChange}
@@ -149,6 +164,7 @@ const AddCourseCard = () => {
           id="description"
           name="description"
           rows={4}
+          required
           className="input-field rounded-lg"
           placeholder="Enter Course Description"
           onChange={handleInputChange}
@@ -183,6 +199,7 @@ const AddCourseCard = () => {
           id="duration"
           name="duration"
           type="text"
+          required
           className="input-field rounded-lg"
           placeholder="Enter Course Duration"
           onChange={handleInputChange}
@@ -198,6 +215,7 @@ const AddCourseCard = () => {
         <select
           id="category"
           name="category"
+          required
           className="input-field rounded-lg"
           placeholder="Select Course Category"
           onChange={handleInputChange}
@@ -231,6 +249,7 @@ const AddCourseCard = () => {
           name="subCategory"
           className="input-field rounded-lg"
           type="text"
+          required
           placeholder="Enter Course Sub-Category"
           onChange={handleInputChange}
         ></input>
@@ -249,6 +268,7 @@ const AddCourseCard = () => {
           step="0.01"
           className="input-field rounded-lg"
           placeholder="Enter Course Fees"
+          required
           min={0}
           onChange={handleInputChange}
         ></input>
@@ -267,6 +287,7 @@ const AddCourseCard = () => {
           className="input-field rounded-lg"
           placeholder="Enter Course Modules Count"
           min={0}
+          required
           onChange={handleInputChange}
         ></input>
       </div>
@@ -283,6 +304,7 @@ const AddCourseCard = () => {
             accept="image/*"
             id="thumbnail"
             name="thumbnail"
+            required
             className="mt-1 block w-full border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
             onChange={handleFileUpload}
           />
@@ -291,7 +313,7 @@ const AddCourseCard = () => {
             //handle onclick
             onClick={handleApiCall}
           >
-            Upload
+            {uploadText}
           </button>
         </div>
       </div>
