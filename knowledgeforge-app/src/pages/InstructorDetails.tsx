@@ -31,7 +31,7 @@ const InstructorDetail = () => {
   }, []);
 
   return (
-    <div className="flex flex-row instructor-details-page">
+    <div className="flex flex-row h-screen instructor-details-page">
       <Sidebar category={category} />
       <div className="w-screen instructor">
         <InstructorDetailCard instructor={instructor} />
