@@ -184,14 +184,25 @@ const AddCourseCard = () => {
         >
           Course Category
         </label>
-        <input
+        <select
           id="category"
           name="category"
-          type="text"
           className="input-field rounded-lg"
           placeholder="Enter course description"
           onChange={handleInputChange}
-        ></input>
+        >
+          <option value="DigitalMarketing">Digital Marketing</option>
+          <option value="DataScience">Data Science</option>
+          <option value="Writing">Writing</option>
+          <option value="Psychology">Psychology</option>
+          <option value="Finance">Finance</option>
+          <option value="Programming">Programming</option>
+          <option value="Cooking">Cooking</option>
+          <option value="Design">Design</option>
+          <option value="ProjectManagement">Project Management</option>
+          <option value="Spanish">Spanish</option>
+          <option value="EnvironmentalScience">Environmental Science</option>
+        </select>
       </div>
       <div className="mt-4 w-full max-w-md">
         <label
@@ -203,8 +214,8 @@ const AddCourseCard = () => {
         <input
           id="subCategory"
           name="subCategory"
-          type="text"
           className="input-field rounded-lg"
+          type="text"
           placeholder="Enter course description"
           onChange={handleInputChange}
         ></input>

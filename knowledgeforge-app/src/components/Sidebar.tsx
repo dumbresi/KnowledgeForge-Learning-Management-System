@@ -30,6 +30,7 @@ import { useTranslation } from "react-i18next";
 
 type Props = {
   category: (query: string) => void;
+  className?: string;
 };
 
 const Sidebar = (props: Props) => {
@@ -122,7 +123,7 @@ const Sidebar = (props: Props) => {
   ];
 
   return (
-    <div className="h-screen">
+    <div>
       <div
         className={`h-full p-3 space-y-2 ${
           isSidebarOpen ? "w-60" : "w-24"
