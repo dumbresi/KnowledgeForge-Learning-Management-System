@@ -5,43 +5,33 @@ import User from "../models/UserModel";
 import Sidebar from "../components/Sidebar";
 
 const UserPage = () => {
-    const [user, setUser] = useState<User | null>(null); // User or null as initial state
+  const [user, setUser] = useState<User | null>(null); // User or null as initial state
 
-    useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const userData = await UserService.getUser(); // Fetch a single user
-                setUser(userData);
-            } catch (error) {
-                console.error('Error fetching user data:', error);
-            }
-        };
-        fetchData();
-    }, []);
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const userData = await UserService.getUser(); // Fetch a single user
+        setUser(userData);
+      } catch (error) {
+        console.error("Error fetching user data:", error);
+      }
+    };
+    fetchData();
+  }, []);
 
-    const category=()=>{
+  const category = () => {};
 
-    }
-
-    return (
-        <div className="flex">
-            <Sidebar category={category} />
-            <div className="flex-1 justify-center items-center mt-6">
-                {user ? (
-                    <UserCard usermodel={user} />
-                ) : (
-                    <p>Loading...</p>
-                )}
-            </div>
-        </div>
-    );
+  return (
+    <div className="flex flex-row h-screen">
+      <Sidebar category={category} />
+      <div className="w-screen">
+        {user ? <UserCard user={user} /> : <p>Loading...</p>}
+      </div>
+    </div>
+  );
 };
 
 export default UserPage;
-
-
-
-
 
 // const UserPage = () => {
 
@@ -74,6 +64,4 @@ export default UserPage;
 //         </div>
 //       )
 
-
 // }
-

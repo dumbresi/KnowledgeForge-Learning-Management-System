@@ -5,33 +5,31 @@ import { updateUserSuccess } from "../redux/user/userSlice";
 import { useTranslation } from "react-i18next";
 
 type UserCardProps = {
-  // user: {
-  //   userName: string;
-  //   email: string;
-  //   contactNumber: string;
-  // };
-  usermodel:UserModel;
+  user: {
+    userName: string;
+    email: string;
+    contactNumber: string;
+  };
 };
 
-const UserCard: React.FC<UserCardProps> = ({ usermodel }) => {
+const UserCard: React.FC<UserCardProps> = ({ user }) => {
   const [isEditing, setIsEditing] = useState(false);
   const dispatch = useDispatch();
   const [editedUser, setEditedUser] = useState<UserModel>({
-    userName: usermodel.userName,
-    email: '',
-    contactNumber: usermodel.contactNumber,
+    userName: user.userName,
+    email: "",
+    contactNumber: user.contactNumber,
     // password: '', // Initialize with an empty string or default value
     // registeredCourses: '', // Initialize with an empty array or default value
   });
-    // State to manage the updated user data from the API response
-    // const [updatedUser, setUpdatedUser] = useState<UserModel>({
-    //   userName: user.userName,
-    //   email: '',
-    //   contactNumber: user.contactNumber,
-    //   // password: '',
-    //   // registeredCourses: '',
-    // });
-
+  // State to manage the updated user data from the API response
+  const [updatedUser, setUpdatedUser] = useState<UserModel>({
+    userName: user.userName,
+    email: "",
+    contactNumber: user.contactNumber,
+    // password: '',
+    // registeredCourses: '',
+  });
 
   const handleEditClick = () => {
     setIsEditing(!isEditing);
@@ -48,24 +46,23 @@ const UserCard: React.FC<UserCardProps> = ({ usermodel }) => {
     try {
       // await updateUser(editedUser);
       setIsEditing(false);
-      const result = await fetch('http://localhost:4000/user',{
-        method:'PUT',
-        credentials:'include',
+      const result = await fetch("http://localhost:4000/user", {
+        method: "PUT",
+        credentials: "include",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
-        body:JSON.stringify({
-           "userName":editedUser.userName,
-           "contactNumber":editedUser.contactNumber
-        })
-      },
-      );
+        body: JSON.stringify({
+          userName: editedUser.userName,
+          contactNumber: editedUser.contactNumber,
+        }),
+      });
       // console.log( result.json());
       // console.log(updatedUser);
       if (result.ok) {
         const updatedUserData = await result.json();
         console.log(updatedUserData); // Log the updated user data
-        // setUpdatedUser(updatedUserData);
+        setUpdatedUser(updatedUserData);
         setEditedUser(updatedUserData);
         const storeData = {
           userName: updatedUserData.userName,
@@ -74,32 +71,27 @@ const UserCard: React.FC<UserCardProps> = ({ usermodel }) => {
           userType: "user",
         };
         dispatch(updateUserSuccess(storeData));
-        console.log("User data:"+updatedUserData)
+        console.log("User data:" + updatedUserData);
       } else {
         // Handle unsuccessful response
       }
-    }
-     catch (error) {
+    } catch (error) {
       console.error("Error updating user:", error);
       // Handle error, show error message, etc.
     }
   };
-  const { t } = useTranslation('common');
-
+  const { t } = useTranslation("common");
 
   return (
-    <div className="min-h-screen items-center justify-center px-4">
-      <div className="flex-1 max-w-4xl mx-auto pt-8 mt-8 bg-slate-200 rounded-lg shadow-xl p-6">
-        <div className="flex items-center justify-between mb-6">
-          <div>
-            <h3 className="text-3xl font-semibold leading-7 text-gray-900">
-              {isEditing ? t("Edit User") : editedUser.userName}
-            </h3>
-            <p className="mt-1 max-w-2xl text-sm leading-6 text-gray-500">
-              {t("Welcome to your profile.")}
-            </p>
-          </div>
-          
+    <div className="min-h-screen flex items-center justify-end px-4 bg-background_cream pr-32">
+      <div className="p-40 max-w-8xl bg-white w-3/4 rounded-lg shadow-xl">
+        <div className="px-4 sm:px-0">
+          <h3 className="text-3xl font-semibold leading-7 text-gray-900">
+            {isEditing ? t("Edit User") : editedUser.userName}
+          </h3>
+          <p className="mt-1 max-w-2xl text-sm leading-6 text-gray-500">
+            {t("Welcome to your profile.")}
+          </p>
         </div>
         <div className="mt-6 border-t border-gray-100">
           <dl className="divide-y divide-gray-100">
@@ -126,7 +118,7 @@ const UserCard: React.FC<UserCardProps> = ({ usermodel }) => {
                 {t("Email")}
               </dt>
               <dd className="mt-1 text-md leading-6 text-gray-700">
-                {usermodel.email}
+                {user.email}
               </dd>
             </div>
             <div className="px-4 py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
@@ -147,19 +139,16 @@ const UserCard: React.FC<UserCardProps> = ({ usermodel }) => {
                 </dd>
               )}
             </div>
-            <div>
-            </div>
-            
           </dl>
         </div>
         <div className="mt-5">
-            <button
+          <button
             className="bg-orange-500 hover:bg-orange-700 text-white text-sm font-bold py-2 px-4 rounded"
             onClick={isEditing ? handleSaveClick : handleEditClick}
           >
             {isEditing ? t("Save") : t("Edit")}
           </button>
-            </div>
+        </div>
       </div>
     </div>
   );
