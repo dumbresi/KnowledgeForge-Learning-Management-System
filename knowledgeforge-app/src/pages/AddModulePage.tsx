@@ -25,7 +25,7 @@ const AddModulePage = () => {
   };
 
   const handleSubmit = () => {
-    navigate(Paths.allCoursesPath);
+    navigate(Paths.allCoursesPath,{replace:true});
   };
 
   return (

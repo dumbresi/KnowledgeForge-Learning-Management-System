@@ -10,6 +10,7 @@ import {
 import * as AuthService from "../services/auth-service";
 import * as Paths from "../resources/paths";
 import { toast } from "react-toastify";
+import { useLocation } from "react-router-dom";
 
 type Props = {};
 
@@ -19,8 +20,9 @@ const RegisterDialog = (props: Props) => {
   const [contactNumber, setContactNumber] = useState("");
   const [password, setPassword] = useState("");
   const [university, setUniversity] = useState("");
-
-  const [activeTab, setActiveTab] = useState("student");
+  const location =useLocation();
+  const [activeTab, setActiveTab] = useState<string>(() => (location.state !== null ? location.state : "student"));
+  console.log("Register user type:"+location.state)
 
   const navigate = useNavigate();
 
@@ -77,8 +79,8 @@ const RegisterDialog = (props: Props) => {
     setActiveTab(tab);
   };
 
-  const takeToLoginPage = () => {
-    navigate("/user/login");
+  const takeToLoginPage = (userType:string) => {
+    navigate(Paths.loginPath,{state:userType,replace:true});
   };
 
   const handleSubmit = async (e: FormEvent) => {
@@ -201,7 +203,7 @@ const RegisterDialog = (props: Props) => {
               <br />
               <div className="text-center m-2">
                 Already a user?{" "}
-                <button className="text-light_blue" onClick={takeToLoginPage}>
+                <button className="text-light_blue"onClick={() => takeToLoginPage("student")}>
                   Log In
                 </button>
               </div>
@@ -267,7 +269,7 @@ const RegisterDialog = (props: Props) => {
               <br />
               <div className="text-center m-2">
                 Already a user?{" "}
-                <button className="text-light_blue" onClick={takeToLoginPage}>
+                <button className="text-light_blue" onClick={() => takeToLoginPage("instructor")}>
                   Log In
                 </button>
               </div>
