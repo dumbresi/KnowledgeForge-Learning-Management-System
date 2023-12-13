@@ -21,7 +21,10 @@ router.route('/registeredCourses/:id')
     .get(userController.checkRegistration)
     .post(userController.registerInCourse);
 router.route('/courseProgress')
-    .post(userController.updateCourseProgress)
+    .post(userController.updateCourseProgress);
+    
+router.route('/courseProgress/:id')
     .get(userController.getCourseProgress);
+
 
 export default router;
