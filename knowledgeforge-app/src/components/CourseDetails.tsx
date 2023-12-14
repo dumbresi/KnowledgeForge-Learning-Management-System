@@ -269,11 +269,11 @@ const CourseDetails: React.FC<Props> = () => {
                         <div
                           key={moduleItem._id}
                           onClick={() => {
-                            setModuleNo(index + 1);
                             if (
                               areAllModulesCompleted(completedModule, index)
                             ) {
                               changeSelectedModule(moduleItem);
+                              setModuleNo(index + 1);
                             }
                             console.log("Completed Modules:" + completedModule);
                           }}
