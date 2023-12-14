@@ -1,18 +1,11 @@
-import React, { useState, useEffect, startTransition } from "react";
-import CourseCard from "../components/CourseCard";
+import React, { useState, useEffect } from "react";
 import * as CourseService from "../services/course-service";
 import * as InstructorService from "../services/instructor-service";
 import Course from "../models/Course";
 import {
-  BrowserRouter,
-  Route,
-  Routes,
-  Link,
   useNavigate,
 } from "react-router-dom";
-import SearchBox from "../components/SearchBox";
 import Sidebar from "../components/Sidebar";
-import logo from "../resources/knowledgeForge.jpeg";
 import Topbar from "../components/Topbar";
 import * as Paths from "../resources/paths";
 import * as AuthService from "../services/auth-service";
@@ -30,7 +23,7 @@ const AllCoursePage = (props: AllCoursePageProps) => {
   const [courses, setCourses] = useState<Course[]>([]);
   const [filteredCourses, setFilteredCourses] = useState<Course[]>([]);
   const navigate = useNavigate();
-  const { currentUser, loading, error } = useSelector(
+  const { currentUser } = useSelector(
     (state: RootState) => state.user
   );
 
@@ -67,13 +60,6 @@ const AllCoursePage = (props: AllCoursePageProps) => {
     }
   };
 
-  const handleLogout = async () => {
-    const response = await AuthService.logout();
-
-    if (response.status == 200) {
-      navigate(Paths.loginPath);
-    }
-  };
 
   const filterCoursesByCategory = (category: string) => {
     const searchedCourse = courses.filter((c) =>
@@ -103,11 +89,6 @@ const AllCoursePage = (props: AllCoursePageProps) => {
         ) : (
           ""
         )}
-        {/* <div className="grid gap-1 grid-cols-[repeat(auto-fill,minmax(300px,1fr))] p-2">
-          {filteredCourses.map((courseItem) => (
-            <CourseCard course={courseItem} />
-          ))} 
-        </div> */}
       </div>
     </div>
   );

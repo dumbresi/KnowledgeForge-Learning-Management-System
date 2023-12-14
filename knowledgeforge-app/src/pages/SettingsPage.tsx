@@ -1,4 +1,3 @@
-// SettingsPage.tsx
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import * as Paths from "../resources/paths";
@@ -11,7 +10,7 @@ import Sidebar from "../components/Sidebar";
 const SettingsPage: React.FC = () => {
   const [darkMode, setDarkMode] = useState(false);
   const navigate = useNavigate();
-  const { currentUser, loading, error } = useSelector(
+  const { currentUser } = useSelector(
     (state: RootState) => state.user
   );
 
@@ -32,7 +31,6 @@ const SettingsPage: React.FC = () => {
   };
 
   const handleDeleteAccount = () => {
-    // AuthService.deleteAccount({"email":"sid@gmail.com"});
     navigate(Paths.loginPath);
   };
 

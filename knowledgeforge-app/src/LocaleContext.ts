@@ -9,7 +9,7 @@ const defaultLocale = 'en';
 
 const LocaleContext = createContext<LocaleContextType>({
   locale: defaultLocale,
-  setLocale: () => {}, // Placeholder function
+  setLocale: () => {}, 
 });
 
 export default LocaleContext;

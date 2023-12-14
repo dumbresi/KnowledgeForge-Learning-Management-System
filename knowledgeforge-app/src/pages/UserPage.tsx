@@ -32,36 +32,3 @@ const UserPage = () => {
 };
 
 export default UserPage;
-
-// const UserPage = () => {
-
-//     const [user, setUser] = useState<User[]>([]);
-
-//     useEffect(() => {
-//         // fetch user data from API
-
-//         const fetchData = async () => {
-//             try {
-//                 const data = UserService.getUser();
-//                 setUser(await data);
-//             } catch (error) {
-//                 console.error('Error fetching user data:', error);
-//             }
-//             };
-//             fetchData();
-//     }, []);
-
-//     return (
-//         <div className='user-page'>
-//             <h1>Welcome to your profile!</h1>
-//             <div>
-//                 {
-//                     user.map(
-//                         (userItem) =>( <UserCard user={userItem}/> )
-//                     )
-//                 }
-//             </div>
-//         </div>
-//       )
-
-// }

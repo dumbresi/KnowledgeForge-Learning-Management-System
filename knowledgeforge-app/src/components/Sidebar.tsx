@@ -15,10 +15,6 @@ import { useMediaQuery } from "react-responsive";
 import * as Paths from "../resources/paths";
 import * as AuthService from "../services/auth-service";
 import {
-  BrowserRouter,
-  Route,
-  Routes,
-  Link,
   useNavigate,
 } from "react-router-dom";
 import { signOut } from "../redux/user/userSlice";

@@ -1,14 +1,10 @@
 import React, { useState, ChangeEvent, FormEvent } from "react";
 import {
-  BrowserRouter,
-  Route,
-  Routes,
-  Link,
   useNavigate,
 } from "react-router-dom";
 import * as AuthService from "../services/auth-service";
 import * as Paths from "../resources/paths";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { signInSuccess } from "../redux/user/userSlice";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -41,9 +37,7 @@ function Login(): JSX.Element {
     });
   };
 
-  // const handleLoginFailed = (message: string) => {
-  //   console.log("login failed:" + message);
-  // };
+
   const location= useLocation();
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");

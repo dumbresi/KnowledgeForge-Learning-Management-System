@@ -10,8 +10,6 @@ const InstructorDetail = () => {
     email: "",
     contactNumber: "",
     university: "",
-    // password: "",
-    // myCourses: []
   });
 
   const category = () => {};
