@@ -6,7 +6,7 @@ const ContactUs = () => {
   const category = () => {};
 
   return (
-    <div className="flex flex-row h-screen">
+    <div className="flex flex-row h-full">
       <Sidebar category={category} />
       <div className="w-screen instructor">
         <ContactCard />
