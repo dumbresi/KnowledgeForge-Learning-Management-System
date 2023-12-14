@@ -37,6 +37,7 @@ const CourseDetails: React.FC<Props> = () => {
   const course: Course = location.state;
   const [modules, setModules] = useState<Module[]>([]);
   const [doneButtonColor, setDoneButtonColor] = useState("bg-gray-500");
+  const [doneButtonText, setDoneButtonText] = useState("Mark as Done");
   const [moduleNo, setModuleNo] = useState(1);
   const [completedModule, setCompletedModule] = useState<number[]>([1]);
   const navigate = useNavigate();
@@ -61,8 +62,10 @@ const CourseDetails: React.FC<Props> = () => {
   useEffect(() => {
     if (completedModule.includes(moduleNo)) {
       setDoneButtonColor("bg-green-500");
+      setDoneButtonText("Done");
     } else {
       setDoneButtonColor("bg-gray-500");
+      setDoneButtonText("Mark as Done");
     }
   }, [selectedModule, completedModule]);
 
@@ -251,7 +254,7 @@ const CourseDetails: React.FC<Props> = () => {
                     >
                       <div className="mr-2 flex flex-row">
                         <FaCheck className="mr-5 mt-1" />
-                        Mark as Done
+                        {`${doneButtonText}`}
                       </div>
                     </button>
                   </div>

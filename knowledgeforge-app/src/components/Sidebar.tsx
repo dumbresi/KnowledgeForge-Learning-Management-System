@@ -91,6 +91,7 @@ const Sidebar = (props: Props) => {
   const setCategoryFilter = (title: string) => {
     // props.category(e.arguments);
     props.category(title);
+    navigate(Paths.homePath);
   };
 
   const showRegisteredCourses = () => {
@@ -107,8 +108,8 @@ const Sidebar = (props: Props) => {
       icon: <BsList />,
       submenu: true,
       submenuItems: [
-        { title: t("Programming") },
-        { title: t("Machine Learning") },
+        { title: t("DataScience") },
+        { title: t("DigitalMarketing") },
         { title: t("Cybersecurity") },
       ],
     },

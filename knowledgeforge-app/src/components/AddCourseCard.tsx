@@ -121,7 +121,7 @@ const AddCourseCard = () => {
           state: {
             noOfModules: Number(formData.noOfModules),
             courseId: res._id,
-          },
+          }, replace:true
         });
         // Return res if you want to use it in the next then block
         return res;
