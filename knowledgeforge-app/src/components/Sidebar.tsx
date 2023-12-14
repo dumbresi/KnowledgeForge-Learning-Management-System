@@ -182,7 +182,7 @@ const Sidebar = (props: Props) => {
                     if (menu.title === t("Logout")) {
                       handleLogout();
                     }
-                    if (menu.title === "Profile") {
+                    if (menu.title === t("Profile")) {
                       takeToProfilePage();
                     }
                     if (menu.title === t("Dashboard")) {
@@ -197,16 +197,16 @@ const Sidebar = (props: Props) => {
                     if (menu.title === t("Login")) {
                       taketoLoginPage();
                     }
-                    if (menu.title === "My Courses") {
+                    if (menu.title === t("My Courses")) {
                       showRegisteredCourses();
                     }
-                    if (menu.title === "Add Course") {
+                    if (menu.title === t("Add Course")) {
                       goToAddCoursePage();
                     }
-                    if (menu.title === "Categories") {
+                    if (menu.title === t("Categories")) {
                       setSubmenuOpen(!isSubmenuOpen);
                     }
-                    if (menu.title === "Contact") {
+                    if (menu.title === t("Contact")) {
                       takeToContactPage();
                     }
                   }}
