@@ -178,7 +178,7 @@ const CourseDetails: React.FC<Props> = () => {
 
   return (
     <>
-      <div className="flex h-screen">
+      <div className="flex min-h-full">
         <Sidebar category={ingore} />
         <div className="container mx-auto mt-10 p-4 ml-2">
           <div className="md:flex md:items-center md:justify-between">
