@@ -193,7 +193,7 @@ const CourseDetails: React.FC<Props> = () => {
 
   return (
     <>
-      <div className="flex h-screen">
+      <div className="flex min-h-full">
         <ToastContainer />
         <Sidebar category={ingore} />
         <div className="container mx-auto mt-10 p-4 ml-2">
