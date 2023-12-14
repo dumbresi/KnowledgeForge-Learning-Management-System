@@ -12,20 +12,34 @@ import sampleThumb from "../resources/placeholder.jpg";
 import Sidebar from "./Sidebar";
 import { FaStar, FaCheck } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
-import * as Paths from '../resources/paths';
+import * as Paths from "../resources/paths";
+import { ToastContainer, toast } from "react-toastify";
 
 type Props = {};
 
 const placeholderImage = sampleThumb;
 
 const CourseDetails: React.FC<Props> = () => {
+  const markAsDone = () => {
+    toast.success("Marked Done", {
+      position: "top-right",
+      autoClose: 3000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "light",
+    });
+  };
+
   const location = useLocation();
   const course: Course = location.state;
   const [modules, setModules] = useState<Module[]>([]);
   const [doneButtonColor, setDoneButtonColor] = useState("bg-gray-500");
   const [moduleNo, setModuleNo] = useState(1);
   const [completedModule, setCompletedModule] = useState<number[]>([1]);
-  const navigate= useNavigate();
+  const navigate = useNavigate();
   const [selectedModule, setSelectedModule] = useState<Module | undefined>(
     undefined
   );
@@ -149,6 +163,7 @@ const CourseDetails: React.FC<Props> = () => {
         ]);
       }
       console.log("Module marked as done:", selectedModule);
+      markAsDone();
     } catch (error) {
       console.error("Error marking module as done:", error);
     }
@@ -169,13 +184,14 @@ const CourseDetails: React.FC<Props> = () => {
     return allCompleted;
   }
 
-  const takeToLogin=()=>{
+  const takeToLogin = () => {
     navigate(Paths.loginPath);
-  }
+  };
 
   return (
     <>
       <div className="flex h-screen">
+        <ToastContainer />
         <Sidebar category={ingore} />
         <div className="container mx-auto mt-10 p-4 ml-2">
           <div className="md:flex md:items-center md:justify-between">
@@ -204,96 +220,99 @@ const CourseDetails: React.FC<Props> = () => {
           </div>
 
           <hr className="w-full border-t-2 shadow-lg border-gray-300 my-6" />
-          {currentUser?
-          <>
-          {(isEnrolled || currentUser?.userType==='instructor') ? (
-            <div className="md:flex md:justify-between mt-12">
-              <div className="mb-4 md:mb-0 md:w-2/3">
-                <div className="mb-4 font-bold text-3xl">
-                  Lesson {selectedModule?.module_no}
-                </div>
-                <div className="border-2 w-11/12 h-96 rounded-lg shadow-xl overflow-auto">
-                  <VideoPlayer videoID={`${selectedModule?.videoId}`} />
-                </div>
-                <div className="mt-6">
-                  <ul>
-                    <li className="mb-2 font-semibold text-3xl">
-                      {selectedModule?.title}
-                    </li>
-                    <li className="text-base italic  text-gray-600 mt-4 mb-1">
-                      {selectedModule?.description}
-                    </li>
-                    <li className="text-sm italic  text-gray-600 mb-4">
-                      Duration: {selectedModule?.duration}
-                    </li>
-                  </ul>
-                </div>
-
-                <button
-                  className={`${doneButtonColor} text-white px-4 py-2 rounded-lg mt-4`}
-                  onClick={markModuleAsDone}
-                >
-                  <div className="mr-2 flex flex-row">
-                    <FaCheck className="mr-5 mt-1" />
-                    Mark as Done
-                  </div>
-                </button>
-              </div>
-
-              <div className="md:w-1/3 md:mr-8 flex flex-col items-center rounded-2xl">
-                <div className="w-full mb-4 ">
-                  <h2 className="text-2xl bg-white font-bold text-gray-800 p-4">
-                    List of Modules
-                  </h2>
-                  <hr className="border-t-2 shadow-lg border-gray-300" />
-                  {modules.map((moduleItem: Module, index: number) => (
-                    <div
-                      key={moduleItem._id}
-                      onClick={() => {
-                        setModuleNo(index + 1);
-                        if (areAllModulesCompleted(completedModule, index)) {
-                          changeSelectedModule(moduleItem);
-                        }
-                        console.log("Completed Modules:" + completedModule);
-                      }}
-                      className={`cursor-pointer bg-white shadow-md py-2 hover:shadow-lg transition duration-300 ${
-                        selectedModule?._id === moduleItem._id
-                          ? "bg-gray-100"
-                          : ""
-                      }`}
-                    >
-                      <ModuleCard
-                        module={moduleItem}
-                        completed={completedModule.includes(index + 1)}
-                      />
+          {currentUser ? (
+            <>
+              {isEnrolled || currentUser?.userType === "instructor" ? (
+                <div className="md:flex md:justify-between mt-12">
+                  <div className="mb-4 md:mb-0 md:w-2/3">
+                    <div className="mb-4 font-bold text-3xl">
+                      Lesson {selectedModule?.module_no}
                     </div>
-                  ))}
+                    <div className="border-2 w-11/12 h-96 rounded-lg shadow-xl overflow-auto">
+                      <VideoPlayer videoID={`${selectedModule?.videoId}`} />
+                    </div>
+                    <div className="mt-6">
+                      <ul>
+                        <li className="mb-2 font-semibold text-3xl">
+                          {selectedModule?.title}
+                        </li>
+                        <li className="text-base italic  text-gray-600 mt-4 mb-1">
+                          {selectedModule?.description}
+                        </li>
+                        <li className="text-sm italic  text-gray-600 mb-4">
+                          Duration: {selectedModule?.duration}
+                        </li>
+                      </ul>
+                    </div>
+
+                    <button
+                      className={`${doneButtonColor} text-white px-4 py-2 rounded-lg mt-4`}
+                      onClick={markModuleAsDone}
+                    >
+                      <div className="mr-2 flex flex-row">
+                        <FaCheck className="mr-5 mt-1" />
+                        Mark as Done
+                      </div>
+                    </button>
+                  </div>
+
+                  <div className="md:w-1/3 md:mr-8 flex flex-col items-center rounded-2xl">
+                    <div className="w-full mb-4 ">
+                      <h2 className="text-2xl bg-white font-bold text-gray-800 p-4">
+                        List of Modules
+                      </h2>
+                      <hr className="border-t-2 shadow-lg border-gray-300" />
+                      {modules.map((moduleItem: Module, index: number) => (
+                        <div
+                          key={moduleItem._id}
+                          onClick={() => {
+                            setModuleNo(index + 1);
+                            if (
+                              areAllModulesCompleted(completedModule, index)
+                            ) {
+                              changeSelectedModule(moduleItem);
+                            }
+                            console.log("Completed Modules:" + completedModule);
+                          }}
+                          className={`cursor-pointer bg-white shadow-md py-2 hover:shadow-lg transition duration-300 ${
+                            selectedModule?._id === moduleItem._id
+                              ? "bg-gray-100"
+                              : ""
+                          }`}
+                        >
+                          <ModuleCard
+                            module={moduleItem}
+                            completed={completedModule.includes(index + 1)}
+                          />
+                        </div>
+                      ))}
+                    </div>
+                  </div>
                 </div>
-              </div>
-            </div>
+              ) : (
+                <div className="text-center">
+                  {" "}
+                  {/* Render something for users who are not enrolled */}
+                  <p className="text-lg mb-4">
+                    You are not enrolled in this course.
+                  </p>
+                  <button
+                    onClick={enrollForCourse}
+                    className="bg-sky-800 font-semibold shadow-md duration-300 text-white px-4 py-2 rounded-lg hover:shadow-xl"
+                  >
+                    Enroll Now
+                  </button>
+                </div>
+              )}
+            </>
           ) : (
-            <div className="text-center">
-              {" "}
-              {/* Render something for users who are not enrolled */}
-              <p className="text-lg mb-4">
-                You are not enrolled in this course.
-              </p>
-              <button
-                onClick={enrollForCourse}
-                className="bg-sky-800 font-semibold shadow-md duration-300 text-white px-4 py-2 rounded-lg hover:shadow-xl"
-              >
-                Enroll Now
-              </button>
-            </div>
+            <>
+              <div>
+                Please <button onClick={takeToLogin}>Login</button> using
+                Student Id
+              </div>
+            </>
           )}
-          </>
-          :
-          <>
-          <div>
-            Please <button onClick={takeToLogin}>Login</button> using Student Id
-          </div>
-          </>
-          }
         </div>
       </div>
     </>

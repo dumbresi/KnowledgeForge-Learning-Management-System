@@ -11,14 +11,14 @@ import Course from "../models/Course";
 import * as instructorService from "../services/instructor-service";
 import { RootState } from "../redux/store";
 import { useSelector } from "react-redux";
-import * as CourseService from '../services/course-service'; 
+import * as CourseService from "../services/course-service";
 
 // Add course card for the instructor to add courses
 const AddCourseCard = () => {
   const { currentUser, loading, error } = useSelector(
     (state: RootState) => state.user
   );
-  const [uploadText, setUploadText]=useState("Add Course");
+  const [uploadText, setUploadText] = useState("Add Course");
 
   const [formData, setFormData] = useState({
     title: "",
@@ -64,7 +64,7 @@ const AddCourseCard = () => {
     }
   };
 
-  const handleApiCall = async() => {
+  const handleApiCall = async () => {
     // API call logic
     const apiData = {
       title: formData.title,
@@ -79,26 +79,32 @@ const AddCourseCard = () => {
       creationTime: Date().toString(),
     };
     console.log(apiData);
-    if(apiData.category===""|| apiData.description==="" || apiData.noOfModules===0 ||
-      apiData.title==='' || apiData.thumbnail==='' || apiData.duration==='' ){
+    if (
+      apiData.category === "" ||
+      apiData.description === "" ||
+      apiData.noOfModules === 0 ||
+      apiData.title === "" ||
+      apiData.thumbnail === "" ||
+      apiData.duration === ""
+    ) {
       setUploadText("Fill all detials");
       return;
     }
-    if(apiData.noOfModules<0){
+    if (apiData.noOfModules < 0) {
       setUploadText("Please enter valid number of modules");
       return;
     }
     // Make API call using apiData
     // const response :Promise<Response> =
-     await CourseService.addInstructorCourses(JSON.stringify(apiData)).
-    // fetch("http://localhost:4000/courses", {
-    //   method: "POST",
-    //   headers: {
-    //     "Content-Type": "application/json",
-    //   },
-    //   body: JSON.stringify(apiData),
-    // }
-      then((response: Response) => {
+    await CourseService.addInstructorCourses(JSON.stringify(apiData))
+      // fetch("http://localhost:4000/courses", {
+      //   method: "POST",
+      //   headers: {
+      //     "Content-Type": "application/json",
+      //   },
+      //   body: JSON.stringify(apiData),
+      // }
+      .then((response: Response) => {
         if (response.status === 200) {
           // Return the promise for response.json()
           return response.json();
@@ -224,17 +230,17 @@ const AddCourseCard = () => {
             {" "}
             Select Course Category{" "}
           </option>
-          <option value="DigitalMarketing">Digital Marketing</option>
-          <option value="DataScience">Data Science</option>
+          <option value="Digital Marketing">Digital Marketing</option>
+          <option value="Data Science">Data Science</option>
           <option value="Writing">Writing</option>
           <option value="Psychology">Psychology</option>
           <option value="Finance">Finance</option>
           <option value="Programming">Programming</option>
           <option value="Cooking">Cooking</option>
           <option value="Design">Design</option>
-          <option value="ProjectManagement">Project Management</option>
+          <option value="Project Management">Project Management</option>
           <option value="Spanish">Spanish</option>
-          <option value="EnvironmentalScience">Environmental Science</option>
+          <option value="Environmental Science">Environmental Science</option>
         </select>
       </div>
       <div className="mt-4 w-full max-w-md">
