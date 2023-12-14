@@ -37,9 +37,6 @@ const CourseCard: React.FC<CourseCardProps> = ({ course }) => {
               src={thumbnailUrl}
               onError={handleThumbnailError}
               className="object-cover w-full h-full"
-              // className={`w-full md:w-1/2 h-36 object-cover rounded-lg md:ml-10 ${
-              //   thumbnailError ? "h-36" : ""
-              // }`}
             />
           ) : (
             <div className="flex items-center justify-center bg-gray-200 text-gray-400 w-full h-full">

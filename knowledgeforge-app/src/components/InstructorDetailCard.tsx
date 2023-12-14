@@ -24,14 +24,6 @@ const InstructorDetailCard: React.FC<InstructorDetailCardProps> = ({
     // Add other properties if needed
   });
   const { currentUser } = useSelector((state:RootState)=>state.user);
-
-
-  // useEffect(()=>{
-
-  // },[isEditing]);
-  // const handleEditClick = () => {
-  //   setIsEditing(!isEditing);
-  // };
   const handleEditClick = () => {
     setIsEditing(!isEditing);
   };
@@ -47,10 +39,6 @@ const InstructorDetailCard: React.FC<InstructorDetailCardProps> = ({
 
   const handleSaveClick = async () => {
     try {
-      // Make API call to update instructor data
-      // Example:
-      // const result = await updateInstructor(editedInstructor);
-
       setIsEditing(false);
       const result = await fetch("http://localhost:4000/instructor", {
         method: "PUT",
@@ -77,19 +65,9 @@ const InstructorDetailCard: React.FC<InstructorDetailCardProps> = ({
         };
 
         dispatch(updateUserSuccess(storeData));
-
-        // dispatch(updateUserSuccess({
-        //   userName: updatedInstructorData.name, contactNumber: updatedInstructorData.contactNumber,
-        //   email: updatedInstructorData.email,
-        //   userType: "instructor"
-        // }));
-        // console.log("Instructor data:"+updatedInstructorData)
       } else {
         // Handle unsuccessful response
       }
-
-      // Simulate API response for demonstration purposes
-      // const updatedInstructorData = { ...editedInstructor, id: instructor.id };
 
       // Update Redux state with the updated data
     } catch (error) {

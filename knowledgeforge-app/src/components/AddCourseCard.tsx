@@ -1,9 +1,5 @@
 import React, { ChangeEvent, MouseEventHandler, useRef, useState } from "react";
 import {
-  BrowserRouter,
-  Route,
-  Routes,
-  Link,
   useNavigate,
 } from "react-router-dom";
 import * as Patths from "../resources/paths";
@@ -15,7 +11,7 @@ import * as CourseService from "../services/course-service";
 
 // Add course card for the instructor to add courses
 const AddCourseCard = () => {
-  const { currentUser, loading, error } = useSelector(
+  const { currentUser} = useSelector(
     (state: RootState) => state.user
   );
   const [uploadText, setUploadText] = useState("Add Course");
@@ -95,15 +91,7 @@ const AddCourseCard = () => {
       return;
     }
     // Make API call using apiData
-    // const response :Promise<Response> =
     await CourseService.addInstructorCourses(JSON.stringify(apiData))
-      // fetch("http://localhost:4000/courses", {
-      //   method: "POST",
-      //   headers: {
-      //     "Content-Type": "application/json",
-      //   },
-      //   body: JSON.stringify(apiData),
-      // }
       .then((response: Response) => {
         if (response.status === 200) {
           // Return the promise for response.json()

@@ -93,13 +93,6 @@ const AddModuleCard = (props: Props) => {
         return;
     }
     ModuleService.AddModule(JSON.stringify(formData))
-    // fetch("http://localhost:4000/modules", {
-    //   method: "POST",
-    //   headers: {
-    //     "Content-Type": "application/json",
-    //   },
-    //   body: JSON.stringify(formData),
-    // })
       .then((response) => response.json())
       .then((data) => {
         setAddModuleText("Module Added");

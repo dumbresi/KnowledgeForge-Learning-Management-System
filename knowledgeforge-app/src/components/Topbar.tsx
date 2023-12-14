@@ -84,17 +84,6 @@ const Topbar = ({ onSearch }: Props) => {
               <option value="ru">Russian</option>
               </select>
             </div>
-
-            {/* {currentUser?.userName ? (
-        <button onClick={handleLogout} className="text-white end-2.5 bottom-2.5 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-1.5 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-          {t("Logout")}
-        </button>
-      ) : (
-        <button onClick={handleLogin} className="text-white end-2.5 bottom-2.5 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-1.5 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-        >
-          {t("Login")}
-        </button>
-      )} */}
           </div>
         </div>
       </nav>
