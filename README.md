@@ -9,8 +9,7 @@ Siddharth Dumbre <br>
 Vaibhav Gohil <br>
 Mit Sheth <br>
 
-
-## Following is the Domain Driven Design of the project
+## Following is the Entity Relation Diagram of the project
 
 ![Alt DDD](DDD/KnowledgeForge.jpeg)
 
@@ -36,38 +35,43 @@ This folder contains the frontend of the application built with React.js. It han
 ### Steps to Run the Server
 
 1. **Set up Environment Variables**
-    - In the `KnowledgeForge Server` directory, create a `.env` file.
-    - Add necessary environment variables (e.g., database connection string,Port number API keys) following the `.env.example` file provided.
+
+   - In the `KnowledgeForge Server` directory, create a `.env` file.
+   - Add necessary environment variables (e.g., database connection string,Port number API keys) following the `.env.example` file provided.
 
 2. **Install Dependencies**
-    ```bash
-    cd KnowledgeForge_server
-    npm install
-    ```
+
+   ```bash
+   cd KnowledgeForge_server
+   npm install
+   ```
 
 3. **Run the Server**
-    ```bash
-    npm start
-    ```
-    This will start the backend server at `http://localhost:YourPort`.
+   ```bash
+   npm start
+   ```
+   This will start the backend server at `http://localhost:YourPort`.
 
 ### Steps to Run the Frontend App
 
 1. **Install Dependencies**
-    ```bash
-    cd KnowledgeForge-app
-    npm install
-    ```
+
+   ```bash
+   cd KnowledgeForge-app
+   npm install
+   ```
 
 2. **Start the App**
-    ```bash
-    npm start
-    ```
-    This will launch the frontend application at `http://localhost:3000`.
+
+   ```bash
+   npm start
+   ```
+
+   This will launch the frontend application at `http://localhost:3000`.
 
 3. **Connect to the Backend**
-    - Ensure the backend server is running at the specified port.
-    - Update the frontend's API endpoint configuration (if needed) to match the backend's address.
+   - Ensure the backend server is running at the specified port.
+   - Update the frontend's API endpoint configuration (if needed) to match the backend's address.
 
 ## Additional Notes
 
