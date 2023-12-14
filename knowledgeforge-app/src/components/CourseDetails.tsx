@@ -196,7 +196,7 @@ const CourseDetails: React.FC<Props> = () => {
       <div className="flex min-h-full">
         <ToastContainer />
         <Sidebar category={ingore} />
-        <div className="container mx-auto mt-10 p-4 ml-2">
+        <div className="container mx-auto mt-10 p-4 ml-2 h-full">
           <div className="md:flex md:items-center md:justify-between">
             <div className="mb-4 md:mb-0">
               <h1 className="text-3xl md:text-4xl  mb-2">{course.title}</h1>
@@ -269,11 +269,11 @@ const CourseDetails: React.FC<Props> = () => {
                         <div
                           key={moduleItem._id}
                           onClick={() => {
-                            setModuleNo(index + 1);
                             if (
                               areAllModulesCompleted(completedModule, index)
                             ) {
                               changeSelectedModule(moduleItem);
+                              setModuleNo(index + 1);
                             }
                             console.log("Completed Modules:" + completedModule);
                           }}
@@ -293,7 +293,7 @@ const CourseDetails: React.FC<Props> = () => {
                   </div>
                 </div>
               ) : (
-                <div className="text-center">
+                <div className="text-center h-screen">
                   {" "}
                   {/* Render something for users who are not enrolled */}
                   <p className="text-lg mb-4">

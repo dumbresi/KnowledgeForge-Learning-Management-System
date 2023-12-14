@@ -29,7 +29,7 @@ const AddModulePage = () => {
   };
 
   return (
-    <div className="flex flex-row h-full">
+    <div className="flex flex-row min-h-full">
       <div className="w-1/6 min-h-full bg-background-cream"> 
         <Sidebar category={category} />
       </div>
