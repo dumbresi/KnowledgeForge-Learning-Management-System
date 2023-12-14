@@ -88,9 +88,9 @@ const AllCoursePage = (props: AllCoursePageProps) => {
   };
 
   return (
-    <div className=" bg-zinc-100 flex h-auto">
+    <div className=" bg-zinc-100 flex min-h-screen">
       <ToastContainer />
-      <div className="flex flex-row h-screen">
+      <div className="flex flex-row min-h-full">
         <Sidebar category={filterCoursesByCategory} />
       </div>
 
