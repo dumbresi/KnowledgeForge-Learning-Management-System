@@ -25,18 +25,16 @@ const AddModulePage = () => {
   };
 
   const handleSubmit = () => {
-    navigate(Paths.allCoursesPath,{replace:true});
+    navigate(Paths.allCoursesPath, { replace: true });
   };
 
   return (
-    <div className="flex flex-row min-h-full">
-      <div className="w-1/6 min-h-full bg-background-cream"> 
+    <div className="flex flex-row min-h-screen">
+      <div className="flex w-1/6 min-h-screen">
         <Sidebar category={category} />
       </div>
-      <div className="flex flex-col ml-8 my-10 justify-between  bg-white rounded-3xl p-8">
-        <div className="flex flex-col h-4/5 rounded-3xl">
-          {renderModuleCards()}
-        </div>
+      <div className="flex flex-col ml-8 my-10 justify-between h-9 bg-white rounded-3xl p-8">
+        {renderModuleCards()}
         <button className="submit-button w-24" onClick={handleSubmit}>
           Done
         </button>
