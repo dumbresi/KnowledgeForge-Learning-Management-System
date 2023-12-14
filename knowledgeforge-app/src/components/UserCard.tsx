@@ -122,7 +122,7 @@ const UserCard: React.FC<UserCardProps> = ({ user }) => {
                 {t("Email")}
               </dt>
               <dd className="mt-1 text-md leading-6 text-gray-700">
-                {currentUser?.contactNumber}
+                {currentUser?.email}
               </dd>
             </div>
             <div className="px-4 py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
