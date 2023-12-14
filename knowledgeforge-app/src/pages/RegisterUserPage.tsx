@@ -11,8 +11,6 @@ type RegisterUserPageProps = {
 const RegisterUserPage: React.FC<RegisterUserPageProps> = ({ isLogin }) => {
   return (
     <div className="flex flex-col md:flex-row justify-center items-center bg-background_cream min-h-screen">
-      {/* <div className='md:border-l md:border-solid md:border-gray-500 h-auto bg-light_blue md:w-1/4'></div> */}
-
       <div className="justify-center duration-300 hover:shadow-slate-700 w-full px-4 md:px-10 py-8 mx-auto bg-white border rounded-lg shadow-2xl flex flex-col md:flex-row items-center md:w-[1000px] md:h-[700px] p-4 md:p-8">
         <div className="m-2 w-full md:w-1/2">
           <img

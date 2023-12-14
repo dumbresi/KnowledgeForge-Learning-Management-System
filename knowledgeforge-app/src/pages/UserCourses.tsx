@@ -11,7 +11,7 @@ type Props = {};
 // Show user's enrolled courses in the page
 const UserCourses = (props: Props) => {
   const [enrolledCourses, setEnrolledCourses] = useState<Course[]>([]);
-  const { currentUser, loading, error } = useSelector(
+  const { currentUser } = useSelector(
     (state: RootState) => state.user
   );
 
