@@ -4,7 +4,6 @@ import * as baseService from './base-service';
 import Course from '../models/Course';import { userDetailsPath } from '../resources/paths';
 const localhost='http://localhost:4000'
 const userPath = '/user';
-const getUserPath='/current'
 
 interface CourseProgress {
     courseProgress: {
@@ -15,10 +14,8 @@ interface CourseProgress {
 export const getUser = async (): Promise<User> => {
     try {
         const user = await commonService.commonGETOne<User>(userDetailsPath);
-        //console.log('Received user data:', user); // Log the received user data
         return user;
     } catch (error) {
-        //console.error('Error fetching user data:', error);
         throw new Error('Error fetching user data: ' + error);
     }
 };

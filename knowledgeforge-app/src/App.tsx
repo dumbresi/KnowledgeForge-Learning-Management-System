@@ -1,23 +1,16 @@
-import React, { useState } from "react";
-import courses from "./models/Course";
-import logo from "./logo.svg";
+import React from "react";
 import "./App.css";
 import {
   BrowserRouter,
   Route,
   Routes,
-  Link,
-  Router,
-  redirectDocument,
 } from "react-router-dom";
 import AllCoursePage from "./pages/AllCoursePage";
 import RegisterUserPage from "./pages/RegisterUserPage";
-import LoginPage from "./components/LoginDialog";
 import InstructorDetails from "./pages/InstructorDetails";
 import UserPage from "./pages/UserPage";
 import * as Paths from "./resources/paths";
 import CourseDetails from "./components/CourseDetails";
-import AddCourse from "./components/AddCourseCard";
 import AddCoursePage from "./pages/AddCoursePage";
 import Sidebar from "./components/Sidebar";
 import SettingsPage from "./pages/SettingsPage";
@@ -26,8 +19,6 @@ import AddModulePage from "./pages/AddModulePage";
 import ContactUs from "./pages/Contactus";
 
 function App() {
-  const isLogin = true;
-
   React.useEffect(() => {
     if ("serviceWorker" in navigator) {
       window.addEventListener("load", () => {
