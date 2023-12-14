@@ -310,7 +310,7 @@ const CourseDetails: React.FC<Props> = () => {
             </>
           ) : (
             <>
-              <div>
+              <div className="h-screen">
                 Please <button onClick={takeToLogin}>Login</button> using
                 Student Id
               </div>
