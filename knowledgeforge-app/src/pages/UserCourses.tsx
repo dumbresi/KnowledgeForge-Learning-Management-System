@@ -5,6 +5,7 @@ import { RootState } from "../redux/store";
 import Course from "../models/Course";
 import CoursesGrid from "../components/CoursesGrid";
 import Sidebar from "../components/Sidebar";
+import { ToastContainer } from "react-toastify";
 
 type Props = {};
 // Show user's enrolled courses in the page
@@ -25,6 +26,7 @@ const UserCourses = (props: Props) => {
   }, []);
   return (
     <div className="">
+      <ToastContainer />
       <div className="flex">
         <div className="flex h-screen">
           <Sidebar category={() => {}} />
