@@ -54,13 +54,18 @@ const Sidebar = (props: Props) => {
   };
 
   const handleLogout = async () => {
-    const response = await AuthService.logout();
+    
+    try {
+      const response = await AuthService.logout();
     console.log(response);
-
-    if (response !== null) {
-      dispatch(signOut());
+      if (response !== null) {
+        dispatch(signOut());
+        navigate(Paths.loginPath);
+      }
+    } catch (error) {
       navigate(Paths.loginPath);
     }
+   
   };
 
   const takeToHomePage = () => {
