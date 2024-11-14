@@ -3,7 +3,7 @@ import * as moduleServices from '../services/module-service.js';
 import { setResponse,setErrorResponse } from './response-handler.js';
 import mongoose from "mongoose";
 
-//callback function for the post route
+
 export const post= async(request,response)=>{
     try {
         const newModule={...request.body};
@@ -16,7 +16,7 @@ export const post= async(request,response)=>{
     }
 }
 
-//callback funtion for the delete route
+
 export const remove= async(request,response)=>{
     try {
         const id =request.params._id;
@@ -30,7 +30,7 @@ export const remove= async(request,response)=>{
     }
 }
 
-//callback function for the get route
+
 export const searchById =async(request,response)=>{
     console.log(request.params);
     try {
@@ -48,8 +48,6 @@ export const searchById =async(request,response)=>{
 export const getModules = async(request, response)=>{
     try{
         const courseId = request.params.courseId;
-
-        
         const allModules = await moduleServices.getModules(courseId);
         
         setResponse(allModules,response)

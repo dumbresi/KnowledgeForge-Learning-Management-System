@@ -35,10 +35,10 @@ export const getOneUser = async(email)=>{
           },
           {
             $project: {
-              userName: 1, // Include the 'username' field
-              email: 1,    // Include the 'email' field
+              userName: 1, 
+              email: 1,    
               contactNumber: 1,  
-              _id: 0,      // Exclude the '_id' field
+              _id: 0,      
 
             },
           },
@@ -63,7 +63,7 @@ export const registeredCourses = async(email)=>{
           {
             $project: {
               myCourses:1, 
-              _id: 0,      // Exclude the '_id' field
+              _id: 0,      
 
             },
           },

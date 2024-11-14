@@ -13,7 +13,6 @@ export let gridFsBucket;
 export let upload;
 export let uploadImage;
 const initialize = async(app)=>{
-    //debug
     app.use(cors({
         origin:'http://localhost:3000',
         credentials:true,
@@ -50,13 +49,6 @@ uploadImage = multer({ storage: imageStorage }).single();
         }
       });
      upload= multer({ storage: storage });
-    //  app.post('/video', upload.single('video'), (req, res) => {
-    //     console.log('///');
-    //       res.status(201).send('Video uploaded successfully');
-        
-      
-        
-    //   });
  
     registerRouter(app);
 
