@@ -1,17 +1,21 @@
-## KnowledgeForge
+# KnowledgeForge
 
-KnowledgeForge is an innovative online platform designed to seamlessly manage and deliver a wealth of educational resources. This comprehensive hub serves as a dynamic repository for courses, learning materials, and educational content, providing users with a centralized and intuitive interface to explore and enhance their knowledge.
+**KnowledgeForge** is an innovative online platform designed to seamlessly manage and deliver a wealth of educational resources. This comprehensive hub serves as a dynamic repository for courses, learning materials, and educational content, providing users with a centralized and intuitive interface to explore and enhance their knowledge.
 
-## Team Members
+![KnowledgeForge Sitw](assets/site.png)
 
-Gaurav Gunjal <br>
-Siddharth Dumbre <br>
-Vaibhav Gohil <br>
-Mit Sheth <br>
+## Technology Stack
 
-## Following is the Entity Relation Diagram of the project
+- **Frontend**: React.js, TailwindCSS  
+- **Backend**: Node.js, Express.js  
+- **Database**: MongoDB  
+- **API**: RESTful APIs
 
-![Alt DDD](DDD/KnowledgeForge.jpeg)
+## Entity Relationship Diagram
+
+Following is the Entity Relationship Diagram (ERD) of the project:
+
+![KnowledgeForge ERD](DDD/KnowledgeForge.jpeg)
 
 ## Project Structure
 
@@ -19,61 +23,35 @@ The project is divided into two main folders:
 
 ### KnowledgeForge Server
 
-This folder contains the backend of the application built with Node.js, Express, and MongoDB. It handles the API endpoints, database operations, and authentication.
+This folder contains the backend of the application, built with **Node.js**, **Express**, and **MongoDB**. It handles the API endpoints, database operations, and user authentication.
 
 ### KnowledgeForge App
 
-This folder contains the frontend of the application built with React.js. It handles the user interface, interactions, and communication with the backend server.
+This folder contains the frontend of the application, built with **React.js** and styled with **TailwindCSS**. It handles the user interface, interactions, and communication with the backend server.
 
 ## Getting Started
 
 ### Prerequisites
 
-- Node.js installed globally
-- MongoDB installed and running
+- **Node.js** installed globally
+- **MongoDB** installed and running locally (or use a cloud instance)
 
 ### Steps to Run the Server
 
 1. **Set up Environment Variables**
 
    - In the `KnowledgeForge Server` directory, create a `.env` file.
-   - Add necessary environment variables (e.g., database connection string,Port number API keys) following the `.env.example` file provided.
+   - Add necessary environment variables (e.g., database connection string, port number, API keys) by following the example provided in `.env.example`.
 
 2. **Install Dependencies**
 
    ```bash
    cd KnowledgeForge_server
    npm install
-   ```
 
-3. **Run the Server**
-   ```bash
-   npm start
-   ```
-   This will start the backend server at `http://localhost:YourPort`.
+## Team Members
 
-### Steps to Run the Frontend App
-
-1. **Install Dependencies**
-
-   ```bash
-   cd KnowledgeForge-app
-   npm install
-   ```
-
-2. **Start the App**
-
-   ```bash
-   npm start
-   ```
-
-   This will launch the frontend application at `http://localhost:3000`.
-
-3. **Connect to the Backend**
-   - Ensure the backend server is running at the specified port.
-   - Update the frontend's API endpoint configuration (if needed) to match the backend's address.
-
-## Additional Notes
-
-- Remember to restart the server or rebuild the frontend whenever you make changes.
-- Refer to individual `README.md` files in each directory for more specific instructions.
+- Gaurav Gunjal  
+- Siddharth Dumbre  
+- Vaibhav Gohil  
+- Mit Sheth
